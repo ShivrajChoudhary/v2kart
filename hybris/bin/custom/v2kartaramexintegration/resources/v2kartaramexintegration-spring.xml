@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2013 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+	
+    <bean id="webServiceClient" class="org.springframework.ws.client.core.WebServiceTemplate">
+        <property name="marshaller" ref="v2kartConsignmentIntegrationMarshaller" />
+        <property name="unmarshaller" ref="v2kartConsignmentIntegrationMarshaller" />
+    </bean>
+    
+    <bean name="aramexConsignmentStatusUpdateCronJob" class="in.com.v2kart.aramexintegration.cronjob.AramexConsignmentStatusUpdateCronJob" parent="abstractJobPerformable">
+        <property name="aramexTrackerService" ref="aramexTrackerService" />
+    </bean>
+    
+     <bean id="aramexTrackerService" class="in.com.v2kart.aramexintegration.service.impl.AramexTrackerServiceImpl">
+        <property name="wsClient" ref="webServiceClient" />
+        <property name="defaultConsignmentTrackURI" value="${consignment.tracking.aramex.URI}" />
+        <property name="aramexTrackerDao" ref="aramexTrackerDao"/>
+    </bean>
+    
+    <bean id="aramexTrackerDao" class="in.com.v2kart.aramexintegration.constants.dao.impl.AramexTrackerDaoImpl">
+        <property name="flexibleSearchService" ref="flexibleSearchService"/>
+        <property name="modelService" ref="modelService"/>
+        <property name="v2DeliveryConfirmationNotificationSender" ref="v2DeliveryConfirmationNotificationSender"/>
+    </bean>
+</beans>

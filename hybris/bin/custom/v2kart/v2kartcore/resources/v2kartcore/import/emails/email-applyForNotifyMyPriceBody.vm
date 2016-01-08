@@ -1,0 +1,24 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+</head>
+<body>
+<ul>
+	<p style="text-transform: capitalize;">
+		Dear $ctx.customerNotificationData.currentUserName,
+	</p>
+	<p>
+		Thanks for your interest in $ctx.customerNotificationData.name .
+	</p>
+    <p>
+       You will be Notified by Email when the product becomes available at  &#8377; $ctx.customerNotificationData.notificationPrice .
+    </p>
+    <p>
+        Sincerely,
+    </p>
+    <p>
+         ${ctx.customerNotificationData.site}.com
+    </p>
+</ul>
+</body>
+</html>

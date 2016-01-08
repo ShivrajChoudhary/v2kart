@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    *******************************************************************************************************************
+    IMPORT ENGINE CONFIGURATION FILE
+    *******************************************************************************************************************
+-->
+
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:util="http://www.springframework.org/schema/util"
+
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
+           http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd
+           ">
+
+    <!-- IMPORTING CSV CELL PROCESSORS -->
+    <import resource="v2kartdataimport-csvcellprocessors.xml" />
+
+    <!-- Product CSV Reader -->
+    <bean name="v2ProductCsvReader" class="in.com.v2kart.dataimport.importengine.impl.CSVReaderImpl" scope="prototype">
+        <property name="defaultFileName" value="${importEngine.csvFileName.Product}" />
+        <property name="directoryPath" value="${importEngine.csvDirName.Product}" />
+        <property name="dtoType" value="in.com.v2kart.dataimport.dto.V2ProductDto" />
+        <property name="cellProcessors" ref="v2ProductCellProcessors" />
+        <property name="hasFileHeader" value="false" />
+        <property name="headers">
+            <array value-type="java.lang.String">
+                <value>articleNumber</value>
+                <value>articleName</value>
+                <value>baseProductCode</value>
+                <value>articleDescription</value>
+                <value>mccd</value>
+                <value>mcdesc</value>
+                <value>size</value>
+                <value>color</value>
+                <value>primaryColor</value>
+                <value>brand</value>
+                <value>fabric</value>
+                <value>subFabric</value>
+                <value>pattern</value>
+                <value>style</value>
+                <value>fitting</value>
+                <value>sleeves</value>
+                <value>pockets</value>
+                <value>neck</value>
+                <value>lengthType</value>
+                <value>type</value>
+                <value>occasion</value>
+                <value>baseMaterial</value>
+                <value>upperMaterial</value>
+                <value>dialMaterial</value>
+                <value>frameMaterial</value>
+                <value>heel</value>
+                <value>ankle</value>
+                <value>closure</value>
+                <value>fold</value>
+                <value>dialShape</value>
+                <value>buckleShape</value>
+                <value>weight</value>
+                <value>packSize</value>
+                <value>lensTechnology</value>
+                <value>idealFor</value>
+                <value>compatibleLaptopSize</value>
+                <value>fragrance</value>
+             	<value>length</value>          
+                <value>chest</value>
+                <value>bust</value>
+                <value>waist</value>
+                <value>blockedIndicator</value>
+                <value>boostingFactor</value>
+                <value>shape</value>
+            </array>
+        </property>
+    </bean>
+
+    <bean id="v2ProductCellProcessors" class="java.util.ArrayList" scope="tenant">
+        <constructor-arg>
+            <list value-type="org.supercsv.cellprocessor.ift.CellProcessor">
+                <ref bean="strMin1Max20" />
+                <ref bean="parseStringLowerCaseStrMin1Max100" />
+                <ref bean="strMin1Max30" />
+                <ref bean="optionalStrMin1Max100" />
+                <ref bean="optionalStrMin1Max30" />
+                <ref bean="optionalStrMin1Max100" />
+                <ref bean="strMin1Max10" />
+                <ref bean="parseOptionalStringLowerCaseStrMin1Max30" />
+                <ref bean="parseOptionalStringLowerCaseStrMin1Max30" />
+                <ref bean="parseOptionalStringLowerCaseStrMin1Max30" />
+                <ref bean="parseOptionalStringLowerCaseStrMin1Max30" />
+                <ref bean="parseOptionalStringLowerCaseStrMin1Max30" />
+                <ref bean="parseOptionalStringLowerCaseStrMin1Max30" />
+                <ref bean="parseOptionalStringLowerCaseStrMin1Max30" />
+                <ref bean="parseOptionalStringLowerCaseStrMin1Max30" />
+                <ref bean="parseOptionalStringLowerCaseStrMin1Max30" />
+                <ref bean="parseOptionalStringLowerCaseStrMin1Max30" />
+                <ref bean="parseOptionalStringLowerCaseStrMin1Max30" />
+                <ref bean="parseOptionalStringLowerCaseStrMin1Max30" />
+                <ref bean="parseOptionalStringLowerCaseStrMin1Max30" />
+                <ref bean="parseOptionalStringLowerCaseStrMin1Max30" />
+                <ref bean="parseOptionalStringLowerCaseStrMin1Max30" />
+                <ref bean="parseOptionalStringLowerCaseStrMin1Max30" />
+                <ref bean="parseOptionalStringLowerCaseStrMin1Max30" />
+                <ref bean="parseOptionalStringLowerCaseStrMin1Max30" />
+                <ref bean="parseOptionalStringLowerCaseStrMin1Max30" />
+                <ref bean="parseOptionalStringLowerCaseStrMin1Max30" />
+                <ref bean="parseOptionalStringLowerCaseStrMin1Max30" />
+                <ref bean="parseOptionalStringLowerCaseStrMin1Max30" />
+                <ref bean="parseOptionalStringLowerCaseStrMin1Max30" />
+                <ref bean="parseOptionalStringLowerCaseStrMin1Max30" />
+                <ref bean="optionalStrMin1Max30" />
+                <ref bean="optionalStrMin1Max30" />
+                <ref bean="parseOptionalStringLowerCaseStrMin1Max30" />
+                <ref bean="parseOptionalStringLowerCaseStrMin1Max30" />
+                <ref bean="parseOptionalStringLowerCaseStrMin1Max30" />
+                <ref bean="parseOptionalStringLowerCaseStrMin1Max30" />
+                <ref bean="parseOptionalStringLowerCaseStrMin1Max30" />
+                <ref bean="optionalStrMin1Max30" />
+                <ref bean="optionalStrMin1Max30" />
+                <ref bean="optionalStrMin1Max30" />
+                <ref bean="parseBool" />
+                <ref bean="optionalStrMin1Max30" />
+                <ref bean="parseOptionalStringLowerCaseStrMin1Max30" />
+            
+            </list>
+        </constructor-arg>
+    </bean>
+
+    <!-- StoreInventory CSV Reader -->
+    <bean name="v2StoreInventoryCsvReader" class="in.com.v2kart.dataimport.importengine.impl.CSVReaderImpl" scope="prototype">
+        <property name="defaultFileName" value="${importEngine.csvFileName.Inventory}" />
+        <property name="directoryPath" value="${importEngine.csvDirName.Inventory}" />
+        <property name="dtoType" value="in.com.v2kart.dataimport.dto.V2StoreInventoryDto" />
+        <property name="cellProcessors" ref="v2StoreInventoryCellProcessors" />
+        <property name="hasFileHeader" value="false" />
+        <property name="headers">
+            <array value-type="java.lang.String">
+                <value>siteCode</value>
+                <value>code</value>
+                <value>available</value>
+                <value>creationDate</value>
+                <value>creationTime</value>
+            </array>
+        </property>
+    </bean>
+
+    <bean id="v2StoreInventoryCellProcessors" class="java.util.ArrayList" scope="tenant">
+        <constructor-arg>
+            <list value-type="org.supercsv.cellprocessor.ift.CellProcessor">
+                <ref bean="strMin1Max5" />
+                <ref bean="trim" />
+                <ref bean="parseInt" />
+                <ref bean="strMin6Max20" />
+                <ref bean="strMin6Max20" />
+            </list>
+        </constructor-arg>
+    </bean>
+
+    <!-- Price CSV Reader -->
+    <bean name="v2PriceCsvReader" class="in.com.v2kart.dataimport.importengine.impl.CSVReaderImpl" scope="prototype">
+        <property name="defaultFileName" value="${importEngine.csvFileName.Price}" />
+        <property name="directoryPath" value="${importEngine.csvDirName.Price}" />
+        <property name="dtoType" value="in.com.v2kart.dataimport.dto.V2PriceDto" />
+        <property name="cellProcessors" ref="v2PriceCellProcessors" />
+        <property name="hasFileHeader" value="false" />
+        <property name="headers">
+            <array value-type="java.lang.String">
+                <value>priceType</value>
+                <value>code</value>
+                <value>price</value>
+                <value>validFrom</value>
+                <value>validTo</value>
+            </array>
+        </property>
+    </bean>
+
+    <bean id="v2PriceCellProcessors" class="java.util.ArrayList" scope="tenant">
+        <constructor-arg>
+            <list value-type="org.supercsv.cellprocessor.ift.CellProcessor">
+                <ref bean="parsePriceType" />
+                <ref bean="trim" />
+                <ref bean="parseDouble" />
+                <ref bean="v2ParseDate" />
+                <ref bean="v2ParseDate" />
+            </list>
+        </constructor-arg>
+    </bean>
+    <!-- Media Excel Reader -->
+    <bean name="v2MediaExcelReader" class="in.com.v2kart.dataimport.importengine.impl.ExcelReaderImpl" scope="prototype">
+        <property name="defaultFileName" value="${importEngine.excelFileName.Media}" />
+        <property name="dtoType" value="in.com.v2kart.dataimport.dto.V2MediaDto" />
+        <property name="cellProcessors" ref="v2MediaCellProcessors" />
+        <property name="hasFileHeader" value="true" />
+        <property name="noOfColumns" value="5" />
+        <property name="excelSheetName" value="Media" />
+        <property name="headers">
+            <array value-type="java.lang.String">
+                <value>code</value>
+                <value>sequence</value>
+                <value>contentType</value>
+                <value>fileName</value>
+                <value>altText</value>
+            </array>
+        </property>
+    </bean>
+
+    <bean id="v2MediaCellProcessors" class="java.util.ArrayList" scope="tenant">
+        <constructor-arg>
+            <list value-type="org.supercsv.cellprocessor.ift.CellProcessor">
+                <ref bean="parseStringLowerCaseStrMin1Max100" />
+                <ref bean="parseInt" />
+                <ref bean="trimOptional" />
+                <ref bean="trim" />
+                <ref bean="trimOptional" />
+            </list>
+        </constructor-arg>
+    </bean>
+
+</beans>

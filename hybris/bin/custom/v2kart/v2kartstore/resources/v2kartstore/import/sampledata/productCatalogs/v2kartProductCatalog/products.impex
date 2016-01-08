@@ -1,0 +1,16 @@
+# ImpEx for Importing Products into Merchandise  store
+  
+# Macros / Replacement Parameter definitions
+$productCatalog=v2kartProductCatalog
+  
+  
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+$supercategories=supercategories(code, $catalogVersion)
+$baseProduct=baseProduct(code,$catalogVersion)
+$approved=approvalstatus(code)[default='approved']
+#$taxGroup=Europe1PriceFactory_PTG(code)[default=in-vat-full] 
+# Language
+$lang=en 
+ 
+ 
+ 

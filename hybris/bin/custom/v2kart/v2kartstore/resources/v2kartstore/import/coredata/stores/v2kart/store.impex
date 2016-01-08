@@ -1,0 +1,134 @@
+# 
+# Create the V2Kart BaseStore
+#
+ 
+$storePrefix=v2kart
+$productCatalog=$storePrefixProductCatalog
+$classificationCatalog=v2KartClassification
+$currencies=INR
+$net=false
+$storeUid=$storePrefix
+$defaultCurrency=INR
+$languages=en
+$defaultLanguage=en
+$india=IN
+#$unitedKingdom=GB,GG,IM,JE
+#$europeNotUK=AD,AL,AT,BA,BE,BG,BY,CH,CY,CZ,DE,DK,EE,ES,FI,FO,FR,GI,GL,GR,HR,HU,IE,IS,IT,LI,LT,LU,LV,MC,MD,ME,MK,MT,NL,NO,PL,PT,RO,RS,RU,SE,SI,SK,SM,TR,UA,VA
+#$asianCountries=CN,JP,VN,HK,KP,KR
+#$deliveryCountries=$unitedKingdom,$europeNotUK,$asianCountries,US
+$deliveryCountries=$india
+$orderProcessCode=order-process
+#$orderProcessCode=order-process-manual
+$pickupInStoreMode=BUY_AND_COLLECT
+$customerAllowedToIgnoreSuggestions=true
+$paymentProvider=Mockup
+$promoGrp=v2kartPromoGrp
+$checkoutFlowGroup=defaultCheckoutGroup
+$vendor=v2kart
+ 
+INSERT_UPDATE PromotionGroup;Identifier[unique=true];
+;$promoGrp;
+
+# Vendor
+INSERT_UPDATE Vendor;code[unique=true];name
+                    ;$vendor           ; v2Kart Vendor
+
+# Base Store
+INSERT_UPDATE BaseStore;uid[unique=true];catalogs(id)							;currencies(isocode);net  ;taxGroup(code);storelocatorDistanceUnit(code);defaultCurrency(isocode);languages(isocode);defaultLanguage(isocode);deliveryCountries(isocode);submitOrderProcessCode;pickupInStoreMode(code);customerAllowedToIgnoreSuggestions  ;paymentProvider  ;checkoutFlowGroup; maxRadiusForPoSSearch;defaultDeliveryOrigin(name)
+					   ;$storeUid		;$productCatalog,$classificationCatalog ;$currencies		;$net ;			     ;km                            ;$defaultCurrency        ;$languages        ;$defaultLanguage        ;$deliveryCountries        ;$orderProcessCode     ;$pickupInStoreMode     ;$customerAllowedToIgnoreSuggestions ;$paymentProvider ;$checkoutFlowGroup;                     ;
+
+
+# Warehouse
+INSERT_UPDATE Warehouse;code[unique=true];name              ;vendor(code)[default=default];default[default=true];baseStores(uid)[default=$storeUid]
+ 					   ;DH25            ;Warehouse Central  ;                             ;                     ;
+
+# Warehouse
+INSERT_UPDATE Warehouse ;code[unique=true];vendor(code)[default=$vendor];default[default='false'];baseStores(uid)[default=$storeUid]
+						;HD16             ;                            ;
+						;HD17             ;                            ;
+						;HH12             ;                            ;
+						;HN10             ;                            ;
+						;HI06             ;                            ;
+						;H008             ;                            ;
+						;H009             ;                            ;
+						;HB05             ;                            ;
+						;HB06             ;                            ;
+						;HB07             ;                            ;
+						;HB08             ;                            ;
+						;HB09             ;                            ;
+						;HJ08             ;                            ;
+						;HU32             ;                            ;
+						;HK04             ;                            ;
+						;HB10             ;                            ;
+
+		                                                               
+
+
+INSERT_UPDATE Address;&addrID;line1;line2;town;region(isocode);country(isocode)[default='IN'];postalcode[unique=true];owner(PointOfService.name)[unique=true];phone1
+;HD16;V2 Retail Ltd. L-45, N.H.W. ROAD, MAHIPALPUR ;NH-08, MAHIPALPUR, NEW DELHI;Delhi;IN-DL;;110037;V2  RETAIL LTD HD16;9876543210
+;HD17;V2 Retail Ltd. 10204 and 10205,PADAM SINGH ROAD;OPP.PIZZA HUT,KAROLBAGH;Delhi;IN-DL;;110005;V2  RETAIL LTD HD17;9876543210
+;HH12;V2 Retail Ltd. IC-58,NIT MAIN MARKET;FARIDABAD (HARYANA);;IN-NCR;;121001;V2  RETAIL LTD HH12;9876543210
+;HN10;V2 Retail Ltd. G.S ROAD PALTAN BAZAR;NEAR KRIAN SHREE HOTEL,ASSAM,GUWAHATI;GUWAHATI-ASSAM;IN-AS;;781008;V2  RETAIL LTD HN10;9876543210
+;HI06;V2 Retail Ltd. THE MALL,BELOW ANAND CINEMA;HP;SOLAN-HP;IN-HP;;173212;V2  RETAIL LTD HI06;9876543210
+;H008;V2 Retail Ltd. City Mall, Telephone Bhavan Road;Brahmapur (GM.),Orissa;ORISSA;IN-OR;;760001;V2  RETAIL LTD H008;9876543210
+;H009;V2 Retail Ltd. Brajraj Complex,Badambadi;P.S-Badambadi,Cuttack,Orissa;ORISSA;IN-OR;;753001;V2  RETAIL LTD H009;9876543210
+;HB05;V2 Retail Ltd. 301 MAHARAJA KAMESHWAR COMPLEX,;PATNA, BIHAR;BIHAR;IN-BR;;800001;V2  RETAIL LTD HB05;9876543210
+;HB06;V2 Retail Ltd. H NO-53/47, W No-23, NEW KRISHNA ROAD;( OPPOSITE CIVIL LINE P.S,)GAYA,B;BIHAR;IN-BR;;823001;V2  RETAIL LTD HB06;9876543210
+;HB07;V2 Retail Ltd. R.N. Plaza Khasra No 791,R.B.S.S.S. Road;Kachhari Road,Bhagalpur, Bihar;BIHAR;IN-BR;;812001;V2  RETAIL LTD HB07;9876543210
+;HB08;V2 Retail Ltd. Mirzapur Chowk, Station Road,;Darbhanga, Bihar;BIHAR;IN-BR;;846004;V2  RETAIL LTD HB08;9876543210
+;HB09;V2 Retail Ltd. Supriya Cinema Road,Behind Axis;Bettiah (West),Champaran,Bihar;BIHAR;IN-BR;;845438;V2  RETAIL LTD HB09;9876543210
+;HJ08;V2 Retail Ltd. NO.-7 SAKCHI NEW PLANNING AREA;JAMSHEDPUR,JHARKHAND;JHARKHAND;IN-JH;;831001;V2  RETAIL LTD HJ08;9876543210
+;HU32;V2 Retail Ltd. NO.-7 LGF, A.D. Gold, Vijay Chowk; Bank Road,Gorakhpur,UP;GORAKHPUR;IN-GK;;273001;V2  RETAIL LTD HU32;9876543210
+;HK04;V2 Retail Ltd. 98/4, 98/5 krishnapur village,airport road; gokul road, near big bazar, hubli,dharwad karnatka ;KARNATAKA;IN-GK;;580030;V2  RETAIL LTD HK04;9876543210
+;HB10;V2 Retail Ltd. GYAN CHAND COMPLEX, JAIL ROAD;ARRAH BHOJPUR, NEAR PANJAB NATIONAL BANK ARRAH;BIHAR;IN-BR;;802301;V2  RETAIL LTD HB10;9876543210	
+
+INSERT_UPDATE PointOfService;name[unique=true];displayName;warehouses(code);address(&addrID);type(code)[default=STORE];phoneNo
+;V2  RETAIL LTD HD16;V2  RETAIL LTD;HD16;HD16;;9988776655
+;V2  RETAIL LTD HD17;V2  RETAIL LTD;HD17;HD17;;9988776655
+;V2  RETAIL LTD HH12;V2  RETAIL LTD;HH12;HH12;;9988776655
+;V2  RETAIL LTD HN10;V2  RETAIL LTD;HN10;HN10;;9988776655
+;V2  RETAIL LTD HI06;V2  RETAIL LTD;HI06;HI06;;9988776655
+;V2  RETAIL LTD H008;V2  RETAIL LTD;H008;H008;;9988776655
+;V2  RETAIL LTD H009;V2  RETAIL LTD;H009;H009;;9988776655
+;V2  RETAIL LTD HB05;V2  RETAIL LTD;HB05;HB05;;9988776655
+;V2  RETAIL LTD HB06;V2  RETAIL LTD;HB06;HB06;;9988776655
+;V2  RETAIL LTD HB07;V2  RETAIL LTD;HB07;HB07;;9988776655
+;V2  RETAIL LTD HB08;V2  RETAIL LTD;HB08;HB08;;9988776655
+;V2  RETAIL LTD HB09;V2  RETAIL LTD;HB09;HB09;;9988776655
+;V2  RETAIL LTD HJ08;V2  RETAIL LTD;HJ08;HJ08;;9988776655
+;V2  RETAIL LTD HU32;V2  RETAIL LTD;HU32;HU32;;9988776655
+;V2  RETAIL LTD HK04;V2  RETAIL LTD;HK04;HK04;;9988776655
+;V2  RETAIL LTD HB10;V2  RETAIL LTD;HB10;HB10;;9988776655
+
+#INSERT_UPDATE PointOfService;name[unique=true];warehouses(code);type(code);address(&addrID);latitude	;longitude	;geocodeTimestamp[dateformat=dd-MM-yyyy]	;basestore(uid)[default=$storeUid];division;distributionChannel(code);concept;salesOrganization;salesOffice
+#							;DH25			  ;DH25			   ;WAREHOUSE	  ;addr1		   ;19.120791	;72.926395	;29-04-2025									;								  ;00	   ;01						 ;11	 ;0236			   ;DH25
+
+
+INSERT_UPDATE PointOfService;name[unique=true];displayName;warehouses(code);type(code)[default=WAREHOUSE];phoneNo
+                            ;DH25             ;DH25 POS   ;DH25            ;;9988776655
+
+
+#INSERT_UPDATE Address;&addrID;streetnumber[unique=true]   ;streetname;town;region(regionCode);country(isocode)[default='IN'];postalcode[unique=true];phone1;owner(PointOfService.name)[unique=true]
+#                     ;addr1  ;8th Floor, Tower C 24/7 Park;LBS Marg Vikhroli(west);Mumbai;13;;400083;+91 92-8231-0236;DH25
+
+# add PointOfService in Base Store
+INSERT_UPDATE BaseStore;uid[unique=true];catalogs(id)							;currencies(isocode);net  ;taxGroup(code);storelocatorDistanceUnit(code);defaultCurrency(isocode);languages(isocode);defaultLanguage(isocode);deliveryCountries(isocode);submitOrderProcessCode;pickupInStoreMode(code);customerAllowedToIgnoreSuggestions  ;paymentProvider  ;checkoutFlowGroup; maxRadiusForPoSSearch;defaultDeliveryOrigin(name)
+					   ;$storeUid		;$productCatalog,$classificationCatalog ;$currencies		;$net ;			     ;km                            ;$defaultCurrency        ;$languages        ;$defaultLanguage        ;$deliveryCountries        ;$orderProcessCode     ;$pickupInStoreMode     ;$customerAllowedToIgnoreSuggestions ;$paymentProvider ;$checkoutFlowGroup;                     ;DH25
+
+ 					    
+ 
+INSERT_UPDATE BaseStore2DeliveryModeRel;source(uid)[unique=true];target(code)[unique=true]
+;v2kart;standard-ncr-within-city            
+;v2kart;express-ncr-within-city             
+;v2kart;standard-within-region-upto-500-km  
+;v2kart;express-within-region-upto-500-km   
+;v2kart;standard-rest-of-india-above-500-km 
+;v2kart;express-rest-of-india-above-500-km  
+;v2kart;standard-north-east  
+;v2kart;standard-pickup     
+;v2kart;express-pickup     
+
+
+UPDATE BaseStore ;uid[unique=true];pointsOfService(PointOfService.name)
+				 ;$storeUid		  ;V2  RETAIL LTD HD16,V2  RETAIL LTD HD17,V2  RETAIL LTD HH12,V2  RETAIL LTD HN10,V2  RETAIL LTD HI06,V2  RETAIL LTD H008,V2  RETAIL LTD H009,V2  RETAIL LTD HB05,V2  RETAIL LTD HB06,V2  RETAIL LTD HB07,V2  RETAIL LTD HB08,V2  RETAIL LTD HB09,V2  RETAIL LTD HJ08,V2  RETAIL LTD HU32,V2  RETAIL LTD HK04,V2  RETAIL LTD HB10
+          

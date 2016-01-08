@@ -1,0 +1,286 @@
+
+/** CSS Start for checkout Pages **/
+
+#checkoutProgress {
+	background: none repeat scroll 0 0 #fff;
+	height: 30px;
+	margin: 0 0 20px;
+}
+
+#checkoutProgress li a.step {
+	background: none repeat scroll 0 0 #eee;
+	float: left;
+	height: 30px;
+	line-height: 30px;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+}
+
+#checkoutProgress.steps-1 li a.step {
+	width: 100%;
+}
+
+#checkoutProgress.steps-2 li a.step {
+	width: 50%;
+}
+
+#checkoutProgress.steps-3 li a.step {
+	width: 33%;
+}
+
+#checkoutProgress.steps-4 li a.step {
+	width: 24.6%;
+}
+
+#checkoutProgress.steps-5 li a.step {
+	width: 20%;
+}
+
+#checkoutProgress.steps-6 li a.step {
+	width: 16%;
+}
+
+#checkoutProgress.steps-7 li a.step {
+	width: 14%;
+}
+
+#checkoutProgress.steps-8 li a.step {
+	width: 12.5%;
+}
+
+#checkoutProgress.steps-9 li a.step {
+	width: 11%;
+}
+
+#checkoutProgress.steps-10 li a.step {
+	width: 10%;
+}
+
+#checkoutProgress li {
+	display: block;
+	float: left;
+	position: relative;
+	width: 33%;
+}
+
+#checkoutProgress li a {
+	color: inherit;
+	display: block;
+	text-align: center;
+	position: relative;
+}
+
+#checkoutProgress li a.step.visited {
+	
+}
+
+#checkoutProgress li:hover a {
+	background: none repeat scroll 0 0 #000;
+	color: #fff !important;
+}
+
+#checkoutProgress li.active a.step {
+	background: none repeat scroll 0 0 #000;
+	color: #fff;
+}
+
+#checkoutProgress li a.step.disabled {
+	color: #999;
+	cursor: text;
+}
+
+#checkoutProgress li:after {
+	border-bottom: 16px solid transparent;
+	border-left: 16px solid #eee;
+	border-top: 16px solid transparent;
+	content: " ";
+	display: block;
+	height: 0;
+	left: 100%;
+	margin-top: -16px;
+	position: absolute;
+	top: 50%;
+	width: 0;
+	z-index: 2;
+}
+
+#checkoutProgress li:before {
+	border-bottom: 16px solid transparent;
+	border-left: 16px solid #999;
+	border-top: 16px solid transparent;
+	content: " ";
+	display: block;
+	height: 0;
+	left: 100%;
+	margin-left: 1px;
+	margin-top: -16px;
+	position: absolute;
+	top: 50%;
+	width: 0;
+	z-index: 1;
+}
+
+#checkoutProgress li.active:after, #checkoutProgress li:hover:after {
+	border-left-color: #000 !important;
+}
+
+#page {
+    width: initial;
+}
+#checkoutContentPanel label, td{
+	color: #333;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 14px;
+    line-height: 1.42857;
+    font-weight: 400;
+}
+.col-md-5 #checkoutOrderDetails {
+    padding-left: 30px;
+    width: 100%;
+}
+#checkoutOrderDetails .deliveryCartItems {
+    margin: 40px 0;
+    width: 100%;
+}
+.deliveryCartItems thead td, #orderTotals thead td {
+    background: none repeat scroll 0 0 #000 !important;
+    color: #fff;
+    padding: 5px !important;
+    text-transform: uppercase;
+    font-weight: bold;
+    line-height: initial !important;
+}
+#orderTotals tbody td {
+    height: 30px;
+    line-height: 30px;
+}
+#orderTotals td {
+    padding: 5px;
+    text-align: top;
+}
+
+/** CSS End for checkout pages **/
+
+
+
+
+
+/** CSS Start for checkout Delivery Address Pages **/
+
+.v2kartDelivaryAddress .checkout-pg {
+    padding-left: 10px;
+}
+
+.v2kartDelivaryAddress .address-fields {
+    display: inline-block;
+    position: relative;
+    width: 100%;
+}
+.v2kartDelivaryAddress .address-fields div {
+    float: left;
+    width: 50%;
+}
+.v2kartDelivaryAddress .address-fields input {
+    float: left;
+    margin-right: 3px;
+}
+.v2kartDelivaryAddress .address-fields label {
+    display: block;
+    font-weight: normal;
+    margin-bottom: 5px;
+    max-width: 100%;
+    color: #333;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 14px;
+    line-height: 1.42857;
+}
+.v2kartDelivaryAddress .order-detailscntr {
+    display: inline-block;
+    margin: 20px 0;
+    width: 100%;
+}
+
+
+.v2kartDelivaryAddress .order-info li {
+   /*  border: 1px dotted #a5a5a5;
+    float: left;
+    padding: 20px 11px;
+    min-height:300px;
+    position: relative;
+    width: 48%;
+    margin-bottom: 16px; */
+    border: 1px dotted #a5a5a5;
+    float: left;
+    padding: 8px 4px;
+    min-height:250px;
+    position: relative;
+    width: 48%;
+    margin-bottom: 16px;
+}
+
+.addressformat{
+ margin-top:-19px;
+} 
+.addresslistformat {
+ max-width:240px;
+ word-wrap:break-word;
+ white-space: pre-wrap;
+}
+ 
+.v2kartDelivaryAddress .nextAddress {
+    margin-left: 16px;
+}
+.v2kartDelivaryAddress .order-detailscntr h3 {
+    border-bottom: 1px solid #a5a5a5;
+    color: #000 !important;
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 25px;
+    margin-top: 0;
+    padding-bottom: 10px;
+}
+.v2kartDelivaryAddress .del-info li {
+    border: medium none;
+    font-size: 13px;
+    min-height: inherit;
+    padding: 0;
+    width: 100%;
+    margin: 0;
+}
+.v2kartDelivaryAddress .addressContentPane .control-group {
+    float: left;
+    margin-right: 20px;
+    width: 46%;
+}
+.v2kartDelivaryAddress .addressContentPane .control-group:FIRST-CHILD {
+   /*  width: 100% !important; */
+}
+.v2kartDelivaryAddress .addressContentPane .control-group:FIRST-CHILD select {
+    width: 46% !important;
+}
+.v2kartDelivaryAddress .none {
+    display: none;
+}
+.v2kartDelivaryAddress .small-input {
+    float: left;
+    margin-right: 2%;
+    width: 17% !important;
+}
+.v2kartDelivaryAddress .checkp-input {
+    width: 81% !important;
+}
+.v2kartDelivaryAddress .control-group input[disabled], .v2kartDelivaryAddress .control-group select[disabled], .v2kartDelivaryAddress .control-group textarea[disabled], .v2kartDelivaryAddress .control-group input[readonly], .v2kartDelivaryAddress .control-group select[readonly], .v2kartDelivaryAddress .control-group textarea[readonly] {
+    background-color: #eeeeee;
+    cursor: not-allowed;
+}
+.v2kartDelivaryAddress .addressContentPane .control-group:FIRST-CHILD label {
+   /*  width: 46% !important; */
+}
+
+.v2kartDelivaryAddress .addressContentPane .form-additionals .control-group:FIRST-CHILD {
+     width: 100% !important; 
+}
+
+/** CSS End for checkout Delivery Address Pages **/
+

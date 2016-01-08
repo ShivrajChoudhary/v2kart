@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    *******************************************************************************************************************
+    DAO CONFIGURATION FILE
+    *******************************************************************************************************************
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:util="http://www.springframework.org/schema/util" xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
+           http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context-3.0.xsd
+           ">
+    <!-- TitleModel Dao -->
+    <bean id="titleModelDao" class="in.com.v2kart.core.dao.impl.DefaultBaseDaoImpl">
+        <constructor-arg name="typecode">
+            <util:constant static-field="de.hybris.platform.core.model.user.TitleModel._TYPECODE" />
+        </constructor-arg>
+        <constructor-arg name="codePropertyName">
+            <util:constant static-field="de.hybris.platform.core.model.user.TitleModel.CODE" />
+        </constructor-arg>
+    </bean>
+
+    <!-- SMS template Model Dao -->
+    <bean id="smsTemplateModelDao" class="in.com.v2kart.core.dao.impl.DefaultBaseDaoImpl">
+        <constructor-arg name="typecode">
+            <util:constant static-field="in.com.v2kart.core.model.V2SmsTemplateModel._TYPECODE" />
+        </constructor-arg>
+        <constructor-arg name="codePropertyName">
+            <util:constant static-field="in.com.v2kart.core.model.V2SmsTemplateModel.CODE" />
+        </constructor-arg>
+    </bean>
+
+    <!-- ProductModel Dao -->
+    <bean id="productModelDao" class="in.com.v2kart.core.dao.impl.DefaultCatalogAwareModelDaoImpl">
+        <constructor-arg name="typecode">
+            <util:constant static-field="de.hybris.platform.core.model.product.ProductModel._TYPECODE" />
+        </constructor-arg>
+        <constructor-arg name="codePropertyName">
+            <util:constant static-field="de.hybris.platform.core.model.product.ProductModel.CODE" />
+        </constructor-arg>
+        <constructor-arg name="catalogVersionPropertyName">
+            <util:constant static-field="de.hybris.platform.core.model.product.ProductModel.CATALOGVERSION" />
+        </constructor-arg>
+    </bean>
+
+    <!-- categoryModelDao Dao -->
+    <bean id="categoryModelDao" class="in.com.v2kart.core.dao.impl.V2CategoryModelDaoImpl">
+        <constructor-arg name="typecode">
+            <util:constant static-field="de.hybris.platform.category.model.CategoryModel._TYPECODE" />
+        </constructor-arg>
+        <constructor-arg name="codePropertyName">
+            <util:constant static-field="de.hybris.platform.category.model.CategoryModel.CODE" />
+        </constructor-arg>
+        <constructor-arg name="catalogVersionPropertyName">
+            <util:constant static-field="de.hybris.platform.category.model.CategoryModel.CATALOGVERSION" />
+        </constructor-arg>
+    </bean>
+
+
+    <!-- mediaContainerModelDao Dao -->
+    <bean id="mediaContainerModelDao" class="in.com.v2kart.core.dao.impl.DefaultCatalogAwareModelDaoImpl">
+        <constructor-arg name="typecode">
+            <util:constant static-field="de.hybris.platform.core.model.media.MediaContainerModel._TYPECODE" />
+        </constructor-arg>
+        <constructor-arg name="codePropertyName">
+            <util:constant static-field="de.hybris.platform.core.model.media.MediaContainerModel.QUALIFIER" />
+        </constructor-arg>
+        <constructor-arg name="catalogVersionPropertyName">
+            <util:constant static-field="de.hybris.platform.core.model.media.MediaContainerModel.CATALOGVERSION" />
+        </constructor-arg>
+    </bean>
+
+</beans>

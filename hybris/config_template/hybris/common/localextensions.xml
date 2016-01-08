@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hybrisconfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="resources/schemas/extensions.xsd">
+    <extensions>
+
+        <!-- ###################################################################################
+
+            COMMON LOCAL EXTENSION
+
+            All extensions located in ${HYBRIS_BIN_DIR}/platform/ext are automatically loaded.
+            More information about how to configure available extensions can be found here : https://wiki.hybris.com/x/nZVzC
+
+            ###################################################################################
+        -->
+
+        <path dir="${HYBRIS_BIN_DIR}" />
+
+        <!-- ext-platform -->
+        <extension name="admincockpit" />
+        <extension name="backoffice" />
+        <extension name="cockpit" />
+        <extension name="hmc" />
+        <extension name="mcc" />
+        <extension name="platformhmc" />
+        <extension name="amazoncloud" />
+
+        <!-- ext-commerce -->
+        <extension name="btg" />
+        <extension name="btgcockpit" />
+        <extension name="commercesearch" />
+        <extension name="commercesearchbackoffice" />
+        <extension name="commercesearchhmc" />
+        <extension name="commerceservices" />
+        <extension name="basecommerce" />
+        <extension name="payment" />
+        <extension name="promotions" />
+        <extension name="voucher" />
+        <extension name="customerreview" />
+        <extension name="ticketsystem" />
+        <extension name="solrfacetsearch" />
+        <extension name="solrfacetsearchhmc" />
+        <extension name="wishlist" />
+        <extension name="commercefacades" />
+
+        <!-- ext-data -->
+        <!-- <extension name="commercesearchsampledata" /> -->
+        <extension name="mediaconversion" />
+
+        <!-- ext-content -->
+        <extension name="productcockpit" />
+        <extension name="cms2" />
+        <extension name="cms2lib" />
+        <extension name="cmscockpit" />
+        <extension name="classificationsystems" />
+        <extension name="mobileoptionals" />
+        <extension name="mobileservices" />
+        <extension name="cscockpit" />
+        <!-- <extension name="instore" /> -->
+
+        <!-- ext-addon -->
+        <extension name="addonsupport" />
+         <extension name="b2ccheckoutaddon" />
+
+        <!-- ext-accelerator -->
+        <extension name="acceleratorservices" />
+        <extension name="acceleratorfacades" />
+        <extension name="acceleratorcms" />
+        <extension name="acceleratorstorefrontcommons" />
+
+        <!-- ext-Custom -->
+		<extension name="v2kartfulfilmentprocess"/>
+		<extension name="v2kartcore"/>
+		<extension name="v2kartinitialdata"/>
+		<extension name="v2kartfacades"/>
+		<extension name="v2kartstorefront"/>
+		<extension name="v2kartcockpits"/>
+		<extension name="v2kartstore" />
+		<extension name="v2kartcheckoutaddon" />
+        <extension name="v2kartpayupaymentintegration" />
+        <extension name="v2kartccavenuepaymentintegration" />
+		<extension name="v2kartebspaymentintegration" />
+        <extension name="v2kartdataimport" />
+        <extension name="v2kartimportlog" />
+        <extension name="v2kartaramexintegration"/>
+        <extension name="v2kartdelhiverylspintegration"/>
+		<extension name="v2kartdotzotlspintegration"/>
+		<extension name="v2kartecomlspintegration" />
+                <!-- <extension name="v2karttest"/> -->
+
+        <!-- ADMIN NODE SPECIFIC EXTENSION -->
+
+        <extension name="v2kartsapinboundintegration" />
+        <extension name="v2kartsapoutboundintegration" /> 
+		<!-- ext-CommerceWebServices -->
+		<extension name="v2kartcommercewebservices" />		
+    </extensions>
+</hybrisconfig>

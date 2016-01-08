@@ -1,0 +1,599 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    [y] hybris Platform
+
+    Copyright (c) 2000-2014 hybris AG
+    All rights reserved.
+
+    This software is the confidential and proprietary information of hybris
+    ("Confidential Information"). You shall not disclose such Confidential
+    Information and shall use it only in accordance with the terms of the
+    license agreement you entered into with hybris.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd"
+    profile="v2kart">
+
+    <!-- Facades -->
+    <alias alias="simpleSuggestionFacade" name="defaultSimpleSuggestionFacade" />
+    <bean id="defaultSimpleSuggestionFacade" class="in.com.v2kart.facades.suggestion.impl.DefaultSimpleSuggestionFacade">
+        <property name="simpleSuggestionService" ref="simpleSuggestionService" />
+        <property name="userService" ref="userService" />
+        <property name="categoryService" ref="categoryService" />
+        <property name="productService" ref="productService" />
+        <property name="productPricePopulator" ref="productPricePopulator" />
+        <property name="productPrimaryImagePopulator" ref="productPrimaryImagePopulator" />
+        <property name="productConverter" ref="productConverter" />
+    </bean>
+
+    <alias name="acceleratorVariantOptionDataConverter" alias="variantOptionDataConverter" />
+    <bean id="acceleratorVariantOptionDataConverter" parent="abstractPopulatingConverter">
+        <property name="targetClass" value="de.hybris.platform.commercefacades.product.data.VariantOptionData" />
+        <property name="populators">
+            <list>
+                <ref bean="acceleratorVariantOptionDataPopulator" />
+            </list>
+        </property>
+    </bean>
+
+    <alias name="defaultAcceleratorVariantOptionDataPopulator" alias="acceleratorVariantOptionDataPopulator" />
+    <bean id="defaultAcceleratorVariantOptionDataPopulator" class="in.com.v2kart.facades.populators.AcceleratorVariantOptionDataPopulator"
+        parent="variantOptionDataPopulator">
+        <property name="mediaService" ref="mediaService" />
+        <property name="mediaContainerService" ref="mediaContainerService" />
+        <property name="typeService" ref="typeService" />
+        <property name="enumerationService" ref="enumerationService" />
+        <property name="imageFormatMapping" ref="imageFormatMapping" />
+        <property name="variantAttributeMapping">
+            <map>
+                <entry key="V2kartStyleVariantProduct.style" value="styleSwatch" />
+            </map>
+        </property>
+    </bean>
+
+
+    <alias name="acceleratorGenderConverter" alias="genderConverter" />
+    <bean id="acceleratorGenderConverter" parent="abstractPopulatingConverter">
+        <property name="targetClass" value="in.com.v2kart.facades.product.data.GenderData" />
+        <property name="populators">
+            <list>
+                <ref bean="genderDataPopulator" />
+            </list>
+        </property>
+    </bean>
+
+    <alias name="defaultGenderDataPopulator" alias="genderDataPopulator" />
+    <bean id="defaultGenderDataPopulator" class="in.com.v2kart.facades.populators.GenderDataPopulator">
+        <property name="typeService" ref="typeService" />
+    </bean>
+
+    <bean id="v2ProductPopulator" class="in.com.v2kart.facades.populators.V2ProductPopulator">
+        <property name="genderConverter" ref="genderConverter" />
+    </bean>
+
+    <!-- Add the v2ProductPopulator to the productConverter -->
+    <bean parent="modifyPopulatorList">
+        <property name="list" ref="productConverter" />
+        <property name="add" ref="v2ProductPopulator" />
+    </bean>
+
+    <!-- accelerator Image Format Mappings -->
+    <alias name="acceleratorImageFormatMapping" alias="imageFormatMapping" />
+    <bean id="acceleratorImageFormatMapping" parent="defaultImageFormatMapping">
+        <property name="mapping">
+            <map>
+                <entry key="superZoom" value="Product-1000Wx1250H" />
+                <entry key="zoom" value="Product-420Wx525H" />
+                <entry key="store" value="Product-365Wx244H" />
+                <entry key="product" value="Product-128Wx160H" />
+                <entry key="thumbnail" value="Product-92Wx115H" />
+                <entry key="cartIcon" value="Product-65Wx65H" />
+                <entry key="styleSwatch" value="Product-65Wx65H" />
+                <entry key="productListing" value="Product-176Wx220H" />
+                <entry key="newProductListing" value="Product-220Wx275H" />
+                <entry key="mobileProductListing" value="Product-220Wx275H" />
+          </map>
+        </property>
+    </bean>
+
+    <alias name="V2OrderEntryPopulator" alias="orderEntryPopulator" />
+    <bean id="V2OrderEntryPopulator" class="in.com.v2kart.facades.populators.V2OrderEntryPopulator" parent="defaultOrderEntryPopulator">
+    </bean>
+
+    <alias name="V2OrderHistoryPopulator" alias="orderHistoryPopulator" />
+    <bean id="V2OrderHistoryPopulator" class="in.com.v2kart.facades.populators.V2OrderHistoryPopulator" parent="defaultOrderHistoryPopulator">
+        <property name="orderConverter" ref="orderConverter" />
+    </bean>
+
+    <alias name="v2ConsignmentPopulator" alias="consignmentPopulator" />
+    <bean id="v2ConsignmentPopulator" class="in.com.v2kart.facades.populators.V2ConsignmentPopulator" parent="defaultConsignmentPopulator">
+
+    </bean>
+
+
+    <alias name="acceleratorProductPrimaryImagePopulator" alias="productPrimaryImagePopulator" />
+    <bean id="acceleratorProductPrimaryImagePopulator" parent="defaultProductPrimaryImagePopulator">
+        <property name="imageFormats">
+            <list>
+                <value>superZoom</value>
+                <value>zoom</value>
+                <value>product</value>
+                <value>thumbnail</value>
+                <value>cartIcon</value>
+                <value>productListing</value>
+             	<value>newProductListing</value>
+             	<value>mobileProductListing</value>
+           
+            </list>
+        </property>
+    </bean>
+
+    <alias name="acceleratorProductGalleryImagesPopulator" alias="productGalleryImagesPopulator" />
+    <bean id="acceleratorProductGalleryImagesPopulator" parent="defaultProductGalleryImagesPopulator">
+        <property name="imageFormats">
+            <list>
+                <value>superZoom</value>
+                <value>zoom</value>
+                <value>product</value>
+                <value>thumbnail</value>
+                <value>productListing</value>
+                <value>newProductListing</value>
+                <value>mobileProductListing</value>
+            </list>
+        </property>
+    </bean>
+
+    <alias name="v2ProductPrimaryImagePopulator" alias="productPrimaryImagePopulator" />
+    <bean id="v2ProductPrimaryImagePopulator" parent="defaultProductPrimaryImagePopulator" class="in.com.v2kart.facades.populators.V2ProductPrimaryImagePopulator">
+        <property name="imageFormats">
+            <list>
+                <value>superZoom</value>
+                <value>zoom</value>
+                <value>product</value>
+                <value>thumbnail</value>
+                <value>cartIcon</value>
+                <value>primaryImage</value>
+                <value>quickView</value>
+                <value>trendingNow</value>
+                <value>productListing</value>
+            	<value>newProductListing</value>
+               	<value>mobileProductListing</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="customerEmailContext" class="in.com.v2kart.facades.process.email.context.CustomerEmailContext" parent="abstractEmailContext"
+        scope="prototype">
+        <property name="customerConverter" ref="customerConverter" />
+    </bean>
+
+    <bean id="forgottenPasswordEmailContext" class="in.com.v2kart.facades.process.email.context.ForgottenPasswordEmailContext" parent="customerEmailContext"
+        scope="prototype">
+        <property name="customerConverter" ref="customerConverter" />
+    </bean>
+
+    <bean id="orderNotificationEmailContext" class="in.com.v2kart.facades.process.email.context.OrderNotificationEmailContext" parent="abstractEmailContext"
+        scope="prototype">
+        <property name="orderConverter" ref="orderConverter" />
+    </bean>
+
+    <bean id="deliverySentEmailContext" class="in.com.v2kart.facades.process.email.context.DeliverySentEmailContext" parent="abstractEmailContext"
+        scope="prototype">
+        <property name="consignmentConverter" ref="consignmentConverter" />
+    </bean>
+
+    <bean id="readyForPickupEmailContext" class="in.com.v2kart.facades.process.email.context.ReadyForPickupEmailContext" parent="abstractEmailContext"
+        scope="prototype">
+        <property name="consignmentConverter" ref="consignmentConverter" />
+    </bean>
+
+     <bean id="orderCancelledEmailContext" class="in.com.v2kart.facades.process.email.context.OrderCancelledEmailContext" parent="orderPartiallyModifiedEmailContext"
+        scope="prototype">       
+    </bean>
+
+
+    <bean id="orderRefundEmailContext" class="in.com.v2kart.facades.process.email.context.OrderRefundEmailContext" parent="abstractEmailContext"
+        scope="prototype">
+        <property name="orderConverter" ref="orderConverter" />
+    </bean>
+    <bean id="consignmentCollectionReminderEmailContext" class="in.com.v2kart.facades.process.email.context.ConsignmentCollectionReminderEmailContext"
+        parent="abstractEmailContext" scope="prototype">
+        <property name="consignmentConverter" ref="consignmentConverter" />
+        <property name="formatFactory" ref="formatFactory" />
+        <property name="customerServiceUncollectedConsignmentStrategy" ref="customerServiceUncollectedConsignmentStrategy" />
+        <property name="orderConverter" ref="orderConverter" />
+    </bean>
+
+    <bean id="orderPartiallyModifiedEmailContext" class="in.com.v2kart.facades.process.email.context.OrderPartiallyModifiedEmailContext"
+        parent="abstractEmailContext" scope="prototype">
+        <property name="orderConverter" ref="orderConverter" />
+        <property name="orderEntryConverter" ref="orderEntryConverter" />
+        <property name="priceDataFactory" ref="priceDataFactory" />
+    </bean>
+
+    <bean id="orderPartiallyCanceledEmailContext" class="in.com.v2kart.facades.process.email.context.OrderPartiallyCanceledEmailContext"
+        parent="orderPartiallyModifiedEmailContext" scope="prototype">
+    </bean>
+
+    <bean id="orderPartiallyRefundedEmailContext" class="in.com.v2kart.facades.process.email.context.OrderPartiallyRefundedEmailContext"
+        parent="orderPartiallyModifiedEmailContext" scope="prototype">
+    </bean>
+
+    <bean id="notPickedUpConsignmentCanceledEmailContext" class="in.com.v2kart.facades.process.email.context.NotPickedUpConsignmentCanceledEmailContext"
+        parent="abstractEmailContext" scope="prototype">
+        <property name="consignmentConverter" ref="consignmentConverter" />
+        <property name="priceDataFactory" ref="priceDataFactory" />
+    </bean>
+
+    <alias name="defaultCheckoutFlowFacade" alias="checkoutFlowFacade" />
+    <bean id="defaultCheckoutFlowFacade" class="in.com.v2kart.facades.flow.impl.DefaultCheckoutFlowFacade" parent="defaultAcceleratorCheckoutFacade">
+        <property name="checkoutFlowStrategy" ref="checkoutFlowStrategy" />
+        <property name="checkoutPciStrategy" ref="checkoutPciStrategy" />
+    </bean>
+
+    <!--
+        The SessionOverrideCheckoutFlowFacade allows the CheckoutFlow and the SubscriptionPciOption to be overridden in the session.
+        This is typically done for demonstration purposes and you may not need this behaviour in your environment, in which case the
+        defaultCheckoutFlowFacade should be sufficient.
+    -->
+    <alias name="sessionOverrideCheckoutFlowFacade" alias="checkoutFlowFacade" />
+    <bean id="sessionOverrideCheckoutFlowFacade" class="in.com.v2kart.facades.flow.impl.SessionOverrideCheckoutFlowFacade" parent="defaultCheckoutFlowFacade">
+        <property name="sessionService" ref="sessionService" />
+    </bean>
+
+    <alias name="v2CheckoutFacade" alias="acceleratorCheckoutFacade" />
+    <bean id="v2CheckoutFacade" class="in.com.v2kart.facades.order.impl.V2CheckoutFacadeImpl" parent="defaultAcceleratorCheckoutFacade">
+        <property name="uidKeyGenerator" ref="codeGenerator" />
+        <property name="addressReversePopulator" ref="addressReversePopulator" />
+        <property name="addressPopulator" ref="addressPopulator" />
+        <property name="v2PaymentService" ref="paymentService" />
+        <property name="storeCreditFacade" ref="storeCreditFacade" />
+        <property name="paymentFacade" ref="paymentFacade" />
+    </bean>
+
+
+
+    <alias name="yacceleratorSearchPagePointOfServiceDistancePopulator" alias="searchPagePointOfServiceDistancePopulator" />
+    <bean id="yacceleratorSearchPagePointOfServiceDistancePopulator" class="in.com.v2kart.facades.storefinder.populators.SearchPagePointOfServiceDistancePopulator">
+        <property name="pointOfServiceDistanceConverter" ref="pointOfServiceDistanceConverter" />
+    </bean>
+
+    <bean id="genderData" class="in.com.v2kart.facades.product.data.GenderData" scope="prototype" />
+
+    <alias name="v2CustomerFacade" alias="customerFacade" />
+    <bean id="v2CustomerFacade" class="in.com.v2kart.facades.customer.impl.V2CustomerFacadeImpl" parent="defaultCustomerFacade">
+        <property name="v2CustomerSapIntegrationService" ref="v2CustomerSapInboundIntegrationService" />
+    </bean>
+
+    <alias name="v2ProductPricePopulator" alias="productPricePopulator" />
+    <bean id="v2ProductPricePopulator" class="in.com.v2kart.facades.populators.V2ProductPricePopulator" parent="defaultProductPricePopulator">
+        <property name="promotionService" ref="promotionsService" />
+        <property name="baseSiteService" ref="baseSiteService" />
+        <property name="timeService" ref="timeService" />
+    </bean>
+    
+    <alias name="v2CashOnDeliveryOtp" alias="v2CashOnDeliveryOtp" />
+    <bean id="v2CashOnDeliveryOtp" class="in.com.v2kart.facades.otp.impl.V2CashOnDeliveryOtpImpl" parent="defaultCustomerFacade">
+        <property name="userService" ref="userService" />
+        <property name="modelService" ref="modelService" />
+    </bean>
+    
+
+    <alias name="v2PaymentFacade" alias="paymentFacade" />
+    <bean name="v2PaymentFacade" class="in.com.v2kart.facades.payment.impl.V2PaymentFacadeImpl" parent="defaultPaymentFacade">
+        <property name="v2PaymentService" ref="v2PaymentService" />
+        <property name="i18nService" ref="i18nService" />
+    </bean>
+
+
+
+    <bean id="wishlistData" class="in.com.v2kart.facades.core.data.WishlistData" scope="prototype" />
+    <alias name="defaultWishlistConverter" alias="wishlistConverter" />
+    <bean id="defaultWishlistConverter" parent="abstractPopulatingConverter">
+        <lookup-method name="createTarget" bean="wishlistData" />
+        <property name="populators">
+            <list>
+                <ref bean="wishlistPopulator" />
+            </list>
+        </property>
+    </bean>
+
+    <alias name="defaultWishlistPopulator" alias="wishlistPopulator" />
+    <bean id="defaultWishlistPopulator" class="in.com.v2kart.facades.populators.WishlistPopulator" scope="tenant">
+        <property name="wishlistEntryConverter" ref="wishlistEntryConverter" />
+        <property name="productService" ref="productService" />
+        <property name="wishlistService" ref="wishlistService" />
+    </bean>
+
+    <bean id="wishlistFacade" class="in.com.v2kart.facades.wishlist.impl.WishlistFacadeImpl" scope="tenant">
+        <property name="productService" ref="productService" />
+        <property name="wishlistService" ref="wishlistService" />
+        <property name="wishlistConverter" ref="wishlistConverter" />
+    </bean>
+
+    <alias name="defaultWishlistEntryConverter" alias="wishlistEntryConverter" />
+    <bean id="defaultWishlistEntryConverter" parent="abstractPopulatingConverter">
+        <lookup-method name="createTarget" bean="orderEntryData" />
+        <property name="populators">
+            <list>
+                <ref bean="wishlistEntryPopulator" />
+            </list>
+        </property>
+    </bean>
+
+    <alias name="defaultWishlistEntryPopulator" alias="wishlistEntryPopulator" />
+    <bean id="defaultWishlistEntryPopulator" class="in.com.v2kart.facades.populators.WishlistEntryPopulator" scope="tenant">
+    </bean>
+
+    <!-- Customer Notification Beans -->
+    <bean id="v2NotifyCustomerFacade" class="in.com.v2kart.facades.notifycustomer.impl.V2NotifyCustomerFacadeImpl">
+        <property name="customerNotificationService" ref="customerNotificationService" />
+    </bean>
+
+    <!-- BeSeller beans -->
+    <!-- <bean id="v2BeSellerDAO" class="in.com.v2kart.core.dao.impl.V2BeSellerDAOImpl">
+        <property name="modelService" ref="modelService" />
+        </bean>
+
+        <bean id="v2BeSellerService" class="in.com.v2kart.core.services.impl.V2BeSellerServiceImpl">
+        <property name="v2BeSellerDAO" ref="v2BeSellerDAO" />
+        <property name="modelService" ref="modelService" />
+        </bean> -->
+
+    <bean id="sellerFacade" class="in.com.v2kart.facades.seller.impl.SellerFacadeImpl">
+        <property name="v2BeSellerService" ref="beSellerService" />
+    </bean>
+
+
+    <!-- be seller end -->
+
+    <alias name="defaultV2CartFacade" alias="cartFacade" />
+    <bean id="defaultV2CartFacade" class="in.com.v2kart.facades.cart.impl.DefaultV2CartFacade" parent="defaultCartFacade">
+        <property name="v2VoucherService" ref="voucherService" />
+        <property name="cartConverter" ref="extendedCartConverter"/>
+    </bean>
+
+    <bean id="commerceWebServicesCartFacade" class="in.com.v2kart.facades.cart.impl.DefaultV2CartFacade" parent="defaultCartFacade">
+        <property name="v2VoucherService" ref="voucherService" />
+        <property name="cartConverter" ref="extendedCartConverter" />
+        <property name="commerceCartService" ref="commerceWebServicesCartService" />
+    </bean>
+
+    <!-- Vouchers -->
+
+    <alias name="defaultV2VoucherPopulator" alias="v2VoucherPopulator" />
+    <bean id="defaultV2VoucherPopulator" class="in.com.v2kart.facades.voucher.converters.populator.V2VoucherPopulator">
+        <property name="currencyConverter" ref="currencyConverter"></property>
+    </bean>
+
+    <alias name="defaultV2VoucherConverter" alias="v2VoucherConverter" />
+    <bean id="defaultV2VoucherConverter" parent="abstractPopulatingConverter">
+        <property name="targetClass" value="in.com.v2kart.facades.voucher.data.V2VoucherData" />
+        <property name="populators">
+            <list merge="true">
+                <ref bean="v2VoucherPopulator" />
+            </list>
+        </property>
+    </bean>
+
+    <alias name="v2SearchResultProductPopulator" alias="commerceSearchResultProductPopulator" />
+    <bean id="v2SearchResultProductPopulator" class="in.com.v2kart.facades.populators.V2SearchResultProductPopulator" parent="defaultCommerceSearchResultProductPopulator"></bean>
+
+    <alias name="v2kartProductCategorySearchPageConverter" alias="productCategorySearchPageConverter" />
+    <bean id="v2kartProductCategorySearchPageConverter" parent="defaultProductCategorySearchPageConverter">
+        <lookup-method name="createTarget" bean="productCategorySearchPageData" />
+        <property name="populators">
+            <list merge="true">
+                <ref bean="v2kartProductCategorySearchPagePopulator" />
+            </list>
+        </property>
+    </bean>
+
+    <alias name="v2OrderPopulator" alias="orderPopulator" />
+    <bean id="v2OrderPopulator" class="in.com.v2kart.facades.populators.V2OrderPopulator" parent="defaultOrderPopulator">
+        <property name="customPaymentInfoConverter" ref="customPaymentInfoConverter" />
+        <property name="v2CancelReasons">
+			<map merge="true">
+				<entry key="notinterestedanymore" value="Not Interested Any More"/>
+				<entry key="orderduplicateproductbymistake" value="Order Duplicate Product By Mistake"/>
+				<entry key="purchasedwrongproduct" value="Purchased Wrong Product"/>
+				<entry key="delayindelivery" value="Delay In Delivery"/>
+				<entry key="other" value="Other"/>
+			</map>
+		</property>
+		
+		<property name="v2RefundReasons">
+			<map merge="true">
+			    <entry key="wrongshipment" value="Wrong Shipment"/>
+                <entry key="productdefective" value="Product Defective"/>
+                <entry key="productdamaged" value="Product Damaged"/>
+                <entry key="other" value="Other"/>
+			</map>
+		</property>
+    </bean>
+
+    <alias name="v2CustomPaymentInfoConverter" alias="customPaymentInfoConverter" />
+    <bean id="v2CustomPaymentInfoConverter" parent="abstractPopulatingConverter">
+        <property name="targetClass" value="de.hybris.platform.commercefacades.order.data.CCPaymentInfoData" />
+        <property name="populators">
+            <list>
+                <ref bean="customPaymentInfoPopulator" />
+            </list>
+        </property>
+    </bean>
+
+    <alias name="V2CustomPaymentInfoPopulator" alias="customPaymentInfoPopulator" />
+    <bean id="V2CustomPaymentInfoPopulator" class="in.com.v2kart.facades.populators.V2CustomPaymentInfoPopulator">
+        <property name="addressConverter" ref="addressConverter" />
+    </bean>
+
+    <bean id="v2kartProductCategorySearchPagePopulator" class="in.com.v2kart.facades.search.converters.populator.V2KartProductCategorySearchPagePopulator"
+        parent="productCategorySearchPagePopulator" />
+
+
+    <alias name="v2kartSolrProductSearchFacade" alias="productSearchFacade" />
+    <bean id="v2kartSolrProductSearchFacade" class="in.com.v2kart.facades.search.solrfacetsearch.impl.V2KartSolrProductSearchFacadeImpl"
+        parent="defaultSolrProductSearchFacade" />
+
+    <alias name="v2CustomerPopulator" alias="customerPopulator" />
+    <bean id="v2CustomerPopulator" class="in.com.v2kart.facades.populators.V2CustomersPopulator" parent="defaultCustomerPopulator">
+    </bean>
+
+    <alias name="v2ProductPromotionsPopulator" alias="productPromotionsPopulator" />
+    <bean id="v2ProductPromotionsPopulator" parent="defaultProductPromotionsPopulator" class="in.com.v2kart.facades.populators.V2ProductPromotionsPopulator">
+    </bean>
+
+    <alias name="v2OrderFacade" alias="orderFacade" />
+    <bean id="v2OrderFacade" parent="defaultOrderFacade" class="in.com.v2kart.facades.order.impl.V2OrderFacadeImpl">
+        <property name="enumerationService" ref="enumerationService" />
+        <property name="cancelableEntriesStrategy" ref="defaultCancelableEntriesStrategy"/>
+        <property name="orderEntryConverter" ref="orderEntryConverter"/>
+        <property name="orderModificationRecordConverter" ref="orderModificationRecordConverter"/>
+    </bean>
+
+    <alias name="v2ProductClassificationPopulator" alias="productClassificationPopulator" />
+    <bean id="v2ProductClassificationPopulator" parent="defaultProductClassificationPopulator"
+        class="in.com.v2kart.facades.product.converters.populator.V2ProductClassificationPopulator">
+    </bean>
+
+    <!-- @since 1.2 -->
+    <bean id="storeCreditFacade" class="in.com.v2kart.facades.storeCredit.impl.StoreCreditFacadeImpl" parent="defaultCustomerFacade">
+        <property name="storeCreditService" ref="storeCreditService" />
+    </bean>
+
+    <alias name="v2WalletTransactionConverter" alias="v2WalletTransactionConverter" />
+    <bean id="v2WalletTransactionConverter" parent="abstractPopulatingConverter">
+        <property name="targetClass" value="in.com.v2kart.facades.wallet.data.V2WalletTransactionData" />
+        <property name="populators">
+            <list>
+                <ref bean="v2WalletTransactionPopulator" />
+            </list>
+        </property>
+    </bean>
+
+
+    <alias name="v2WalletTransactionPopulator" alias="v2WalletTransactionPopulator" />
+    <bean id="v2WalletTransactionPopulator" class="in.com.v2kart.facades.wallet.populators.V2CustomerWalletTransactionPopulator">
+    </bean>
+
+    <alias name="v2CustomerWalletFacade" alias="v2CustomerWalletFacade" />
+    <bean id="v2CustomerWalletFacade" class="in.com.v2kart.facades.wallet.impl.V2CustomerWalletFacadeImpl">
+        <property name="storeCreditService" ref="storeCreditService" />
+        <property name="v2WalletTransactionConverter" ref="v2WalletTransactionConverter" />
+        <property name="userService" ref="userService" />
+    </bean>
+
+    <alias name="v2CartPopulator" alias="cartPopulator" />
+    <bean id="v2CartPopulator" parent="defaultCartPopulator" class="in.com.v2kart.facades.populators.V2CartPopulator">
+        <property name="cartService" ref="cartService" />
+    </bean>
+    
+    <alias name="v2NotificationPopulator" alias="notificationPopulator" />
+    <bean id="v2NotificationPopulator" class="in.com.v2kart.facades.populators.V2NotificationPopulator"/>
+    
+    <alias name="orderCancellationFacade" alias="orderCancellationFacade" />
+    <bean id ="orderCancellationFacade"  class="in.com.v2kart.facades.order.cancel.impl.V2OrderCancellationFacadeImpl">
+     	<property name="orderCancelDao" ref="orderCancelDao"/>
+	  	<property name="modelService" ref="modelService" />
+        <property name="userService" ref="userService" />
+        <property name="customerAccountService" ref="customerAccountService" />
+        <property name="baseStoreService" ref="baseStoreService" />
+        <property name="checkoutCustomerStrategy" ref="checkoutCustomerStrategy" />
+        <property name="enumerationService" ref="enumerationService" />
+        <property name="orderCancelService" ref="orderCancelService" />
+        <property name="v2RefundAmountService" ref="v2RefundAmountService" />
+        <property name="priceDataFactory" ref="priceDataFactory" />
+        		<property name="v2CancelReasons">
+			<map merge="true">
+				<entry key="notinterestedanymore" value="Not Interested Any More"/>
+				<entry key="orderduplicateproductbymistake" value="Order Duplicate Product By Mistake"/>
+				<entry key="purchasedwrongproduct" value="Purchased Wrong Product"/>
+				<entry key="delayindelivery" value="Delay In Delivery"/>
+				<entry key="other" value="Other"/>
+			</map>
+		</property>
+    </bean>
+    
+    <alias name="v2ExtendedCartPopulator" alias="extendedCartPopulator" />
+    <bean id="v2ExtendedCartPopulator" parent="defaultCartPopulator" class="in.com.v2kart.facades.populators.V2ExtendedCartPopulator">
+        <property name="cartPopulator" ref="cartPopulator" />
+    </bean>
+
+    <alias name="v2OrderModificationRecordConverter" alias="orderModificationRecordConverter"/>
+	<bean id="v2OrderModificationRecordConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="in.com.v2kart.facades.order.data.OrderModificationRecordData"/>
+		<property name="populators">
+			<list>
+			<ref bean="orderModificationRecordPopulator"/>
+			</list>
+		</property>
+	</bean>
+
+	<alias name="v2OrderModificationRecordPopulator" alias="orderModificationRecordPopulator"/>
+	<bean class="in.com.v2kart.facades.populators.V2OrderModificationRecordPopulator" id="v2OrderModificationRecordPopulator">
+		<property name="orderModificationRecordEntryConverter" ref="orderModificationRecordEntryConverter"/>
+	</bean>
+
+	<alias name="v2OrderModificationRecordEntryConverter" alias="orderModificationRecordEntryConverter"/>
+	<bean id="v2OrderModificationRecordEntryConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="in.com.v2kart.facades.order.data.OrderModificationRecordEntryData"/>
+		<property name="populators">
+		<list>
+		<ref bean="orderModificationRecordEntryPopulator"/>
+		</list>
+		</property>
+	</bean>
+
+	<alias name="v2OrderModificationRecordEntryPopulator" alias="orderModificationRecordEntryPopulator"/>
+	<bean class="in.com.v2kart.facades.populators.V2OrderModificationRecordEntryPopulator" id="v2OrderModificationRecordEntryPopulator">
+		<property name="orderEntryModificationRecordEntryConverter" ref="orderEntryModificationRecordEntryConverter"/>
+	</bean>
+
+	<alias name="v2OrderEntryModificationRecordEntryConverter" alias="orderEntryModificationRecordEntryConverter"/>
+	<bean id="v2OrderEntryModificationRecordEntryConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="in.com.v2kart.facades.order.data.OrderEntryModificationRecordEntryData"/>
+		<property name="populators">
+			<list>
+			<ref bean="orderEntryModificationRecordEntryPopulator"/>
+			</list>
+		</property>
+	</bean>
+
+	<alias name="v2OrderEntryModificationRecordEntryPopulator" alias="orderEntryModificationRecordEntryPopulator"/>
+	<bean class="in.com.v2kart.facades.populators.V2OrderEntryModificationRecordEntryPopulator" id="v2OrderEntryModificationRecordEntryPopulator">
+		<property name="orderEntryConverter" ref="orderEntryConverter"/>
+	</bean>
+	
+	<alias name="v2OrderReturnFacade" alias="orderReturnFacade"/>
+	<bean class="in.com.v2kart.facades.order.impl.V2OrderReturnFacadeImpl" id="v2OrderReturnFacade">
+		<property name="orderEntryConverter" ref="orderEntryConverter"/>
+		<property name="userService" ref="userService"/>
+		<property name="customerAccountService" ref="customerAccountService"/>
+		<property name="baseStoreService" ref="baseStoreService"/>
+		<property name="checkoutCustomerStrategy" ref="checkoutCustomerStrategy"/>
+		<property name="enumerationService" ref="enumerationService"/>
+		<property name="returnService" ref="returnService"/>
+		<property name="priceDataFactory" ref="priceDataFactory" />
+		<property name="v2RefundReasons">
+			<map merge="true">
+			    <entry key="wrongshipment" value="Wrong Shipment"/>
+                <entry key="productdefective" value="Product Defective"/>
+                <entry key="productdamaged" value="Product Damaged"/>
+                <entry key="other" value="Other"/>
+			</map>
+		</property>
+	</bean>
+    
+
+    <alias name="v2ZoneDeliveryModePopulator" alias="zoneDeliveryModePopulator" />
+    <bean id="v2ZoneDeliveryModePopulator" parent="defaultZoneDeliveryModePopulator" class="in.com.v2kart.facades.populators.V2DeliveryModePopulator" />
+	
+	    <alias name="v2PointOfServicePopulator" alias="pointOfServicePopulator" />
+    <bean id="v2PointOfServicePopulator" parent="defaultPointOfServicePopulator" class="in.com.v2kart.facades.populators.V2PointOfServicePopulator" />
+	
+	    <alias name="v2NotificationFacade" alias="v2NotificationFacade" />
+    <bean id="v2NotificationFacade" class="in.com.v2kart.facades.notification.impl.V2NotificationFacadeImpl" />
+
+</beans>

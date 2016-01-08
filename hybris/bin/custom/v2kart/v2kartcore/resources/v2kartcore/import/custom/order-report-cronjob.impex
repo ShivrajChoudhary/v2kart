@@ -1,0 +1,9 @@
+INSERT_UPDATE ServicelayerJob;code[unique=true];springId;springIdCronJobFactory;
+;v2OrderReportJob;v2OrderReportJob;;
+
+INSERT_UPDATE CronJob;code[unique=true];job(code);sessionLanguage(isocode)
+;v2OrderReportJob;v2OrderReportJob;en
+
+#INSERT_UPDATE Trigger;cronjob(code)[unique=true];cronExpression
+# Run the v2OrderReportJob manual
+#;v2OrderReportJob;0 0 0 * * ?;

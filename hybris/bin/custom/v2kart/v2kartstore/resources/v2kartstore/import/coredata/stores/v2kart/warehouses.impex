@@ -1,0 +1,25 @@
+$storeUid=v2kart
+
+ 
+INSERT_UPDATE BaseStore2WarehouseRel;source(uid)[unique=true];target(code)[unique=true]
+;$storeUid;DH25
+
+
+INSERT_UPDATE BaseStore2WarehouseRel;source(uid)[unique=true];target(code)[unique=true]
+									;$storeUid               ;HD16
+									;$storeUid               ;HD17
+									;$storeUid               ;HH12
+									;$storeUid               ;HN10
+									;$storeUid               ;HI06
+									;$storeUid               ;H008
+									;$storeUid               ;H009
+									;$storeUid               ;HB05
+									;$storeUid               ;HB06
+									;$storeUid               ;HB07
+									;$storeUid               ;HB08
+									;$storeUid               ;HB09
+									;$storeUid               ;HJ08
+									;$storeUid               ;HU32
+									;$storeUid               ;HK04
+									;$storeUid               ;HB10
+	

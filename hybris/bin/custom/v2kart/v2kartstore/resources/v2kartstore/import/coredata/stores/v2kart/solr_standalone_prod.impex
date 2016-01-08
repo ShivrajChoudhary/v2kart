@@ -1,0 +1,22 @@
+#
+# Update spotlight_Product Index to standalone mode
+#
+
+$prefix=v2kart
+$productCatalog=$prefixProductCatalog
+$catalogVersions=catalogVersions(catalog(id),version);
+$serverConfigName=$prefixSolrServerConfig
+$indexConfigName=$prefixSolrIndexConfig
+$searchConfigName=$prefixPageSize
+$facetSearchConfigName=$prefixIndex
+
+INSERT_UPDATE SolrEndpointUrl;url[unique=true];master[default=false]
+;http://172.31.48.160:8983/solr;true;
+;http://172.31.62.73:8983/solr;false;
+
+INSERT_UPDATE SolrServerConfig;name[unique=true];mode(code);embeddedMaster;aliveCheckInterval;connectionTimeout;readTimeout;solrEndpointUrls(url)
+;$serverConfigName;standalone;false;5000;200;100;http\://172.31.48.160\:8983/solr,http\://172.31.62.73\:8983/solr
+
+# Create the solr indexer configuration
+INSERT_UPDATE SolrIndexConfig;name[unique=true];batchSize;numberOfThreads;indexMode(code);
+;$indexConfigName;100;1;DIRECT;

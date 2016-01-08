@@ -1,0 +1,19 @@
+# ImpEx for Importing Category Classifications
+
+# Macros / Replacement Parameter definitions
+$productCatalog=v2kartProductCatalog
+$productCatalogName=v2kart Product Catalog
+$classificationCatalog=v2KartClassification
+
+$classCatalogVersion=catalogversion(catalog(id[default='$classificationCatalog']),version[default='1.0'])[unique=true,default='$classificationCatalog:1.0']
+$classSystemVersion=systemVersion(catalog(id[default='$classificationCatalog']),version[default='1.0'])[unique=true]
+
+# Language
+$lang=en
+
+# Insert Classifications
+UPDATE ClassificationClass;code[unique=true];$classCatalogVersion;name[lang=$lang]
+
+
+# Insert Classification Attributes
+UPDATE ClassificationAttribute;code[unique=true];$classSystemVersion;name[lang=$lang]

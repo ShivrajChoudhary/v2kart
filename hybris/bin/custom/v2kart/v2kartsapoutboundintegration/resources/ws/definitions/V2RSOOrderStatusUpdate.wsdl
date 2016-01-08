@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="RSOOrderStatusUpdateService" targetNamespace="http://v2kretail.in/ecomm/ordr" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+    xmlns:tns="http://v2kretail.in/ecomm/ordr" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+    <wsdl:types>
+        <xs:schema xmlns:tns="http://v2kretail.in/ecomm/ordr" xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified"
+            elementFormDefault="unqualified" targetNamespace="http://v2kretail.in/ecomm/ordr">
+            <xs:element name="RSoOrderStatusUpdateReq">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="RSONo" type="xs:string" />
+                        <xs:element  name="RequestStatus" type="xs:string" />
+                        <xs:element  name="RefundAmount" type="xs:string" />
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="RSoOrderStatusUpdateRes">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="RespCode" type="xs:string" />
+                        <xs:element name="RespMsg" type="xs:string" />
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+
+        </xs:schema>
+
+    </wsdl:types>
+    <wsdl:message name="RSO_OrderStatusUpdateResponse">
+        <wsdl:part name="ROrderStatusUpdateResponse" element="tns:RSoOrderStatusUpdateRes">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="RSO_OrderStatusUpdate">
+        <wsdl:part name="ROrderStatusUpdateRequest" element="tns:RSoOrderStatusUpdateReq">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:portType name="RSO_OrderStatusUpdatePort">
+        <wsdl:operation name="RSO_OrderStatusUpdate_Operation">
+            <wsdl:input name="RSO_OrderStatusUpdate" message="tns:RSO_OrderStatusUpdate">
+            </wsdl:input>
+            <wsdl:output name="RSO_OrderStatusUpdateResponse" message="tns:RSO_OrderStatusUpdateResponse">
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="RSOOrderStatusUpdateServiceSoapBinding" type="tns:RSO_OrderStatusUpdatePort">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+        <wsdl:operation name="RSO_OrderStatusUpdate_Operation">
+            <soap:operation soapAction="http://sap.com/xi/WebService/soap1.1" style="document" />
+            <wsdl:input name="RSO_OrderStatusUpdate">
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output name="RSO_OrderStatusUpdateResponse">
+                <soap:body use="literal" />
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="RSOOrderStatusUpdateService">
+        <wsdl:port name="RSO_OrderStatusUpdatePort" binding="tns:RSOOrderStatusUpdateServiceSoapBinding">
+            <soap:address location="" />
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,9 @@
+INSERT_UPDATE ServicelayerJob;code[unique=true];springId;springIdCronJobFactory;
+;customerUpdateResendJob;customerUpdateResendJob;;
+
+INSERT_UPDATE CronJob;code[unique=true];job(code);sessionLanguage(isocode)
+;customerUpdateResendJob;customerUpdateResendJob;en
+
+INSERT_UPDATE Trigger;cronjob(code)[unique=true];cronExpression
+# Run the customerUpdateResendJob at 20:00 daily
+;customerUpdateResendJob;0 0 20 * * ?;

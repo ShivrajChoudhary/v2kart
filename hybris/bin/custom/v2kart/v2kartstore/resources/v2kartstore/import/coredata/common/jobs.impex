@@ -1,0 +1,41 @@
+INSERT_UPDATE ServicelayerJob;code[unique=true];springId[unique=true]
+;v2MediaImportJob;v2MediaImportJob
+;v2DataImportJob;v2DataImportJob
+;delhiveryConsignmentStatusUpdateCronjob;delhiveryConsignmentStatusUpdateCronjob
+;aramexConsignmentStatusUpdateCronJob;aramexConsignmentStatusUpdateCronJob
+;v2ClearCacheJob;clearCacheJob
+;convertGalleryImagesjob;convertGalleryImagesjob
+;dotzotConsignmentStatusUpdateCronJob;dotzotConsignmentStatusUpdateCronJob
+;ecomConsignmentStatusUpdateCronJob  ;ecomConsignmentStatusUpdateCronJob
+
+INSERT_UPDATE CronJob;code[unique=true];job(code);sessionlanguage(isocode);sessioncurrency(isocode);active;logtofile;loglevelfile(code)
+;v2MediaImportJob;v2MediaImportJob;en;INR;1;0;ERROR
+;v2DataImportJob;v2DataImportJob;en;INR;1;0;ERROR
+
+INSERT_UPDATE CronJob;code[unique=true];job(code);sessionLanguage(isocode)
+;delhiveryConsignmentStatusUpdateCronjob;delhiveryConsignmentStatusUpdateCronjob;en
+;aramexConsignmentStatusUpdateCronJob;aramexConsignmentStatusUpdateCronJob;en
+;v2ClearCacheJob;v2ClearCacheJob;en
+;v2ConvertGalleryImagesCronjob;convertGalleryImagesjob;en
+;dotzotConsignmentStatusUpdateCronJob;dotzotConsignmentStatusUpdateCronJob;en
+;ecomConsignmentStatusUpdateCronJob;ecomConsignmentStatusUpdateCronJob;en
+;v2ExpireWaletAmountCronJob;v2ExpireWaletAmountCronJob;en
+;v2WalletCreditExpireNotificationCronJob;v2WalletCreditExpireNotificationCronJob;en
+
+INSERT_UPDATE Trigger;cronjob(code)[unique=true];cronExpression
+# Run every half hour
+;v2DataImportJob;0 0/30 * 1/1 * ? *
+# Run the delhiveryConsignmentStatusUpdateCronjob at an interval of 3 hours
+;delhiveryConsignmentStatusUpdateCronjob;0 0 0/3 1/1 * ? *;
+# Run the aramexConsignmentStatusUpdateCronJob at an interval of 3 hours
+;aramexConsignmentStatusUpdateCronJob;0 0 0/3 1/1 * ? *;
+# Run after evry two hour for CS cockpit thumbnail images
+;v2ConvertGalleryImagesCronjob;0 0 0/2 1/1 * ? *
+# Run the dotzotConsignmentStatusUpdateCronJob at an interval of 3 hours
+;dotzotConsignmentStatusUpdateCronJob;0 0 0/3 1/1 * ? *;
+# Run the ecomConsignmentStatusUpdateCronJob at an interval of 3 hours
+;ecomConsignmentStatusUpdateCronJob;0 0 0/3 1/1 * ? *;
+# Run the v2ExpireWaletAmountCronJob daily at 00:00 am
+;v2ExpireWaletAmountCronJob;0 0 00 * * ?;
+# Run the v2WalletCreditExpireNotificationCronJob daily at 00:00 am
+;v2WalletCreditExpireNotificationCronJob;0 0 00 * * ?;

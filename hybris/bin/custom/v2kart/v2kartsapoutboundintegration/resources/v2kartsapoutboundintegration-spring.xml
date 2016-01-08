@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    [y] hybris Platform
+
+    Copyright (c) 2000-2013 hybris AG
+    All rights reserved.
+
+    This software is the confidential and proprietary information of hybris
+    ("Confidential Information"). You shall not disclose such Confidential
+    Information and shall use it only in accordance with the terms of the
+    license agreement you entered into with hybris.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:jee="http://www.springframework.org/schema/jee" xmlns:jms="http://www.springframework.org/schema/jms" xmlns:util="http://www.springframework.org/schema/util"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd
+           http://www.springframework.org/schema/jee  
+           http://www.springframework.org/schema/jee/spring-jee-3.0.xsd
+           http://www.springframework.org/schema/jms 
+           http://www.springframework.org/schema/jms/spring-jms-3.0.xsd
+           http://www.springframework.org/schema/util 
+           http://www.springframework.org/schema/util/spring-util-3.1.xsd">
+
+    <!-- OrderUpdate -->
+
+    <bean id="v2SapOrderUpdateIntegrationService" class="in.com.v2kart.sapoutboundintegration.services.Impl.V2SapOrderUpdateIntegrationServiceImpl">
+        <property name="modelService" ref="modelService" />
+        <property name="v2ConsignmentUpdateService" ref="v2ConsignmentUpdateService" />
+        <property name="v2OrderDao" ref="orderDao" />
+        <property name="v2AcceleratorConsignmentDao" ref="v2AcceleratorConsignmentDao" />
+        <property name="v2SmsService" ref="v2SmsService" />
+        <property name="v2UserSmsDataMapPopulator" ref="v2UserSmsDataMapPopulator" />
+        <property name="businessProcessService" ref="businessProcessService" />
+    </bean>
+
+    <bean id="v2ConsignmentUpdateService" class="in.com.v2kart.sapoutboundintegration.services.Impl.V2ConsignmentUpdateServiceImpl">
+        <property name="modelService" ref="modelService" />
+        <property name="warehouseService" ref="warehouseService" />
+        <property name="stockService" ref="stockService" />
+        <property name="flexibleSearchService" ref="flexibleSearchService" />
+    </bean>
+
+</beans>

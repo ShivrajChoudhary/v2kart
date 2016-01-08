@@ -1,0 +1,370 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+  ~ [y] hybris Platform
+  ~
+  ~ Copyright (c) 2000-2014 hybris AG
+  ~ All rights reserved.
+  ~
+  ~ This software is the confidential and proprietary information of hybris
+  ~ ("Confidential Information"). You shall not disclose such Confidential
+  ~ Information and shall use it only in accordance with the terms of the
+  ~ license agreement you entered into with hybris.
+  -->
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="beans.xsd">
+
+	<enum class="in.com.v2kart.commercewebservices.populator.options.PaymentInfoOption">
+		<value>BASIC</value>
+		<value>BILLING_ADDRESS</value>
+	</enum>
+
+	<!--auth response  -->
+	<bean class="in.com.v2kart.commercewebservices.auth.data.LogoutResponse">
+		<property name="success" type="boolean"/>
+	</bean>
+
+	<!-- storesession data -->
+
+	<bean class="in.com.v2kart.commercewebservices.storesession.data.LanguageDataList">
+		<property name="languages"
+		          type="java.util.Collection&lt;de.hybris.platform.commercefacades.storesession.data.LanguageData>"/>
+	</bean>
+
+	<bean class="in.com.v2kart.commercewebservices.storesession.data.CurrencyDataList">
+		<property name="currencies"
+		          type="java.util.Collection&lt;de.hybris.platform.commercefacades.storesession.data.CurrencyData>"/>
+	</bean>
+
+	<!-- order data -->
+
+	<bean class="in.com.v2kart.commercewebservices.order.data.CardTypeDataList">
+		<property name="cardTypes"
+		          type="java.util.List&lt;de.hybris.platform.commercefacades.order.data.CardTypeData>"/>
+	</bean>
+	<bean class="in.com.v2kart.commercewebservices.order.data.OrderCancellationData">
+	<property name="reasons" type="java.util.List&lt;in.com.v2kart.commercewebservices.order.data.ReasonsData>"/>
+		<property name="entries"
+		          type="java.util.List&lt;in.com.v2kart.facades.cancel.data.CancelEntryData>"/>
+	</bean>
+	<bean class="in.com.v2kart.commercewebservices.order.data.ReasonsData">
+	<property name="reasonKey" type="String" />
+	<property name="reasonValue" type="String" />
+		</bean>
+	<bean class="in.com.v2kart.commercewebservices.order.data.OrderReturnableData">
+	<property name="reasons" type="java.util.List&lt;in.com.v2kart.commercewebservices.order.data.ReasonsData>"/>
+		<property name="entries"
+		          type="java.util.List&lt;in.com.v2kart.facades.order.data.ReturnEntryData>"/>
+	</bean>
+	<bean class="in.com.v2kart.commercewebservices.order.data.TrackOrderData">
+	<property name="orderData" type="de.hybris.platform.commercefacades.order.data.OrderData"/>
+	<property name="status" type="String"/>
+	</bean>
+	<bean class="in.com.v2kart.commercewebservices.order.data.OrderRefundAmount">
+        <property name="amount" type="String" />
+    </bean>
+    <bean class="in.com.v2kart.commercewebservices.order.data.OrderCancelledData">
+        <property name="orderCode" type="String" />
+        <property name="isFull" type="String" />
+        <property name="reason" type="String" />
+        <property name="notes" type="String" />
+        <property name="entries" type="java.util.List&lt;in.com.v2kart.facades.cancel.data.CancelEntryData>" />
+    </bean>
+    <bean class="in.com.v2kart.commercewebservices.order.data.OrderReturnedData">
+        <property name="orderCode" type="String" />
+        <property name="isFull" type="String" />
+        <property name="reason" type="String" />
+        <property name="notes" type="String" />
+        <property name="returnAction" type="String" />
+        <property name="entries" type="java.util.List&lt;in.com.v2kart.facades.order.data.ReturnEntryData>" />
+    </bean>
+    <bean class="in.com.v2kart.commercewebservices.order.data.OrderCancelStatus">
+		<property name="status"
+		          type="Boolean"/>
+		<property name="message"
+		          type="java.lang.String"/>
+	</bean>
+	<!-- product data -->
+
+	<bean class="in.com.v2kart.commercewebservices.product.data.ProductDataList">
+		<property name="products"
+		          type="java.util.List&lt;de.hybris.platform.commercefacades.product.data.ProductData>"/>
+		<property name="catalog" type="String"/>
+		<property name="version" type="String"/>
+		<property name="totalProductCount" type="int"/>
+		<property name="totalPageCount" type="int"/>
+		<property name="currentPage" type="int"/>
+	</bean>
+
+	<bean class="in.com.v2kart.commercewebservices.product.data.PromotionDataList">
+		<property name="promotions"
+		          type="java.util.List&lt;de.hybris.platform.commercefacades.product.data.PromotionData>"/>
+	</bean>
+
+	<bean class="in.com.v2kart.commercewebservices.product.data.ReviewDataList">
+		<property name="reviews" type="java.util.List&lt;de.hybris.platform.commercefacades.product.data.ReviewData>"/>
+	</bean>
+
+	<bean class="in.com.v2kart.commercewebservices.product.data.SuggestionDataList">
+		<property name="suggestions"
+		          type="java.util.List&lt;de.hybris.platform.commercefacades.product.data.SuggestionData>"/>
+	</bean>
+	<bean class="in.com.v2kart.commercewebservices.product.data.ProductAndReferenceData">
+		<property name="productReferences"
+		          type="java.util.List&lt;de.hybris.platform.commercefacades.product.data.ProductReferenceData>"/>
+        <property name="productData"
+		          type="de.hybris.platform.commercefacades.product.data.ProductData"/>
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.order.data.CartModificationDataList">
+		<property name="cartModificationList"
+		          type="java.util.List&lt;de.hybris.platform.commercefacades.order.data.CartModificationData>"/>
+	</bean>
+	
+	<!-- feedback data -->
+	<bean class="in.com.v2kart.commercewebservices.feedback.data.FeedbackData">
+		<property name="categories"
+		          type="java.util.List&lt;java.lang.String>"/>
+        <property name="ratings"
+		          type="java.util.List&lt;java.lang.String>"/>
+	</bean>
+	<bean class="in.com.v2kart.commercewebservices.feedback.data.FeedbackStatus">
+		<property name="status"
+		          type="Boolean"/>
+		<property name="message"
+		          type="java.lang.String"/>
+	</bean>
+	<!-- Beaseller data -->
+	<bean class="in.com.v2kart.commercewebservices.seller.data.BeaSellerStatus">
+		<property name="status"
+		          type="Boolean"/>
+		<property name="message"
+		          type="java.lang.String"/>
+	</bean>
+	<!-- user data -->
+
+	<bean class="in.com.v2kart.commercewebservices.user.data.TitleDataList">
+		<property name="titles" type="java.util.List&lt;de.hybris.platform.commercefacades.user.data.TitleData>"/>
+	</bean>
+
+	<bean class="in.com.v2kart.commercewebservices.user.data.CountryDataList">
+		<property name="countries" type="java.util.List&lt;de.hybris.platform.commercefacades.user.data.CountryData>"/>
+	</bean>
+
+	<bean class="in.com.v2kart.commercewebservices.user.data.AddressDataList">
+		<property name="addresses" type="java.util.List&lt;de.hybris.platform.commercefacades.user.data.AddressData>"/>
+	</bean>
+
+
+	<!-- validation data -->
+	<bean class="in.com.v2kart.commercewebservices.validation.data.AddressValidationData">
+		<property name="errors" type="de.hybris.platform.commercewebservicescommons.dto.error.ErrorListWsDTO"/>
+		<property name="decision" type="String"/>
+		<property name="suggestedAddressesList"
+		          type="in.com.v2kart.commercewebservices.user.data.AddressDataList"/>
+	</bean>
+
+	<!-- Additional title property for CustomerData -->
+	<bean class="de.hybris.platform.commercefacades.user.data.CustomerData"
+	      extends="de.hybris.platform.commercefacades.user.data.PrincipalData">
+		<property name="title" type="String"/>
+	</bean>
+
+	<bean class="in.com.v2kart.commercewebservices.user.data.LoginChangeResponse">
+		<property name="success" type="boolean"/>
+	</bean>
+
+	<bean class="in.com.v2kart.commercewebservices.user.data.PasswordRestoreResponse">
+		<property name="success" type="boolean"/>
+	</bean>
+    <bean class="in.com.v2kart.commercewebservices.user.data.UserWalletData">
+		<property name="customerBalance" type="Double"/>
+		<property name="transactions" type="java.util.List&lt;in.com.v2kart.facades.wallet.data.V2WalletTransactionData>" />
+	</bean>
+    
+    
+    
+     <bean class="in.com.v2kart.commercewebservices.component.CMSLinkComponentData">
+        <property name="url" type="String" />
+        <property name="linkName" type="String" />
+    </bean>
+
+    <bean class="in.com.v2kart.commercewebservices.component.CMSNavigationNodeData">
+        <property name="title" type="String" />
+        <property name="visible" type="boolean" />
+        <property name="links" type="java.util.List&lt;in.com.v2kart.commercewebservices.component.CMSLinkComponentData>" />
+        <property name="parent" type="in.com.v2kart.commercewebservices.component.CMSNavigationNodeData" />
+        <property name="children" type="java.util.List&lt;in.com.v2kart.commercewebservices.component.CMSNavigationNodeData>" />
+
+    </bean>
+
+    <bean class="in.com.v2kart.commercewebservices.component.NavigationBarComponentData">
+        <property name="name" type="String" />
+        <property name="link" type="in.com.v2kart.commercewebservices.component.CMSLinkComponentData" />
+        <property name="navigationNode" type="in.com.v2kart.commercewebservices.component.CMSNavigationNodeData" />
+    </bean>
+
+    <bean class="in.com.v2kart.commercewebservices.component.NavigationBarCollectionComponentData">
+        <property name="components" type="java.util.List&lt;in.com.v2kart.commercewebservices.component.NavigationBarComponentData>" />
+    </bean>
+    
+    
+    
+
+	<!-- update queues -->
+
+	<bean class="in.com.v2kart.commercewebservices.queues.data.ProductExpressUpdateElementData">
+		<property name="code" type="String"/>
+		<property name="catalogId" type="String"/>
+		<property name="catalogVersion" type="String"/>
+	</bean>
+
+	<bean class="in.com.v2kart.commercewebservices.queues.data.ProductExpressUpdateElementDataList">
+		<property name="productExpressUpdateElements"
+		          type="java.util.List&lt;in.com.v2kart.commercewebservices.queues.data.ProductExpressUpdateElementData>"/>
+	</bean>
+
+	<bean class="in.com.v2kart.commercewebservices.queues.data.OrderStatusUpdateElementData">
+		<property name="code" type="String"/>
+		<property name="status" type="String"/>
+		<property name="baseSiteId" type="String"/>
+	</bean>
+
+	<bean class="in.com.v2kart.commercewebservices.queues.data.OrderStatusUpdateElementDataList">
+		<property name="orderStatusUpdateElements"
+		          type="java.util.List&lt;in.com.v2kart.commercewebservices.queues.data.OrderStatusUpdateElementData>"/>
+	</bean>
+
+    
+    <bean class="in.com.v2kart.commercewebservices.component.V2KartCarouselComponentData">
+    <property name="categoryCode" type="String" />
+    <property name="products" type="java.util.List&lt;de.hybris.platform.commercefacades.product.data.ProductData>" />
+    <property name="title" type="String" />
+    </bean>
+    
+   <!--  <bean class="in.com.v2kart.commercewebservices.component.V2KartCarouselComponentListData">
+    <property name="carousalComponents" type="java.util.List&lt;in.com.v2kart.commercewebservices.component.V2KartCarouselComponentData>" />
+    </bean> -->
+    
+    <bean class="in.com.v2kart.commercewebservices.category.V2KartCategoryData">
+    <property name="code" type="String" />
+    <property name="subCategory" type="java.util.List&lt;in.com.v2kart.commercewebservices.category.V2KartCategoryData>" />
+    <property name="title" type="String" />
+    <property name="mediaURL" type="String" />
+  <!--   <property name="urls" type="java.util.List&lt;String>" />  -->
+    </bean>
+    
+     <bean class="in.com.v2kart.commercewebservices.component.V2KartBannersData">
+        <property name="medias" type="java.util.List&lt;in.com.v2kart.commercewebservices.component.V2KartContentComponent>" />
+        <property name="code" type="String" />
+     </bean>
+    
+     <bean class="in.com.v2kart.commercewebservices.component.V2KartContentComponent">
+        <property name="mediaUrl" type="String" />
+        <property name="isCategoryPage" type="boolean" />
+        <property name="isPdpPage" type="boolean" />
+        <property name="isLandingPage" type="boolean" />
+        <property name="link" type="String" />
+        <property name="code" type="String" />
+        <property name="name" type="String" />
+     </bean>
+
+    <bean class="in.com.v2kart.commercewebservices.component.V2KartRotatingImagesComponentData">
+        <property name="medias" type="java.util.List&lt;in.com.v2kart.commercewebservices.component.V2KartContentComponent>" />
+    </bean>
+    
+    
+    <bean class="in.com.v2kart.commercewebservices.component.V2KartHomeScreenData">
+        <property name="rotatingImages" type="in.com.v2kart.commercewebservices.component.V2KartRotatingImagesComponentData" />
+        <property name="nowTrendngcarousals" type="in.com.v2kart.commercewebservices.component.V2KartCarouselComponentData" />
+        <property name="newlyLaunchcarousals" type="in.com.v2kart.commercewebservices.component.V2KartCarouselComponentData" />
+        <property name="topSellingcarousals" type="in.com.v2kart.commercewebservices.component.V2KartCarouselComponentData" />
+        <property name="banners" type="in.com.v2kart.commercewebservices.component.V2KartBannersData" />
+        <property name="homeOptionalBanners" type="in.com.v2kart.commercewebservices.component.V2KartRotatingImagesComponentData" />
+    </bean>
+    
+    <bean class="in.com.v2kart.commercewebservices.component.V2KartParentCategoryData">
+        <property name="rotatingImages" type="in.com.v2kart.commercewebservices.component.V2KartRotatingImagesComponentData" />
+        <property name="banners" type="in.com.v2kart.commercewebservices.component.V2KartBannersData" />
+        <property name="bestSellercarousels" type="in.com.v2kart.commercewebservices.component.V2KartCarouselComponentData" />
+    </bean>
+     <bean class="in.com.v2kart.commercewebservices.common.StatusData">
+        <property name="status" type="Boolean" />
+        <property name="message" type="String" />
+        <property name="code" type="String" />    
+    </bean>
+    
+     <bean class="in.com.v2kart.commercewebservices.component.product.data.CartStatusData">
+        <property name="cartUnitCount" type="int" />
+    </bean>
+    <bean class="in.com.v2kart.commercewebservices.component.product.data.ProductInCartData">
+        <property name="productInCart" type="Boolean" />
+    </bean>
+     <bean class="de.hybris.platform.commercefacades.order.data.CartData">
+        <property name="status" type="in.com.v2kart.commercewebservices.common.StatusData" />
+         <property name="deliveryModes" type="java.util.List&lt;? extends DeliveryModeData>" />
+        <property name="paymentModes" type="java.util.List&lt;in.com.v2kart.commercewebservices.component.product.data.CartDeliveryOptionData>" />
+    </bean>
+    
+    <bean class="de.hybris.platform.commercefacades.product.data.ProductData">
+        <property name="shippingDetails" type="String" />
+    </bean>
+    
+     <bean class="de.hybris.platform.commercefacades.product.data.PriceData">
+        <property name="rsFormatedValue" type="String" />
+    </bean>
+    
+    
+
+  <bean class="de.hybris.platform.commercefacades.user.data.RegionDataList">
+        <property name="region" type="java.util.List&lt;de.hybris.platform.commercefacades.user.data.RegionData>" />
+    </bean>
+
+<bean class="in.com.v2kart.commercewebservices.component.product.data.ServiceableProductResponse">
+        <property name="isServiceable" type="boolean" />
+    </bean>
+<bean class="in.com.v2kart.commercewebservices.component.product.data.CodAndServiceableProductResponse">
+        <property name="isServiceable" type="boolean" />
+        <property name="isCodAvailable" type="boolean" />
+        <property name="pinCode" type="String" />
+    </bean>
+<bean class="in.com.v2kart.commercewebservices.component.product.data.StaticPageResponse">
+        <property name="content" type="String" />
+    </bean>
+    
+    <bean class="in.com.v2kart.commercewebservices.component.product.data.CartDeliveryOptionData">
+        <property name="mode" type="String" />
+        <property name="info" type="String" />
+        <property name="isAvailable" type="Boolean" />
+    </bean>
+    
+    
+      <bean class="de.hybris.platform.commercefacades.order.data.DeliveryModeData">
+        <property name="selected" type="Boolean" />
+    </bean>
+    
+    
+      <bean class="in.com.v2kart.commercewebservices.wishlist.WishListDataList">
+        <property name="whislists" type="java.util.List&lt;in.com.v2kart.facades.core.data.WishlistData>" />
+    </bean>
+    <!-- Cash OTP DATA -->
+    <bean class="in.com.v2kart.commercewebservices.otp.data.OtpData">
+        <property name="isMatch" type="String" />
+        <property name="currentTime" type="String" />
+        <property name="ValidTime" type="String" />
+        <property name="errorMessage" type="String" />
+    </bean>
+    
+    <bean class="in.com.v2kart.commercewebservices.notification.V2NotificationDataList">
+        <property name="notifications" type="java.util.List&lt;in.com.v2kart.facades.notification.data.V2NotificationData>" />
+    </bean>
+    
+    <bean class="in.com.v2kart.commercewebservices.color.V2HexCodeDataList">
+        <property name="hexCodes" type="java.util.List&lt;in.com.v2kart.commercewebservices.color.V2HexCodeData>" />
+    </bean>
+    
+    <bean class="in.com.v2kart.commercewebservices.color.V2HexCodeData">
+        <property name="hexCode" type="String" />
+        <property name="color" type="String" />
+    </bean>
+    
+      
+</beans>

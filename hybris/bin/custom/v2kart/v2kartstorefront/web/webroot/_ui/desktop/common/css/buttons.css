@@ -1,0 +1,175 @@
+/* -------------------------------------------------------------- 
+  
+buttons.css
+* Gives you some great CSS-only buttons.
+   
+Created by Kevin Hale [particletree.com]
+* particletree.com/features/rediscovering-the-button-element
+
+See Readme.txt in this folder for instructions.
+
+-------------------------------------------------------------- */
+
+a.button, button {
+	display: inline-block;
+  padding: 6px 12px;
+  margin-bottom: 0;
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 1.42857143;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  background-image: none;
+  border: 1px solid transparent;
+  border-radius: 4px;
+}
+
+.button:focus, button:focus,
+.button:active:focus, button:active:focus,
+.button.active:focus, button.active:focus{
+  outline: thin dotted;
+  outline: 5px auto -webkit-focus-ring-color;
+  outline-offset: -2px;
+}
+.btn:hover,
+.btn:focus {
+  color: #333;
+  text-decoration: none;
+}
+.btn:active,
+.btn.active {
+  background-image: none;
+  outline: 0;
+  -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
+          box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
+}
+
+button {
+	/*width: auto;
+	overflow: visible;
+	height: 32px;*/
+}
+
+a.button {
+	/*height: 28px;
+	line-height: 28px;*/
+}
+
+button img, a.button img {
+	margin: 0 3px -3px 0 !important;
+	padding: 0;
+	border: none;
+	width: 16px;
+	height: 16px;
+	float: none;
+}
+
+
+/* Button colors
+-------------------------------------------------------------- */
+
+
+
+button.positive,
+button.negative {
+	
+}
+
+a.button.positive,
+a.button.negative {
+	
+}
+
+
+
+
+
+
+/* Standard */
+button:hover, a.button:hover {
+}
+a.button:active,
+button:active {
+}
+
+/* Positive */
+button.positive,
+a.button.positive {
+	 background-color: #000;
+    border-color: #000;
+    color: #fff;
+}
+a.button.positive:hover, 
+button.positive:hover {
+}
+a.button.positive:active,
+button.positive:active {
+}
+
+/* Negative */
+button.negative,
+a.button.negative {
+	color: #000;
+	background: #fff;
+	border-color:#000;
+
+}
+a.button.negative:hover, 
+button.negative:hover {
+}
+a.button.negative:active,
+button.negative:active {
+}
+
+
+
+/* Button block width
+-------------------------------------------------------------- */
+
+
+button.block, a.button.block {
+	width: 100%;
+}
+
+
+
+
+
+
+
+
+
+
+
+button[disabled]{
+	opacity:0.2;
+	cursor:default;
+	text-transform: none;
+}
+
+
+
+
+
+
+
+
+
+button.link {
+	display:inline;
+	float:none;
+	background:none;
+	border:0;
+	padding:0;
+	margin:0;
+	line-height:auto;
+	font-weight:normal;
+	color:inherit !important;
+	opacity:inherit;
+}

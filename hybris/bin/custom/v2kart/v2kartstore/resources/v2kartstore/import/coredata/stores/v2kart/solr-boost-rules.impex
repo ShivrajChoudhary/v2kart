@@ -1,0 +1,15 @@
+$solrIndexedTypeIdentifier=v2kartProductType
+$solrIndexedType=solrIndexedType(identifier[default=$solrIndexedTypeIdentifier])
+
+							 
+########Boost Rule for Category
+
+INSERT_UPDATE GlobalSolrSearchProfile;code;indexedType(identifier)[unique=true];
+;product-srch-profile;$solrIndexedTypeIdentifier;
+
+INSERT_UPDATE SolrBoostRule ;solrIndexedProperty(name, $solrIndexedType)[unique=true];operator(code)[unique=true];propertyValue[unique=true];boostFactor;solrSearchProfiles(code)[unique=true]					  
+							;boostingFactor                                          ;EQUAL_TO                   ;FIFTH                     ;1          ;product-srch-profile
+							;boostingFactor                                          ;EQUAL_TO                   ;FOURTH                    ;2          ;product-srch-profile
+							;boostingFactor                                          ;EQUAL_TO                   ;THIRD                     ;3          ;product-srch-profile
+							;boostingFactor                                          ;EQUAL_TO                   ;SECOND                    ;4          ;product-srch-profile
+							;boostingFactor                                          ;EQUAL_TO                   ;FIRST                     ;5          ;product-srch-profile

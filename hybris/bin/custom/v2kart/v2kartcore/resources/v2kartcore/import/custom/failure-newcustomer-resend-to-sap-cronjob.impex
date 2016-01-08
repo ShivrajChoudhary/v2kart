@@ -1,0 +1,9 @@
+INSERT_UPDATE ServicelayerJob;code[unique=true];springId;springIdCronJobFactory;
+;v2FailureNewCustomerResendJob;v2FailureNewCustomerResendJob;;
+
+INSERT_UPDATE CronJob;code[unique=true];job(code);sessionLanguage(isocode)
+;v2FailureNewCustomerResendJob;v2FailureNewCustomerResendJob;en
+
+INSERT_UPDATE Trigger;cronjob(code)[unique=true];cronExpression
+# Run the v2FailureNewCustomerResendJob at every 2 hours from from 8 am to 10 pm.
+;v2FailureNewCustomerResendJob;0 0 8,10,12,14,16,18,20,22 * * ?;

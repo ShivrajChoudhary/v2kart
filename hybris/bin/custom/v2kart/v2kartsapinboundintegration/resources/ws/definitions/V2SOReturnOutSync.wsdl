@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="SI_ReturnProcess_S_OB"
+	targetNamespace="http://v2retail.com" xmlns:p2="urn:v2k:ia:eai:ecom:ord"
+	xmlns:p1="http://v2retail.com" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy"
+	xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd"
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+	<wsdl:documentation />
+	<wsp:UsingPolicy wsdl:required="true" />
+	<wsp:Policy wsu:Id="OP_SI_ReturnProcess_S_OB" />
+	<wsdl:types>
+		<xsd:schema targetNamespace="urn:v2k:ia:eai:ecom:ord"
+			xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="urn:v2k:ia:eai:ecom:ord">
+			<xsd:element name="SOReturnRes">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="OrderReturnRes" maxOccurs="unbounded">
+							<xsd:complexType>
+								<xsd:sequence>
+									<xsd:element name="RespCode" type="xsd:string" />
+									<xsd:element name="RespMsg" type="xsd:string" />
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="SOReturnReq">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="OrderReturnReq" maxOccurs="unbounded">
+							<xsd:complexType>
+								<xsd:sequence>
+									<xsd:element name="ReturnOrderNo" type="xsd:string" />
+									<xsd:element name="DocType" type="xsd:string"
+										minOccurs="0" />
+									<xsd:element name="SalesOrg" type="xsd:string"
+										minOccurs="0" />
+									<xsd:element name="DistrChannel" type="xsd:string"
+										minOccurs="0" />
+									<xsd:element name="OriginalSONo" type="xsd:string"
+										minOccurs="0" />
+									<xsd:element name="ReturnReason" type="xsd:string" />
+									<xsd:element name="SOReturnItemDtls" maxOccurs="unbounded">
+										<xsd:complexType>
+											<xsd:sequence>
+												<xsd:element name="ItemNo" type="xsd:string" />
+												<xsd:element name="ArticleNo" type="xsd:string" />
+												<xsd:element name="TargetQty" type="xsd:string"
+													minOccurs="0" />
+												<xsd:element name="Unit" type="xsd:string"
+													minOccurs="0" />
+											</xsd:sequence>
+										</xsd:complexType>
+									</xsd:element>
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:schema>
+	</wsdl:types>
+	<wsdl:message name="p2.SOReturnReq">
+		<wsdl:documentation />
+		<wsdl:part name="SOReturnReq" element="p2:SOReturnReq" />
+	</wsdl:message>
+	<wsdl:message name="p2.SOReturnRes">
+		<wsdl:documentation />
+		<wsdl:part name="SOReturnRes" element="p2:SOReturnRes" />
+	</wsdl:message>
+	<wsdl:portType name="SI_ReturnProcess_S_OB">
+		<wsdl:documentation />
+		<wsdl:operation name="SI_ReturnProcess_S_OB">
+			<wsdl:documentation />
+			<wsp:Policy>
+				<wsp:PolicyReference URI="#OP_SI_ReturnProcess_S_OB" />
+			</wsp:Policy>
+			<wsdl:input message="p1:p2.SOReturnReq" />
+			<wsdl:output message="p1:p2.SOReturnRes" />
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="SI_ReturnProcess_S_OBBinding" type="p1:SI_ReturnProcess_S_OB">
+		<soap:binding style="document"
+			transport="http://schemas.xmlsoap.org/soap/http" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+		<wsdl:operation name="SI_ReturnProcess_S_OB">
+			<soap:operation soapAction="http://sap.com/xi/WebService/soap1.1"
+				xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+			<wsdl:input>
+				<soap:body use="literal" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="SI_ReturnProcess_S_OBService">
+		<wsdl:port name="HTTP_Port" binding="p1:SI_ReturnProcess_S_OBBinding">
+			<soap:address
+				location="http://piprd:50000/XISOAPAdapter/MessageServlet?senderParty=&amp;senderService=BC_V2Retail&amp;receiverParty=&amp;receiverService=&amp;interface=SI_ReturnProcess_S_OB&amp;interfaceNamespace=http%3A%2F%2Fv2retail.com"
+				xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+		</wsdl:port>
+		<wsdl:port name="HTTPS_Port" binding="p1:SI_ReturnProcess_S_OBBinding">
+			<soap:address
+				location="https://piprd:50001/XISOAPAdapter/MessageServlet?senderParty=&amp;senderService=BC_V2Retail&amp;receiverParty=&amp;receiverService=&amp;interface=SI_ReturnProcess_S_OB&amp;interfaceNamespace=http%3A%2F%2Fv2retail.com"
+				xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

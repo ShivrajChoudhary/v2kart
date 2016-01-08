@@ -1,0 +1,9 @@
+INSERT_UPDATE ServicelayerJob;code[unique=true];springId;springIdCronJobFactory;
+;v2FailureSalesOrderExtractJob;v2FailureSalesOrderExtractJob;;
+
+INSERT_UPDATE CronJob;code[unique=true];job(code);sessionLanguage(isocode)
+;v2FailureSalesOrderExtractJob;v2FailureSalesOrderExtractJob;en
+
+INSERT_UPDATE Trigger;cronjob(code)[unique=true];cronExpression
+# Run the v2FailureSalesOrderExtractJob at 17:00 daily
+;v2FailureSalesOrderExtractJob;0 0 17 * * ?;

@@ -1,0 +1,87 @@
+# Import master data for v2kart
+
+##SMS Templates for v2kart
+INSERT_UPDATE V2SmsTemplate;code[unique=true];triggerPoint(code);message
+;User_registration_message_template;USER_REGISTRATION;"Hi <%=username%> , Thank you for registering with V2kart.com. Enjoy the Value & Variety available at www.V2kart.com."
+;Order_Confirmation_message_template;ORDER_CONFIRMATION;"Hi <%=username%>, Thank you for placing order no. <%=orderNo%>. Please check your email for details."
+;Order_Dispatched_message_template;ORDER_DISPATCHED;"Hi <%=username%>, Your order no. <%=orderNo%> is handed over to <%=lspName%> with tracking no. <%=trackingNo%>. It should reach you within 4-10 working days."
+;Delivery_Confirmation_message_template;DELIVERY_CONFIRMATION;"Hi <%=username%>, Your order no. <%=orderNo%> is successfully delivered. Visit www.V2kart.com to enjoy Value & Variety."
+;User_otp_message_template;USER_REGISTRATION;"Hi Customer, OTP to confirm your COD order is <%=otp%>. This OTP is valid for 10 minutes only. For queries reach us at support@v2kart.com"
+
+
+
+##Mobile aggregator
+INSERT_UPDATE MobileAggregator;code[unique=true];engine(code)
+							  ;v2KartAggregator	;smppEngine;
+
+##Mobile shortcode
+INSERT_UPDATE MobileShortcode;aggregator(code)[unique=true];country(isocode)[unique=true];code[unique=true];supportedMessageType(code);messageMaxSize
+							 ;v2KartAggregator			   ;IN							 ;VVKart		   ;OUTGOING				  ;300
+				
+##Mobile aggregator parameters to activate the aggregator
+INSERT_UPDATE MobileAggregatorParameter;name[unique=true]		;aggregator(code)[unique=true]	;value
+									   ;text.smpp.address		;v2KartAggregator				;103.247.98.13
+									   ;text.smpp.port			;v2KartAggregator				;2346
+									   ;text.smpp.login			;v2KartAggregator				;20150004
+									   ;text.smpp.pass			;v2KartAggregator				;vrl@123
+									   ;text.smpp.systype		;v2KartAggregator				;VMA
+									   ;text.smpp.servicetype	;v2KartAggregator				;VMA
+									   ;text.smpp.country		;v2KartAggregator				;IND
+									   ;text.smpp.timeout		;v2KartAggregator				;30
+									   ;text.smpp.retrydelay	;v2KartAggregator				;30
+		
+		
+INSERT_UPDATE V2ProductSize;key[unique=true];value
+;S;1
+;M;2
+;L;3
+;XL;4
+;XXL;5
+;XXXL;6
+;2-3Y;1
+;4-5Y;2
+;6-7Y;3
+;8-9Y;4
+;10-11Y;5
+;12-13Y;6
+;14-15Y;7
+;16Y;8
+;17Y;9
+;60CM;1
+;65CM;2
+;70CM;3
+;75CM;4
+;80CM;5
+;85CM;6
+;0-3M;1
+;3-6M;2
+;6-12M;3
+;12-18M;4
+							   
+INSERT_UPDATE V2HexCodes;color[unique=true];hexCode
+;BEIGE	;"#F5F5DC"
+;BLACK	;"#000000"
+;BLUE	;"#0000FF"
+;NAVY	;"#000080"
+;ROYALBLUE	;"#4169E1"
+;SKYBLUE	;"#87CEEB"
+;BROWN	;"#A52A2A"
+;CHOCOLATE	;"#D2691E"
+;WHITE	;"#FFFFFF"
+;CREAM	;"#FFFFCC"
+;DARKGRAY	;"#A9A9A9"
+;LIGHTGRAY	;"#D3D3D3"
+;GOLD	;"#FFD700"
+;GREEN	;"#008000"
+;OLIVE	;"#808000"
+;KHAKI	;"#F0E68C"
+;MAGENTA	;"#FF00FF"
+;MAROON	;"#800000"
+;ORANGE	;"#FFA500"
+;PINK	;"#FFC0CB"
+;PURPLE	;"#800080"
+;RED	;"#FF0000"
+;SILVER	;"#C0C0C0"
+;TAN	;"#D2B48C"
+;YELLOW	;"#FFFF00"
+							   

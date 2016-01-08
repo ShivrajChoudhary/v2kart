@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="/platform"/>
+	<classpathentry exported="true" kind="lib" path="resources"/>
+	<classpathentry kind="lib" path="lib/commons-lang3-3.1.jar"/>
+	<classpathentry kind="lib" path="lib/dozer-5.4.0.jar"/>
+	<classpathentry kind="lib" path="lib/super-csv-2.1.0.jar"/>
+	<classpathentry kind="lib" path="lib/super-csv-dozer-2.1.0.jar"/>
+	<classpathentry kind="src" output="eclipsebin/classes" path="src"/>
+	<classpathentry kind="src" output="eclipsebin/web/classes" path="web/src"/>
+	<classpathentry kind="src" output="eclipsebin/classes" path="testsrc"/>
+	<classpathentry kind="src" output="eclipsebin/classes" path="gensrc"/>
+	<classpathentry kind="lib" path="lib/commons-collections4-4.0.jar"/>
+	<classpathentry kind="lib" path="lib/poi-3.7.jar"/>
+	<classpathentry kind="lib" path="lib/poi-ooxml-3.10-FINAL-20140208.jar"/>
+	<classpathentry kind="lib" path="lib/poi-ooxml-schemas-3.10-FINAL-20140208.jar"/>
+	<classpathentry kind="lib" path="lib/xmlbeans-2.3.0.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/v2kartcore"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/v2kartimportlog"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/wishlist"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/mediaconversion"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/basecommerce"/>
+	<classpathentry kind="output" path="eclipsebin/notused"/>
+</classpath>

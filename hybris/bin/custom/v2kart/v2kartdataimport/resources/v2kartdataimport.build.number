@@ -1,0 +1,8 @@
+#Ant properties
+#Tue Jul 08 12:49:18 CEST 2014
+builddate=20140708 1249
+description=v2kartdataimport
+name=v2kartdataimport
+vendor=hybris
+version=5.2.0.0
+version.api=5.2.0

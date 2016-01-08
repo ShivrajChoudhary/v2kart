@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    *******************************************************************************************************************
+    IMPORT ENGINE CONFIGURATION FILE
+    *******************************************************************************************************************
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:util="http://www.springframework.org/schema/util"
+
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
+           http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd
+           ">
+
+    <!-- IMPORTING CSV CELL PROCESSORS -->
+    <import resource="v2kartdataimport-csvcellprocessors.xml" />
+
+    <!--
+        *******************************************************************************************************************
+        CSV READER INITIALIZATION
+        *******************************************************************************************************************
+    -->
+
+    <!-- Product CSV Reader -->
+    <bean name="v2ProductCsvReader" class="in.com.v2kart.dataimport.importengine.impl.CSVReaderImpl" scope="prototype">
+        <property name="defaultFileName" value="${importEngine.csvFileName.Product}" />
+        <property name="dtoType" value="in.com.v2kart.dataimport.dto.V2ProductDto" />
+        <property name="cellProcessors" ref="v2ProductCellProcessors" />
+        <property name="hasFileHeader" value="false" />
+        <property name="headers">
+            <array value-type="java.lang.String">
+                <value>articleNumber</value>
+                <value>articleName</value>
+                <value>articleDescription</value>
+                <value>baseProductCode</value>
+                <value>category</value>
+                <value>mccd</value>
+                <value>mcdesc</value>
+                <value>pattern</value>
+                <value>type</value>
+                <value>weight</value>
+                <value>fabric</value>
+                <value>fitting</value>
+                <value>sleeves</value>
+                <value>neck</value>
+                <value>occasion</value>
+                <value>ankleHeel</value>
+                <value>closure</value>
+                <value>shape</value>
+                <value>pockets</value>
+                <value>length</value>
+                <value>color</value>
+                <value>size</value>
+                <value>blockedIndicator</value>
+            </array>
+        </property>
+    </bean>
+
+    <bean id="v2ProductCellProcessors" class="java.util.ArrayList" scope="tenant">
+        <constructor-arg>
+            <list value-type="org.supercsv.cellprocessor.ift.CellProcessor">
+                <ref bean="strMin1Max20" />
+                <ref bean="strMin1Max20" />
+                <ref bean="optionalStrMin1Max30" />
+                <ref bean="optionalStrMin1Max30" />
+                <ref bean="optionalStrMin1Max30" />
+                <ref bean="optionalStrMin1Max30" />
+                <ref bean="optionalStrMin1Max30" />
+                <ref bean="optionalStrMin1Max30" />
+                <ref bean="optionalStrMin1Max30" />
+                <ref bean="optionalStrMin1Max30" />
+                <ref bean="optionalStrMin1Max30" />
+                <ref bean="optionalStrMin1Max30" />
+                <ref bean="optionalStrMin1Max30" />
+                <ref bean="optionalStrMin1Max30" />
+                <ref bean="optionalStrMin1Max30" />
+                <ref bean="optionalStrMin1Max30" />
+                <ref bean="optionalStrMin1Max30" />
+                <ref bean="optionalStrMin1Max30" />
+                <ref bean="optionalStrMin1Max30" />
+                <ref bean="optionalStrMin1Max30" />
+                <ref bean="optionalStrMin1Max30" />
+                <ref bean="optionalStrMin1Max30" />
+                <ref bean="parseBool" />
+            </list>
+        </constructor-arg>
+    </bean>
+</beans>

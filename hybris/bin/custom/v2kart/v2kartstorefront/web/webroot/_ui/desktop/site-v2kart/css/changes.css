@@ -1,0 +1,3458 @@
+#cboxContent {
+	border-radius: 10px;
+}
+
+#registerForm .help-inline {
+	float: right;
+	margin-top: -60px;
+	color: red;
+}
+
+.bold {
+	font-weight: bold;
+}
+
+.cms-content {
+	font-size: 13px;
+}
+
+.footer {
+	margin-bottom: auto;
+	border-top: aliceblue;
+}
+
+.hoverDisable {
+	pointer-events: none;
+	cursor: default;
+}
+
+}
+.passwordHelpLine .help-inline {
+	margin-top: -86px !important;
+}
+
+.popoverTC.right {
+	margin-top: 20px;
+	right: 0
+}
+
+.productDescription .productAddToCartPanel .span-5 {
+	width: 305px !important;
+}
+
+.popoverTC.large-box {
+	width: 550px;
+}
+
+.popoverTC {
+	background-clip: padding-box;
+	background-color: #fff;
+	border: 1px solid rgba(0, 0, 0, 0.2);
+	border-radius: 6px;
+	box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+	padding: 0px;
+	position: absolute;
+	text-align: left;
+	top: 0;
+	white-space: normal;
+	z-index: 1060;
+}
+
+.popoverTC.small-box {
+	width: 200px;
+	height: 200px
+}
+
+.popover-link {
+	position: relative;
+}
+
+.popover-content h2 {
+	color: #fff;
+	font-size: 16px;
+	padding: 3px 10px;
+	margin-bottom: 0px;
+}
+
+.popover.big {
+	width: 400px;
+	margin-top: 20px;
+}
+
+.popover.big a.popover-close {
+	right: 20px;
+	top: 10px;
+}
+
+.popover.right {
+	margin-top: 20px;
+}
+
+.notifymepopover .control-label img {
+	margin: 0px;
+}
+
+.notifymepopover .control-label .mandatory {
+	display: inline-block;
+	margin-left: 5px;
+	margin-bottom: 10px;
+}
+
+.uppercaseText {
+	text-transform: uppercase;
+}
+
+/***********Popover***************/
+.popover-link {
+	position: relative
+}
+
+.popover {
+	background-clip: padding-box;
+	background-color: #fff;
+	border: 1px solid rgba(0, 0, 0, 0.2);
+	border-radius: 6px;
+	box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+	padding: 0px;
+	position: absolute;
+	text-align: left;
+	top: 0;
+	white-space: normal;
+	z-index: 1029;
+}
+
+.popover-inner {
+	position: relative
+}
+
+.popover.large-box {
+	width: 550px;
+}
+
+.popover.medium-box {
+	width: 350px;
+}
+
+.popover.small-box {
+	width: 160px;
+}
+
+.popover.top {
+	margin-top: 15px;
+}
+
+.popover.right {
+	margin-top: 35px;
+	right: 0
+}
+
+.popover.bottom {
+	margin-top: 10px;
+}
+
+.popover.left {
+	margin-left: -10px;
+	left: 0
+}
+
+.popover-title { /* background-color: #5e5d63; */
+	font-size: 12px;
+	font-weight: bold;
+	line-height: 18px;
+	margin: 0px;
+	padding: 6px 8px;
+	/* color: #fff;
+	text-transform: uppercase */
+}
+
+.popover-content {
+	padding: 9px 14px;
+}
+
+.popover-content ul {
+	font-size: 11px;
+	margin: 0 10px
+}
+
+.popover-content ul li {
+	line-height: 18px;
+	margin: 0;
+	padding: 0;
+	color: #000;
+}
+
+.popover-close {
+	background: #fff;
+	border-radius: 4px;
+	color: #000;
+	font-size: 20px;
+	line-height: 22px;
+	padding: 0 3px;
+	position: absolute;
+	right: 10px;
+	top: 9px;
+	text-decoration: none !important
+}
+
+.popover-content label {
+	width: 120px;
+	margin-right: 10px;
+}
+
+#emailafriendpopover {
+	width: 600px;
+	max-width: none;
+	left: -352px;
+}
+
+#popoverCB {
+	left: -110px;
+	top: -112px;
+	width: 388px;
+	max-width: none !important;
+}
+
+/* #notifyMe {
+	position: relative;
+} */
+.emailProductPage .validation_error {
+	border: 1px solid #ec8279 !important;
+	background: #fef1f0 !important;
+}
+
+.notifyForm .validation_error {
+	border: 1px solid #ec8279 !important;
+	background: #fef1f0 !important;
+}
+
+.control-label  .skip {
+	color: #D81302;
+	font-size: 12px;
+	float: right;
+	position: static;
+}
+
+#footer {
+	clear: both;
+}
+
+#spinner {
+	width: 260px;
+	margin: 0 auto;
+}
+
+.stick {
+	position: fixed;
+	top: 0px;
+	z-index: 10;
+}
+
+/* ################################## Cart Page start ################################ */
+.cartPageButtons {
+	width: 100%;
+}
+
+.cartPageButtons #checkoutButtonBottom {
+	margin: auto;
+}
+
+.cartPageButtons .continue-shop-btn {
+	margin-top: 0px;
+}
+
+#cartItems thead th {
+	padding: 8px;
+}
+
+.cartPageButtons button.doCheckoutBut {
+	margin: auto;
+	font-size: 100%;
+}
+
+#cartItems .modal .modal-dialog {
+	margin: 140px auto;
+}
+
+.coupon-codesection .voucherMessagePositive, .coupon-codesection .voucherMessageNegative
+	{
+	font-weight: bold;
+}
+
+.coupon-codesection .voucherMessageNegative {
+	color: #c90400;
+}
+
+.coupon-codesection .voucherMessagePositive {
+	color: #339b01;
+}
+
+#cartItems .modal-footer .popupFooterButtons {
+	float: right;
+}
+
+#cartItems .modal-footer .popupFooterButtons button {
+	margin-top: 0px;
+	text-decoration: inherit;
+}
+
+#cartItems {
+	margin-bottom: 10px;
+	width: 100%;
+}
+
+#cartItems .headline {
+	background: url("../images/heading-bg.png") no-repeat scroll left bottom
+		rgba(0, 0, 0, 0);
+	border-bottom: none;
+	font-family: "Rockwell";
+	font-size: 17px;
+	font-weight: normal;
+	height: 45px;
+	line-height: 30px;
+	margin: 0 0 20px;
+	text-transform: none;
+	padding-top: 10px;
+}
+
+#cartItems .headline .cartId {
+	color: #c7c7c7;
+	font-size: 0.8em;
+	font-weight: normal;
+	margin: 0 0 0 20px;
+}
+
+#cartItems table.cart {
+	width: 100%;
+	margin-top: 20px;
+}
+
+#cartItems thead th {
+	border-bottom: 1px solid #a5a5a5;
+	font-size: 1em;
+	font-weight: bold;
+	height: 30px;
+	line-height: 30px;
+	text-transform: uppercase;
+}
+
+#cartItems thead th#header3, #cartItems thead th#header4 {
+	text-align: center;
+}
+
+#cartItems thead th#header6 {
+	text-align: center;
+}
+
+#cartItems thead th#header7 {
+	text-align: center;
+}
+
+#cartItems .cartItem td {
+	border-bottom: none;
+	padding: 10px;
+	vertical-align: middle;
+}
+
+#cartItems .cartItem td.thumb {
+	border-bottom: 0 none;
+	padding-right: 20px;
+	width: 96px;
+	height: 96px;
+}
+
+#cartItems .cartItem td.itemPrice, #cartItems .cartItem td.total,
+	#cartItems .cartItem td.quantity {
+	width: 115px;
+}
+
+#cartItems .cartItem td.quantity form {
+	margin: 0 0 10px;
+}
+
+#cartItems .cartItem td.quantity .qty {
+	display: block;
+	margin: 0 auto;
+	text-align: center;
+	width: 40px;
+}
+
+#cartItems .cartItem td.quantity .updateQuantityProduct, #cartItems .submitRemoveProduct
+	{
+	display: block;
+	text-align: center;
+	text-decoration: underline;
+	font-size: 12px;
+}
+
+#cartItems .cartItem td.shipping {
+	width: 200px;
+}
+
+#cartItems .cartItem td.shipping .pointOfServiceName {
+	color: #999;
+	font-size: 11px;
+}
+
+#cartItems .cartItem td.shipping .pickupInStoreButton {
+	text-decoration: underline;
+}
+
+#cartItems .cartItem td.itemPrice {
+	text-align: center;
+	width: 96px;
+}
+
+#cartItems .cartItem td.total {
+	text-align: center;
+	width: 96px;
+}
+
+.expressCheckoutBox .headline {
+	border-bottom: 1px solid #a5a5a5;
+	font-size: 1.2em;
+	font-weight: bold;
+	height: 30px;
+	line-height: 30px;
+	text-transform: uppercase;
+}
+
+.expressCheckoutBox .description {
+	line-height: 30px;
+}
+
+.expressCheckoutBox ul li {
+	list-style: outside none disc;
+	margin: 0 0 5px 13px;
+}
+
+.checkout-btn {
+	float: right;
+	margin: 0px 0px 0 4px;
+}
+
+.value-order {
+	float: right;
+}
+
+.continue-shop-btn {
+	margin: 0px 10px 0 0;
+}
+
+.cartItem {
+	background: none repeat scroll 0 0 #fafafa;
+	border-bottom: 5px solid #fff;
+}
+
+.value-order #orderTotals {
+	width: 100%;
+}
+
+.value-order #orderTotals th {
+	background: #000;
+	color: #fff;
+	text-transform: uppercase;
+	padding: 5px;
+}
+
+.value-order #orderTotals td {
+	padding: 5px;
+}
+
+.remove-item {
+	background: url("../images/close.png") no-repeat scroll center center
+		rgba(0, 0, 0, 0);
+	margin-right: 3px;
+	width: 20px;
+	height: 20px;
+	position: relative;
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.submitRemoveProduct:hover .remove-item {
+	background: url("../images/close-hover.png") no-repeat scroll center
+		center rgba(0, 0, 0, 0);
+}
+
+#orderTotals td:first-child {
+	text-align: left;
+	vertical-align: top;
+}
+
+#orderTotals tfoot td {
+	font-family: georgia, serif;
+	font-weight: bold;
+}
+
+#orderTotals tfoot td {
+	border-top: 1px solid #a5a5a5;
+	font-size: 1.1em;
+	font-weight: bold;
+	height: 30px;
+	line-height: 30px;
+}
+
+.realTotals p {
+	margin-bottom: 15px;
+	font-size: 12px;
+	padding-left: 5px;
+}
+
+.shop-infocntr {
+	padding-bottom: 36px;
+	width: 420px;
+	float: left;
+}
+
+.promotion-box {
+	margin-bottom: 20px;
+}
+
+.promotion-box h3 {
+	margin-bottom: 10px;
+	margin-top: 0;
+	font-size: 16px;
+}
+
+.coupon-codesection {
+	background: none repeat scroll 0 0 #f9f9f9;
+	border: 1px solid #ccc;
+	margin: 0;
+	overflow: hidden;
+	padding: 10px;
+}
+
+.coupon-codesection h3 {
+	font-size: 14px;
+	margin-top: 0;
+}
+
+.payment-controlsection {
+	float: left;
+	width: 100%;
+}
+
+.payment-controlsection .control-label {
+	font-size: 14px;
+	line-height: 26px;
+	float: left;
+}
+
+.payment-controlsection input {
+	padding: 4px 6px;
+}
+
+.coupon-btn {
+	float: none;
+	margin: 0;
+}
+
+#miniCartLayer .legend a {
+	float: right;
+}
+
+/* ################################ Cart Page end ################################## */
+/* Scroll to top*/
+#return-to-top {
+	position: fixed;
+	top: 540px;
+	right: 69px;
+	background: #EE3139;
+	/* width: 137px; */
+	height: 33px;
+	display: block;
+	text-decoration: none;
+	-webkit-border-radius: 35px;
+	-moz-border-radius: 35px;
+	display: none;
+	-webkit-transition: all 0.3s linear;
+	-moz-transition: all 0.3s ease;
+	-ms-transition: all 0.3s ease;
+	-o-transition: all 0.3s ease;
+	transition: all 0.3s ease;
+	border: 0 none !important;
+	border-radius: 4px 4px 4px 4px !important;
+	box-shadow: 0 2px 25px rgba(0, 0, 0, 0.2) !important;
+	color: #FFF;
+	padding: 3px 11px;
+	font-family: "Lato", sans-serif !important;
+	font-size: 14px;
+	font-weight: 400;
+	text-shadow: none;
+	z-index: 1;
+}
+
+#return-to-top span {
+	color: #fff;
+	margin: 0;
+	position: relative;
+	/* left: 12px; */
+	top: 4px;
+	font-size: 19px;
+	-webkit-transition: all 0.3s ease;
+	-moz-transition: all 0.3s ease;
+	-ms-transition: all 0.3s ease;
+	-o-transition: all 0.3s ease;
+	transition: all 0.3s ease;
+}
+
+#return-to-top:hover {
+	background: rgb(53, 138, 217);
+}
+
+#return-to-top:hover i {
+	color: #fff;
+	top: 5px;
+}
+
+/* Scroll to top ends */
+.quickview {
+	margin-bottom: 0px;
+}
+
+.link {
+	width: 80%;
+}
+
+.banner {
+	width: 20%;
+}
+
+
+
+.megamenuBanner {
+	width: 30px !important;
+	height: 30px !important;
+}
+
+/* ################################ My account pages start ###################################*/
+.span-24 { /*	margin: 0 -15px;*/
+	width: 1008px;
+}
+
+.span-4 {
+	width: 25%;
+	padding: 0 15px;
+	margin: 0;
+}
+
+.span-20 {
+	width: 75%;
+	padding: 0 15px;
+}
+
+.accountNav .headline {
+	background-color: #000;
+	border: medium none;
+	color: #fff;
+	font-size: 14px;
+	font-weight: normal;
+	height: 30px;
+	line-height: 30px;
+	margin: 0 0 10px;
+	padding-left: 10px;
+	text-transform: uppercase;
+	white-space: nowrap;
+}
+
+.accountLeftNavigation .accountNav ul li {
+	background: url("../images/list-style.jpg") repeat-y scroll right bottom
+		rgba(0, 0, 0, 0);
+	margin-bottom: 2px;
+	padding: 5px;
+	font-size: 12px;
+	color: rgb(51, 51, 51);
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.accountNav ul li.active a {
+	color: #c80000;
+	font-weight: bold;
+}
+
+.accountLeftNavigation .accountNav ul li a {
+	font-size: 13px;
+	background: none repeat scroll 0 0 transparent;
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	line-height: 1.42857;
+}
+
+.accountContentPane .headline {
+	background: url("../images/heading-bg.png") no-repeat scroll left bottom
+		rgba(0, 0, 0, 0);
+	border-bottom: medium none;
+	font-family: "Rockwell";
+	font-size: 17px;
+	font-weight: normal;
+	height: 30px;
+	line-height: 30px;
+	margin: 0 0 20px;
+	text-transform: none;
+}
+
+.accountContentPane div, .accountContentPane p, .accountContentPane td,
+	.accountContentPane a {
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.accountContentPane a.button {
+	background-color: #000;
+	border-color: #000;
+	color: #fff;
+	-moz-user-select: none;
+	background-image: none;
+	border: 1px solid transparent;
+	border-radius: 4px;
+	cursor: pointer;
+	display: inline-block;
+	font-size: 14px;
+	font-weight: normal;
+	line-height: 1.42857;
+	margin-bottom: 0;
+	padding: 6px 12px;
+	text-align: center;
+	vertical-align: middle;
+	white-space: nowrap;
+	height: auto;
+}
+
+.accountContentPane a.button:hover, .accountContentPane a.button:focus,
+	.accountContentPane a.button:active, .accountContentPane a.button.active
+	{
+	color: #fff;
+	background-color: #444;
+	border-color: #000;
+	outline: none;
+}
+
+
+.accountNav .MyProfile,.accountNav .MyAddress, .accountNav .MyOrders,
+	.accountNav .MyPayments, .accountNav .MyWishlist,.MyWallet,.accountNav .MyPassword{
+	margin-right: 5px;
+}
+
+.icons .MyProfile:before {
+	content: "\e008";
+}
+
+.icons .MyAddress:before {
+	content: "\e102";
+}
+
+.icons .MyOrders:before {
+	content: "\e032";
+}
+
+.icons .MyPayments:before {
+	content: "\e139";
+}
+
+.icons .MyWishlist:before {
+	content: "\e143";
+}
+
+.icons .MyWallet:before {
+	content: "\e139";
+}
+.icons .MyPassword:before {
+	content: "\e033";
+}
+
+.btn-red {
+/* 	background-color: #ee3139 !important; */
+}
+
+.btn-secondary {
+	background-color: #fff;
+	border-color: #dc2930;
+	color: #ee3139;
+}
+
+
+
+/*################################ My account pages Update Password Page###################################*/
+.padUpdatePassword {
+	padding-top: 20px;
+}
+
+.padright20 {
+	padding-right: 20px;
+}
+
+/*################################ My account pages WishList Page ###################################*/
+#wishListPage .wishListDetail {
+	width: 50%;
+}
+
+#wishListPage .control-group {
+	width: 90% !important;
+}
+
+#wishListPage .itemPrice {
+	margin: 20px 0 10px 0 !important;
+}
+
+#wishListPage ul {
+	width: 100%;
+}
+
+#wishListPage ul li {
+	width: 100%;
+	padding-bottom: 10px;
+	margin-bottom: 14px;
+	float: left;
+}
+
+/* done for removing address from address book */
+#cboxClose.hover {
+	background-position: 0px 0px !important;
+}
+
+.control-group textarea, .control-group input[type="text"],
+	.control-group input[type="password"], .control-group input[type="datetime"],
+	.control-group input[type="datetime-local"], .control-group input[type="date"],
+	.control-group input[type="month"], .control-group input[type="time"],
+	.control-group input[type="week"], .control-group input[type="number"],
+	.control-group input[type="email"], .control-group input[type="url"],
+	.control-group input[type="search"], .control-group input[type="tel"],
+	.control-group input[type="color"], .control-group .uneditable-input,
+	input[type="text"] {
+	background-color: #ffffff;
+	border: 1px solid #cccccc;
+	-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+	-moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+	box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+	border-radius: 3px;
+}
+
+.control-group select {
+	border: 1px solid #cccccc;
+	background-color: #ffffff;
+	border-radius: 3px;
+	-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+	-moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+	box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+}
+
+
+wdh15 {
+	width: 15% !important;
+}
+
+.addressItem .is-default-address {
+	margin: 0px;
+	margin-right: 10px;
+}
+
+.accountContentPane .addressItem {
+	border: 1px dotted #a5a5a5;
+	margin: 10px 0;
+	padding: 10px;
+	position: relative;
+}
+
+/* ################################My account pages ends###################################*/
+/* ################################Payment Method Page Starts###################################*/
+#paymentStepCheckout .check-content-sec {
+	padding-bottom: 40px;
+	display: inline-block;
+	width: 100%;
+}
+
+#paymentStepCheckout .marB30 {
+	margin-bottom: 30px;
+}
+
+#paymentStepCheckout .pay-title {
+	font-size: 14px;
+	margin: 10px 0;
+}
+
+#paymentStepCheckout .pay-title .headline {
+	background: url("../images/heading-bg.png") no-repeat scroll left bottom
+		rgba(0, 0, 0, 0);
+	border-bottom: none;
+	font-family: "Rockwell";
+	font-size: 17px;
+	font-weight: normal;
+	height: 30px;
+	line-height: 30px;
+	margin: 0 0 10px;
+	text-transform: none;
+}
+
+#paymentStepCheckout .addressContentPane .control-group {
+	float: left;
+	margin-right: 20px;
+	width: 46%;
+}
+
+#paymentStepCheckout .small-input {
+	width: 17% !important;
+	float: left;
+	margin-right: 4px;
+}
+
+#paymentStepCheckout .checkp-input {
+	width: 81% !important;
+}
+
+#paymentStepCheckout .tabs-left {
+	display: inline-block;
+	border-bottom: none;
+	width: 100%;
+}
+
+#paymentStepCheckout .tabs-left>.nav-tabs {
+	float: left;
+	margin-right: 0px;
+	border-right: 1px solid #ddd;
+	background: none repeat scroll 0 0 transparent;
+	border-bottom: none;
+	border-top: 1px solid #ddd;
+}
+
+#paymentStepCheckout .tab-content {
+	float: left;
+	width: 68%;
+	padding-bottom: 0px;
+}
+
+#paymentStepCheckout .tabs-left>.nav-tabs>li {
+	float: none;
+	margin-bottom: 0;
+}
+
+#paymentStepCheckout .tabs-left>.nav-tabs .active>a,
+	#paymentStepCheckout .tabs-left>.nav-tabs .active>a:hover,
+	#paymentStepCheckout .tabs-left>.nav-tabs .active>a:focus {
+	border-bottom: 1px solid #ccc;
+	border-color: transparent;
+	border-right-color: #000;
+	background: #000;
+	color: #fff;
+	-webkit-box-shadow: 0 1px 2px 0 rgba(255, 255, 255, 0.8);
+	-moz-box-shadow: 0 1px 2px 0 rgba(255, 255, 255, 0.8);
+	box-shadow: 0 1px 2px 0 rgba(255, 255, 255, 0.8);
+}
+#paymentStepCheckout .tabs-left > .nav-tabs > li > a:hover, #paymentStepCheckout  .tabs-left > .nav-tabs > li > a:focus {
+	background: #000;
+	color: #fff;
+}
+
+#paymentStepCheckout .tabs-left>.nav-tabs>li>a {
+	border-left: 1px solid #ddd;
+	margin-right: 0px !important;
+	-webkit-border-radius: 0px 0 0 0px;
+	-moz-border-radius: 0px 0 0 0px;
+	border-radius: 0px 0 0 0px;
+	border-bottom: 1px solid #ccc;
+	font-size: 13px;
+	font-family: Arial, Helvetica, sans-serif;
+	font-weight: bold;
+	background: #eee;
+}
+
+#paymentStepCheckout .tab-content>.tab-pane {
+	display: none;
+	border-radius: 0px 0 0;
+	padding-top: 0px;
+	border-top: none;
+}
+
+
+#paymentStepCheckout .tab-content>.active {
+	display: block;
+}
+
+#paymentStepCheckout .pay-mode-sec {
+	display: inline-block;
+	float: left;
+	width: 98%;
+	padding-left: 20px;
+}
+
+#paymentStepCheckout .pay-mode-sec input {
+	margin-right: 10px;
+}
+
+#paymentStepCheckout .online-paymentcard {
+	float: left;
+	margin: 15px 0 0 24px;
+}
+
+#paymentStepCheckout .online-paymentcard li {
+	float: left;
+	margin-right: 5px;
+}
+
+#paymentStepCheckout .control-group input[disabled],
+	#paymentStepCheckout .control-group input[readonly] {
+	cursor: not-allowed;
+	background-color: #eeeeee;
+}
+
+
+#paymentStepCheckout .textcod{
+    font-size: 13px;
+   top: -3px;
+  position: relative;
+}
+
+
+
+#paymentStepCheckout .check-content-sec button {
+    margin-top: 13px;
+}
+
+
+#paymentStepCheckout .codOtpTextBox{ margin:10px 0; display:none}
+#paymentStepCheckout .codOtpTextBox p{ font-size: 13px;margin: 0 0 5px;}
+#paymentStepCheckout .smsAlert label {
+  float: left;
+  margin-right: 5px;
+  line-height: 30px;
+  font-weight: bold;
+}
+
+#paymentStepCheckout .smsAlert .otpSmsInput {
+  width: 200px !important;
+  float: left;
+  margin: 0;
+  padding: 4px 6px;
+}
+
+#paymentStepCheckout .resentOtp{font-size: 11px;  font-weight: bold; line-height: 32px; padding: 0 10px;}
+
+#paymentStepCheckout .otpMessage{
+color: #339b01;
+font-size: 11px;
+}
+
+#paymentStepCheckout .not-valid-otp{
+color: #c90400;
+font-size: 11px;
+}
+
+
+/* ################################Payment Method Page Ends###################################*/
+
+#storeFinder .searchPane .headline {
+	border-bottom: 1px dotted #a5a5a5;
+	font-family: "Rockwell";
+	font-size: 1.2em;
+	font-weight: normal;
+	height: 39px;
+	line-height: 39px;
+	margin: 0 0 20px;
+	text-transform: uppercase;
+}
+
+.breadcrumb ul li a {
+	color: #8E8E8E;
+	font-size: 0.9em;
+	text-transform: uppercase;
+}
+
+a.button, button {
+	border-radius: 4px;
+	padding: 6px 12px;
+}
+
+#storeFinder .searchPane {
+	width: 300px;
+	border-color: #E8E8E8;
+}
+
+.control-group textarea, .control-group input[type="text"],
+	.control-group input[type="password"], .control-group input[type="datetime"],
+	.control-group input[type="datetime-local"], .control-group input[type="date"],
+	.control-group input[type="month"], .control-group input[type="time"],
+	.control-group input[type="week"], .control-group input[type="number"],
+	.control-group input[type="email"], .control-group input[type="url"],
+	.control-group input[type="search"], .control-group input[type="tel"],
+	.control-group input[type="color"], .control-group .uneditable-input {
+	border-radius: 3px;
+}
+
+button.positive, a.button.positive {
+	background-color: #444;
+/* 	border-color: #DC2930; */
+	color: #FFF;
+	font-weight: normal;
+	text-transform: initial;
+	
+	height: 34px;
+}
+button.positive:hover, a.button:HOVER{
+	background-color: #000;
+}
+
+#storeFinder .searchPane .findStoresNearMe {
+	background-color: #EE3139;
+}
+
+#storeFinder .storeResultList .storeResultTable {
+	font-size: 13px;
+}
+
+#storeFinder .storeResultList .storeResultTable thead th {
+	background: none repeat scroll 0% 0% #000;
+	color: #FFF;
+}
+
+#storeFinder .storeResultList .storeResultTable thead #header1 {
+	padding-left: 10px;
+}
+
+.storefinder_map_action {
+	padding: 0px 10px !important;
+	margin-left: 110px !important;
+	margin-top: -2px !important;
+	height: initial !important;
+}
+
+#storeDetail .detailPane .headline {
+	font-weight: normal;
+	font-family: 'Rockwell';
+}
+
+input[readonly="true"] {
+	background-color: #eeeeee !important;
+}
+
+/* #### faq page ####*/
+@charset "utf-8";
+
+/* CSS Document */
+a.faqanchor {
+	display: block;
+	position: relative;
+	top: -250px;
+	visibility: hidden;
+}
+
+.title_holder h2 {
+	background-color: #000;
+	border: medium none;
+	color: #fff;
+	font-size: 14px;
+	font-weight: normal;
+	height: 30px;
+	line-height: 30px;
+	margin: 0 0 10px;
+	padding-left: 10px;
+	white-space: nowrap;
+}
+
+.nav_column li {
+	margin-bottom: 2px;
+}
+
+.nav_column li a {
+	background: url("../images/list-style.jpg") repeat-y scroll right bottom
+		rgba(0, 0, 0, 0);
+	font-size: 13px;
+	display: block;
+	padding: 5px;
+}
+
+.nav_column li a:hover {
+	background: #ccc;
+}
+
+.textpage-faqs h2 {
+	font-family: "Rockwell";
+	font-size: 20px;
+	font-weight: normal;
+	background: url("../images/heading-bg.png") no-repeat scroll left bottom
+		rgba(0, 0, 0, 0);
+	border: 1px solid #e8e8e8;
+	color: #000;
+	margin-top: 0;
+	margin-bottom: 10px;
+	padding: 3px 10px 5px;
+	outline: none;
+}
+
+.textpage-faqs h3 {
+	font-family: "Rockwell";
+	font-size: 17px;
+	font-weight: normal;
+}
+
+.textpage-faqs table th {
+	background: #000;
+	color: #fff;
+	padding: 5px 13px;
+	font-weight: bold;
+	font-size: 14px;
+}
+
+.textpage-faqs td {
+	padding: 5px 15px;
+	vertical-align: top;
+	border-bottom: 1px solid #fff;
+	font-size: 13px;
+}
+
+.textpage-faqs .blue3 {
+	background: #bebebe;
+}
+
+.textpage-faqs .grey3 {
+	background: #eaeaea;
+}
+
+.item_container {
+	font-size: 13px;
+}
+
+.pagetop-link {
+	display: inline-block;
+	padding: 6px 12px;
+	margin-bottom: 0;
+	font-size: 14px;
+	font-weight: normal;
+	line-height: 1.42857143;
+	text-align: center;
+	white-space: nowrap;
+	vertical-align: middle;
+	cursor: pointer;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	background-image: none;
+	border: 1px solid transparent;
+	border-radius: 4px;
+	margin: 10px 0
+}
+
+.pagetop-link {
+	padding: 1px 5px;
+	font-size: 12px;
+	line-height: 1.5;
+	border-radius: 3px;
+	color: #fff;
+	background-color: #ee3139;
+	border-color: #d71a22;
+}
+
+.pagetop-link:hover {
+	color: #fff;
+	background-color: #d71a22;
+	border-color: #d71a22;
+}
+
+/* wish list page css */
+#wishListPage .wishItem {
+	background: none repeat scroll 0 0 #fafafa;
+	border-bottom: 5px solid #fff;
+}
+
+.btn-secondary {
+	margin-top: 10px;
+	background-color: #FFF;
+	border-color: #000;
+	color: #000;
+}
+
+.control-group input[disabled] {
+	background-color: #eeeeee;
+}
+
+.control-group input[id="address.phoneNo"] {
+	width: 82%;
+}
+
+/* ################################Order Confirmation Page Starts###################################*/
+#orderConfirmationPage  .th-pg-content {
+	width: 100%;
+	text-align: center;
+	padding: 10px 0;
+	color: #000;
+	font-size: 14px;
+	font-family: Arial, Helvetica, sans-serif;
+	margin-bottom: 20px;
+}
+
+#orderConfirmationPage  .thank-pg-cont {
+	width: 100%;
+	text-align: center;
+	padding: 10px 3px;
+	font-weight: bold;
+	font-size: 24px;
+	font-family: "Rockwell";
+	margin: 20px 0 10px;
+}
+
+#orderConfirmationPage .thank-pg-cont .detail-pro {
+	font-size: 17px;
+	font-weight: normal;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+#orderConfirmationPage .th-pg-content button.btn {
+	float: none;
+	margin: auto;
+}
+
+.order-detailscntr {
+	margin: 20px 0;
+	display: inline-block;
+	width: 100%;
+}
+
+#th-pg-main .order-info li {
+	border: 1px dotted #a5a5a5;
+	float: left;
+	min-height: 270px;
+	padding: 20px 11px;
+	position: relative;
+	width: 23.6%;
+	margin-top: 10px;
+}
+
+.order-detailscntr h3 {
+	border-bottom: 1px solid #a5a5a5;
+	color: #000 !important;
+	font-size: 14px;
+	font-weight: bold;
+	margin-bottom: 25px;
+	padding-bottom: 10px;
+	margin-top: 0;
+}
+
+#th-pg-main .del-info li {
+	border: medium none;
+	font-size: 13px;
+	min-height: inherit;
+	padding: 0;
+	width: 100% !important;
+	margin: 0;
+}
+
+.nextAddress {
+	margin-left: 16px;
+}
+
+/* ################################Account Order Details Starts###################################*/
+#order-pg .order-info li {
+	border: 1px dotted #a5a5a5;
+	float: left;
+	min-height: 243px;
+	padding: 19px 11px;
+	position: relative;
+	width: 47.9%;
+	margin-top: 10px;
+}
+
+#order-pg .del-info li {
+	border: medium none;
+	font-size: 13px;
+	min-height: inherit;
+	padding: 0;
+	width: 100% !important;
+	margin: 0;
+}
+
+/* Home page css changes. */
+.col-md-9 .bx-wrapper img {
+	width: 742px;
+	height: 395px;
+	/* max-width: 100%; */
+	display: block;
+	border: 1px solid #e8e8e8;
+}
+
+#beasellertable .control-group {
+	width: 600px;
+}
+
+#beasellertable .control-group label {
+	width: 150px;
+	padding-top: 0px;
+	margin: 8px 0px 2px;
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+#orderTotals th {
+	background: none repeat scroll 0 0 #000;
+	color: #fff;
+	padding: 5px;
+	text-transform: uppercase;
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-size: 14px;
+	line-height: 1.42857;
+	font-weight: bold;
+}
+
+#checkoutContentPanel .headline {
+	text-transform: initial;
+}
+
+#beasellertable .control-group .controls {
+	padding-left: 150px;
+}
+
+#beasellertable .control-group {
+	width: 800px;
+}
+
+/* ################################Account Order History###################################*/
+#accountOrderHistory .paginationBar .totalResults {
+	font-size: 12px;
+	color: #a2a2a2;
+	float: left;
+	width: 135px;
+}
+
+#accountOrderHistory .paginationBar {
+	margin-top: 15px;
+}
+
+#accountOrderHistory .paginationBar .sortForm {
+	float: left;
+}
+
+#accountOrderHistory .orderListTable thead {
+	background: none repeat scroll 0 0 #000;
+	color: #fff;
+}
+
+#accountOrderHistory .orderListTable {
+	position: relative;
+	width: 100%;
+	margin-top: 20px;
+}
+
+/* ################################Account Order Details###################################*/
+.orderListTable .item {
+	background: none repeat scroll 0 0 #fafafa;
+	border-bottom: 5px solid #fff;
+}
+
+#accountOrderDetailsPage .orderListTable .item {
+	border-bottom: 5px solid #fafafa;
+}
+
+#accountOrderDetailsPage .orderListTable #promotions {
+	background: none repeat scroll 0 0 #fafafa;
+	border-bottom: 5px solid #fff;
+}
+
+.orderList .orderListTable .product_details a {
+	text-decoration: underline;
+}
+
+.orderList .orderListTable thead th {
+	border-bottom: 1px solid #a5a5a5;
+}
+
+.orderList .orderListTable tbody td:first-child, .orderList .orderListTable thead th:first-child
+	{
+	padding-left: 10px;
+}
+
+.orderList .orderListTable tbody td.orderHistoryTotal, .orderList .orderListTable thead th.orderHistoryTotal
+	{
+	padding-right: 20px;
+	text-align: right;
+}
+
+.controls .skipInline {
+	color: #D81302;
+	font-size: 12px;
+}
+
+#checkoutButtonTop.doCheckoutBut {
+	font-size: 80%;
+	margin-right: 7px;
+	margin-top: initial;
+}
+
+.control-group input[id="profile.mobileNumber"] {
+	margin-left: 10px;
+}
+
+.accountProfileUpdateMobile {
+	width: 255px !important;
+}
+
+.mobileNumberLabel {
+	margin-left: -40px !important;
+}
+
+.phoneNumberLabel {
+	margin-left: -54px !important;
+}
+
+.orderList .orderRCtable thead tr th{
+    font-size: 1em !important;
+  	font-weight: bold;
+  	text-transform: none;
+  	padding: 10px;
+}
+
+.orderList .orderRCtable tbody tr.item td{
+	padding: 10px;
+}
+
+#accountOrderDetailsPage .orderList .orderRCtable tbody tr.item td{
+	text-align: left !important;
+}
+
+#accountOrderDetailsPage .orderRCtable tbody tr.item{
+	border-bottom: 2px solid #fff;
+}
+
+.orderRCtable tbody tr:nth-child(odd) {
+  background: #f6f6f6;
+  border-bottom: 2px solid #fff;
+}
+
+.orderRCtable tbody tr:nth-child(2n) {
+  background: none repeat scroll 0 0 #d5d5d5;
+  border-bottom: 2px solid #fff;
+}
+
+#accountOrderDetailsPage .orderList .orderRCtable thead tr th{
+	text-align: left !important;
+}
+
+/* ################################Search Page###################################*/
+.searchPageHeading {
+	font-size: 22px;
+}
+
+.accountAddressPopup .modal-footer button {
+	float: right;
+	margin-top: 0px;
+}
+
+.navigationbarcollectioncomponent ul.Lb li.Lb .Lc {
+	width: 162px;
+}
+
+.account-link .btn-group .btn {
+	border-top-left-radius: 4px !important;
+	border-bottom-left-radius: 4px !important;
+	border-top-right-radius: 4px !important;
+	border-bottom-right-radius: 4px !important;
+}
+
+.account-link .btn {
+	padding: 9px 12px;
+	margin-right: 5px !important;
+}
+
+.pdp-heading {
+	border-bottom: 2px solid #000;
+	font-size: 19px;
+	font-family: 'arial';
+	font-size: 19px;
+	font-weight: normal;
+	color: #000;
+	padding: 0px 3px 5px;
+	margin-bottom: 10px;
+}
+
+.red {
+	color: red;
+}
+
+.facetNavigation .facet .facetHead .refinementToggle {
+	 text-transform: uppercase;
+}
+
+#header #search {
+	padding-right: 0px !important;
+	padding-left: 0px !important;
+}
+
+.home-icon {
+	left: 0px !important;
+}
+
+#resultsList .section-separator {
+	/* display: inline-block; */
+	width: 100%;
+}
+
+#quickViewPopCarouselContainer .jcarousel-skin .jcarousel-list.jcarousel-list-vertical
+	{
+	height: auto !important;
+}
+
+#quickView .productImage .productImagePrimary a.productImagePrimaryLink img
+	{
+	width: auto;
+}
+
+#checkoutOrderDetails table {
+	border-collapse: initial !important;
+}
+
+/* #order-pg .order-info li { */ /* 	width: 48.8% !important; */ /* } */
+#checkoutProgress.steps-3 li.step {
+	float: left !important;
+	width: 33% !important;
+}
+
+.doCheckoutBut#checkoutButtonTop {
+	margin-top: 0px;
+}
+
+#addToCartErrorMessage {
+	color: red;
+	font-size: 12px;
+   line-height: 25px;
+}
+
+/* select size variation*/
+button.pdp-size-btn {
+	background-color: #fff;
+	border: 1px solid #000;
+	border-radius: 15px;
+	box-shadow: none;
+	color: #000;
+	cursor: pointer;
+	display: inline-block;
+	font-size: 1.083em;
+	font-weight: 500;
+	height: 30px;
+	line-height: 1.2;
+	margin-bottom: 0px;
+	margin-right: 5px;
+	min-width: 30px;
+	padding: 0 7px;
+	vertical-align: top;
+}
+
+button.pdp-selected-size {
+	background-color: #000;
+	color: #fff;
+	outline: none;
+	border: 1px solid #000;
+	border-radius: 15px;
+	box-shadow: none;
+	display: inline-block;
+	font-size: 1.083em;
+	font-weight: 500;
+	height: 30px;
+	line-height: 1.2;
+	margin-bottom: 0px;
+	margin-right: 5px;
+	min-width: 30px;
+	padding: 0 7px;
+	vertical-align: top;
+}
+
+button.pdp-size-btn:hover, button.pdp-size-btn.selected {
+	background-color: #000;
+	color: #fff;
+	outline: none;
+}
+
+#checkoutOrderDetails .deliveryCartItems .priceRow {
+	border-bottom: 1px dotted #a5a5a5;
+	width: 33%;
+	padding-bottom: 5px;
+}
+
+#checkoutProgress.steps-3 li.step a {
+	width: 100%;
+}
+
+.foReqFld .skip span {
+	position: relative;
+	right:-54px;
+}
+
+/* <!-- cancel order starts--> */
+#orderCancelResultpopover {
+	z-index: 10;
+	margin-top: 106px;
+}
+
+/* <!-- cancel order ends--> */
+/* ################Checkout delivery method page starts ################*/
+.chooseDeliveryMethod .checkout-pg .headline {
+	background: url("../images/heading-bg.png") no-repeat scroll left bottom
+		rgba(0, 0, 0, 0);
+	border-bottom: none;
+	font-family: "Rockwell";
+	font-size: 17px;
+	font-weight: normal;
+	height: 30px;
+	line-height: 30px;
+	margin: 0 0 20px;
+	text-transform: none;
+}
+
+#checkoutContentPanel {
+	padding-top: 20px;
+}
+
+/* ################Checkout delivery method page ends ################*/
+/* ################PLP and quickview popup product desc starts ################*/
+.productDescription .outOfStock {
+	color: #000000;
+font-weight: bold;
+font-size: 20px;
+
+}
+
+.productDescription .qty input[type="text"] {
+	margin-bottom: 10px;
+	padding: 4px 6px;
+}
+
+.productDescription .viewProductDetails a {
+	text-decoration: underline;
+	color: #666;
+	font-weight: bold;
+}
+
+.viewProductDetails a {
+	margin-left: 175px;
+}
+
+.productDescription .viewProductDetails a:hover {
+	color: #4490a5;
+}
+
+/* ################PLP and quickview popup product desc ends ################*/
+#content .span-14 {
+	width: 618px !important;
+}
+
+#errfn {
+	display: none;
+}
+
+#customerSupportPara {
+	text-align: left;
+}
+
+/* .bx-wrapper {
+	float: left;
+	margin-left: 35px !important;
+} */
+.bx-wrapper img {
+	/* width: 100%; */
+}
+.col-md-12 .product-slider .bx-wrapper .bx-controls-direction a {
+	display: none;
+}
+.col-md-12:HOVER .product-slider .bx-wrapper .bx-controls-direction a {
+	display: block;
+}
+.col-md-12 .product-slider .bx-wrapper .bx-controls-direction a:HOVER {
+	display: block;
+}
+.slider-carousel .bx-wrapper .bx-default-pager {
+	display: none;
+}
+.slider-carousel .bx-wrapper:HOVER .bx-default-pager {
+	display: block;
+}
+
+.bx-wrapper .bx-controls-direction a {
+	width: 30px;
+}
+
+#mainSliderSlot .bx-wrapper {
+	float: left;
+	margin-left: 0px !important;
+}
+
+.v2kartDelivaryAddress .checkout-pg .headline {
+	background: url("../images/heading-bg.png") no-repeat scroll left bottom
+		rgba(0, 0, 0, 0);
+	border-bottom: medium none;
+	font-family: "Rockwell";
+	font-size: 17px;
+	font-weight: normal;
+	height: 30px;
+	line-height: 30px;
+	margin: 0 0 20px;
+	text-transform: none;
+}
+
+.add-to-cart {
+	margin: 0 !important;
+}
+
+.add-to-cart1 {
+	margin: 0px 0 0px !important;
+	width: 150%;
+}
+
+.sizeguidecenter {
+	margin-top: 150px !important;
+}
+
+.variant_options .size button {
+	margin-top: 0px;
+	margin-right: 8px;
+}
+
+#accountOrderHistory .orderListTable p {
+	color: #fff !important;
+}
+
+.orderList .orderListTable thead th {
+	font-size: 12px !important;
+	vertical-align: top;
+	padding-left: 10px !important;
+	padding-right: 10px !important;
+	line-height: normal;
+	text-align: left !important
+}
+
+.orderList .orderListTable tbody td {
+	font-size: 12px !important;
+	padding-left: 10px !important;
+	padding-right: 10px !important;
+	line-height: normal;
+}
+
+.orderListTable thead th {
+	padding-top: 10px;
+}
+
+#AccountOrderHistoryComponent-ViewOrderAction a {
+	color: #fff;
+}
+
+.orderhistoryheading {
+	font-family: "Rockwell";
+	font-weight: bold;
+	border-bottom: 1px solid #a5a5a5 !important;
+}
+
+/* pagination on order history page  */
+.paginationBar ul.pagination li strong {
+	padding-top: 7px;
+}
+
+.pagination>li>a, .pagination>li>span {
+	border: 0px;
+}
+
+#cartItems thead th#header3 {
+	padding-right: 0px
+}
+
+#emailafriendresultpopover .popover-inner {
+	width: 295px;
+}
+
+#emailafriendresultpopover {
+	max-width: 295px;
+}
+
+#updatePwdForm .control-group label, #updatePasswordForm .control-group label
+	{
+	display: inline-block;
+}
+
+.col-md-9 .heading {
+#	border: none !important;
+}
+
+/*########################## Rupee Symbol Implementation ################### */
+.pricedesc .big-price, .pricedesc .small-price {
+	font-family: 'indian_rupeeregular', Helvetica, Arial, sans-serif;
+}
+
+.prod-price .price {
+	font-family: 'indian_rupeeregular', Helvetica, Arial, sans-serif;
+}
+
+.product-desc .prod-price {
+	font-family: 'indian_rupeeregular', Helvetica, Arial, sans-serif;
+}
+
+.indian-rupee-price {
+	font-family: 'indian_rupeeregular', Helvetica, Arial,
+		sans-serif !important;
+}
+
+/*########################## Rupee Symbol Implementation ################### */
+/*########################## Order History Tabs Changes ################### */
+#comTabs {
+	margin: 0 0 40px 0;
+	clear: both;
+	font-size: 13px;
+}
+
+#comTabs ul.tabs-list, #comTabs .tabHead {
+	background: url('../images/heading-bg.png') no-repeat bottom left;
+}
+
+#comTabs ul.tabs-list li {
+	float: left;
+}
+
+#comTabs ul.tabs-list li a, #comTabs .tabHead {
+	display: block;
+	font-size: 1.367em;
+	text-transform: uppercase;
+	padding: 8px 20px 8px 20px;
+	font-family: 'Rockwell';
+	font-weight: normal;
+	color: #000;
+}
+
+#comTabs ul.tabs-list li.current a, #comTabs ul.tabs-list li a {
+	border: 1px solid #e8e8e8;
+	border-bottom: 0;
+	border-left: 0
+}
+
+#comTabs ul.tabs-list li.current a, #comTabs ul.tabs-list li:first-child a
+	{
+	border: 1px solid #e8e8e8;
+	border-bottom: 0;
+	border-left: 1px solid #e8e8e8;
+}
+
+#comTabs ul.tabs-list li.current a, #comTabs ul.tabs-list li a.current {
+	color: #000;
+	background: #fff;
+	border: 1px solid #000;
+	border-bottom: 0;
+	margin: 0 0 0px 0;
+	padding: 9px 19px 9px 19px;
+}
+
+#comTabs ul.tabs-list li a:focus {
+	text-decoration: none;
+}
+
+#comTabs  .current-info, #comTabs .content .tabhead {
+	display: none;
+}
+
+#comTabs .content {
+	position: relative;
+	margin: 20px 0 0 0;
+}
+
+#AccountOrderHistoryComponent-ViewOrderAction {
+	text-transform: capitalize;
+	text-decoration: underline;
+}
+
+/*########################## Order History Tabs Changes ################### */
+.promotion-box h3 {
+	background: #000;
+	color: #fff;
+	text-transform: uppercase;
+	padding: 5px;
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-size: 14px;
+	line-height: 1.42857;
+	font-weight: bold;
+}
+
+/*########################## Order History Tabs Changes ################### */
+#page a[href]:after, #footer a[href]:after {
+	display: none;
+}
+
+.cart_promotion h2 {
+	background: none repeat scroll 0 0 #000;
+	color: #fff;
+	padding: 5px;
+	text-transform: uppercase;
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-size: 14px;
+	line-height: 1.42857;
+	font-weight: bold;
+}
+
+.item_container_holder .item_container .cart-promotions-applied {
+	color: #333;
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-size: 14px;
+	line-height: 1.42857;
+	font-weight: 400;
+}
+
+/*############### Add Delivery Address###################################*/
+.add-delAddress li {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.control-group.error #rating\.errors {
+	color: #c90400;
+}
+
+/*################### Static Page ####################*/
+.staticpagedescription {
+	text-align: justify;
+}
+
+#codCheckboxChecked {
+	margin-left: 20px !important;
+	margin-top: 0px;
+}
+
+.freeCodCharges {
+	margin-left: 20px !important;
+}
+
+.mobile-error .foReqFld .skip span {
+	width: 113px;
+}
+
+/*###########################Facet Cosmetic changes on PLP##########################################333*/
+.page-productList .col-md-3 .facetNavigation {
+	margin-top: 5px;
+}
+
+.page-productList .col-md-9 {
+	margin-top: 5px;
+}
+
+/*####################################################################################################*/
+.section-separator .productGridItem {
+	margin: 0px !important;
+}
+
+.section-separator .productGridItem .prod-title {
+	height: 20px;
+	overflow: hidden;
+}
+
+.section-separator .productGridItem .product-desc {
+	padding: 2px 1px;
+}
+
+.accountContentPane .clearfix .control-label {
+	width: 100%;
+}
+
+/*Low Stock changes*/
+.stock_message {
+	color: red;
+	line-height: 28px;
+	margin: 0;
+}
+
+.page-productDetails .qty {
+	width: 200px;
+}
+
+/*######################################breadcrumb alignment changes########################*/
+.breadcrumb {
+	padding: 0px !important;
+	margin-bottom: 0px !important;
+}
+
+.plpbanner { /*	margin-bottom: 15px;*/
+	
+}
+
+/*################################################################################*/
+.uppercase {
+	text-transform: uppercase;
+}
+
+/* #################### Product Name Capitalize on PDP, Cart Page, Checkout ############ */
+.capitalize {
+	text-transform: capitalize;
+}
+
+.miniCartPopup .itemList .itemDesc a, #checkoutOrderDetails .deliveryCartItems .name a
+	{
+	text-transform: capitalize;
+}
+
+/*################################################################################*/
+/*######################################FAQ Page arrow ##########################################*/
+h2.ui-accordion-header .ui-icon.ui-icon-triangle-1-e {
+	background: url(../images/scroller-v-next.png) no-repeat 0 6px;
+	display: block;
+	width: 19px;
+	height: 18px;
+	float: right
+}
+
+h2.ui-state-active .ui-icon.ui-icon-triangle-1-s {
+	background: url(../images/scroller-v-prev.png) no-repeat 0 6px;
+	display: block;
+	width: 19px;
+	height: 18px;
+	float: right
+}
+
+/*###################################Pincode and COD CSS for ProductDetailPAge#############################################*/
+.checkPin {
+	float: right;
+}
+
+#pincode {
+	margin-bottom: 0px;
+	background: none repeat scroll 0% 0% #F1F1F1;
+	padding: 5px;
+	border: 1px solid #CCC;
+}
+
+.btn-cod {  color: #fff;
+  background-color: #444444;
+  border-color: #000;}
+
+.delivery {
+	background: url("../images/truck-icon.png") no-repeat scroll 0px -3px
+		transparent;
+	margin-right: 6px;
+	padding-left: 25px;
+	font-size: 12px;
+}
+
+#pincode .form-control {
+	height: 34px !important;
+	line-height: 1.42857;
+	padding: 6px 12px;
+	margin: 0px;
+}
+
+.cod {
+	background: #fff;
+	border: 1px solid #ccc;
+	padding: 5px;
+	border-top: 0;
+	margin-bottom: 5px;
+}
+
+.codhead {
+	color: #ee3139;
+	margin-bottom: 0;
+}
+
+.cod-msg {
+	margin-bottom: 0;
+	font-size: 13px;
+	margin-top: 5px;
+}
+
+.status_button {
+	width: 80px;
+	padding-left: 6px;
+}
+
+.blue-link {
+	color: #ee3139 !important;
+	text-decoration: underline;
+	margin-left: 5px;
+}
+
+.panel-static {
+	margin:5px 0px;
+}
+
+#checkForm {
+	/* 	padding-left: 5px; */
+	font-size: 12px !important;
+}
+
+.serviceability_avilable {
+	margin-top: -0.7em;
+	background: url('../images/right.PNG') no-repeat 0px -3px;
+	color: green !important;
+	padding-left: 28px !important;
+	padding-top: 1px;
+	font-size: 13px;
+}
+
+.serviceability_notavilable {
+	margin-top: -0.7em;
+	background: url('../images/cross.PNG') no-repeat 0px -1px;
+	color: #ee3139 !important;
+	padding-left: 28px;
+	padding-top: 1px;
+	font-size: 13px;
+}
+
+.pinSearchInput {
+	width: 120px !important;
+	font-weight: normal !important;
+	height: 34px !important;
+	padding: 4px 6px;
+	margin-bottom: 34px;
+	line-height: 20px;
+	color: #555555;
+	vertical-align: middle;
+	display: block;
+	margin-left: -5px;
+	min-height: 24px !important;
+}
+
+.checkPin {
+	text-transform: UPPERCASE !important;
+	padding: 4px 6px;
+	margin:0 5px!important;
+	
+	width: 74px;
+	margin-left: 4px;
+}
+
+.pincode-text {
+	margin-left: 2px;
+}
+
+.accountContentPane .clearfix .control-label {
+	width: 100%;
+}
+
+.margin-top-8 {
+	margin-top: 8px;
+}
+
+.plpbanner .simple_disp-img.simple-banner {
+	max-width: 324px;
+	float: left;
+	display: inline-block;
+	margin-right: 2px;
+}
+
+.plpbanner .simple_disp-img.simple-banner img {
+	height: 350px !important;
+}
+
+.codText {
+	margin-left: 20px !important;
+	font-weight: bold;
+}
+
+.wishlist {
+	font-size: 12px;
+	text-align: center;
+}
+
+.wishlist img {
+	display: block;
+	margin: auto;
+}
+
+#addFromWishlist {
+	font-family: Arial, Verdana, sans-serif;
+	padding-bottom: 4px;
+}
+
+.tracking_details td {
+	border-bottom: 0px !important;
+}
+
+.orderList .tracking_details {
+	width: 100%;
+}
+
+.orderList .tracking_details td, .orderList .tracking_details th {
+	padding: 6px 8px !important;
+}
+
+.orderList .tracking_details th {
+	font-weight: bold;
+}
+
+@media ( min-width : 768px) {
+	.small-modal .modal-dialog {
+		width: 400px;
+	}
+}
+
+/* Wishlist Changes */
+.wishlistentryname {
+	margin: 0 0 1px !important;
+}
+
+.wishlistentrysize {
+	margin-bottom: 2px;
+}
+
+.productCartImage img {
+	width: 70px;
+}
+
+.form-control {
+	height: 34px;
+	line-height: 1.42857;
+	padding: 6px 12px;
+	margin-bottom: 0;
+}
+
+.form-group {
+	display: inline-block;
+	margin-bottom: 0;
+	vertical-align: middle;
+}
+
+#pincode p {
+	margin: 0 0 -1px;
+}
+
+.pdpcolortitle {
+	color: #000 !important;
+	font-weight: bold;
+}
+
+/* .summary {
+	margin-left: 15px;
+}
+ */
+#quickView .productDescription .pricedesc {
+	margin-bottom: 0px !important;
+}
+
+.productDetailsPanel .productDescription .pricedesc {
+	margin-bottom: 0px !important;
+}
+
+.facetNavigation .facetApplied {
+	margin-bottom: 5px;
+}
+
+.addressItem a.button {
+	margin-top: -14px;
+}
+
+.coupon-codesection .payment-controlsection input {
+	height: 32px;
+}
+
+#accountOrderHistory .orderList .orderListTable .item td {
+	text-align: center !important;
+}
+
+#accountOrderHistory .orderList .orderListTable .item .product_details {
+	text-align: left !important;
+}
+
+#accountOrderHistory .orderList .orderListTable .orderhistoryheading {
+	text-align: center !important;
+}
+
+#accountOrderDetailsPage .orderList .orderListTable .item td {
+	text-align: center !important;
+}
+
+#accountOrderDetailsPage .orderList .orderListTable th {
+	text-align: center !important;
+}
+
+#accountOrderDetailsPage .orderList .orderListTable .product_detail {
+	text-align: left !important;
+}
+
+#accountOrderDetailsPage .orderList .orderListTable .item .details {
+	text-align: left !important;
+}
+
+/* .headerContent .glyphicon.TrackyourOrder:before {
+	content: "\e062";
+	margin-right: 2px;
+} */
+.masthead .glyphicon.TrackyourOrder:before {
+	content: "\e062";
+	margin-right: 2px;
+}
+
+/* .headerContent .glyphicon.FAQs:before {
+	content: "\e008";
+	margin-right: 2px;
+} */
+.masthead .glyphicon.FAQs:before {
+	content: "\e008";
+	margin-right: 2px;
+}
+
+#orderConfirmationPage .orderList .orderListTable .item td {
+	text-align: center !important;
+}
+
+#orderConfirmationPage .orderList .orderListTable th {
+	text-align: center !important;
+}
+
+#orderConfirmationPage .orderList .orderListTable .product_detail {
+	text-align: left !important;
+}
+
+#orderConfirmationPage .orderList .orderListTable .item .details {
+	text-align: left !important;
+}
+
+/* .headerContent .glyphicon.FindaStore:before {
+	content: "\e003";
+	margin-right: 2px;
+} */
+.masthead .glyphicon.FindaStore:before {
+	content: "\e003";
+	margin-right: 2px;
+}
+
+/* .headerContent .glyphicon.ContactUs:before {
+	content: "\e183";
+	margin-right: 2px;
+} */
+.masthead .glyphicon.ContactUs:before {
+	content: "\e183";
+	margin-right: 2px;
+}
+.masthead .glyphicon.BeASeller:before {
+	content: "\002a";
+	margin-right: 2px;
+}
+.masthead .glyphicon.BecomeADealer:before {
+	content: "\002a";
+	margin-right: 2px;
+}
+
+.top-scroller .topnav {
+	padding: 0;
+  	margin: 0;
+  	float: right;
+  	
+}
+.top-scroller .topparagraph {
+	float: left;
+	
+}
+
+.ui-autocomplete .ui-menu-item .ui-state-hover {
+	border: solid !important;
+	border-width: 1px !important;
+}
+
+@media ( min-width : 1200px) {
+	.quickview .container {
+		max-width: 850px;
+	}
+}
+
+.ui-autocomplete .ui-menu-item .desc .price {
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.footerlogo {
+	margin-top: 22px !important;
+}
+
+.noFacet {
+	border: 0px !important;
+}
+
+.page-multiStepCheckoutSummaryPage #content .simple_disp-img img {
+	width: auto;
+}
+
+.beASellerLogo {
+	margin-top: 20px !important;
+}
+
+.socialIconAtFooter {
+	margin-top:5px;
+}
+
+.orderListTable .productImage a img {
+	margin-bottom: 6px;
+	margin-top: -15px;
+}
+
+/*#############################Phase II CSS Changes##############################################*/
+
+/*############################PLP Page Size View On hover####################################################*/
+.size-strip {
+	background: none repeat scroll 0% 0% #000;
+	padding: 2px 0px 0px;
+}
+
+.size-strip .sizeinfo {
+	padding: 2px 5px 1px;
+	border-right: 1px dotted #CCC;
+	color: #FFF;
+}
+
+.quickViewSpinner {
+	margin: 0 auto;
+	position: absolute;
+	left: 300px;
+	top: 160px;
+	z-index: 99;
+}
+
+#productTabs p.write {
+	margin-top: 5px;
+}
+
+#checkoutOrderDetails .deliveryCartItems thead td {
+	font-size: 14px;
+	line-height: 0px;
+}
+
+.beASellerButton {
+	margin-left: 148px;
+}
+
+/*#################### PLP Restrict refreshing the complete page when a facet is selected  #######################*/
+#plpSpinner {
+	position: fixed;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+/* 	background: rgba(255, 255, 255, 0.7);; */
+	z-index: 1029;
+}
+
+#plpSpinner img {
+	position: absolute;;
+	left: 50%;
+	top: 50%;
+}
+
+/*#################### PLP Restrict refreshing the complete page when a facet is selected ends #######################*/
+.pdpnotifymepopup {
+	margin-top: 318px !important;
+}
+
+.category-section .bx-wrapper {
+	margin: 0 auto !important;
+	float: none;
+}
+
+.category-section img {
+	margin-bottom: 1px;
+}
+
+/*############################Guest track Order Page ####################################################*/
+.guestOrderContent .headline {
+	background: url("../images/heading-bg.png") no-repeat scroll left bottom
+		rgba(0, 0, 0, 0);
+	border-bottom: medium none;
+	font-family: "Rockwell";
+	font-size: 17px;
+	font-weight: normal;
+	height: 30px;
+	line-height: 30px;
+	margin: 0 0 20px;
+	text-transform: none;
+}
+
+.guestOrderContent div, .accountContentPane p, .accountContentPane td,
+	.accountContentPane a {
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.guestOrderContent .addressItem {
+	border: 1px dotted #a5a5a5;
+	margin: 10px 0;
+	padding: 10px;
+	position: relative;
+}
+
+.guestOrderContent .clearfix .control-label {
+	width: 100%;
+}
+
+.guestOrderContent .orderList {
+	border: 0;
+	padding: 0;
+	margin: 0;
+}
+
+.guestOrderContent .addressItem {
+	border-bottom: 1px dotted #a5a5a5;
+	padding: 20px 0;
+	position: relative;
+}
+
+.guestOrderContent .nextAddress {
+	margin-left: 27px;
+}
+
+.smsAlert {
+	width: 482px;
+}
+
+.smsAlert .skip {
+	font-weight: bold;
+}
+
+
+.wallet-strip {
+    background: none repeat scroll 0 0 #444444;
+    border-bottom: 1px solid #fff;
+    color: #fff;
+    padding: 8px 10px;
+}
+
+
+.walletTable{
+    position: relative;
+}
+
+.walletTable {
+	width:100%;
+	 max-height: 400px;
+    overflow-y: scroll;
+	display:block;
+    border-bottom: 1px solid #808080;
+}
+
+.walletTable thead {
+    background: none repeat scroll 0 0 #000;
+    color: #fff;
+}
+
+.walletTable thead tr th {
+    font-weight: bold;
+}
+
+#phoneNumberError {
+	float: right;
+	height: 20px;
+}
+
+
+#phoneNumberError label {
+	margin-bottom: 0px;
+}
+
+.account-profile-data {
+	text-transform: capitalize;
+}
+
+.account-profile-data .style-LowerCase {
+	text-transform: lowercase;
+}
+
+.account-profile-data .removeCapitalization {
+	text-transform: none;
+}
+
+.track_your_order .modal-content{
+    min-height:auto !important;
+}
+
+/* ####################BOPIS CSS changes ######################################## */
+.page-productDetails #colorbox .modal-content{
+    min-height:600px;
+}
+.page-cartPage #colorbox .modal-content{
+    min-height:600px;
+}
+.modal-header {
+    font-size: 18px !important;
+      font-family: 'Rockwell';
+}
+.page-productDetails .col-md-3 {
+  width: 25% !important;
+}
+
+.pickup-form .form-group {
+    width: 58% !important;
+  float: left !important;
+  margin-left: 0px;
+}
+.page-productDetails .btn-red {
+/*   background-color: #ee3139 !important; */
+  margin-top: 0px;
+  margin-left: 5px;
+  height: 34px;
+}
+/* .page-cartPage .btn-red { */
+/* /*   background-color: #ee3139 !important; */ */
+/*   margin-top: 0px; */
+/*   margin-left: 5px; */
+/*   height: 34px; */
+/* } */
+#popup_store_pickup_form input[type="text"]{
+    background-color: #ffffff;
+  border: 1px solid #cccccc;
+ 
+  box-shadow: inset 0 0px 0px rgba(0, 0, 0, 0.075) !important;
+  border-radius: 3px;
+    
+}
+.searchPOSResultsList .col-md-6 .pick-box .pick-info .stock .red{
+    color: red !important;
+      float: right !important;
+}
+.searchPOSResultsList .col-md-6 .pick-box .pick-info .stock .pull-right .green{
+    color: green !important;
+     float: right !important;
+}
+.searchPOSResultsList .text-center {
+      padding-left: 50px;
+
+    }
+.searchPOSResultsList .negative{
+    color:red;
+    float: right;
+}
+.searchPOSResultsList .positive{
+    color:green;
+    float: right;
+}
+#popup_store_pickup_form .product-desc .details{
+    margin-bottom: 0px !important;
+}
+ button.addToCartButton {
+  height: 40px;
+  border: 1px solid #000;
+  padding: 0;
+  width: 38%;
+  font-size: 1em;
+  color: #fff;background-color: #444444;
+}
+#AddToCart-AddToCartAction .btn{
+    width: 112px !important;
+      margin-left: -4px !important;
+        padding: 6px 6px !important;
+          height: 34px;
+}
+.productDescription .productAddToCartPanel .span-5 {
+  width: 390px !important;
+}
+.btn[disabled] {
+  pointer-events: none;
+  cursor: not-allowed;
+  filter: alpha(opacity=65);
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  opacity: .65;
+}
+
+.modal-body>.row>.col-md-3>.productInfo>.product-desc>.prod-title {
+  min-height: 20px !important;
+}
+
+#pickUpLocationSelect>#proceed{
+    margin-left: -1px;
+    margin-bottom: 2px;
+}
+#popup_store_pickup_form .qty label{
+      font-weight: normal !important;
+}
+#cartItems .headline {
+      padding-bottom: 37px;
+
+    }
+#cartItems .changeStoreLink{
+      margin-left: -6px;
+     
+}
+.pickupInStoreButton{
+    padding-left: 2px;
+    padding-right: 2px;
+}
+#cartItems .wishlist{
+      margin: 0 0 27px;
+}
+
+
+#checkoutOrderDetails .pickupCartItems thead td {
+    font-size: 14px;
+background: none repeat scroll 0 0 #000 !important;
+  color: #fff;
+  padding: 5px !important;
+  line-height: initial !important;
+    border-bottom: 1px solid #a5a5a5;
+  height: 30px;
+  line-height: 30px;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.pickupCartItems dl {
+  margin-bottom: 0px !important;
+}
+.pickupCartItems dl dt {
+  font-weight: normal;
+}
+
+#chooseLocation .btn-red{
+      margin-bottom: 2px !important;
+      margin-left: 0px !important;
+}
+
+
+.page-productDetails #cboxClose {
+    background: url("../images/colorbox/popupCross.PNG") no-repeat 0 0 !important;
+
+    }
+.page-cartPage #cboxClose {
+    background: url("../images/colorbox/popupCross.PNG") no-repeat 0 0 !important;
+
+    }
+.orderList dl {
+  margin-bottom: 0px !important;
+}
+.orderList dl dt {
+  font-weight: normal;
+}
+
+#orderConfirmationPage .orderList .orderListTable thead th#header2{
+    text-align: left !important;
+}
+#cartItems thead th {
+    min-width: 5px;
+}
+.page-productDetails .pick-box {
+    height:210px;
+
+    }
+.page-cartPage .pick-box {
+    height:200px;
+
+    }
+.pick-box #command>.btn-red{
+    margin-top: -20px;
+}
+.page-cartPage #selectStoreForm>.btn-red{
+	    margin-top: -20px;
+}
+#accountOrderDetailsPage tbody td .headline {
+     background: none !important;
+  border-bottom: 1px dotted #A5A5A5;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 1em;
+  height: auto;
+  line-height: 18px;
+  margin: 0 0 20px;
+  text-transform: none;
+  font-weight: bold;
+}
+
+.page-multiStepCheckoutSummaryPage .button{
+	background-color: #444444;
+  border-color: #000;
+  color: #FFF;
+  font-weight: normal;
+  text-transform: initial;
+  height: 34px;
+   padding: 2px 12px;
+}
+
+/* ####################BOPIS CSS changes ends######################################## */
+/* ####################Add to bag confirm popup starts######################################## */
+.page-productDetails #confirmAddPopup .modal-content,  .page-productDetails #confirmBuyNowPopup .modal-content{
+  min-height: initial;
+}
+#confirmAddPopup .modal-footer .btn, #confirmBuyNowPopup .modal-footer .btn, .confirmAddPopup .modal-footer .btn{
+	margin-top: 0px;
+	width: 112px;
+	margin-left: 5px !important;
+	height: 34px;
+}
+#confirmAddPopup .modal-footer .btn, #confirmBuyNowPopup .modal-footer .btn{
+	float: right;
+}
+.confirmAddPopup .modal-footer .btn{
+	float: none;
+}
+/* ####################Add to bag confirm popup ends######################################## */
+
+
+
+.pickupCartItems dt, .pickupCartItems dd{
+	display:inline;
+}
+.pickupCartItems dl dt {
+  font-weight: bold;
+}
+
+/* #################### Gift Wrap Cart Page starts ######################################## */
+.giftIconSmall {
+  background: url("../images/gift-icon-small.png") no-repeat scroll center center rgba(0, 0, 0, 0);
+  height: 12px;
+  width: 12px !important;
+  position: relative;
+  margin-right: 5px;
+  float: left;
+}
+.smallTxt {
+  font-size: 12px;
+}
+/* #################### Gift Wrap Cart Page ends ######################################## */
+
+
+.productImage .productImagePrimary .productImagePrimaryLink {
+  display: block;
+  width: 420px;
+}
+
+
+/* ####################Cart page update Quantity add and subtract button######################################## */
+
+
+.updateQuantityClass input[type="button"]{
+	 background-color: #000 !important;
+    border: medium none;
+    color: #fff;
+    height: 24px;
+    width: 17px;
+    
+}
+
+.updateQuantityClass input{ border-radius: 0;
+    float: left;
+    height: 24px;
+    text-align: center;
+}
+
+
+/* #######################################Pure Chat ############################################################ */
+
+.purechat-widget .purechat-expanded{ 
+    margin-right: -38px !important;
+    width: 280px !important;
+}
+.purechat-widget-expanded .purechat-collapsed-outer{ 
+    margin-right: -38px !important;
+    width: 280px !important;
+}
+.purechat-widget-collapsed .purechat-collapsed-outer{ 
+    margin-right: -38px !important;
+    width: 195px !important;
+}
+
+.purechat-widget .purechat-button-available .purechat-collapsed-outer { 
+    margin-right: -38px !important;
+    width: 195px !important;
+}
+
+
+.purechat-widget .purechat-menu .btn, .purechat-window .purechat-menu .btn {
+    background-color: #c80000 !important;
+}
+
+.purechat-widget .purechat-ended-form .btn, .purechat-window .purechat-ended-form .btn, .purechat-widget .purechat-init-form .btn, .purechat-window .purechat-init-form .btn, .purechat-widget .purechat-email-form .btn, .purechat-window .purechat-email-form .btn{
+    background-color: #c80000 !important;
+    border: 1px solid #c80000 !important;
+}
+
+
+/*******************Order-Cancellation*********************/
+.order-cancel .modal-title { font-size: 18px;}
+.order-return .modal-title { font-size: 18px;}
+.order-container{padding:0 15px;}
+.order-cancellation-heading { background: none repeat scroll 0 0 #000;  color: #fff; font-size: 15px; font-weight: bold; margin:0 0 10px 0; padding: 6px 3px 6px 12px; text-align: left;}
+.order-labels{ margin-right:10px !important; font-size:13px !important; font-weight:bold !important; min-width:100px; float:left;} 
+.order-cancel select{ min-width: 250px;  padding: 5px 0;}
+.order-cancel input[type="text"]{ width: 80% !important;}
+.order-return select{ min-width: 110px;  padding: 5px 0;}
+.order-return input[type="text"]{ width: 80% !important;}
+.marB10{ margin-bottom:10px !important;}
+.agreement{ float:left;}
+.agreement input{float:left; margin-right:5px; width:auto;
+}
+.agreement label{ font-size:13px;}
+table.orderRCtable {  width: 100%; margin-top:20px;}
+.orderRCtable thead tr{ background:none !important;} 
+.orderRCtable thead th {border-bottom:1px solid #a5a5a5; font-size: 1em; font-weight: bold;  text-transform:none; padding: 10px;}
+.orderRCtable thead th#header3{ text-align: center;}
+.orderRCtable thead th#header6 { text-align: center;}
+.orderRCtable thead th#header7 { text-align: center;}
+.orderRCtable td { border-bottom: medium none; padding: 10px; vertical-align: middle; font-size: 13px;}
+.orderRCtable tr:nth-child(2n) {  background: none repeat scroll 0 0 #d5d5d5; border-bottom: 2px solid #fff;}
+.orderRCtable tr:nth-child(odd){ background:#f6f6f6; border-bottom:2px solid #fff;}
+
+.marB30 {
+  margin-bottom: 30px;
+}
+
+table.orderRCtablePopup{ width: 100%; margin-top:0px;}
+.orderRCtablePopup thead tr{ background:none !important;} 
+.orderRCtablePopup thead th {border-bottom:1px solid #a5a5a5; font-size: 1em; font-weight: bold;  text-transform:none; padding: 7px 10px; background-color: #000; color:#fff;}
+.orderRCtablePopup thead th#header3{ text-align: center;}
+.orderRCtablePopup thead th#header6 { text-align: center;}
+.orderRCtablePopup thead th#header7 { text-align: center;}
+.orderRCtablePopup td { border-bottom:none; padding: 5px 10px; vertical-align: top; font-size: 13px;}
+.orderRCtablePopup tr:nth-child(2n) { background: none repeat scroll 0 0 #d5d5d5; border-bottom: 2px solid #fff;}
+.orderRCtablePopup tr:nth-child(odd){ background:#f6f6f6; border-bottom:2px solid #fff;}
+.orderRCtablePopup td input{margin-bottom:0px; }
+.orderRCtablePopup { max-height:200px; overflow-y:scroll; display:block; }
+
+div.retyrnQty select{
+	border-radius:3px;
+margin-top: 15px;
+}
+
+.order-container{ position:relative; margin-bottom:10px;}
+
+.marT10{ margin-top:10px;}
+.disableBg{ position:absolute; background:#fff; opacity:0.6; width:100%; height:100%; top:0; left:0; display:none;}
+.disableBg1{ position:absolute; background:#fff; opacity:0.6; width:100%; height:100%; top:0; left:0; display:none;}
+.close-button {
+    background: url("../images/colorbox/popupCross.PNG") no-repeat scroll 0 0 !important;
+    color: #000;
+    float: right;
+    font-size: 21px;
+    font-weight: bold;
+    line-height: 1;
+    opacity: 0.5;
+    text-shadow: 0 1px 0 #fff;
+    border: 0 none;
+    cursor: pointer;
+    padding: 0;
+    margin-right: -5px;
+    margin-top: 7px;
+}
+
+.fullOrderDetails{
+     display: none;
+}
+.close-button:hover,
+.close-button:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+  filter: alpha(opacity=90);
+  opacity: 1;
+}
+
+.cancelOrderColorbox,.cancelOrderColorbox #cboxWrapper,.cancelOrderColorbox #cboxContent,
+.cancelOrderColorbox #cboxLoadedContent,.returnOrderColorbox,.returnOrderColorbox #cboxWrapper,
+.returnOrderColorbox #cboxContent,.returnOrderColorbox #cboxLoadedContent {
+	overflow: visible !important;
+    z-index: 99999999;
+     border-radius: 8px;
+     box-shadow:0 0 0 0 #000 !important;
+} 
+
+.refundText{
+	color: #E61F26 !important;
+	font-size: 12px !important;
+	width: 100% !important;
+	margin-left: 15px !important;
+}
+
+.agreement {
+    float: left;
+    white-space: nowrap;
+}
+
+.orderList {
+    border: none !important;
+    margin: 0 0 0 !important;
+    padding:0 !important;
+}
+
+/* #colorbox { */
+/*     box-shadow: 0 0 0 #000 !important; */
+/* } */
+
+.btn-disabled {
+    background-color: #ffd1d9;
+    border-color: #ffd1d9;
+    color: #fff;
+    cursor: default;
+}
+
+.cancel-buttons,.return-buttons {
+    float: right;
+    position: relative;
+}
+
+
+.labelError {
+	color: #E61F26 !important;
+	font-style: italic !important;
+	font-size: 10px !important;
+	width: 100% !important;
+} 
+
+
+.labelErrorEmpty {
+  color: #E61F26 !important;
+  font-style: italic !important;
+  font-size: 12px !important;
+  width: 100% !important;
+  margin-left: 457px;
+} 
+
+.formFieldError input { border: 1px solid red; }
+
+
+a.productImageZoomLink {
+  right: 30px !important;
+}
+.pdplinks .popover-content{
+    color: green !important;
+}
+
+.prod-price .smallprice{
+	font-size: 12px !important;
+  	color: #a3a3a3 !important;
+  	text-decoration: line-through !important;
+}
+
+.btn-cod:HOVER {
+	background-color: #000;
+}
+
+#selectDeliverylocationForm #chooseDeliveryLocation_continue_button{
+	display: none;
+}
+
+#pickup_store_results>.searchPOSPaging{
+	margin-left:16px !important;
+}
+
+.page-productDetails .product-desc .qty {
+  width: 200px;
+  margin-top: -26px;
+}
+ .facetValueCount {
+  margin-left: 1px !important;
+}
+
+.truncate {
+	    max-width: 145px !important;
+display: inline-block !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+.facetNavigation .facetValues ul.facet_block li .facetValueCount{
+	color:#000; 
+	vertical-align: top !important;
+	margin-left:2px;
+	
+}
+
+.product_code{
+	font-size: 13px;
+	margin-left: 10px;
+}
+
+
+#termsAndConditionsAgree {
+    margin-left: 23px
+}
+
+.errorBoxlabel{
+	margin-left: 120px;
+}
+.productAddToCartPanelContainer {
+	display: inline-block;
+	margin: 35px 0 10px 30px;
+}
+p.printInvoice {
+  margin-bottom: 0;
+}
+p.printInvoice .btn-red {
+  color: #000;
+  background-color: #fff;
+  border-color: #000;
+  font-size: 20px;
+  border-radius: 0;
+  padding: 3px 7px;
+  position: relative;
+  top: -5px;
+}
+div.addToCartButton {
+	float: left;
+}
+div.addToCartButton>button {
+	float: none;
+}
+.delievery-option {
+
+  font-size: 13px;
+  margin-bottom: 0px;
+  background: #f1f1f1;
+  border-bottom: 3px double #ccc;
+  padding: 10px;
+}
+
+.delievery-option #checkoutForm .listing {
+  display: inline-block !important;
+  vertical-align: top;
+  margin-right: 20px;
+}
+.btn-xs, .btn-group-xs > .btn {
+  padding: 1px 5px;
+  font-size: 12px;
+  line-height: 1.5;
+  border-radius: 3px;
+}
+#cartItems .headline {
+	  margin: 0 0 0px !important;
+}
+
+#pickupstore_search_button{
+	  margin-left: 3px !important;
+  margin-top: 1px !important;
+}
+#find_pickupStoresNearMe_button{
+		  margin-left: 2px !important;
+  margin-top: 1px !important;
+}
+
+#cartItems thead #header2{
+text-align: center;
+}
+.page-cartPage #selectStoreForm>.btn-red {
+  margin-top: 0px !important;
+  margin-left: 33px !important;
+}
+#popup_store_pickup_form .col-md-9{
+	width:100% !important;
+}
+.pick-box h3 {
+  background: #000 !important;
+
+}
+
+
+.feedbackSelect{
+	margin-left:10px !important;
+	height: 20px !important;
+  padding: 4px 6px !important;
+  margin-bottom: 10px !important;
+  font-size: 14px !important;
+  line-height: 20px !important;
+  color: #555555 !important;
+width:25% !important;
+display:inline; !important;
+
+  min-height: 30px !important;
+}
+.feedbackCategory span{
+	margin-left:35px !important;
+	font-size: 14px !important;
+  line-height: 1.42857 !important;
+  font-weight: 400 !important;
+}
+
+.feedbackCategory label{
+	  min-height: 30px !important;
+}
+
+
+.feedbackCategory .mandatory{
+	margin-left:0px !important;
+}
+
+.feedbackCategory .control-group label {
+	display: initial;
+	}
+	
+	
+#feedbacktable .control-group {
+	width: 600px;
+}
+
+#feedbacktable .control-group label {
+	width: 150px;
+	padding-top: 0px;
+	margin: 0px 0px 2px;
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+#feedbacktable .control-group .controls {
+	padding-left: 150px;
+}
+
+#feedbacktable .control-group {
+	width: 800px; margin-bottom: 15px; position:relative;
+}
+
+#feedbacktable .control-group.error .skipInline{ position:absolute; top:30px;}
+#feedbacktable .control-group.error .skip{ position:absolute; top:50px; left:150px; width:100%; float:left;}
+#feedbacktable .control-group.error .skip span {float:left;}
+
+.feedbackButton {
+	margin-left: 148px;
+
+}
+
+
+.rating{
+  margin-left: 12px;
+  
+}
+
+.feedbackRating{
+   margin: 6px 3px 2px;
+}
+
+.rating span label{ display:inline!important; margin-right:10px!important;}
+.rating span input[type=radio]{ vertical-align:text-top;}
+#popup_store_pickup_form .col-md-5 {
+  width: 45.666667%;
+}
+
+.footer span.glyphicon.MyWallet {
+	margin-right: 0;
+}
+
+.storename{
+	margin-left: 150px;
+	font-size: 10px;
+}
+
+.pickupInStoreButton{
+	margin-top:-26px;
+}
+
+.masthead span.glyphicon.TermsAndConditions:before {
+content: "\e032";
+margin-right: 2px;
+}
+.masthead span.glyphicon.Feedback:before {
+content: "\e111";
+margin-right: 2px;
+}
+
+
+  
+ 
+/* #################### footer payment method changes######################################## */
+#payicon li{
+	margin-bottom:0px;
+}
+
+#payicon img{
+	    margin:5px 5px 0 0px;
+
+}
+
+/***********Download App Changes Start***************/
+.page-downloadApp #breadcrumb {
+	display: none;
+}
+.downloadAppPage {
+	padding: 0 15px;
+}
+.app-download {
+	background: url('../images/app-download-bg.png') no-repeat;
+	background-size: auto;
+	min-height: 600px;
+	text-align: center;
+	padding: 100px 20px 10px;
+}
+
+.app-download h1 {
+	background: #f9f9f9;
+	box-shadow: 2px 4px 5px #000;
+	border-radius: 8px;
+	font-size: 30px;
+	color: #000;
+	margin: auto;
+	padding: 5px;
+	width: 340px;
+}
+
+.app-download h1 img {
+	display: block;
+	margin: 0 auto 10px;
+}
+
+.app-download h3 {
+	color: #fff;
+	font-family: 'Rockwell';
+	font-size: 26px;
+	margin: 20px;
+	text-shadow: 2px 2px 3px #000;
+}
+.masthead span.glyphicon.DownloadApp:before {
+  content: "\e026";
+  margin-right: 2px;
+}
+
+/***********Download App Changes Start***************/
+
+.order-cancel input[id="product.cancelled.quantity"] {
+  width: 50% !important;
+}
+
+
+.orderRCtablePopup td.quantity{
+	width:10% !important;
+
+}
+
+.nav-submenu-title {
+	font-weight: bold !important;
+}
+
+/*footer changes*/
+#payicon h3{
+	}
+
+.productDetailsPanel .coditional{
+  font-size: 11px;
+  font-style: italic;
+  margin-bottom: 5px;
+}
+
+ .productDetailsPanel .coditional p {
+  margin: 0;
+}
+
+.product-slider .product-desc {
+	text-align: center;
+}
+
+
+.changeStoreLink{
+	display: none;
+}
+
+
+.fullOrderDetails .control-group .controls select{
+    width:35%;
+    margin-top:7px;
+}
+
+.fullOrderDetails .order-labels{
+  margin-top: 10px;
+}
+
+.updatePasswordformwidth td .control-group{
+	width: 360px !important;
+}
+.mrp{ font-size:15px;}
+
+.productImagePrimary img{ max-width:100%; margin:0 auto; display:block;R}
+*{ outline:none;}
+
+.nav_column li a{
+	
+	border-left:4px solid #fff;
+	
+}
+.nav_column li.active a{
+	
+	border-left:4px solid #c80000;
+	
+}
+.productGrid .productGridItem{height: 295px;}
+.productDetailsPanel .summary{
+	text-transform: capitalize;
+}
+.bx-wrapper .bx-prev {
+    left: 0px;
+    background: url(../images/bg_direction_nav.png) no-repeat 0 0;
+}
+.bx-wrapper .bx-next {
+    right: 0px;
+    background: url(../images/bg_direction_nav.png) no-repeat 0 0 ;
+    background-position: 100% 0 !important;
+}
+
+.popover.bottom > .arrow {
+  top:-11px !important;
+}

@@ -1,0 +1,51 @@
+#
+# Import Delivery Modes / Zones
+#
+#% impex.setLocale(Locale.ENGLISH)
+
+# Currencies
+$inCurrency=INR
+
+# Delivery Zones
+INSERT_UPDATE Zone                  ; code[unique=true]               ; countries(isocode)
+                                    ; india                           ; IN
+# Zone Delivery Modes
+INSERT_UPDATE ZoneDeliveryMode      ; code[unique=true]                  ; net   ; active[default=true];sapCode;isPickUp[default=false]
+                          			;standard-ncr-within-city            ; false ;;01;
+                                    ;express-ncr-within-city             ; false ;;02;
+                                    ;standard-within-region-upto-500-km  ; false ;;01;
+                                    ;express-within-region-upto-500-km   ; false ;;02;
+                                    ;standard-rest-of-india-above-500-km ; false ;;01;
+                                    ;express-rest-of-india-above-500-km  ; false ;;02;
+                                    ;standard-north-east                 ; false ;;01;
+                                    ;standard-pickup					 ; false ;;03;true
+                                    ;express-pickup						 ; false ;;03;true
+
+INSERT_UPDATE ZoneDeliveryModeValue ; deliveryMode(code)[unique=true]    ; zone(code)[default='india'][unique=true]; currency(isocode)[unique=true] ; value  ; minimum[unique=true]
+                                    ;standard-ncr-within-city            ;                                         ; $inCurrency                    ; 10     ; 0
+                                    ;standard-ncr-within-city            ;                                         ; $inCurrency                    ; 0     ; 500
+                                    ;express-ncr-within-city	         ;                                         ; $inCurrency                    ; 20      ; 0
+                                    ;express-ncr-within-city	         ;                                         ; $inCurrency                    ; 0      ; 1000
+                                    ;standard-within-region-upto-500-km	 ;                                         ; $inCurrency                    ; 30     ; 0
+                                    ;standard-within-region-upto-500-km	 ;                                         ; $inCurrency                    ; 0     ; 500
+                                    ;express-within-region-upto-500-km	 ;                                         ; $inCurrency                    ; 10     ; 0
+                                    ;express-within-region-upto-500-km	 ;                                         ; $inCurrency                    ; 0     ; 1000
+                                    ;standard-rest-of-india-above-500-km ;                                         ; $inCurrency                    ; 40     ; 0
+                                    ;standard-rest-of-india-above-500-km ;                                         ; $inCurrency                    ; 0     ; 500
+                                    ;express-rest-of-india-above-500-km	 ;                                         ; $inCurrency                    ; 50      ; 0
+                                    ;express-rest-of-india-above-500-km	 ;                                         ; $inCurrency                    ; 0      ; 1000
+                                    ;standard-north-east                 ;                                         ; $inCurrency                    ; 60     ; 0
+                                    ;standard-north-east                 ;                                         ; $inCurrency                    ; 0     ; 500
+                                    ;standard-pickup					 ;										   ; $inCurrency 					; 0		 ; 0
+                                    ;express-pickup						 ; 										   ; $inCurrency					; 0		 ; 0
+
+# Pickup Delivery Mode
+INSERT_UPDATE PickUpDeliveryMode    ; code[unique=true] ; active[default=true] ; supportedMode(code)
+                                    ; pickup            ;                      ; BUY_AND_COLLECT
+
+##############################
+# Insert DeliveryMode taxes
+##############################
+INSERT_UPDATE ProductTaxCode        ; productCode[unique=true]        ; taxCode                                                                                                                                         ; taxArea[unique=true]
+#                                    ; standard-ncr(within-city)      ; FR000000                                                                                                                                        ; IN
+

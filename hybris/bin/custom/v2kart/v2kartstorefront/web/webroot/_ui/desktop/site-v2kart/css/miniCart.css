@@ -1,0 +1,118 @@
+/*
+### MiniCart and addToCartLayer
+********************************************************************/
+
+
+.miniCart{
+	position:relative;
+	z-index:200;
+	 margin-top:22px;
+	display:inline-block;
+}
+/* .miniCart a.minicart{background:url(../images/cart-icon.png) no-repeat 3px 0px; width:50px; height:38px; display:block} */
+ .miniCart a.minicart{width:47px; height:38px;background:url("../images/css-sprites/header-icons.png") 82px -2px;display:block;}
+
+.miniCart > a .count{
+	background:#c80000;
+	color:#fff;
+	width:22px;
+	margin:0 5px;
+	font-size:0.833em;
+	display: inline-block;
+	text-align:center;
+	position: absolute;
+    right: -9px;   
+    top: -9px;
+	border-radius:16px;
+	padding:2px 2px 2px 0;
+}
+
+.miniCart > a .price{
+	color:#c7c7c7;
+	font-style:italic;
+}
+
+.miniCartPopup{
+	display:none;
+	position:absolute;
+	right:0;
+	background:#fff;
+	width:358px;
+	border:1px solid #e8e8e8;
+	border-width:1px;
+	padding:10px;
+	top:100%;
+	box-shadow: -1px 2px 4px #ccc;
+	font-size:13px;
+	text-align:left;
+}
+
+#addToCartLayer{
+	display:none;
+	position:fixed;
+	top:100px;
+	z-index:200;
+	right:50%;
+	background:#fff;
+	width:358px;
+	border:1px dotted #a5a5a5;
+	border-width:1px;
+	padding:15px;
+	margin:0 -475px 0 0;
+}
+
+.miniCartPopup .legend,
+#addToCartLayer .legend{
+	border-bottom:1px solid #e8e8e8;
+	font-weight:bold;
+}
+
+.popupCartItem {
+	clear:both;
+	min-height:70px;
+	margin:10px 0;
+}
+
+#addToCartLayer  .popupCartItem {
+	border-bottom:1px dotted #a5a5a5;
+}
+
+.popupCartItem .itemThumb{
+	float:left;
+	margin:0 20px 0 0;
+}
+
+.popupCartItem .itemDesc{
+	margin-left: 85px;
+}
+
+.popupCartItem .itemDesc .label{
+	color: #000;
+    font-size: 12px;
+    font-weight: bold;
+    margin: 0 5px 0 0;
+    padding: 0;
+}
+
+.popupCartItem .itemDesc .itemPrice{
+	text-align:right;
+}
+
+.miniCartPopup .total{
+	border-top:1px dotted #a5a5a5;
+	font-weight: bold;
+}
+
+#addToCartLayer  .button.positive,
+.miniCartPopup  .button.positive {
+	float: right;
+}
+
+.miniCartPopup .banner{
+	margin:10px 0;
+}
+
+#addToCartLayer .links,
+.miniCartPopup .links{
+	clear:both;
+}

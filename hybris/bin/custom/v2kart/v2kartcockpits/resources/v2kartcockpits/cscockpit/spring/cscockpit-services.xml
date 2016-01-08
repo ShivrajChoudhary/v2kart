@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+            http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+    <!-- Product Search using Commerce API -->
+    <alias alias="defaultCsCommerceSearchService" name="defaultCsCommerceSearchService" />
+    <bean id="defaultCsCommerceSearchService" scope="tenant" class="de.hybris.platform.cscockpit.services.search.impl.DefaultCsCommerceSearchService"
+        parent="abstractBusinessService">
+        <property name="productSearchService" ref="v2CommerceProductSearchService" />
+        <property name="typeService" ref="typeService" />
+        <property name="baseSiteService" ref="baseSiteService" />
+        <property name="productService" ref="productService" />
+        <property name="catalogVersionService" ref="catalogVersionService" />
+        <property name="impersonationService" ref="impersonationService" />
+        <property name="postSearchMetaProcessors">
+            <list>
+                <bean class="de.hybris.platform.cscockpit.services.search.meta.processor.ProductPromotionsProcessor">
+                    <property name="csPromotionService" ref="csPromotionService" />
+                </bean>
+                <bean class="de.hybris.platform.cscockpit.services.search.meta.processor.ProductPriceProcessor">
+                    <property name="commercePriceService" ref="commercePriceService" />
+                </bean>
+                <bean class="de.hybris.platform.cscockpit.services.search.meta.processor.ProductStockLevelProcessor">
+                    <property name="commerceStockService" ref="commerceStockService" />
+                    <property name="baseStoreService" ref="baseStoreService" />
+                </bean>
+            </list>
+        </property>
+    </bean>
+
+    <alias alias="regionModelLabelProvider" name="v2RegionModelLabelProvider" />
+    <bean id="v2RegionModelLabelProvider" class="in.com.v2kart.cockpits.cscockpit.services.label.impl.v2RegionModelLabelProvider"
+        parent="abstractModelLabelProvider" />
+
+    <alias alias="csCustomerSearchQueryBuilder" name="v2CsCustomerSearchQueryBuilder" />
+    <bean id="v2CsCustomerSearchQueryBuilder" parent="baseCsFlexibleSearchQueryBuilder"
+        class="in.com.v2kart.cockpits.cscockpit.services.search.generic.query.V2CustomerSearchQueryBuilder">
+    </bean>
+
+</beans>

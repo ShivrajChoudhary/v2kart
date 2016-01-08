@@ -1,0 +1,23 @@
+#
+# Import Delivery Modes / Zones
+#
+
+# Language
+$lang=en
+
+# Zone Delivery Modes
+UPDATE ZoneDeliveryMode   ;code[unique=true]                   ;name[lang=$lang]                    ;description[lang=$lang]
+
+                          ;standard-ncr-within-city            ;Standard Delivery Mode 1	        ;
+                          ;express-ncr-within-city             ;Express Delivery Mode  1          	;
+                          ;standard-within-region-upto-500-km  ;Standard Delivery Mode 2			;
+                          ;express-within-region-upto-500-km   ;Express Delivery Mode  2			;
+                          ;standard-rest-of-india-above-500-km ;Standard Delivery Mode 3			;
+                          ;express-rest-of-india-above-500-km  ;Express Delivery Mode  3 			;
+                          ;standard-north-east                 ;Standard Delivery Mode 4            ;
+                          ;standard-pickup						;Standard Pickup Delivery Mode		;4-5 business days
+                          ;express-pickup						;Express Pickup Delivery Mode		;4-5 business days
+ 
+ 
+ 
+

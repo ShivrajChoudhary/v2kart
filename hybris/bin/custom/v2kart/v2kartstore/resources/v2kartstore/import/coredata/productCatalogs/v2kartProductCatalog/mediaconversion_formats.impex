@@ -1,0 +1,48 @@
+$pd=Product
+$sd=Store
+$VK=V2kart
+$name_en=name[lang=en]
+
+$productCatalog=v2kartProductCatalog
+$storeName=v2kart
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog]
+$media=@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator]
+$medias=medias(code, $catalogVersion)
+$siteResource=jar:in.com.v2kart.constants.V2kartstoreConstants&/v2kartstore/import/coredata/productCatalogs/$productCatalog
+
+INSERT_UPDATE MediaFormat;qualifier[unique=true];$name_en
+;original;Original Image Format
+
+INSERT_UPDATE ConversionMediaFormat;qualifier[unique=true];name[lang=en];conversionStrategy;conversion;inputFormat(qualifier);mediaAddOns(code,$catalogVersion);mimeType;
+;$VK-WF;Working format other Conversion Media Formats.;imageMagickMediaConversionStrategy;-resize 1000x> -colorspace RGB;;;image/jpeg;
+				
+;$pd-65Wx65H;$pd-65Wx65H;imageMagickMediaConversionStrategy;-resize 65;$VK-WF;
+;$pd-96Wx96H;$pd-96Wx96H;imageMagickMediaConversionStrategy;-resize 96;$VK-WF;
+;$pd-300Wx300H;$pd-300Wx300H;imageMagickMediaConversionStrategy;-resize 300;$VK-WF;
+;$pd-365Wx246H;$pd-365Wx246H;imageMagickMediaConversionStrategy;-resize 365x244     -background white -gravity center -extent 365x244	    ;$VK-WF;
+;$pd-515Wx515H;$pd-515Wx515H;imageMagickMediaConversionStrategy;-resize 515;$VK-WF;
+;$pd-1200Wx1200H;$pd-1200Wx1200H;imageMagickMediaConversionStrategy;-resize 1200;$VK-WF;
+;$pd-30Wx30H;$pd-30Wx30H;imageMagickMediaConversionStrategy;-resize 30;$VK-WF;
+;$pd-157Wx235H;$pd-157Wx235H;imageMagickMediaConversionStrategy;-resize 157x235     -background white -gravity center -extent 157x235;$VK-WF;
+
+#####New Formats#####
+;$pd-92Wx115H;$pd-92Wx115H;imageMagickMediaConversionStrategy;-resize 92x115 -background white -gravity center -extent 92x115;$VK-WF;
+;$pd-420Wx525H;$pd-420Wx525H;imageMagickMediaConversionStrategy;-resize 420x525 -background white -gravity center -extent 420x525;$VK-WF;
+;$pd-365Wx244H;$pd-365Wx244H;imageMagickMediaConversionStrategy;-resize 365x244 -background white -gravity center -extent 365x244;$VK-WF;
+;$pd-1000Wx1250H;$pd-1000Wx1250H;imageMagickMediaConversionStrategy;-resize 1000x1250 -background white -gravity center -extent 1000x1250;$VK-WF;
+;$pd-176Wx220H;$pd-176Wx220H;imageMagickMediaConversionStrategy;-resize 176x220 -background white -gravity center -extent 176x220;$VK-WF;
+;$pd-128Wx160H;$pd-128Wx160H;imageMagickMediaConversionStrategy;-resize 128x160 -background white -gravity center -extent 128x160;$VK-WF;
+;$pd-220Wx275H;$pd-220Wx275H;imageMagickMediaConversionStrategy;-resize 220x275 -background white -gravity center -extent 220x275;$VK-WF;
+
+INSERT_UPDATE ConversionGroup;code[unique=true];name[lang=en];supportedFormats(qualifier);
+;$pdConversionGroup;ProductTDetail image conversion;$pd-65Wx65H,$pd-92Wx115H,$pd-128Wx160H,$pd-420Wx525H,$pd-365Wx244H,$pd-515Wx515H,$pd-1000Wx1250H,$pd-30Wx30H,$pd-176Wx220H,$pd-220Wx275H;
+;$sdConversionGroup;Store Detail image conversion;$VK-WF,$pd-65Wx65H,$pd-365Wx244H;
+
+################ Temporarily added for testing  ################### 
+
+INSERT_UPDATE MediaConversionCronJob;code[unique=true];job(code);sessionLanguage(isocode);maxThreads;$catalogVersion
+;V2kartMediaConversionCronjob;mediaConversionJob;en;4;
+
+INSERT_UPDATE Trigger; cronJob(code)[unique=true];cronexpression;active
+# Run the V2KartMediaConversionCronjob every 10 minutes except 2:00-4:00 a.m
+;V2kartMediaConversionCronjob;0 0/10 0-1,4-23 ? * *;true

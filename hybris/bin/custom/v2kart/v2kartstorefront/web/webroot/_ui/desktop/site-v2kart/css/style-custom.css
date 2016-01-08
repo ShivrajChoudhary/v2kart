@@ -1,0 +1,332 @@
+@font-face {
+	font-family: 'Rockwell';
+	src: url('Rockwell.eot') format('embedded-opentype');
+	font-weight: normal;
+	font-style: normal;
+}
+
+
+@font-face {
+	
+	 font-family: 'Rockwell';
+
+  src: url('../fonts/Rockwell.eot');
+  src: url('../fonts/Rockwell.eot?#iefix') format('embedded-opentype'), url('../fonts/Rockwell.woff') format('woff'), url('../fonts/Rockwell.ttf') format('truetype'), url('../fonts/Rockwell.svg#Rockwell') format('svg');
+  
+  
+	
+}
+@font-face {
+	font-family: "Flaticon";
+	src: url("../fonts/flaticon.eot");
+	src: url("../fonts/flaticon.eot#iefix") format("embedded-opentype"),
+	url("../fonts/flaticon.woff") format("woff"),
+	url("../fonts/flaticon.ttf") format("truetype"),
+	url("../fonts/flaticon.svg") format("svg");
+	font-weight: normal;
+	font-style: normal;
+}
+
+[class^="flaticon-"]:before, [class*=" flaticon-"]:before,
+[class^="flaticon-"]:after, [class*=" flaticon-"]:after {   
+	font-family: Flaticon;
+        font-size: 16px;
+font-style: normal;
+margin:0 3px;
+}
+
+.flaticon-creditcard5:before {
+content: "\e000";
+}
+.flaticon-rupee1:before {
+content: "\e001";
+}
+	
+a:focus{ outline:none; color:#000;}
+a:hover{ color:#6b6b6b; text-decoration:none;}
+
+body{ padding-top:160px;}
+
+/******Common style*****/
+.pLeft0{ padding-left:0!important}
+/********Header**********/
+.masthead{padding:10px 0 0; background:#fff; }
+.topnav{ list-style:none; margin-bottom:2px; padding-left:52px}
+.topnav li{ display:inline; }
+.topnav li a{  color:#fff; font-size:12px; padding: 2px 6px;}
+.topnav li:last-child a{ border:none}
+.topnav li a:hover{ color:#e4585c; text-decoration:none;}
+.account-link{ margin-top:22px; display:inline-block}
+.account-link .btn-group{ vertical-align:inherit; margin-left:10px;}
+.account-link a{ font-size:12px; text-transform:capitalize; font-weight:bold}
+.account-link .btn{padding: 9px 12px;}
+/********Navigation*******/
+.navbar-toggle{ background:#000;}
+.navbar-toggle .icon-bar{  background:#fff;}
+.topNavigation{ border-bottom:1px solid #e8e8e8; border-top:1px solid #e8e8e8;  margin-bottom: 0px; position:relative}
+.nav a{font-family: 'Rockwell'; font-size:17px; font-weight:normal;   color:#000;}
+.nav > li > a {padding: 10px 4px}
+.nav > li.active a, .nav > li > a:hover, .nav > li > a:focus { border-bottom:4px solid #e0686b;}
+
+/******heading*******/
+.heading{ border-bottom: 2px solid #000; font-size:17px;font-family: 'Rockwell'; font-size:17px; font-weight:normal;   color:#000; padding:
+3px 3px 5px; margin-bottom:10px;  }
+.cat-banner{margin-bottom:10px;}
+.cat-banner img{ border:1px solid #e8e8e8; max-width:100%;}
+
+.side-banner{ margin-bottom:10px;}
+.side-banner img{ margin-bottom:10px; border:1px solid #e8e8e8; max-width:100%;}
+
+/*********product-slider******/
+.product-slider{ margin-bottom:10px;}
+.product-desc{ font-size:12px; padding:2px 3px;}
+.product-desc p{ margin-bottom: 2px;}
+.prod-title{ font-weight:normal !important; max-height:35px;text-transform:capitalize;     
+overflow:hidden;
+text-overflow: ellipsis;
+    white-space: nowrap;
+    text-align: left;
+    }
+.prod-price{ margin-bottom: 0; }
+.old-price{ text-decoration: line-through;
+  color: #6b6b6b;
+  font-weight: normal;
+  margin-right: 5px;}
+  .mrp {
+  color: #000;
+  font-weight: bold;
+  margin-right: 5px;
+}
+.badge-red {
+  background: #c80000;
+  font-size: 11px;
+}
+.productGridItem a:hover{ text-decoration:none!important}
+
+/**********Footer*******/
+.footer{ margin-top:0px;}
+.footer img{ max-width:100%;}
+.f-section-1{ background:#979797; border-top:1px solid #e8e8e8;}
+.f-section-1 p{ font-family: 'Rockwell'; font-size:17px; font-weight:normal;   color:#fff; text-align:left; margin: 10px 0 5px;}
+
+.f-section-2{ background:#fafafa; border-top:1px solid #e8e8e8; padding-bottom:10px;}
+.f-section-2 h3{ font-size:15px; font-weight:bold}
+.f-section-2 p{font-size:13px;  color:#979797;line-height:22px;}
+.f-section-2 ul{}
+.f-section-2 li{ font-size:13px;  color:#979797;}
+.f-section-2 a{color:#979797; line-height:22px;}
+.f-section-2 a:hover{ color:#ee3139; text-decoration:none}
+
+.f-section-3{ background:#fff;border-top:1px solid #e8e8e8;}
+.f-section-3 h4{ font-family: 'Rockwell'; font-size:15px; font-weight:normal; color:#000;}
+.sitelogo{ margin-top:20px !important;}
+.copyright{ text-align:center; padding:10px 0 0; font-size:12px; clear:both}
+/*******Bootstrap 5coloumn grid***/
+div.col-sm-7.five-three {width: 60% !important;}
+	div.col-sm-5.five-two {width: 40% !important;}
+
+/*******Button Style*******/
+.btn-red {color: #fff;background-color: #000;border-color: #000;}
+.btn-red:hover,.btn-red:focus,.btn-red:active,.btn-red.active,.open > .dropdown-toggle.btn-red {color: #fff;background-color: #444;border-color: #000;   outline:none;}
+.btn-red:active,.btn-red.active,.open > .dropdown-toggle.btn-red {background-image: none;}
+.btn-default-red {color: #333;background-color: #fff; border-color: #ee3139; color:#ee3139}
+.btn-default-red:hover, .btn-default-red:focus{  color: #fff;  background-color: #ee3139;  border-color: #dc2930;}
+.btn-defaultred {color: #fff;background-color: #ee3139;border-color: #dc2930;}
+.btn-defaultred:hover,.btn-defaultred:focus,.btn-defaultred:active,.btn-defaultred.active,.open > .dropdown-toggle.btn-defaultred {color: #fff;background-color: #e0222a;border-color: #dc2930;   outline:none;}
+.btn-defaultred:active,.btn-defaultred.active,.open > .dropdown-toggle.btn-defaultred {background-image: none;}
+
+/******Web Ruppee******/
+
+@font-face {
+    font-family: 'indian_rupeeregular';
+    src: url('../fonts/indian_rupee-webfont.eot');
+    src: url('../fonts/indian_rupee-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/indian_rupee-webfont.woff2') format('woff2'),
+         url('../fonts/indian_rupee-webfont.woff') format('woff'),
+         url('../fonts/indian_rupee-webfont.ttf') format('truetype'),
+         url('../fonts/indian_rupee-webfont.svg#indian_rupeeregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+.webRupee{font-family: 'indian_rupeeregular'; display:inline!important}
+
+/***********Quick view Popup******/
+.quickview{background:#fff; margin:0 0 0px 0; padding-top:50px;}
+
+
+/************* 2015-02-10 Bhavna ****************/
+
+
+/*******Breadcrum Style*******/
+.breadcrumb {background: none repeat scroll 0 0 rgba(0, 0, 0, 0); margin: 0 0 5px; border-radius:0px; padding:0px;}
+.breadcrumb ul { line-height: 0.833em; padding: 10px 0px 5px 0px;}
+.breadcrumb ul li { float: left;}
+.breadcrumb ul li.separator { font-size: 1em; line-height: 0.9em; padding: 0 6px;}
+.breadcrumb ul li, .breadcrumb ul li a { color: #000; font-size: 0.9em; text-transform: uppercase;}
+.breadcrumb ul li a.last { color: #000;  font-weight: bold;}
+
+
+/******* Login/Register Page Style*******/
+.userRegister { border: 1px dotted #a5a5a5; padding: 0 20px 20px;}
+.userRegister .headline { background: url("../images/heading-bg.png") no-repeat scroll left bottom rgba(0, 0, 0, 0); color: #000; font-family: "Rockwell"; font-size: 17px; font-weight: normal; margin-bottom: 10px; padding: 3px 10px 5px 0; height:40px;}
+.userRegister .description {  margin: 0 0 20px; font-size:12px;}
+.userRegister form { margin: 0;}
+#recaptcha_widget { margin: 20px 0 0;}
+
+.userLogin { border: 1px dotted #a5a5a5;  padding: 0 20px 20px;}
+.userLogin .headline { background: url("../images/heading-bg.png") no-repeat scroll left bottom rgba(0, 0, 0, 0); color: #000; font-family: "Rockwell"; font-size: 17px; font-weight: normal; margin-bottom: 10px; padding: 3px 10px 5px 0; height:40px;}
+.userLogin .description { margin: 0 0 5px; font-size:12px;}
+.userLogin form { margin: 0;}
+.userLogin .expressCheckoutLogin { margin: 20px 0 0;}
+.userLogin .expressCheckoutLogin ul li { list-style: outside none disc; margin: 0 0 5px 13px;}
+
+.forgottenPwd {  padding: 0px;}
+.forgottenPwd .headline { background: url("../images/heading-bg.png") no-repeat scroll left bottom rgba(0, 0, 0, 0); color: #000; font-family: "Rockwell"; font-size: 17px; font-weight: normal; margin-bottom: 10px; padding: 3px 10px 5px 0;}
+.forgottenPwd .description { margin: 0 0 20px; font-size:12px;}
+.expressCheckoutCheckbox { margin: 0 0 10px;}
+.expressCheckoutCheckbox input { margin: 2px 7px 0 0;}
+a.password-forgotten { text-decoration: underline; font-size:12px;}
+.required.right { color: #666; float: right; font-size: 11px; margin: 0 0 0 20px; max-width: 60%;}
+
+
+.btn-secondary{background-color: #fff; border-color: #dc2930; color: #ee3139;}
+.btn-secondary:hover,.btn-secondary:focus,.btn-secondary:active,.btn-secondary.active{background-color: #fff; border-color: #6b6b6b; color: #6b6b6b;}
+.btn.active:focus, .btn:focus, .btn:active:focus{ outline:none;}
+
+.control-group textarea:focus, .control-group input[type="text"]:focus, .control-group input[type="password"]:focus, .control-group input[type="datetime"]:focus, .control-group input[type="datetime-local"]:focus, .control-group input[type="date"]:focus, .control-group input[type="month"]:focus, .control-group input[type="time"]:focus, .control-group input[type="week"]:focus, .control-group input[type="number"]:focus, .control-group input[type="email"]:focus, .control-group input[type="url"]:focus, .control-group input[type="search"]:focus, .control-group input[type="tel"]:focus, .control-group input[type="color"]:focus, .control-group .uneditable-input:focus{ border:1px solid #ccc;}
+.control-group select:focus, .control-group input[type="file"]:focus, .control-group input[type="radio"]:focus, .control-group input[type="checkbox"]:focus{  outline:none;}
+
+/************* 2015-02-12 Bhavna ****************/
+
+@media (max-width: 768px) {
+	.login-section{ margin-top:10px;} /*-- 2015-02-12 --*/
+}
+
+.marT20{ margin-top:20px;}
+
+.accountNav .headline { background-color: #000; border:none; font-size: 14px; font-weight: normal; height: 30px; line-height: 30px;  margin: 0 0 10px; padding-left: 10px; text-transform: uppercase; white-space: nowrap; color:#fff;}
+.accountNav ul { margin: 0 0 20px; font-size:12px;}
+.accountNav li.active { font-weight: bold;}
+
+.account-profile-data tr > td {  min-width: 70px; padding: 0 5px 5px 0;}
+.accountContentPane .headline {  background: url("../images/heading-bg.png") no-repeat scroll left bottom rgba(0, 0, 0, 0); border-bottom: none;  font-family: "Rockwell"; font-size: 17px; font-weight: normal; height: 30px; line-height: 30px; margin: 0 0 20px; text-transform: none;}
+.accountContentPane .orderList { border: 0 none; margin: 0; padding: 0;}
+.accountContentPane .addressItem {  border-bottom: 1px dotted #a5a5a5; padding: 20px 0; position: relative;}
+.accountContentPane .buttons { position: absolute; right: 14px; top: 0px;}
+.accountContentPane .paymentItem { border-bottom: 1px dotted #a5a5a5; padding: 20px 0; position: relative;}
+.accountContentPane .paymentItem .buttons { position: absolute;  right: 0; top: 20px;}
+.accountContentPane .i18nAddressForm { margin-right: -20px;}
+.accountContentPane .control-group { float: left;  margin-right: 20px; width: 305px;}
+.accountContentPane .form-actions { clear: both;}
+.accountContentPane .orderBoxes {clear: left; margin: 20px -20px 0 0;}
+.accountContentPane .orderBoxes .orderBox {  margin: 0 20px 20px 0; width: 343px;}
+.accountContentPane .accountnavigationcollectioncomponent { margin: 0;}
+.accountContentPane .accountnavigationcollectioncomponent .accountNav { border: 1px dotted #a5a5a5; float: left; height: 100px; margin: 0 20px 20px 0;  padding: 0 20px 20px; width: 47%;}
+.accountContentPane .accountnavigationcollectioncomponent .accountNav .headline { background: url("../images/heading-bg.png") no-repeat scroll left bottom rgba(0, 0, 0, 0); padding: 0; color:#000; font-family: "Rockwell"; font-size: 17px; font-weight: normal; text-transform:none;}
+.accountContentPane .accountnavigationcollectioncomponent .accountNav a { display: block; /*text-decoration: underline;*/}
+.accountLeftNavigation .accountNav ul li{ padding:5px 5px; background: url("../images/list-style.jpg") repeat-y scroll right bottom rgba(0, 0, 0, 0); margin-bottom: 2px;}
+.accountLeftNavigation .accountNav ul li a{ font-size:13px;}
+.accountNav ul li a.active{color: #ee3139; font-weight: bold;}
+.profile-icon, .address-icon, .order-icon{ margin-right:5px;}
+.accountContentPane .description{ position:relative;}
+
+.edit{background: url("../images/edit.png") no-repeat scroll center center rgba(0, 0, 0, 0); position:relative; display:block; height:24px; width:24px; float:left; margin:0 5px 0 0;}
+.remove-address{background: url("../images/remove.png") no-repeat scroll center center rgba(0, 0, 0, 0); position:relative; display:block; height:24px; width:24px; float:left; top: -3px;}
+.bottom-btn-panel{ margin-top:20px; display: inline-block;}
+.accountBodyContentSlot{ margin-bottom:30px;}
+.info-txt{ color:#636363; font-size:11px;}
+
+
+@media (min-width: 300px) and (max-width: 696px) {
+	.accountContentPane .accountnavigationcollectioncomponent .accountNav { width:100%;}
+}
+
+
+
+@media (max-width: 767px) {
+	body{padding-top:190px;}
+	.topNavigation{ margin-bottom:0px;}
+  .logo{ margin-bottom:5px;}
+  .logo img{ margin:auto;}
+  /* .headerContent { display:block;} */
+  .siteSearch{ margin-top:5px; margin-bottom:5px;}
+  .home-icon{ left:11px; top:5px}
+  .miniCart, .account-link{ margin-top:0;}
+  .miniCart{ float:right; margin-left:10px}
+  .sitelogo{ margin-top:15px;}
+  .miniCartPopup{ width:335px;}
+  .navbar-toggle{ position:absolute; top:-46px; left:10px;}
+  .navbar-collapse{ padding:0;}
+  .navigationbarcollectioncomponent li.La{ display:block; float:none; text-align:left;}
+  	
+	div.col-xs-7.five-three {width: 100% !important;}
+	div.col-xs-5.five-two {width: 100% !important;}
+	
+  
+}
+
+@media (max-width: 991px) {
+	body{   padding-top: 200px;}
+	.navigationbarcollectioncomponent li.La > a{ padding:10px 18px 6px}
+	.navigationbarcollectioncomponent li.parent:hover > a{ padding-left:17px; padding-right:17px;}
+
+}
+@media (min-width: 992px) {
+ 
+}
+@media (min-width: 1200px) {
+  
+}
+
+
+.forgottenPwd .description {
+  margin: 0 0 20px;
+  font-size: 12px;
+}
+
+
+.promotion-strip-right{ background:#f5f5f5; border:1px solid #e8e8e8; padding:10px; border-radius:4px; max-width:110px; position:fixed; right:10px; top:200px; }
+.promotion-strip-left { background:#f5f5f5; border:1px solid #e8e8e8; padding:10px; border-radius:4px; max-width:110px; position:fixed; left:10px; top:200px;  }
+.offer-box{ margin:10px 0; }
+.offer-box p.head{ font-size:18px;}
+.offer-box p{ margin:0; font-size:13px;}
+
+/*site is under development text */
+.masthead{ padding:0;}
+.top-scroller{ background:#000; color:#fff; padding:7px 0; margin-bottom:5px;}
+
+/************Track Order Popup*********/
+
+.track .modal-title{ font-size:18px;}
+.trackinfo {
+  background: url("../images/or-bg.png") no-repeat left center;
+  padding-left: 60px;
+  min-height: 195px;
+}
+.track .description {
+  font-weight: bold;
+}
+.trackinfo ul{ margin:10px 0; padding:0;}
+.trackinfo ul li{ font-size:12px; margin:5px 10px; list-style-type:circle;}
+
+.alertMsg {
+  color: #000;
+  font-size: 14px;
+  margin-right: 3px;
+}
+
+/* shipping charges style*/
+
+.free-shipping{ background:#000 url('../images/free-shipping.png') no-repeat 10px center; padding:5px 10px; text-align:center; border-radius:4px; color:#fff; margin-bottom:10px}
+.free-shipping span{ padding-right:10px;}
+
+.cash-card-icon {
+  font-size: 16px;
+  top: 4px;
+  margin: 0 3px;
+}
+.pickupInStoreButton{
+      margin-left: 300px;
+  margin-top: -25px;
+  height: 22px;
+}

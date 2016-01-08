@@ -1,0 +1,73 @@
+# ImpEx for Importing Category Classifications
+
+# Macros / Replacement Parameter definitions
+$productCatalog=v2kartProductCatalog
+$productCatalogName=v2kart Product Catalog
+$classificationCatalog=v2KartClassification
+
+$classCatalogVersion=catalogversion(catalog(id[default='$classificationCatalog']),version[default='1.0'])[unique=true,default='$classificationCatalog:1.0']
+$classSystemVersion=systemVersion(catalog(id[default='$classificationCatalog']),version[default='1.0'])[unique=true]
+
+# Language
+$lang=en
+
+# Insert Classifications
+UPDATE ClassificationClass;code[unique=true];$classCatalogVersion;name[lang=$lang]
+;apps_classification_class;;General Classification
+;gm_classification_class;;General Classification
+;mens_classification_class;;Men Classification
+;womens_classification_class;;Women Classification
+;footwear_classification_class;;Footwear Classification
+;watches_classification_class;;Watches Classification
+;sunglasses_classification_class;;Sunglasses Classification
+;wallets_classification_class;;Wallets Classification
+;umbrella_classification_class;;Umbrella Classification
+;belts_classification_class;;Belts Classification
+;socks_classification_class;;Socks Classification
+;homefurnishing_classification_class;;Home Furnishing Classification
+;fragrance_classification_class;;Fragrance Classification
+;backpacks_classification_class;;BackPacks Classification
+;size_dimensions_classification_class;;Size Dimensions Classification
+
+
+# Insert Classification Attributes
+UPDATE ClassificationAttribute;code[unique=true];$classSystemVersion;name[lang=$lang]
+;fabric;;Fabric
+;fitting;;Fitting
+;sleeves;;Sleeves
+;neck;;Neck
+;subfabric;;subfabric
+
+;ankle;;Ankel
+;heal;;Heel
+;closure;;Closure
+;shape;;Shape
+
+;pockets;;Pockets
+
+;length;;Length
+;basematerial;;Base Material
+;uppermaterial;;Upper Material
+
+;dialmaterial;;Dial Material
+;dialshape;;Dial Shape
+
+;framematerial;;Frame Material
+;lenstechnology;;Lens Technology
+
+;fold;;Fold
+;buckleshape;; Buckle Shape
+
+;packsize;;Pack Size
+
+;idealfor;;Ideal For
+
+;fragrance;;Fragrance
+
+;compatiblelaptopsize;;Compatible Laptop Size
+
+;length;;Length
+;lengthType;;Length Type
+;bust;;Bust
+;waist;;Waist
+;chest;;Chest

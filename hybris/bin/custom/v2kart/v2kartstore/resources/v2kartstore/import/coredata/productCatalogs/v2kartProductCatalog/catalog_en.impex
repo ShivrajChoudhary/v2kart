@@ -1,0 +1,10 @@
+#
+# Create the v2kart Product Catalog
+#
+# ENGLISH LOCALIZATION
+#
+$lang=en
+$productCatalog=v2kartProductCatalog
+ 
+UPDATE Catalog;id[unique=true];name[lang=$lang]
+;$productCatalog;"v2kart Product Catalog"

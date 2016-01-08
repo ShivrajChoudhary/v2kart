@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    [y] hybris Platform
+
+    Copyright (c) 2000-2014 hybris AG
+    All rights reserved.
+
+    This software is the confidential and proprietary information of hybris
+    ("Confidential Information"). You shall not disclose such Confidential
+    Information and shall use it only in accordance with the terms of the
+    license agreement you entered into with hybris.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="test.checkOrderAction" class="in.com.v2kart.fulfilmentprocess.test.actions.CheckOrder" parent="abstractAction" />
+    <bean id="test.cancelWholeOrderAuthorizationAction" class="in.com.v2kart.fulfilmentprocess.test.actions.CancelWholeOrderAuthorization"
+        parent="abstractAction" />
+    <bean id="test.sendOrderPlacedNotificationAction" class="in.com.v2kart.fulfilmentprocess.test.actions.SendOrderPlacedNotification"
+        parent="abstractAction" />
+    <bean id="test.takePaymentAction" class="in.com.v2kart.fulfilmentprocess.test.actions.TakePayment" parent="abstractAction" />
+    <bean id="test.sendPaymentFailedNotificationAction" class="in.com.v2kart.fulfilmentprocess.test.actions.SendPaymentFailedNotification"
+        parent="abstractAction" />
+    <bean id="test.checkTransactionReviewStatusAction" class="in.com.v2kart.fulfilmentprocess.test.actions.CheckTransactionReviewStatus"
+        parent="abstractAction" />
+    <bean id="test.fraudCheckOrderAction" class="in.com.v2kart.fulfilmentprocess.test.actions.FraudCheckOrder" parent="abstractAction" />
+    <bean id="test.prepareOrderForManualCheckAction" class="in.com.v2kart.fulfilmentprocess.test.actions.PrepareOrderForManualCheck"
+        parent="abstractAction" />
+    <bean id="test.sendFraudErrorNotificationAction" class="in.com.v2kart.fulfilmentprocess.test.actions.SendFraudErrorNotification"
+        parent="abstractAction" />
+    <bean id="test.checkAuthorizeOrderPaymentAction" class="in.com.v2kart.fulfilmentprocess.test.actions.CheckAuthorizeOrderPayment"
+        parent="abstractAction" />
+    <bean id="test.sendAuthorizationFailedNotificationAction" class="in.com.v2kart.fulfilmentprocess.test.actions.SendAuthorizationFailedNotification"
+        parent="abstractAction" />
+    <bean id="test.reserveOrderAmountAction" class="in.com.v2kart.fulfilmentprocess.test.actions.ReserveOrderAmount" parent="abstractAction" />
+    <bean id="test.fraudCheckOrderInternalAction" class="in.com.v2kart.fulfilmentprocess.test.actions.FraudCheckOrderInternal" parent="abstractAction" />
+    <bean id="test.orderManualCheckedAction" class="in.com.v2kart.fulfilmentprocess.test.actions.OrderManualChecked" parent="abstractAction" />
+    <bean id="test.splitOrderAction" class="in.com.v2kart.fulfilmentprocess.test.actions.SplitOrder" parent="abstractAction" />
+    <bean id="test.subprocessesCompletedAction" class="in.com.v2kart.fulfilmentprocess.test.actions.SubprocessesCompleted" parent="abstractAction" />
+    <bean id="test.sendOrderCompletedNotificationAction" class="in.com.v2kart.fulfilmentprocess.test.actions.SendOrderCompletedNotification"
+        parent="abstractAction" />
+    <bean id="test.scheduleForCleanUpAction" class="in.com.v2kart.fulfilmentprocess.test.actions.ScheduleForCleanUp" parent="abstractAction" />
+    <bean id="test.notifyCustomerAboutFraudAction" class="in.com.v2kart.fulfilmentprocess.test.actions.NotifyCustomerAboutFraud"
+        parent="abstractAction" />
+
+</beans>

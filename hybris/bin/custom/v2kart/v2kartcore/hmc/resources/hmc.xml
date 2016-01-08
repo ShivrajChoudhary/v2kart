@@ -1,0 +1,614 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+    [y] hybris Platform
+
+    Copyright (c) 2000-2014 hybris AG
+    All rights reserved.
+
+    This software is the confidential and proprietary information of hybris
+    ("Confidential Information"). You shall not disclose such Confidential
+    Information and shall use it only in accordance with the terms of the
+    license agreement you entered into with hybris.
+-->
+<configuration xmlns="hybris.de/schemas/hmc/generic" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="hybris.de/schemas/hmc/generic hmc.xsd">
+
+    <explorertree>
+        <group name="v2kart">
+            <typeref type="ImportLogEvent" />
+            <typeref type="V2kartPostalCode" />
+            <typeref type="ServiceabilityArea" />
+            <typeref type="V2Seller" />
+             <typeref type="V2Feedback" />
+            <typeref type="V2SmsTemplate" />
+            <typeref type="V2LogisticServiceProvider" />
+            <typeref type="V2Notification"/>
+            <typeref type="V2McCode"/>            
+            <group name="paymentresponse" description="group.paymentresponse.description">
+                <typeref type="PAYUPaymentResponseInfo" description="typeref.payupaymentresponseinfo.description" />
+                <typeref type="CCAvenuePaymentResponseInfo" description="typeref.ccavenuepaymentresponseinfo.description" />
+                <typeref type="EBSPaymentResponseInfo" description="typeref.ebspaymentresponseinfo.description" />
+            </group>
+        </group>
+    </explorertree>
+
+    <type name="Product" mode="append">
+        <organizer>
+            <editor>
+                <tab name="tab.v2kart.v2customfields" position="99">
+                    <section name="section.v2kart.parentcustomfields">
+                        <listlayout>
+                            <attribute name="mccd" />
+                            <attribute name="mcdesc" />
+                            <attribute name="pattern" />
+                            <attribute name="type" />
+                            <attribute name="weight" />
+                            <attribute name="special1" />
+                            <attribute name="special2" />
+                        </listlayout>
+                    </section>
+                </tab>
+            </editor>
+        </organizer>
+    </type>
+
+    <type name="V2kartStyleVariantProduct" mode="append">
+        <organizer>
+            <editor>
+                <tab name="tab.v2kart.v2customfields" position="99">
+                    <section name="section.v2kart.parentcustomfields">
+                        <listlayout>
+                            <attribute name="mccd" />
+                            <attribute name="mcdesc" />
+                            <attribute name="pattern" />
+                            <attribute name="type" />
+                            <attribute name="weight" />
+                            <attribute name="special1" />
+                            <attribute name="special2" />
+                        </listlayout>
+                    </section>
+                </tab>
+            </editor>
+        </organizer>
+    </type>
+
+    <type name="V2kartSizeVariantProduct" mode="append">
+        <organizer>
+            <editor>
+                <tab name="tab.v2kart.v2customfields" position="99">
+                    <section name="section.v2kart.parentcustomfields">
+                        <listlayout>
+                            <attribute name="mccd" />
+                            <attribute name="mcdesc" />
+                            <attribute name="pattern" />
+                            <attribute name="type" />
+                            <attribute name="weight" />
+                            <attribute name="special1" />
+                            <attribute name="special2" />
+                        </listlayout>
+                    </section>
+                </tab>
+            </editor>
+        </organizer>
+    </type>
+
+    <type name="ImportLogEvent" mode="append">
+        <organizer>
+            <search autoperform="true" mode="replace">
+                <condition attribute="threadIdentifier" operator="contains" />
+                <condition attribute="eventType" operator="contains" />
+                <condition attribute="eventStatus" operator="contains" />
+                <condition attribute="eventHint" operator="contains" />
+            </search>
+            <result defaultview="list">
+                <listview mode="replace">
+                    <itemlayout mode="replace">
+                        <attribute name="threadIdentifier" width="300" />
+                        <attribute name="message" width="220" />
+                        <attribute name="eventType" width="100" />
+                        <attribute name="eventStatus" width="100" />
+                        <attribute name="eventHint" width="70" />
+                    </itemlayout>
+                </listview>
+            </result>
+            <editor>
+                <tab name="tab.importlogevent.general" position="0">
+                    <section name="section.importlogevent.properties">
+                        <listlayout>
+                            <attribute name="threadIdentifier" width="300" />
+                            <attribute name="eventType" width="300" />
+                            <attribute name="eventStatus" width="300" />
+                            <attribute name="eventHint" width="300" />
+                            <attribute name="message" width="600">
+                                <textareaeditor expanded="true" />
+                            </attribute>
+                            <attribute name="exceptionTrace" width="600">
+                                <textareaeditor expanded="true" />
+                            </attribute>
+                        </listlayout>
+                    </section>
+                </tab>
+            </editor>
+        </organizer>
+    </type>
+
+    <type name="V2kartPostalCode" mode="append">
+        <organizer>
+            <search autoperform="true" mode="replace">
+                <condition attribute="pinCode" operator="equal" />
+                <condition attribute="description" operator="equal" />
+                <condition attribute="zoneDeliveryMode" operator="equal" />
+            </search>
+            <result defaultview="list">
+                <listview mode="replace">
+                    <itemlayout mode="replace">
+                        <attribute name="pinCode" />
+                        <attribute name="description" />
+                        <attribute name="zoneDeliveryMode" />
+                    </itemlayout>
+                </listview>
+            </result>
+            <editor>
+                <tab name="tab.v2kartpostalcode.general" position="0">
+                    <section name="section.v2kartpostalcode.properties">
+                        <listlayout>
+                            <attribute name="pinCode" />
+                            <attribute name="description" />
+                            <attribute name="zoneDeliveryMode" />
+                        </listlayout>
+                    </section>
+                </tab>
+            </editor>
+        </organizer>
+    </type>
+    <type name="ServiceabilityArea" mode="append">
+        <organizer>
+            <search autoperform="true" mode="replace">
+                <condition attribute="pinCode" operator="equal" />
+            </search>
+            <result defaultview="list">
+                <listview mode="replace">
+                    <itemlayout mode="replace">
+                        <attribute name="pinCode" />
+                    </itemlayout>
+                </listview>
+            </result>
+            <editor>
+                <tab name="tab.serviceabilityarea.general" position="0">
+                    <section name="section.serviceabilityarea.properties">
+                        <listlayout>
+                            <attribute name="pinCode" />
+                        </listlayout>
+                    </section>
+                </tab>
+            </editor>
+        </organizer>
+    </type>
+
+
+    <type name="V2SmsTemplate" mode="append">
+        <organizer>
+            <search autoperform="true" mode="replace">
+                <condition attribute="code" operator="contains" />
+                <condition attribute="triggerPoint" operator="contains" />
+            </search>
+            <result defaultview="list">
+                <listview mode="replace">
+                    <itemlayout mode="replace">
+                        <attribute name="code" width="200" />
+                        <attribute name="triggerPoint" width="100" />
+                        <attribute name="message" width="300" />
+                    </itemlayout>
+                </listview>
+            </result>
+            <editor>
+                <tab name="tab.v2kart.v2customfields" position="0">
+                    <section name="section.v2smstemplate.properties">
+                        <listlayout>
+                            <attribute name="code" width="300" />
+                            <attribute name="triggerPoint" width="300" />
+                            <attribute name="message" width="600">
+                                <textareaeditor expanded="true" />
+                            </attribute>
+                        </listlayout>
+                    </section>
+                </tab>
+            </editor>
+        </organizer>
+    </type>
+
+
+
+    <type name="V2Seller" mode="append">
+        <organizer>
+            <search autoperform="true" mode="replace">
+                <condition attribute="name" operator="equal" />
+                <condition attribute="phone" operator="equal" />
+                <condition attribute="email" operator="equal" />
+                <condition attribute="message" operator="equal" />
+                <condition attribute="category" operator="contains" />
+            </search>
+            <result defaultview="list">
+                <listview mode="replace">
+                    <itemlayout mode="replace">
+                        <attribute name="name" width="200" />
+                        <attribute name="phone" width="100" />
+                        <attribute name="email" width="200" />
+                        <attribute name="message" width="500" />
+                        <attribute name="category" />
+                    </itemlayout>
+                </listview>
+            </result>
+            <editor>
+                <tab name="tab.v2seller.general" position="0">
+                    <section name="section.v2seller.properties">
+                        <listlayout>
+                            <attribute name="name" width="300" />
+                            <attribute name="phone" width="300" />
+                            <attribute name="email" width="300" />
+                            <attribute name="message" width="600">
+                                <textareaeditor expanded="true" />
+                            </attribute>
+                            <attribute name="category" width="300" />
+                        </listlayout>
+                    </section>
+                </tab>
+            </editor>
+        </organizer>
+    </type>
+    
+    
+    
+
+    <type name="V2Feedback" mode="append">
+        <organizer>
+            <search autoperform="true" mode="replace">
+                <condition attribute="email" operator="equal" />
+                <condition attribute="mobileNumber" operator="equal" />
+                <condition attribute="category" operator="equal" />
+                <condition attribute="rating" operator="equal" />
+                <condition attribute="message" operator="contains" />
+            </search>
+            <result defaultview="list">
+                <listview mode="replace">
+                    <itemlayout mode="replace">
+                        <attribute name="email" width="200" />
+                        <attribute name="mobileNumber" width="100" />
+                        <attribute name="rating" width="200" />
+                        <attribute name="category" width="200" />
+                        <attribute name="message" width="500" />          
+                    </itemlayout>
+                </listview>
+            </result>
+            <editor>
+                <tab name="tab.v2feedback.general" position="0">
+                    <section name="section.v2feedback.properties">
+                        <listlayout>
+                            <attribute name="email" width="300" />
+                            <attribute name="mobileNumber" width="300" />
+                            <attribute name="rating" width="300" />
+                            <attribute name="category" width="300" />
+                            <attribute name="message" width="600">
+                                <textareaeditor expanded="true" />
+                            </attribute>
+                                                    </listlayout>
+                    </section>
+                </tab>
+            </editor>
+        </organizer>
+    </type>
+    <type name="V2Notification" mode="append">
+        <organizer>
+            <search autoperform="true" mode="replace">
+                <condition attribute="Description" operator="equal" />
+                <condition attribute="active" operator="equal" />
+                <condition attribute="startDate" operator="equal" />
+                <condition attribute="endDate" operator="equal" />
+                <condition attribute="link" operator="equal" />
+            </search>
+            <result defaultview="list">
+                <listview mode="replace">
+                    <itemlayout mode="replace">
+                        <attribute name="Description" width="500" />
+                        <attribute name="active" width="100" />
+                        <attribute name="startDate" width="200" />
+                        <attribute name="endDate" width="200" />         
+                        <attribute name="link" width="200" />         
+                    </itemlayout>
+                </listview>
+            </result>
+            <editor>
+                <tab name="tab.v2notification.general" position="0">
+                    <section name="section.v2notification.properties">
+                        <listlayout>
+                            <attribute name="id" />
+                            <attribute name="Description" />
+                            <attribute name="active"/>
+                            <attribute name="startDate" />
+                            <attribute name="endDate" />
+                            <attribute name="link" />
+                            <attribute name="isPdp" />
+                            <attribute name="isPlp" />
+                            <attribute name="title" />
+                          </listlayout>
+                    </section>
+                </tab>
+            </editor>
+        </organizer>
+    </type>
+    
+    
+
+    <type name="PAYUPaymentResponseInfo" mode="append">
+        <organizer>
+            <search autoperform="true" mode="replace">
+                <condition attribute="mode" operator="equal" />
+                <condition attribute="pgType" operator="equal" />
+                <condition attribute="status" operator="equal" />
+                <condition attribute="email" operator="equal" />
+                <condition attribute="mihpayid" operator="equal" />
+                <condition attribute="cardnum" operator="equal" />
+            </search>
+            <result defaultview="list">
+                <listview mode="replace">
+                    <itemlayout mode="replace">
+                        <attribute name="mode" />
+                        <attribute name="status" />
+                        <attribute name="email" />
+                        <attribute name="cardnum" />
+                        <attribute name="paymentSource" />
+                        <attribute name="bankcode" />
+                        <attribute name="netAmountDebit" />
+                        <attribute name="nameOnCard" />
+                        <attribute name="productInfo" />
+                    </itemlayout>
+                </listview>
+            </result>
+            <editor>
+                <tab name="tab.payupaymentresponseinfo.general" position="0">
+                    <section name="section.payupaymentresponseinfo.properties">
+                        <listlayout>
+                            <attribute name="mode" />
+                            <attribute name="pgType" />
+                            <attribute name="status" />
+                            <attribute name="email" />
+                            <attribute name="mihpayid" />
+                            <attribute name="cardnum" />
+                            <attribute name="paymentSource" />
+                            <attribute name="bankcode" />
+                            <attribute name="netAmountDebit" />
+                            <attribute name="nameOnCard" />
+                            <attribute name="productInfo" />
+                        </listlayout>
+                    </section>
+                </tab>
+            </editor>
+        </organizer>
+    </type>
+
+    <type name="CCAvenuePaymentResponseInfo" mode="append">
+        <organizer>
+            <search autoperform="true" mode="replace">
+                <condition attribute="orderStatus" operator="equal" />
+                <condition attribute="paymentMode" operator="equal" />
+                <condition attribute="trackingId" operator="equal" />
+                <condition attribute="bankRefNo" operator="equal" />
+                <condition attribute="statusCode" operator="equal" />
+            </search>
+            <result defaultview="list">
+                <listview mode="replace">
+                    <itemlayout mode="replace">
+                        <attribute name="orderStatus" />
+                        <attribute name="paymentMode" />
+                        <attribute name="trackingId" />
+                        <attribute name="bankRefNo" />
+                        <attribute name="statusCode" />
+                        <attribute name="statusMessage" />
+                    </itemlayout>
+                </listview>
+            </result>
+            <editor>
+                <tab name="tab.ccavenuepaymentresponseinfo.general" position="0">
+                    <section name="section.ccavenuepaymentresponseinfo.properties">
+                        <listlayout>
+                            <attribute name="offerCode" />
+                            <attribute name="offerType" />
+                            <attribute name="vault" />
+                            <attribute name="currency" />
+                            <attribute name="orderStatus" />
+                            <attribute name="cardName" />
+                            <attribute name="paymentMode" />
+                            <attribute name="trackingId" />
+                            <attribute name="bankRefNo" />
+                            <attribute name="statusCode" />
+                            <attribute name="failureMessage" />
+                            <attribute name="discountValue" />
+                            <attribute name="statusMessage" />
+                        </listlayout>
+                    </section>
+                </tab>
+            </editor>
+        </organizer>
+    </type>
+    <type name="EBSPaymentResponseInfo" mode="append">
+        <organizer>
+            <search autoperform="true" mode="replace">
+                <condition attribute="responseCode" operator="equal" />
+                <condition attribute="paymentID" operator="equal" />
+                <condition attribute="isFlagged" operator="equal" />
+            </search>
+            <result defaultview="list">
+                <listview mode="replace">
+                    <itemlayout mode="replace">
+                        <attribute name="merchantReferenceNumber" />
+                        <attribute name="responseMessage" />
+                        <attribute name="paymentID" />
+                        <attribute name="isFlagged" />
+                        <attribute name="paymentMethod" />
+                    </itemlayout>
+                </listview>
+            </result>
+            <editor>
+                <tab name="tab.ebspaymentresponseinfo.general" position="0">
+                    <section name="section.ebspaymentresponseinfo.properties">
+                        <listlayout>
+                            <attribute name="responseCode" />
+                            <attribute name="responseMessage" />
+                            <attribute name="dateCreated" />
+                            <attribute name="paymentID" />
+                            <attribute name="merchantReferenceNumber" />
+                            <attribute name="mode" />
+                            <attribute name="address" />
+                            <attribute name="city" />
+                            <attribute name="state" />
+                            <attribute name="postalCode" />
+                            <attribute name="country" />
+                            <attribute name="phone" />
+                            <attribute name="email" />
+                            <attribute name="isFlagged" />
+                            <attribute name="paymentMethod" />
+                        </listlayout>
+                    </section>
+                </tab>
+            </editor>
+        </organizer>
+    </type>
+
+    <type name="V2LogisticServiceProvider">
+        <organizer>
+            <search>
+                <condition attribute="code" />
+                <condition attribute="name" />
+                <condition attribute="trackingUrl" />
+            </search>
+            <result>
+                <listview>
+                    <itemlayout>
+                        <attribute name="code" width="150" />
+                        <attribute name="name" width="250" />
+                        <attribute name="trackingUrl" width="450" />
+                    </itemlayout>
+                </listview>
+            </result>
+            <editor>
+                <tab name="tab.v2kart.v2customfields">
+                    <section name="section.v2kart.v2customfields">
+                        <listlayout>
+                            <attribute name="code" />
+                            <attribute name="name" />
+                            <attribute name="trackingUrl" />
+                        </listlayout>
+                    </section>
+                </tab>
+            </editor>
+        </organizer>
+    </type>
+
+    <!-- @Since 1.2 -->
+    <type name="Customer" mode="append">
+        <organizer>
+            <editor mode="append">
+                <tab name="tab.v2kart.v2customfields" position="99">
+                    <section name="section.v2kart.v2customfields">
+                        <listlayout>
+                            <attribute name="sapResponseDescription" />
+                            <attribute name="walletCreditBalance" />
+                        </listlayout>
+                    </section>
+                </tab>
+            </editor>
+        </organizer>
+    </type>
+  
+    <type name="Order" mode="append">
+        <organizer>
+            <editor mode="append">
+                <tab name="tab.v2kart.v2customfields" position="99">
+                    <section name="section.v2kart.v2customfields">
+                        <listlayout>
+                            <attribute name="sapResponseDescription" />
+                        </listlayout>
+                    </section>
+                </tab>
+<!-- added by shivraj -->                
+                <tab name="positions_and_prices" mode="append">
+     <section name="positions" mode="append">
+      <listlayout>
+         <attribute name="codCharges" descriptionattribute="currency" labelwidth="530" width="124" position="3">
+                         <doubleeditor>
+          <parameter key="align" value="right"/>
+                         </doubleeditor>
+                        </attribute>
+      </listlayout>
+     </section>
+    </tab>
+            </editor>
+            
+        </organizer>
+    </type>
+
+    <type name="Consignment" mode="append">
+        <organizer>
+
+            <editor mode="append">
+
+                <tab name="properties" position="0">
+                    <section name="consignment.details">
+                        <listlayout>
+                            <attribute name="warehouse" width="250" />
+                            <attribute name="deliveryMode" />
+                            <attribute name="shippingDate" />
+                            <attribute name="namedDeliveryDate" />
+                            <attribute name="completionDate" />
+                            <attribute name="deliveryPointOfService" width="250" />
+                            <attribute name="shippingAddress" />
+                            <attribute name="carrier" />
+                            <attribute name="trackingID" />
+                            <attribute name="lsp" />
+                        </listlayout>
+                    </section>
+                </tab>
+            </editor>
+        </organizer>
+
+    </type>
+    <type name="V2McCode" mode="append">
+        <organizer>
+            <search autoperform="true" mode="replace">
+                <condition attribute="code" operator="equal" />
+                <condition attribute="description" operator="contains" />
+                <condition attribute="category" operator="equal" />
+            </search>
+            <result defaultview="list">
+                <listview mode="replace">
+                    <itemlayout mode="replace">
+                        <attribute name="code" width="100"/>
+                        <attribute name="description" width="200" />
+                        <attribute name="category" width="500"/>
+                    </itemlayout>
+                </listview>
+            </result>
+            <editor>
+                <tab name="tab.v2mccode.general" position="0">
+                    <section name="section.v2mccode.properties">
+                        <listlayout>
+                            <attribute name="code" />
+                            <attribute name="description" />
+                            <attribute name="category" >
+                                 <referencecollectioneditor autoperform="true" resortable="true" add="true" remove="true" showsearcheditor="true">
+                           <preset sourceattribute="catalogVersion" targetattribute="catalogVersion"/>
+									<itemlayout>
+                              <attribute name="code" width="180"/>
+                              <attribute name="name" width="180"/>
+                              <attribute name="catalogversion" width="187"/>
+									</itemlayout>
+                        </referencecollectioneditor>
+                     </attribute>
+                            
+                        </listlayout>
+                    </section>
+                </tab>
+            </editor>
+        </organizer>
+    </type>
+    
+</configuration>

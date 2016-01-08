@@ -1,0 +1,689 @@
+#
+# Import CMS content for the site
+#
+
+$prefix=v2kart
+$contentCatalog=v2kartContentCatalog
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+$siteResource=jar:in.com.v2kart.constants.V2kartstoreConstants&/v2kartstore/import/coredata/contentCatalogs/$contentCatalog
+# Language
+$lang=en
+$contentCatalogName=v2kart Content Catalog
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+$productCatalog=$prefixProductCatalog
+$productCV=catalogVersion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+$picture=media(code, $contentCV);
+$image=image(code, $contentCV);
+$media=media(code, $contentCV);
+$page=page(uid, $contentCV);
+$contentPage=contentPage(uid, $contentCV);
+$category=category(code, $productCV);
+
+  
+# CMS Image Components
+UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];$picture[lang=$lang]
+#;;SiteLogoComponent;/images/theme/logo-hybris.png
+   
+# CMS Link Components
+UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[lang=$lang]
+;;HomepageNavLink;"Home"
+;;AboutAcceleratorLink;"About Commerce Accelerator"
+;;AboutHybrisLink;"About hybris"
+;;AccountAddressBookLink;"My Address"
+;;AccountHomeLink;"My Account"
+;;AccountManageAddressLink;"Manage your delivery addresses"
+;;AccountManagePaymentDetailsLink;"Manage your payment details"
+;;AccountOrderHistoryLink;"My Orders"
+;;AccountPaymentDetailsLink;"My Payments"
+;;AccountPersonalDetailsLink;"Update profile"
+;;AccountProfileLink;"My Profile"
+;;AccountUpdatePasswordLink;"Change your password"
+;;AccountViewOrderHistoryLink;"View order history"
+;;AgileCommerceBlogLink;"Agile Commerce Blog"
+;;FAQLink;" FAQs"
+;;FacebookLink;"Facebook"
+;;TwitterLink;"Twitter"
+;;TrackYourOrderLinkHeader;" Track your Order"
+#;;TrackYourOrderLinkFooter;"Track your Order"
+;;FindaStoreLink;" Find a Store"
+;;AccountWishlistLink;"My Wishlist"
+;;AccountWalletLink;"My Wallet"   
+;;AccountPasswordLink;"My Password"
+;;ContactUsLinkHeader;" Contact Us"
+;;BeASellerLink;"Become A Dealer"
+
+UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[lang=$lang]
+;;MenLink;"Men"
+;;WomenLink;"Women"
+;;KidsLink;"Kids"
+;;WinterLink;"Winter"
+;;HomeLink;"Home & Decor"
+;;MoreLink;"More"
+
+#Men
+;;MenFormalWearLink;"Formal Wear"
+;;MenCasualLowersLink;"Casual Lowers"
+;;MenCasualUppersLink;"Casual Uppers"
+;;MenEthnicWearLink;"Ethnic Wear"
+;;MenSuitsAndBlazersLink;"Suits And Blazers"
+;;MenPartyWearLink;"Party Wear"
+;;MenInnerwearLink;"Innerwear"
+;;MenFootwearLink;"Footwear"
+;;MenAccessoriesLink;"Accessories"
+
+#Women
+;;WomenCasualLowersLink;"Casual Lowers"
+;;WomenCasualUppersLink;"Casual Uppers"
+;;WomenEthnicWearLink;"Ethnic Wear"
+;;WomenNightwearAndLingeriesLink;"Nightwear And Lingeries"
+;;WomenFootwearLink;"Footwear"
+;;WomenAccessoriesLink;"Accessories"
+
+#Kids
+;;BoysClothingLink;"Boys Clothing"
+;;GirlsClothingLink;"Girls Clothing"
+;;InfantClothingLink;"Infant Clothing"
+;;KidsFootwearLink;"Kids Footwear"
+;;KidsAccessoriesLink;"Kids Accessories"
+
+#Winter
+;;LadiesWinterWearLink;"Ladies"
+;;MenWinterWearLink;"Men"
+;;BoysWinterWearLink;"Boys" 
+;;GirlsWinterWearLink;"Girls"  
+;;InfantWinterWearLink;"Infant"
+
+#Home
+;;TableAndLivingLinenLink;"Tables And Living Linen"
+;;BedLinenLink;"Bed Linen"
+;;CoversLinenLink;"Covers Linen" 
+;;KitchenLinenLink;"Kitchen Linen"
+;;BathLinenLink;"Bath Linen"
+;;HomeDecorLink;"Home Decor"
+
+#More
+;;SportsLink;"Sports"
+;;FitnessLink;"Fitness"
+;;ToysLink;"Toys"
+;;GamesLink;"Games"
+;;TravelAccessoriesLink;"Travel Accessories"
+
+#Men Formal
+;;MenFormalTrousersLink;"Formal Trousers"
+;;MenFormalShirtsLink;"Formal Shirts"
+;;MenClubwearShirtsLink;"Clubwear Shirts"
+
+#Men Casual Lower
+;;MenCasualLowerTrousersLink;"Trousers"   
+;;MenCasualLowerJeansLink;"Jeans"
+;;MenCasualLowerPyjamasLink;"Pyjamas"
+;;MenCasualLowerBermudasLink;"Bermudas"
+;;MenCasualLowerJamaicansLink;"Jamaicans"
+
+#Men Casual UpperLink
+;;MenCasualUpperCasualShirtsLink;"Casual Shirts"
+;;MenCasualUpperTShirtsLink;"T-Shirts"
+;;MenCasualUpperKurtasLink;"Kurtas"
+
+#Men Ethinic Wear
+;;MenEthnicWearLink;"Ethnic Wear"
+
+#Men Suits And Blazers"
+;;MenSuitsLink;"Suits"
+;;MenBlazersLink;"Blazers"
+;;MenWaistcoatsLink;"Waistcoats"
+
+#Men Party WearLink
+;;MenPartyWearShirtsLink;"Shirts"
+
+#Men Innerwear
+;;MenBriefsAndVestsLink;"Briefs And Vests"
+
+#Men FootwearLink
+;;MenFormalShoesLink;"Formal Shoes"
+;;MenCasualShoesLink;"Casual Shoes"
+;;MenSportsShoesLink;"Sports Shoes "
+;;MenBootsLink;"Boots"
+;;MenSandalsLink;"Sandals/Floaters"
+;;MenHomewearsLink;"Homewears"
+;;MenFlipFlopsLink;"Flip Flops"
+;;MenFootwearAccessoriesLink;"Accessories"
+
+#Men AccessoriesLink
+;;MenBeltsLink;"Belts"
+;;MenWalletsLink;"Wallets"
+;;MenSocksLink;"Socks"
+;;MenHankerchiefsLink;"Handkerchiefs"
+;;MenTiesLink;"Ties"
+;;MenUmbrellasLink;"Umbrellas"
+;;MenSunglassesLink;"Sunglasses"
+;;MenWatchesLink;"Watches"
+;;MenFragrancesLink;"Fragrances"
+
+#Women Casual LowersLink
+;;WomenTrousersAndJeggingsLink;"Trousers And Jeggings"
+;;WomenCasualLowerJeansLink;"Jeans"
+;;WomenCasualLeggingsLink;"Leggings"
+;;WomenCasualLowerPyjamasAndHaremsLink;"Pyjamas And Harems"
+;;WomenCasualLowerCaprisLink;"Capris"
+;;WomenCasualLowerHotPantsLink;"Hot Pants"
+;;WomenCasualLowerSkirtsLink;"Skirts"
+
+#Women Casual Upper
+;;WomenCasualUpperTopsLink;"Tops"
+;;WomenCasualUpperShrugsLink;"Shrugs"
+;;WomenCasualUpperShirtsLink;"Shirts"
+
+#Women Ethinic Wear
+;;WomenEthinicWearLehengasLink;"Lehengas"
+;;WomenEthinicWearSalwarSuitsLink;"Salwar Suits"
+;;WomenEthinicWearKurtisLink;"Kurtis"
+;;WomenEthinicWearDressMaterialsLink;"Dress Materials"
+;;WomenEthinicWearSareesLink;"Sarees"
+;;WomenEthinicWearSareeAccessoriesLink;"Saree Accessories"
+;;WomenEthinicWearMixAndMatchLink;"Mix And Match"
+
+#Women Nightwears And Lingaries
+;;WomenBrasLink;"Bras"
+;;WomenPantiesLink;"Panties"
+;;WomenSlipsLink;"Slips"
+;;WomenNightiesLink;"Nighties"
+;;WomenNightSuitsLink;"Night Suitslink"
+
+#Women Footwears Link
+;;WomenShoesLink;"Shoes"
+;;WomenSandalsLink;"Sandals"
+;;WomenBootsLink;"Boots"
+;;WomenBelliesLink;"Bellies"
+;;WomenHomewearsLink;"Homewears"
+;;WomenFlipFlopsLink;"Flip Flops"
+
+#Women Accessories Link
+;;WomenBeltsLink;"Belts"
+;;WomenPursesLink;"Purses"
+;;WomenWalletsAndClutchesLink;"Wallets And Clutches"
+;;WomenCottonBagsLink;"Cotton Bags(TOTE)"
+;;WomenHankerchiefsLink;"Handkerchiefs"
+;;WomenSocksLink;"Socks"
+;;WomenSunglassesLink;"Sunglasses"
+;;WomenWatchesLink;"Watches"
+;;WomenHairAccessoriesLink;"Hair Accessories"
+;;WomenArtificialJewelleryLink;"Artificial Jewellery"
+;;WomenUmbrellasLink;"Umbrellas"
+;;WomenFragrancesLink;"Fragrances"
+
+#KidsLink
+;;BoysTrousersAndJeansLink;"Trousers And Jeans"
+;;BoysShirtsLink;"Shirts"
+;;BoysTShirtsLink;"T-Shirts"
+;;BoysBabasuitsLink;"Babasuits"
+;;BoysPyjamasLink;"Pyjamas"
+;;BoysShortsLink;"Shorts"
+;;BoysJamaicansLink;"Jamaicans"
+;;BoysOcassionsWearLink;"Ocassions Wear"
+;;BoysNightwearsAndInnerwearsLink;"Nightwears And Innerwears"
+
+
+#Girls ClothingLink
+;;GirlsJeansAndTrousersLink;"Jeans And Trousers"
+;;GirlsLeggingsAndJeggingsLink;"Leggings And Jeggings"
+ ;;GirlsPyjamasAndHaremsLink;"Pyjamas And Harems"
+ ;;GirlsCaprisLink;"Capris"
+;;GirlsTopsAndShrugsLink;"Tops And Shrugs"
+;;GirlsShortsLink;"Shorts"
+;;GirlsSkirtsLink;"Skirts"
+ ;;GirlsKurtisLink;"Kurtis"
+ ;;GirlsFrocksLink;"Frocks"
+ ;;GirlsTwinSetsLink;"Twin Sets"
+ ;;GirlsSalwarSuitsLink;"Salwar Suits"
+;;GirlsLanchaSetsLink;"Lancha Sets"
+ ;;GirlsNightwearAndInnerwearsLink;"Nightwear And Innerwears"
+ 
+ 
+#Infant ClothingLink
+;;InfantTrousersAndJeansLink;"Trousers And Jeans"
+;;InfantPyjamasLink;"Pyjamas"
+;;InfantJamaicansLink;"Jamaicans"
+;;InfantShortsLink;"Shorts"
+;;InfantSkirtsLink;"Skirts"
+;;InfantBabaSuitsLink;"Baba Suits"
+;;InfantDungareesSuitsLink;"Dungarees Suits"
+;;InfantShirtsAndTShirtsLink;"Shirts And T-Shirts"
+;;InfantTopsLink;"Tops"
+;;InfantFrocksLink;"Frocks"
+;;InfantOccassionWearLink;"Occassion Wear"
+;;InfantTwinSetsLink;"Twin Sets"
+;;InfantNightwearAndInnerwearLink;"Nightwear And Innerwear"
+;;InfantAccessoriesLink;"Accessories"
+
+#Kids FootwearLink
+;;InfantShoesLink;"Infant Shoes"  
+;;BoysShoesLink;"Boys Shoes"
+;;GirlsShoesLink;"Girls Shoes"
+;;InfantSandalsLink;"Infant Sandals"  
+;;BoysSandalsLink;"Boys Sandals"
+;;GirlsSandalsLink;"Girls Sandals"
+
+#Kids AccessoriesLink
+;;SchoolBagsLink;"School Bags"
+
+#WinterLink
+;;WomenWinterBlazersLink;"Blazers"
+;;WomenWinterJacketsLink;"Jackets"
+;;WomenWinterSweatersLink;"Sweaters"
+;;WomenWinterTrackSuitsLink;"Track Suits"
+;;WomenWinterLeggingsLink;"Leggings"
+;;WomenWinterTopsLink;"Tops"
+;;WomenWinterKurtisLink;"Kurtis"
+;;WomenWinterDressMaterislsLink;"Dress Materisls"
+;;WomenWinterNightiesLink;"Nighties"
+;;WomenWinterThermalWearLink;"Thermal Wear"
+;;WomenWinterAccessoriesLink;"Accessories"
+
+#Men Winter
+;;MenWinterJacketsLink;"Jackets"
+;;MenWinterSweatersLink;"Sweaters"
+;;MenWinterTrackSuitsLink;"Track Suits"
+;;MenWinterPyjamasLink;"Pyjamas"
+;;MenWinterTShirtsLink;"T-Shirts"
+;;MenWinterThermalWearLink;"Thermal Wear"
+;;MenWinterAccessoriesLink;"Accessories"
+
+#Boys WinterLink
+;;BoysWinterJacketsLink;"Jackets"
+;;BoysWinterSweatersLink;"Sweaters"
+;;BoysWinterTrackSuitsLink;"Track Suits"
+;;BoysWinterPyjamasLink;"Pyjamas"
+;;BoysWinterTShirtsLink;"T-Shirts"
+;;BoysWinterBabaSuitsLink;"Baba Suits"
+;;BoysWinterThermalWearLink;"Thermal Wear"
+;;BoysWinterAccessoriesLink;"Accessories"
+
+#Girls WinterLink
+;;GirlsWinterJacketsLink;"Jackets"
+;;GirlsWinterSweatersLink;"Sweaters"
+;;GirlsWinterTrackSuitsLink;"Track Suits"
+;;GirlsWinterLeggingsLink;"Leggings"
+;;GirlsWinterPyjamasLink;"Pyjamas"
+;;GirlsWinterKurtisLink;"Kurtis"
+;;GirlsWinterTopsLink;"Tops"
+;;GirlsWinterFrocksLink;"Frocks"
+;;GirlsWinterThermalWearLink;"Thermal Wear"
+;;GirlsWinterAccessoriesLink;"Accessories"
+
+#Infant Winter
+;;InfantWinterJacketsLink;"Jackets"
+;;InfantWinterSweatersLink;"Sweaters"
+;;InfantWinterPyjamasLink;"Pyjamas"
+;;InfantWinterTShirtsLink;"T-Shirts"
+;;InfantWinterTopsLink;"Tops"
+;;InfantWinterFrocksLink;"Frocks"
+;;InfantWinterSetsLink;"Sets"
+;;InfantWinterThermalWearLink;"Thermal Wear"
+;;InfantWinterAccessoriesLink;"Accessories"
+
+#Home
+;;CurtainsLink;"Curtains"
+;;CushionsLink;"Cushions"
+;;TablesMatsLink;"Table Mats"
+;;RugsAndRunnersLink;"Rugs And Runners"
+;;CarpetsLink;"Carpets"
+;;BedDheetsAndBedSpreadsLink;"Bed Sheets & Bed Spreads"
+;;PillowsLink;"Pillows"
+;;TopSheetsLink;"Top Sheets"
+;;MosquitoNetsLink;"Mosquito Nets"
+;;BlanketsLink;"Blankets"
+;;TableCoversLink;"Table Covers"
+;;CushionCoversLink;"Cushion Covers"
+;;PillowCoversLink;"Pillow Covers"
+;;AppliancesCoversLink;"Appliances Covers"
+;;ApronsLink;"Aprons"
+;;KitchenNapkinsLink;"Kitchen Napkins"
+;;GlovesAndPotHoldersLink;"Gloves And Pot Holders"
+;;BathTowelsLink;"Bath Towels"
+;;BabyTowelsLink;"Baby Towels"
+;;HandAndFaceTowelsLink;"Hand And Face Towels"
+;;BathGownsLink;"Bath Gowns"
+;;WashBasinTowelsLink;"Wash Basin Towels"
+;;BeanBagsLink;"Bean Bags"
+;;RoomFreshnersLink;"Room Fresheners"
+
+#More
+;;BadmintonRacketAndAccessoriesLink;"Badminton Racket And Accessories"
+;;TennisAndAccessoriesLink;"Tennis And Accessories"
+;;CricketBatsLink;"Cricket Bats"
+;;CricketAndTennisBallLink;"Cricket And Tennis Balls"
+;;FootballAndOtherBallsLink;"Football And Other Balls"
+;;SkatesAndAccessoriesLink;"Skates And Accessories"
+;;ExerciseMatsLink;"Exercise Mats"
+;;DipStandsLink;"Dip Stands"
+;;FitnessEquipmentsLink;"Fitness Equipments"
+;;SoftToysLink;"Soft Toys"
+;;InfantToysLink;"Infant Toys"
+;;MechanicalToysLink;"Mechanical Toys"
+;;BatteryOperatedToysLink;"Battery Operated Toys"
+;;DollsAndAccessoriesLink;"Dolls And Accessories"
+;;PlasticSetsLink;"Plastic Sets"
+;;BoardGamesLink;"Board Games"
+;;BackPacksLink;"Back Packs"
+;;DufflesLink;"Duffles"
+;;DuffleTrolleysLink;"Duffle Trolleys"
+;;UprightsLink;"Uprights"
+;;HandyPouchesLink;"Handy Pouches"   
+;;WaistPouchesLink;"Waist Pouches"  
+;;VanityCasesLink;"Vanity Cases"   
+;;FileBagsLink;"File Bags"
+;;menBarLink;"Men"
+;;womenBarLink;"Women"
+#;;kidBarLink;"Kids"
+;;winterBarLink;"Winter"
+;;homeBarLink;"Home"
+;;moreBarLink;"More"
+
+INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true]                              ;@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator]  ;mime[default='image/jpeg'];&imageRef                                          ;folder(qualifier)[default='images'];altText
+				   ;                       ;V2_HomePage_RightTop  						   	   ;$siteResource/images/banners/homepage/side-banner.png  						;image/png                 ;V2_HomePage_RightTop							   ;                                   ;
+
+				   
+INSERT_UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];$picture[lang=$lang]
+				   	  ;						  ;HomePageRightTopBanner  ;V2_HomePage_RightTop
+
+INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true]                              ;@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator]  ;mime[default='image/jpeg'];&imageRef                                          ;folder(qualifier)[default='images'];altText
+				   ;                       ;V2_HomePage_Right  						   	   ;$siteResource/images/banners/homepage/women-banner.png  						;image/png                 ;V2_HomePage_Right							   ;                                   ;
+
+
+
+INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true]                              ;@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator]  ;mime[default='image/jpeg'];&imageRef                                          ;folder(qualifier)[default='images'];altText
+				   ;                       ;V2_HomePage_MenBanner_Image  						   	   ;$siteResource/images/banners/homepage/MENS.jpg  						;image/jpg                 ;V2_HomePage_MenBanner_Image  									   ;                                   ;
+				   ;                       ;V2_HomePage_WomenBanner_Image  						   	   ;$siteResource/images/banners/homepage/WOMEN.jpg  						;image/jpg                 ;V2_HomePage_WomenBanner_Image  									   ;                                   ;
+   				   ;                       ;V2_HomePage_KidsBanner_Image  						   	   ;$siteResource/images/banners/homepage/KIDS.jpg  						;image/jpg                 ;V2_HomePage_KidsBanner_Image  									   ;                                   ;
+				   ;                       ;V2_HomePage_FurnishingBanner_Image 						   	   ;$siteResource/images/banners/homepage/BABY_TOWEL.jpg  			;image/jpg                 ;V2_HomePage_ FurnishingBanner_Image 							   ;                                   ;								   
+				   
+
+INSERT_UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];$picture[lang=$lang]
+				   	  ;						  ;HomePageRightTopBanner  ;V2_HomePage_RightTop
+					;;MenBanner;V2_HomePage_MenBanner_Image
+					;;WomenBanner;V2_HomePage_WomenBanner_Image
+					;;KidsBanner;V2_HomePage_KidsBanner_Image
+					;;SportsBanner;V2_HomePage_FurnishingBanner_Image
+					;;LuggageBanner;V2_HomePage_FurnishingBanner_Image
+					;;FurnishingBanner;V2_HomePage_FurnishingBanner_Image
+					;;ToysBanner;V2_HomePage_FurnishingBanner_Image
+					;;FragranceBanner;V2_HomePage_FurnishingBanner_Image
+   
+   
+
+   
+# Lightbox Banner for Mini Cart
+INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/jpg'];altText;&imageRef
+#;;Elec_290x45_HomeDeliveryBanner_EN_01.gif;$siteResource/images/banners/site/Elec_290x45_HomeDeliveryBanner_EN_01.gif;;"Order before 6pm for next day delivery";Elec_290x45_HomeDeliveryBanner_EN_01.gif
+   
+UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];$picture[lang=$lang]
+#;;LightboxHomeDeliveryBannerComponent;Elec_290x45_HomeDeliveryBanner_EN_01.gif
+   
+# CMS Mini Cart Component
+UPDATE MiniCartComponent;$contentCV[unique=true];uid[unique=true];name;title[lang=$lang]
+;;MiniCart;Mini Cart;YOUR SHOPPING BASKET
+   
+# CMS tabs components
+UPDATE CMSTabParagraphComponent;$contentCV[unique=true];uid[unique=true];title[lang=$lang];content[lang=$lang]
+;;deliveryTab;Delivery;"<br/><p>V2Kart offers free shipping within India on all products if your total order amount is Rs. 999* or more. Otherwise Rs. 35 will be levied as Shipping Charges.</p>"
+;;shippingTab;Shipping;"<p class='write'><span style='font-weight:600'>Shipping </span></p><p>V2Kart offers free shipping within India on all products if your total order amount is Rs. 999* or more. Otherwise Rs. 35 will be levied as Shipping Charges.</p>"
+
+  
+# CMS Footer Component
+UPDATE FooterComponent;$contentCV[unique=true];uid[unique=true];notice[lang=$lang]
+;;FooterComponent;ï¿½ 2013 hybris software - hybris training
+  
+# CMS Paragraph Component (Contact information)
+INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];content[lang=$lang]
+;;ContactInfo;"Call us: +49 (0)89 890 650 -220"
+  
+# CMS ProductReferences Components
+UPDATE ProductReferencesComponent;$contentCV[unique=true];uid[unique=true];title[lang=$lang]
+;;accessories;Accessories
+;;CrossSelling;Complete Your Style
+;;Others;Accessories
+;;Similar;Complete Your Style
+   
+# Category Pages
+UPDATE CategoryPage;$contentCV[unique=true];uid[unique=true];title[lang=$lang]
+#;;Stuff;Stuff
+#;;Clothes;Clothes
+   
+# CMS Navigation Nodes
+INSERT_UPDATE CMSNavigationNode;$contentCV[unique=true];uid[unique=true];title[lang=$lang]
+;;HybrisSiteRootNode;HybrisSiteRoot
+#;;HybrisNavNode;Hybris Site
+#;;ClothesNavNode;Clothes
+#;;StuffNavNode;Stuff
+#;;AcceleratorNavNode;"Accelerator"
+#;;AccessoriesNavNode;"Accessories"
+;;AccessoryBrandLinksNavNode;"Accessories"
+;;AccountAddressBookNavNode;"My Address"
+;;AccountLeftNavNode;"My Account"
+;;AccountOrderHistoryNavNode;"My Orders"
+;;AccountPaymentDetailsNavNode;"Payment Details"
+;;AccountProfileNavNode;"My Profile"
+;;AccountwishlistNavNode;"My Wishlist"
+;;AccountwalletNavNode;"My Wallet"
+;;AccountpasswordNavNode;"My Password"
+
+
+UPDATE CMSNavigationNode;$contentCV[unique=true];uid[unique=true];title[lang=$lang]
+;;menFormalWearNavNode;"Formal Wear"
+;;menCasualLowerNavNode;"Casual Lower"
+;;menCasualUpperNavNode;"Casual Upper"
+;;menEthnicWearNavNode;"Ethnic Wear"
+;;menSuitsAndBlazersNavNode;"Suits & Blazers"
+;;menPartyWearNavNode;"Party Wear"
+;;menInnerWearNavNode;"Inner Wear"
+;;menFootwearNavNode;"Footwear"
+;;menAccessoriesNavNode;"Accessories"
+;;womenCasualLowerNavNode;"Casual Lower"
+;;womenEthinicWearNavNode;"Ethnic Wear"
+;;womenNightWearsAndLingarieNavNode;"Night Wear And Lingeries" 
+;;womenFootwearNavNode;"Footwear"
+;;womenAccessoriesNavNode;"Accessories"
+;;womenCasualUpperNavNode;"Casual Upper"
+;;kidsAccessoriesNavNode;"Accessories"
+;;boysClothingNavNode;"Boy's Clothing"
+;;girlsClothingNavNode;"Girl's Clothing"
+;;infantClothingNavNode;"Infant Clothing"
+;;kidsFootwearNavNode;"Kids Footwear"
+;;ladiesWinterWearNavNode;"Ladies"
+;;menWinterWearNavNode;"Men"
+;;boysWinterWearNavNode;"Boys"
+;;girlsWinterWearNavNode;"Girls"
+;;infantWinterWearNavNode;"Infant"
+;;tableAndLivingNavNode;"Tables and Living Linen"
+;;bedLinenNavNode;"Bed Linen"
+;;coverLinenNavNode;"Covers Linen" 
+;;kitchenLinenNavNode;"Kitchen Linen" 
+;;bathLinenNavNode;"Bath Linen"
+;;homeDecorNavNode;"Home Decor"
+;;sportsNavNode;"Sports"
+;;fitnessNavNode;"Fitness" 
+;;toysNavNode;"Toys"
+;;gamesNavNode;"Games" 
+;;travelAccessoriesNavNode;"Travel Accessories"
+;;menNavNode;"Men"
+;;womenNavNode;"Women"
+;;kidsNavNode;"Kids"
+;;winterNavNode;"Winter"
+;;homeNavNode;"Home"
+;;moreNavNode;"More"
+
+   
+INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];content[lang=$lang]
+;;NoSearchResultsParagraphComponent;"<h2>Sorry, we couldn't find any results for your search</h2>
+<p>Suggestions</p>
+<ul>
+<li>You may have typed your word incorrectly - please check for misspellings</li>
+<li>You may have been too specific - please broaden your search by using fewer keywords</li>
+<li>Browse our products by selecting a category above</li>
+</ul>"
+   
+###### Hybris Cart Page ######
+   
+INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/jpg'];altText
+#;;Elec_788x120_HomeDeliveryBanner_EN_01.jpg;$siteResource/images/banners/site/Elec_788x120_HomeDeliveryBanner_EN_01.jpg;;"Order before 6pm for next day delivery"
+#;;Elec_148x300_HelpBanner_EN_01.jpg;$siteResource/images/banners/site/Elec_148x300_HelpBanner_EN_01.jpg;;"Need Help? Click here for help with checking out"
+   
+UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];$picture[lang=$lang]
+#;;NextDayDeliveryBanner120;Elec_788x120_HomeDeliveryBanner_EN_01.jpg
+   
+UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];content[lang=$lang]
+;;welcomeMessage;"<h1>Welcome to the hybris v2kart Shop</h1>"
+  
+# CMS PurchasedCategorySuggestion Components
+#UPDATE PurchasedCategorySuggestionComponent;$contentCV[unique=true];uid[unique=true];title[lang=$lang]
+#;;PurchasedCategorySuggestions;"You may also like..."
+  
+# CMS CartSuggestion Components
+UPDATE CartSuggestionComponent;$contentCV[unique=true];uid[unique=true];title[lang=$lang]
+;;CartSuggestions;"You may also like..."
+  
+UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];content[lang=en];
+;;orderExpiredMenuParagraph;;
+;;orderExpiredTextParagraph;"<div class='cms-content order-expired'><div class='information_message neutral'><span class='single'></span><p>This page has expired.</p></div><h2>Dear Customer,</h2><p>Order Status for guest users are only kept for 3 months following the date the order was placed.<br>If you have not received your delivery or have other inquiries, please contact our Customer Service Dept.</p><h3>Be prepared with:</h3><ul class='bullet-list'><li>Your Name</li><li>Order Number (Your Order Number can be found on the confirmation email sent shortly after your order was placed.)</li><li>Order Delivery Address or Pick Up in Store Location</li></ul><p>Our Customer Service professionals will be happy to update you on the status of your order.</p><p class='cms-content-emphasized-big'>Thank you for shopping at hybrisstore.</p></div>";
+  
+UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];content[lang=en];
+;;termsAndConditionsMenuParagraph;"<div class=""nav_column"">    <div class=""title_holder"">      <div class=""title"">         <div class=""title-top"">             <span></span>           </div>        </div>        <h2>Terms and Conditions</h2>   </div>    <div class=""item"">      <ul class=""facet_block indent"">         <li><a href=""#a00"">Registration</a></li>          <li><a href=""#b00"">Eligibility to purchase</a></li>           <li><a href=""#c00"">Orders</a></li>            <li><a href=""#d00"">Pricing policy</a></li>            <li><a href=""#e00"">Sales price adjustment policy</a></li>         <li><a href=""#f00"">Acceptance of your order</a></li>          <li><a href=""#g00"">Payment</a></li>           <li><a href=""#h00"">Insurance and delivery</a></li>            <li><a href=""#i00"">Returns and exchanges</a></li>         <li><a href=""#j00"">Intellectual property rights</a></li>          <li><a href=""#k00"">Content</a></li>           <li><a href=""#l00"">No commercial use</a></li>         <li><a href=""#m00"">Your activity</a></li>         <li><a href=""#n00"">Third party</a></li>           <li><a href=""#o00"">General</a></li>           <li><a href=""#p00"">Indemnification</a></li>           <li><a href=""#q00"">General legal terms</a></li>       </ul> </div></div>";
+  
+UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];content[lang=$lang]
+;;EmptyCartParagraphComponent;"<h2>Your shopping bag is empty</h2><p>Suggestions</p><ul><li>Browse our products by selecting a category above</li></ul>"
+;;NoSearchResultsParagraphComponent;"<h2>Sorry, we couldn't find any results for your search</h2><p>Suggestions:</p><ul><li>You may have typed your keywords incorrectly - please check for misspellings.</li><li>You may have been too specific - please broaden your search by using fewer keywords.</li><li>Browse our products by selecting a category above.</li></ul>"
+  
+UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];content[lang=$lang]
+;;EmptyCartParagraphComponent;"<h2>Your shopping bag is empty</h2><p>Suggestions</p><ul><li>Browse our products by selecting a category above</li></ul>"
+;;HelpParagraphComponent;"<div class=""helpBanner""><span class=""bannerHeadline"" >NEED HELP?</span><span class=""bannerText"">Click here for help with checking out<a href=""#"" >GO > ></a></span></div>"
+
+# v2kart Homepage
+INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true]                              ;@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator]  ;mime[default='image/jpeg'];&imageRef                                          ;folder(qualifier)[default='images'];altText
+                   ;                       ;Banner1   ;$siteResource/images/banners/homepage/banner1.png   						;image/png                 ;V2_951x375_HomeCarouselYoursGracefully_EN_01   ;                                   ;"Get yourself the perfect ethnic wear..."
+				   ;                       ;Banner2 ;$siteResource/images/banners/homepage/banner2.png							;image/png                 ;V2_951x375_HomeCarouselTopUpStyle-Winter_EN_01 ;                                   ;"Top up your Style this winter..."
+				   ;                       ;Banner3       ;$siteResource/images/banners/homepage/banner3.png       					;image/png                 ;V2_951x375_HomeCarouselBestSavings_EN_01       ;                                   ;" A Complete Family Fashion Store..."
+				   ;                       ;Banner4       ;$siteResource/images/banners/homepage/banner4.png       					;image/png                 ;V2_951x375_HomeCarouselKidsFashion_EN_01       ;                                   ;"Largest collection in store..."
+				   ;                       ;Banner5  ;$siteResource/images/banners/homepage/banner1.png  							;image/png                 ;V2_951x375_HomeCarouselTheBestPriceEver_EN_01  ;                                   ;"Shopping with V2 save upto 70%..."
+				   ;                       ;V2_HomePage_RightTop  						   	   ;$siteResource/images/banners/homepage/side-banner.png  						;image/png                 ;V2_HomePage_RightTop							   ;                                   ;
+				   ;                       ;V2_HomePage_RightBottom					           ;$siteResource/images/banners/homepage/side-banner2.png  					;image/png     		 	   ;V2_HomePage_RightBottom							   ;                                   ;
+				   ;					   ;V2_HomePage_Men_Category						   ;$siteResource/images/banners/homepage/mens-category.png						;image/png				   ;V2_HomePage_Men_Category						   ;								   ;
+				   ;					   ;V2_Homepage_Women_Category						   ;$siteResource/images/banners/homepage/women-category.png					;image/png				   ;V2_Homepage_Women_Category						   ;								   ;
+				   ;					   ;V2_Homepage_Kids_Category						   ;$siteResource/images/banners/homepage/kids-category.png					 	;image/png				   ;V2_Homepage_Kids_Category						   ;								   ;
+
+#UPDATE BannerComponent;$contentCV[unique=true];uid[unique=true]        ;headline[lang=$lang]                      ;$picture[lang=$lang]                             ;content[lang=$lang]
+#					  ;                       ;YoursGracefullyBanner   ;Get yourself the perfect ethnic wear...   ;Banner1 ;""
+#					  ;                       ;TopUpStyle-WinterBanner ;Top up your Style this winter...          ;Banner2 ;""
+#					  ;                       ;BestSavingsBanner       ;A Complete Family Fashion Store...        ;Banner3 ;""
+#					  ;                       ;KidsFashionBanner       ;Largest collection in store...            ;Banner4 ;""
+#					  ;                       ;TheBestPriceEverBanner  ;Shopping with V2 save upto 70%...         ;Banner5 ;""
+
+# v2kart Homepage
+INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true]                	              ;@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator] 		 ;mime[default='image/jpeg'];&imageRef                                         ;folder(qualifier)[default='images'];altText
+				   ;                       ;sweater_mela     								   ;$siteResource/images/banners/homepage/sweater_mela.jpg       					;image/jpg                 ;V2_951x375_HomeCarouselSweater_Mela_EN_01      	   ;                                   ;"Largest collection of sweater ..."
+				   ;                       ;kurti_mela									 	   ;$siteResource/images/banners/homepage/kurti_mela.jpg  							;image/jpg                 ;V2_951x375_HomeCarouselKurti_Mela_EN_01  		   ;                                   ;"Largest collection of kurti..."
+				   ;                       ;V2_HomePage_RightTop  						   	   ;$siteResource/images/banners/homepage/supersaver_menwinter.jpg  				;image/jpg                 ;V2_HomePage_RightTop							   ;                                   ;
+				   ;                       ;V2_HomePage_RightBottom					           ;$siteResource/images/banners/homepage/supersaver_womenwinter.jpg  				;image/jpg     		 	   ;V2_HomePage_RightBottom							   ;                                   ;
+				   ;					   ;V2_HomePage_Men_Category						   ;$siteResource/images/banners/homepage/mens-combo.jpg							;image/jpg				   ;V2_HomePage_Men_Category						   ;								   ;
+				   ;					   ;V2_Homepage_Women_Category						   ;$siteResource/images/banners/homepage/women-combo.jpg							;image/jpg				   ;V2_Homepage_Women_Category						   ;								   ;
+				   ;					   ;V2_Homepage_Kids_Category						   ;$siteResource/images/banners/homepage/kids-combos.jpg					 		;image/jpg				   ;V2_Homepage_Kids_Category						   ;								   ;
+
+UPDATE BannerComponent;$contentCV[unique=true];uid[unique=true]        ;headline[lang=$lang]                      ;$picture[lang=$lang]                             ;content[lang=$lang]
+					  ;                       ;YoursGracefullyBanner   ;Get yourself the perfect ethnic wear...   ;sweater_mela ;""
+					  ;                       ;TopUpStyle-WinterBanner ;Top up your Style this winter...          ;kurti_mela ;""
+					  ;                       ;BestSavingsBanner       ;A Complete Family Fashion Store...        ;kurti_mela ;""
+					  ;                       ;KidsFashionBanner       ;Largest collection in store...            ;sweater_mela ;""
+					  ;                       ;TheBestPriceEverBanner  ;Shopping with V2 save upto 70%...         ;sweater_mela ;""
+
+
+UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];$picture[lang=$lang]
+				   	  ;						  ;HomePageRightTopBanner  ;V2_HomePage_RightTop
+				   	  ;						  ;HomePageRightBottomBanner;V2_HomePage_RightBottom
+				   	  
+UPDATE V2KartBannerComponent;$contentCV[unique=true];uid[unique=true];$picture[lang=$lang]
+							;						;MenCategoryBanner;V2_HomePage_Men_Category
+							;						;WomenCategoryBanner;V2_Homepage_Women_Category
+							;						;KidsCategoryBanner;V2_Homepage_Kids_Category
+							;						;AppMenCategoryBanner;Mobile_Men_Category
+							;						;AppWomenCategoryBanner;Mobile_Women_Category
+							;						;AppKidsCategoryBanner;Mobile_Kids_Category
+							
+
+####### FOOTER Starts here #####################################################
+
+UPDATE FooterComponent;$contentCV[unique=true];uid[unique=true];notice[lang=$lang]
+;;FooterComponent;"&copy; 2015 v2kart.com. All rights reserved"
+
+
+UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];content[lang=en];
+;;FooterParagraphComponent;<div class="f-section-1"><div class="container"><div class="row"><div class="col-xs-6 col-sm-6 col-md-4"><p id="customerSupportPara">Customer support: <label>8010202222</label></p></div><div class="col-xs-6 col-sm-6  col-md-3"><p>Free 60-Day Returns</p></div><div class="col-xs-6 col-sm-6  col-md-3"><p>Free shipping above Rs. 999</p></div><div class="col-xs-6 col-sm-6  col-md-2"><p>Cash on Delivery</p></div></div></div></div>
+
+
+UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];$picture[lang=$lang]
+#;;facebookImageComponent;/images/facebook.png; 
+#;;twitterImageComponent;/images/twitter.png;
+#;;googlePlusImageComponent;/images/google.png; 
+#;;pinItImageComponent;/images/pintrest.png;  
+#;;youTubeComponent;/images/youtube.png;
+;;facebookImageComponent;; 
+;;twitterImageComponent;;
+;;googlePlusImageComponent;; 
+;;pinItImageComponent;;  
+;;youTubeComponent;;
+
+INSERT_UPDATE Media;$contentCV[unique=true]	;code[unique=true]		;realfilename		;@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator] ;mime[default='image/png'];folder(qualifier)[default='images'];&imageRef
+										   ;;guarntee-icon-left.png	;guarntee-icon-left.png  ;$siteResource/images/guarntee-icon-left.png 							         ;image/png			      ;				        			  ;guarntee-icon-left.png
+										   ;;shipping-icon-left.png	;shipping-icon-left.png  ;$siteResource/images/shipping-icon-left.png 								     ;image/png			      ;				        			  ;shipping-icon-left.png						        							        
+										   ;;return-icon-left.png	;return-icon-left.png  	;$siteResource/images/return-icon-left.png	  								     ;image/png			      ;				        			  ;return-icon-left.png
+										   ;;wishlist-icon.png 		;wishlist-icon.png		;$siteResource/images/wishlist-icon.png											 ;image/png				  ;									  ;wishlist-icon.png
+UPDATE BannerComponent;$contentCV[unique=true];uid[unique=true]			;$picture[lang=$lang]     ;content[lang=$lang]		  ;headline[lang=$lang]
+                      ;						  ;faqBannerComponent      	;guarntee-icon-left.png   ;Frequently Asked Questions ;FAQ
+                      ;						  ;secondBannerComponent 	;wishlist-icon.png   ;You can view your Wishlist here          	  ;Wishlist			   				   
+                      ;						  ;thirdBannerComponent     ;return-icon-left.png     ;Product Exchanged		  ;Warranty
+
+#UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];content[lang=en];
+#;;Footer2ParagraphComponent;<h4>Verified By:</h4>
+
+####### FOOTER Ends here #####################################################
+
+INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];title[lang=$lang]
+;;aboutUs;"About Us";
+;;contactUs;"Contact Us";
+;;cancellation;"Cancellation";
+;;payment;"Payment";
+;;returns;"Returns";
+;;trackYourOrder;"Track Your Order";
+;;wishlist;"My Wishlist";
+;;wallet;"My Wallet";
+;;serverError;"Server Error";
+;;beADealer;"Become A Dealer";
+;;termsAndCondition;"Terms And Conditions";
+
+UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];content[lang=$lang]
+;;aboutUsParagraph;"<div class='col-xs-12 col-sm-12 col-md-12'><div class='heading'>About Us</div><div class='description cms-content staticpagedescription'><p>V2Kart.com is a portal for all your fashion, lifestyle & home needs. V2Kart.com aims at providing a hassle free and enjoyable shopping experience to shoppers across the country with the widest variety of products at best of its value.</p><p>At V2Kart.com.com we strive to achieve the highest level of â€œCustomer Satisfactionâ€� possible.<br/>Our cutting edge E-commerce platform, highly experienced buying team, agile warehouse systems and state of the art customer care centre provides customer with: </p><ul class= 'bold'><li style='margin-left:20px;list-style-type:disc; font-weight:600;'>Broader selection of products</li><li style='margin-left:20px;list-style-type:disc;font-weight:600;'>Superior buying experience</li><li style='margin-left:20px;list-style-type:disc;font-weight:600;'>On-time delivery of products</li><li style='margin-left:20px;list-style-type:disc;font-weight:600;'>Quick resolution of any concerns</li><li style='margin-left:20px;list-style-type:disc;font-weight:600;'>We run our own warehousing operations to enable us to fulfill your orders completely and achieve fastest shipping in the industry</li></ul><p>Our believe is to provide best quality products at its true price & with great online shopping experience. Our aim is to provide our customers with a physical stores shopping experience; online, without the hassles. </p><h3>About V2 Retail</h3><p>V2 Retail Limited is one of fastest growing Retail Groups in India. The company offers a portfolio of products, including apparel and non-apparel. The company sells readymade, apparels, household merchandise and other consumer goods like footwear, toys, games, handbags, fragrance, cosmetics, home furnishing, dÃ©cor product, sports items, crockery, novelties and gifts. V2, which stands for 'value and variety' sell fashion garments at prices 50-70% lower than other clothing brands through large stores between 12,000 and 25,000 sq ft in size.  V2 offer affordable family fashion at prices to suit every pocket. The outlets cater to almost all price ranges. The showrooms have over 70,000 products range which fulfills all household needs.</p><p>We have been successfully serving the Indian retail market for more than 25 years. In this journey, our group has created many firsts in the industry : 1st to cross 100 stores, 1st to implement SAP, 1st to create private lables in grocerry etc. Currently under V2 Retail limited, we are managing 1,90,000 Sq.ft. retail space with a turnover projection of Rs. 300 crore for 2014 -2015. We firmly believe in fundamentals of value and variety to billions of retail consumer</p></div></div>"
+;;contactUsParagraph;"<div class='col-xs-12 col-sm-12 col-md-12'><div class='yCmsContentSlot'><div class='heading'>Contact Us</div><div class='description cms-content'><div class='content'><div class='co-xs-12 col-sm-6 col-md-6'><h4>Registered & Corporate Office :</h4><p>Plot No. 8, Pocket No. 2, Block A,<br>NH-8, Rangpuri Extn.,<br>New Delhi-110037.<br>website: <a href='http://www.v2retail.com' title='www.v2retail.com'>www.v2retail.com</a></p></div><div class='co-xs-12 col-sm-6 col-md-6'><h4>Send us mail :</h4><p>E-Mail : <a href='mailto:customercare@v2kart.com' title='customercare@v2kart.com'>customercare@v2kart.com</a></p><p>Customer Support : 8010202222</p></div><div class='co-xs-12 col-sm-6 col-md-6'><h4>Replacement & Delivery Center</h4><p>v2kart.com, Khasra No. 21/2, 22 Mubarikpur Village,<br>Farruakh Nagar, Gurgaon<br>Haryana - 122506</p></div></div></div></div></div>"
+;;cancellationParagraph;"<div class='col-xs-12 col-sm-12 col-md-12'> <div class='heading'>Cancellation Policy</div><div class='description cms-content staticpagedescription'> <p class='bold'>Q. What is V2Kart.com Cancellation Policy?</p><p>You can cancel an order until it has been processed in our warehouse by going to the Â section of the website. This includes items purchased on sale. Any amount you paid will be credited back to your bank account.</p><p class='bold'>Q. Can I modify the shipping address of my order after it has been placed?</p><p>Yes, You can modify the shipping address of your order before we have processed (shipped) it, by contacting our customer support team at 8010202222</p><p class='bold'>Q. I just cancelled my order. When will I receive my refund?</p><p>If you have selected Cash on Delivery, there is no amount to refund because you haven't paid for your order. For payments made using a Credit Card, Debit Card, or Net Banking, you will receive a refund to your bank account/CC Card after your order has been cancelled. </p><p><Strong>NOTE :</Strong> If you have made your payment using a Credit Card, Debit Card, or net banking and would like a refund to your bank account in case of order cancellation, please get in touch with our customer support team.</p></div></div>"
+;;FAQMenuParagraph; "<div class='col-md-12'><div class='heading'>Frequently Asked Questions</div></div><div class='description cms-content'><div class='content'><div class='col-md-3'> <div class='nav_column'><div class='item'> <ul class='faq_block indent faqorder'> <li class='active'><a href='#a00' data-panel='0'>Order Tracking</a></li><li><a href='#b00' data-panel='1'>Cancellations and Returns</a></li><li><a href='#c00' data-panel='2'>Refunds</a></li><li><a href='#d00' data-panel='3'>Purchasing on V2Kart.com</a></li><li><a href='#e00' data-panel='4'>My account, login and alerts</a></li><li><a href='#f00' data-panel='5'>Payments</a></li></ul> </div></div></div></div><div class='yCmsContentSlot col-md-9'> <div class='content'><a class='faqanchor' name='00'></a> <div class='textpage textpage-faqs' id='accordion'> <h2 id='a00'><a class='faqanchor'></a>Order Tracking</h2> <div class='item_container faqAccordion' > <p><span style='font-weight:600;'>Q.I have placed my order. What next?</span><br/>Sit back and relax! Once your order is confirmed, we will share the order id and tracking details via E-mail/SMS. You can then TRACK ORDER by logging into your V2Kart Accountâ€™s MY ORDERSÂ section.<br/><br/><span style='font-weight:600;'>Q.Will I be informed once my order is processed?</span><br/>Once your order is confirmed and processed, you will receive a shipment notification via E-mail/SMS advising you on the estimated date of delivery. You can also TRACK ORDER online. Please note tracking information may not be available for all carriers.<br/><br/><span style='font-weight:600;'>Q.How do I check the status of my order?</span><br/>Visit the MY ORDERS page in your My Account and click on TRACK ORDER to get real time status of your order.<br/><br/><span style='font-weight:600;'>Q.Why have I not received my order yet?</span><br/>Due to unforeseen circumstances, it is possible that your order might get delayed. We will send you an E-mail/SMS Â informing you about the delay along with the new expected delivery date. Visit the MY ORDERS page in your account and click on TRACK ORDER to get real time status of your order.<br/><br/><span style='font-weight:600;'>Q.What is the difference between shipping and delivery?</span><br/>Shipping refers to packing and dispatching of your order. While placing an order, you will find a shipping timeline on the products displayed on the website (e.g. dispatched within 5 days). This refers to the number of working days it will take to dispatch the product from our end. The delivery may take 1-3 days depending on the address specified for the order.<br/><br/><span style='font-weight:600;'>Q.Do I have to pay any shipping and delivery charges?</span><br/>Shipping and Delivery charges are particular to a product and have been mentioned on each product page. The charges will vary depending on your location. For many products on V2Kart, the shipping and delivery is provided free of cost.<br/><br/><span style='font-weight:600;'>Q.Which courier company will deliver my order? Is it possible to choose my preferred delivery partner?</span><br/>For a smooth delivery of your orders, we have tied up with a number of trustworthy delivery partners. Once your order is dispatched, you will be informed about the shipping details via E-mail/SMS. Unfortunately, we do not offer the option to choose your preferred delivery partner. However, we will inform you when such services are rolled out in future.<br/><br/><span style='font-weight:600;'>Q.What should I do if I find my package opened or tampered with upon delivery?</span><br/>V2Kart believes in making your shopping experience perfect. However, if you receive an open or a tampered package, please do not accept it. Report this concern by clicking on Return/Replace option in your MY ORDERS page within the TrustPay period. We will look at it immediately and get back to you.<br/><br/><span style='font-weight:600;'>Q.How can I find out if V2Kart delivers to my location?</span><br/>You can find out if V2Kart.com delivers to your location by using the courier serviceability tool located on the right side of the product on all product pages. V2Kart keeps updating the list of serviceable Pin Codes. So, if delivery option is not available right now, please come back to see if this has changed.Â <br/><br/><span style='font-weight:600;'>Q.The status on the tracking website shows delivery was attempted but I was not there. Is it possible to get the delivery now?</span><br/>The courier companies usually make more than one attempt to deliver your order. In case you do not receive your order, please get in touch with us.<br/><br/><a href='#00' class='pagetop-link'>Move to top</a></p> </div><h2 id='b00'><a class='faqanchor'></a>Cancellations and Returns</h2><div class='item_container faqAccordion' > <p><span style='font-weight:600;'>How do I place a cancellation request on V2Kart.com?</span><br/>If you wish to cancel your order, please follow these steps:<br/>1. Create a cancellation request online.<br/>2. Please click on the Cancel button against your order in the MY ORDERS section in My Account.<br/>Cancellation requests can be raised at any time before the shipping of the order. Once the order is cancelled, we will refund any prepaid amount as per our Return Policy.<br/>&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp         or<br/>1. Give call at our customer care number and ask for order cancellation<br/>2. Let the customer care person know your order number<br/>3. Customer care person will do the needful and your order will be cancelled<br/><br/><span style='font-weight:600;'>Q.How do I place a replacement request on V2Kart.com.com?</span><br/>If you want to replace a product on V2Kart.com, please follow these steps:<br/>1. Create a replacement request online. You can replace the product bought on V2Kart.com within 60-days of delivery.<br/> 2. Login to your V2Kart Account and go to MY ORDERS section. <br/> 3. Select the item you wish to replace and click on the Return/Replace button against the order.<br/> 4. Once the replacement request is created, we will ensure that the replacement is processed as soon as possible.<br/> &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp  &nbsp &nbsp &nbsp &nbsp &nbsp             or <br/> 1. Give call at our customer care number and register replacement request<br/> 2. Let the customer care person know your order number<br/> 3. Customer care person will do the needful and your replacement request will be processed<br/> 4. You need to fill the replacement form completely and put it with product<br/> 5. You can dispatch your order at below address after completion of process<br/> V2kart.com, Khasra No21/2, 22 Mubarikpur Village, Farruakh Nagar, Dist Gurgaon , Haryana<br/> 6. After quality check approval as per terms & conditions your product will be replaced or refund will be initiated.<br/> <br/><span style='font-weight:600;'>Q.Why was my order cancelled?</span><br/>We regret the inconvenience caused due to order cancellation. Your order may have been cancelled due to any of the following reasons:<br/> â€¢ If product is out of stock or is discontinued<br/> â€¢ Inaccuracies or errors in pricing information<br/> We will inform you about the cancellation of your order and share details if partial order is cancelled or whole. We will contact you if any additional information is required to accept your order.<br/><br/> <span style='font-weight:600;'>Q.What do I do if I receive wrong product?</span><br/>We take utmost care to ensure customer satisfaction. Unfortunately, if you receive a wrong product please raise a replacement request or get in touch with us. You will also have the option to choose refund for the product.<br/><br/> <span style='font-weight:600;'>Q.What do I do if I receive physically damaged product?</span><br/>Delivery is usually safe, but, if you receive a damaged product you can return/replace it. To avoid any hassle, go through the following steps:<br/> 1. On delivery, check if the product is packed properly, is factory sealed and there is no physical damage to the carton. <br/> 2. If you are concerned, don't open the product yourself. Call the V2Kart customer care for further assistance.<br/><br/> <span style='font-weight:600;'>I bought a product but it does not fit my size. Can I get it replaced?</span><br/>You can get the size exchanged within 60 days of the receipt of your order. Report your concern by filling the Contact Us form. We will get back to you and replace the product with the right size.<br/> <br/><span style='font-weight:600;'>I have requested a replacement, when will I receive it?</span><br/>Once you have raised a replacement request, our team will investigate and initiate the replacement process. You will receive an e-mail/sms advising you on the estimated delivery date. Based on customer location, delivery span varies. <br/><br/><span style='font-weight:600;'>Is there any product not eligible for replacement/return?</span><br/>All items which can be resold are always eligible for return. The following items are not eligible for return/replacement:<br/> Items that have been worn/washed/soiled<br/> Innerwear, lingerie cannot be returned on account of hygiene<br/> Products which were sold as combos/sets, are not eligible for return/replacement as individual items<br/> Seal open branded electronic items cannot be returned in case of not being happy with the product as they canâ€™t be resold<br/> In case of branded electronic items, brandsâ€™ return, repair and replacement policy will apply. <br/><br/><span style='font-weight:600;'>What if I choose to have my order replaced and the product is sold out?</span><br/>Replacement can be initiated only if the product is in stock. Unfortunately if the product is out of stock then refund is initiated after your confirmation. <br/><br/><a href='#00' class='pagetop-link'>Move to top</a> </p></div>   <h2 id='c00'><a class='faqanchor'></a>Refunds</h2><div class='item_container faqAccordion' > <p> <span style='font-weight:600;'> What is V2Kart.com's 60-day Return Policy?</span><br/> V2Kart.com gives you the option to replace and/or return the products bought on V2Kart within 60 days of the receipt of the order. <br> You can return/replace the product if :<br/> â€¢ With the fitting of the product<br/> â€¢ Or if you receive a damaged product<br/> All items to be returned or replaced must be unused and in their original condition with all original tags and packaging intact. <br/><span style='font-weight:600;'>Exceptions to the Return Policy:</span><br/> Products such as Lingerie, innerwear, washed products, products sold as combos, opened electronic products are not eligible for return. <br/><br/><span style='font-weight:600;'>How long will it take me to receive the refund after I cancel the order?</span><br/> We take anywhere between 7-15 days to complete your refund request. The refund amount will be credited to the same account from where payment was made. Refunds will transfer to your bank account <br/><br/><span style='font-weight:600;'>I paid cash on delivery, how would I get the refund?</span><br/> If you chose to pay Cash on Delivery, the refund will be credited in the NEFT transfer to your bank account. For an NEFT transfer we would require the following details: <br/> <span style='font-weight:600;'>Bank Name</span><br/> <span style='font-weight:600;'>Account Holder Name</span><br/> <span style='font-weight:600;'>Bank Account Number</span><br/> <span style='font-weight:600;'>Branch Address</span><br/> <span style='font-weight:600;'>IFSC Code</span><br/> <br/><br/><span style='font-weight:600;'>How long will it take me to receive the refund for my return?</span><br/> We take anywhere between 7-15 days to complete your refund request. For all pre-paid orders, the refund amount will be credited to the same account from where payment was made. For all Cash on Delivery orders, NEFT transfer to your bank account. <br/><br/><span style='font-weight:600;'>Do I have to return the free gift received along with the product while returning the product?</span><br/> If the product bought on V2Kart.com comes with a free gift, you will have to return it along with the product you have raised return request for. <br/><br/><span style='font-weight:600;'>Is it possible to get an NEFT refund if I paid through Credit/Debit card or Netbanking?</span><br/> We are sorry, but the refund amount will be credited to the same account from where the payment was made. However, you can opt for an NEFT transfer to your bank account if your mode of payment was Cash on Delivery. <br/><br/><span style='font-weight:600;'>Do I need to pay the courier company to send my product back? Will I get the money back?</span><br/> Once you have raised a return/replace request on V2Kart, we will arrange for a reverse-pickup of your product. The delivery charges for your return/replace will be borne by us. Â  In case the facility of reverse-pickup is not available at your location, you will be required to ship the product to us. The shipping charges borne by you for the return/replace will be refunded back to you to your provided bank detailsÂ . We will reimburse upto Rs. 100 as shipping charges.Â <br/><br/><span style='font-weight:600;'>Will there be any deductions over the transaction value in case of refunds?</span><br/> In case of refund you will receive just the product cost. The service cost such as courier charges/COD charges will not be refunded.<br/><br/> <a href='#00' class='pagetop-link'>Move to top</a> </p></div><h2 id='d00'><a class='faqanchor' ></a>Purchasing on V2Kart.com</h2><div class='item_container faqAccordion' >  <p> <br/><span style='font-weight:600;'>I haven't received any SMS/e-mail confirmation about the order I just placed on V2Kart. What should I do?</span><br/> Please fill in our Contact Us form with your transaction details and we will look into it immediately and get back to you with the confirmation. <br/><br/><span style='font-weight:600;'>I have added a few products to my cart but I won't be buying them now. Can you save my list?</span><br/> Yes, absolutely. We will keep your cart saved with us. The selected items will not be removed unless you remove those. However, since our inventory sells out fast, it is advised that you complete your purchase as soon as you can. <br/><br/><span style='font-weight:600;'>Can I buy more than one product in one go?</span><br/> Yes, you can. As you click the Buy button on a product page, it gets added to your shopping cart. You can add as many products as you want and then pay for the entire order in one go! <br/><br/><span style='font-weight:600;'>I am interested in a product that is sold out. How can I buy it?</span><br/> Don't be disheartened if a product you like is not available currently. Click the Notify Me button/link on the product page. We will let you know the moment your selected product is back in stock. <br/><br/><span style='font-weight:600;'>I don't know how to buy online. What should I do?</span><br/> Don't worry if you have never bought online. Here are the steps to buy products and deals on V2Kart.<br/> 1. Click the Buy <span style='font-weight:600;'>button</span> on the product or deal you like.<br/> 2. Click the<span style='font-weight:600;'> Proceed to Payment</span> button.<br/> 3. Enter your name, e-mail ID and phone number next.<br/> 4. Enter your shipping address if you are buying products.<br/> 5. Click the <span style='font-weight:600;'>Proceed to Payment</span> button.<br/> 6. Select your payment mode (Credit card, Debit card, Netbanking, Cash on Delivery, Credit Card EMI).<br/> If you are not comfortable paying online, you can choose the Cash on Delivery option and pay on the actual delivery of your product. The option, however, does not apply if you are buying deals. <br/><br/><span style='font-weight:600;'>How do I know my purchase is complete?</span><br/> You will see a confirmation message on the screen along with your order number. If you have bought deals, you will also receive your V2Kart voucher over email and SMS to confirm your purchase. <br/><br/><span style='font-weight:600;'>I did not get an invoice with my product bought from V2Kart. What should I do?</span><br/> All V2Kart products are delivered along with an invoice. In case an invoice is not given to you along with your delivered product, please fill in our Contact Us form with your transaction details and we will look into it immediately.<br/><br/> <a href='#00' class='pagetop-link'>Move to top</a></p> </div>  <h2 id='e00'><a class='faqanchor' name='e00'></a>My account, login and alerts</h2><div class='item_container faqAccordion'  > <p> <br/><span style='font-weight:600;'>I don't remember my password. Help!</span><br/> Don't worry. Here's what you need to do:<br/> 1. Click <span style='font-weight:600;'>My Account</span> on the top right of the site page to access the login window.<br/> 2. Click the <span style='font-weight:600;'> Forgot your password </span>link available on the bottom right of the login window.<br/> 3. Enter your e-mail ID in the displayed field.<br/> We will send you a link in your e-mail.<br/> 4. You can reset your password instantly by clicking the link.<br/> <br/><br/><span style='font-weight:600;'>I am concerned about the privacy of my personal information I have shared with V2Kart.</span><br/> We understand that you value your privacy, and we respect it. V2Kart maintains complete confidentiality and privacy of the data that you share with us. Please go through our privacy policy in case you need more details. <br/><br/><span style='font-weight:600;'>Is it necessary for me to sign up before I buy anything on V2Kart?</span><br/> Not at all. You just need to enter a valid e-mail id before making a purchase. And choose the option of 'Continue without password'. <br/><br/><span style='font-weight:600;'>Are there any perks of signing up on V2Kart?</span><br/> Yes. There are definitely a few advantages of signing up:<br/> You will have quicker and smoother transactions<br/> Your past shipping addresses will be saved so that you don't have to enter them all over again in your next visit.<br/> You can track the history of every order with their details in your account.<br/> Thinking signing up is complicated? All you need to be ready with is your e-mail ID!<br/><br/> <a href='#00' class='pagetop-link'>Move to top</a> </p></div> <h2 id='f00'><a class='faqanchor'></a>Payments</h2><div class='item_container faqAccordion' >  <p> <span style='font-weight:600;'>What is COD?</span><br/> COD refers to Cash On Delivery. It doesnâ€™t matter if you donâ€™t want to use your credit/debit card or use internet banking. You have the option of paying for the purchase at your doorstep. Just place your order and make cash payment upon the delivery of your order. <br/><br/><span style='font-weight:600;'>Can I pay COD (Cash On Delivery) for every product I buy on V2Kart?</span><br/> The cash-on-delivery option is not available on all products. The product details page indicates whether cash on delivery is applicable for a particular product. <br/><br/><span style='font-weight:600;'>My transaction failed but the money was deducted from my account. What do I do?</span><br/> Please fill in our 'Contact us' form available under the 'Any other query' section with your transaction details and we will look into it immediately.If your money has not reached us, it will surely be refunded back to your account. <br/><br/><span style='font-weight:600;'>How does the refund process work and what is the time limit?</span><br/> Once the order is cancelled at the merchantâ€™s website or in case of failed transactions, V2Kart's trustpay ensures that you get the amount to be refunded within 7-15 days of cancelling the order depending upon the bank. <br/><br/><span style='font-weight:600;'>What are the different modes of payment on V2Kart?</span><br/> You can use any one of the following payment methods:<br/> Credit card (Visa/ Master/ Amex)<br/> Credit card EMI (in 3 and 6 months installments)<br/> Debit card (All leading bank debit cards)<br/> Netbanking (For all leading banks )<br/> Cash on Delivery (Available on select deals and products) <br/><br/><span style='font-weight:600;'>Are there any hidden costs when I make a purchase on V2Kart?</span><br/> None. We will never hide any cost from you. The price and charges mentioned on the site are final.When you are buying deal vouchers, please go through the fine print to understand what you need to pay at the vendor's outlet (restaurant, salon, spa, entertaintment/adventure complex). <br/><br/><span style='font-weight:600;'>I would like to pay when my order is delivered. Is that possible?</span><br/> Absolutely! You can make use of our Cash on Delivery option. By selecting this payment option, you are required to pay money on the actual delivery of your product(s). <br/><br/><span style='font-weight:600;'>Can I pay by cheque upon delivery of my order?</span><br/> Sorry, we cannot accept cheques. It is advisable to keep the money ready when the delivery is expected.<br/><br/> <a href='#00' class='pagetop-link'>Move to top</a></p> </div></div></div></div></div>"
+;;FAQMenuDesktopParagraph; "<div class='col-md-12'><div class='heading'>Frequently Asked Questions</div></div><div class='description cms-content'><div class='content'><div class='col-md-3'> <div class='nav_column'><div class='item'> <ul class='faq_block indent faqorder'> <li class='active'><a href='#' data-panel='0'>Order Tracking</a></li><li><a href='#' data-panel='1'>Cancellations and Returns</a></li><li><a href='#' data-panel='2'>Refunds</a></li><li><a href='#' data-panel='3'>Purchasing on V2Kart.com</a></li><li><a href='#' data-panel='4'>My account, login and alerts</a></li><li><a href='#' data-panel='5'>Payments</a></li></ul> </div></div></div></div><div class='yCmsContentSlot col-md-9'> <div class='content'><a class='faqanchor' name='00'></a> <div class='textpage textpage-faqs' id='accordion'> <h2><a class='faqanchor'></a>Order Tracking</h2> <div class='item_container faqAccordion' id='a00'> <p><span style='font-weight:600;'>Q.I have placed my order. What next?</span><br/>Sit back and relax! Once your order is confirmed, we will share the order id and tracking details via E-mail/SMS. You can then TRACK ORDER by logging into your V2Kart Accountâ€™s MY ORDERSÂ section.<br/><br/><span style='font-weight:600;'>Q.Will I be informed once my order is processed?</span><br/>Once your order is confirmed and processed, you will receive a shipment notification via E-mail/SMS advising you on the estimated date of delivery. You can also TRACK ORDER online. Please note tracking information may not be available for all carriers.<br/><br/><span style='font-weight:600;'>Q.How do I check the status of my order?</span><br/>Visit the MY ORDERS page in your My Account and click on TRACK ORDER to get real time status of your order.<br/><br/><span style='font-weight:600;'>Q.Why have I not received my order yet?</span><br/>Due to unforeseen circumstances, it is possible that your order might get delayed. We will send you an E-mail/SMS Â informing you about the delay along with the new expected delivery date. Visit the MY ORDERS page in your account and click on TRACK ORDER to get real time status of your order.<br/><br/><span style='font-weight:600;'>Q.What is the difference between shipping and delivery?</span><br/>Shipping refers to packing and dispatching of your order. While placing an order, you will find a shipping timeline on the products displayed on the website (e.g. dispatched within 5 days). This refers to the number of working days it will take to dispatch the product from our end. The delivery may take 1-3 days depending on the address specified for the order.<br/><br/><span style='font-weight:600;'>Q.Do I have to pay any shipping and delivery charges?</span><br/>Shipping and Delivery charges are particular to a product and have been mentioned on each product page. The charges will vary depending on your location. For many products on V2Kart, the shipping and delivery is provided free of cost.<br/><br/><span style='font-weight:600;'>Q.Which courier company will deliver my order? Is it possible to choose my preferred delivery partner?</span><br/>For a smooth delivery of your orders, we have tied up with a number of trustworthy delivery partners. Once your order is dispatched, you will be informed about the shipping details via E-mail/SMS. Unfortunately, we do not offer the option to choose your preferred delivery partner. However, we will inform you when such services are rolled out in future.<br/><br/><span style='font-weight:600;'>Q.What should I do if I find my package opened or tampered with upon delivery?</span><br/>V2Kart believes in making your shopping experience perfect. However, if you receive an open or a tampered package, please do not accept it. Report this concern by clicking on Return/Replace option in your MY ORDERS page within the TrustPay period. We will look at it immediately and get back to you.<br/><br/><span style='font-weight:600;'>Q.How can I find out if V2Kart delivers to my location?</span><br/>You can find out if V2Kart.com delivers to your location by using the courier serviceability tool located on the right side of the product on all product pages. V2Kart keeps updating the list of serviceable Pin Codes. So, if delivery option is not available right now, please come back to see if this has changed.Â <br/><br/><span style='font-weight:600;'>Q.The status on the tracking website shows delivery was attempted but I was not there. Is it possible to get the delivery now?</span><br/>The courier companies usually make more than one attempt to deliver your order. In case you do not receive your order, please get in touch with us.<br/><br/><a href='#00' class='pagetop-link'>Move to top</a></p> </div><h2><a class='faqanchor'></a>Cancellations and Returns</h2><div class='item_container faqAccordion' id='b00'> <p><span style='font-weight:600;'>How do I place a cancellation request on V2Kart.com?</span><br/>If you wish to cancel your order, please follow these steps:<br/>1. Create a cancellation request online.<br/>2. Please click on the Cancel button against your order in the MY ORDERS section in My Account.<br/>Cancellation requests can be raised at any time before the shipping of the order. Once the order is cancelled, we will refund any prepaid amount as per our Return Policy.<br/>&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp         or<br/>1. Give call at our customer care number and ask for order cancellation<br/>2. Let the customer care person know your order number<br/>3. Customer care person will do the needful and your order will be cancelled<br/><br/><span style='font-weight:600;'>Q.How do I place a replacement request on V2Kart.com.com?</span><br/>If you want to replace a product on V2Kart.com, please follow these steps:<br/>1. Create a replacement request online. You can replace the product bought on V2Kart.com within 60-days of delivery.<br/> 2. Login to your V2Kart Account and go to MY ORDERS section. <br/> 3. Select the item you wish to replace and click on the Return/Replace button against the order.<br/> 4. Once the replacement request is created, we will ensure that the replacement is processed as soon as possible.<br/> &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp  &nbsp &nbsp &nbsp &nbsp &nbsp             or <br/> 1. Give call at our customer care number and register replacement request<br/> 2. Let the customer care person know your order number<br/> 3. Customer care person will do the needful and your replacement request will be processed<br/> 4. You need to fill the replacement form completely and put it with product<br/> 5. You can dispatch your order at below address after completion of process<br/> V2kart.com, Khasra No21/2, 22 Mubarikpur Village, Farruakh Nagar, Dist Gurgaon , Haryana<br/> 6. After quality check approval as per terms & conditions your product will be replaced or refund will be initiated.<br/> <br/><span style='font-weight:600;'>Q.Why was my order cancelled?</span><br/>We regret the inconvenience caused due to order cancellation. Your order may have been cancelled due to any of the following reasons:<br/> â€¢ If product is out of stock or is discontinued<br/> â€¢ Inaccuracies or errors in pricing information<br/> We will inform you about the cancellation of your order and share details if partial order is cancelled or whole. We will contact you if any additional information is required to accept your order.<br/><br/> <span style='font-weight:600;'>Q.What do I do if I receive wrong product?</span><br/>We take utmost care to ensure customer satisfaction. Unfortunately, if you receive a wrong product please raise a replacement request or get in touch with us. You will also have the option to choose refund for the product.<br/><br/> <span style='font-weight:600;'>Q.What do I do if I receive physically damaged product?</span><br/>Delivery is usually safe, but, if you receive a damaged product you can return/replace it. To avoid any hassle, go through the following steps:<br/> 1. On delivery, check if the product is packed properly, is factory sealed and there is no physical damage to the carton. <br/> 2. If you are concerned, don't open the product yourself. Call the V2Kart customer care for further assistance.<br/><br/> <span style='font-weight:600;'>I bought a product but it does not fit my size. Can I get it replaced?</span><br/>You can get the size exchanged within 60 days of the receipt of your order. Report your concern by filling the Contact Us form. We will get back to you and replace the product with the right size.<br/> <br/><span style='font-weight:600;'>I have requested a replacement, when will I receive it?</span><br/>Once you have raised a replacement request, our team will investigate and initiate the replacement process. You will receive an e-mail/sms advising you on the estimated delivery date. Based on customer location, delivery span varies. <br/><br/><span style='font-weight:600;'>Is there any product not eligible for replacement/return?</span><br/>All items which can be resold are always eligible for return. The following items are not eligible for return/replacement:<br/> Items that have been worn/washed/soiled<br/> Innerwear, lingerie cannot be returned on account of hygiene<br/> Products which were sold as combos/sets, are not eligible for return/replacement as individual items<br/> Seal open branded electronic items cannot be returned in case of not being happy with the product as they canâ€™t be resold<br/> In case of branded electronic items, brandsâ€™ return, repair and replacement policy will apply. <br/><br/><span style='font-weight:600;'>What if I choose to have my order replaced and the product is sold out?</span><br/>Replacement can be initiated only if the product is in stock. Unfortunately if the product is out of stock then refund is initiated after your confirmation. <br/><br/><a href='#00' class='pagetop-link'>Move to top</a> </p></div>   <h2><a class='faqanchor'></a>Refunds</h2><div class='item_container faqAccordion' id='c00'> <p> <span style='font-weight:600;'> What is V2Kart.com's 60-day Return Policy?</span><br/> V2Kart.com gives you the option to replace and/or return the products bought on V2Kart within 60 days of the receipt of the order. <br> You can return/replace the product if :<br/> â€¢ With the fitting of the product<br/> â€¢ Or if you receive a damaged product<br/> All items to be returned or replaced must be unused and in their original condition with all original tags and packaging intact. <br/><span style='font-weight:600;'>Exceptions to the Return Policy:</span><br/> Products such as Lingerie, innerwear, washed products, products sold as combos, opened electronic products are not eligible for return. <br/><br/><span style='font-weight:600;'>How long will it take me to receive the refund after I cancel the order?</span><br/> We take anywhere between 7-15 days to complete your refund request. The refund amount will be credited to the same account from where payment was made. Refunds will transfer to your bank account <br/><br/><span style='font-weight:600;'>I paid cash on delivery, how would I get the refund?</span><br/> If you chose to pay Cash on Delivery, the refund will be credited in the NEFT transfer to your bank account. For an NEFT transfer we would require the following details: <br/> <span style='font-weight:600;'>Bank Name</span><br/> <span style='font-weight:600;'>Account Holder Name</span><br/> <span style='font-weight:600;'>Bank Account Number</span><br/> <span style='font-weight:600;'>Branch Address</span><br/> <span style='font-weight:600;'>IFSC Code</span><br/> <br/><br/><span style='font-weight:600;'>How long will it take me to receive the refund for my return?</span><br/> We take anywhere between 7-15 days to complete your refund request. For all pre-paid orders, the refund amount will be credited to the same account from where payment was made. For all Cash on Delivery orders, NEFT transfer to your bank account. <br/><br/><span style='font-weight:600;'>Do I have to return the free gift received along with the product while returning the product?</span><br/> If the product bought on V2Kart.com comes with a free gift, you will have to return it along with the product you have raised return request for. <br/><br/><span style='font-weight:600;'>Is it possible to get an NEFT refund if I paid through Credit/Debit card or Netbanking?</span><br/> We are sorry, but the refund amount will be credited to the same account from where the payment was made. However, you can opt for an NEFT transfer to your bank account if your mode of payment was Cash on Delivery. <br/><br/><span style='font-weight:600;'>Do I need to pay the courier company to send my product back? Will I get the money back?</span><br/> Once you have raised a return/replace request on V2Kart, we will arrange for a reverse-pickup of your product. The delivery charges for your return/replace will be borne by us. Â  In case the facility of reverse-pickup is not available at your location, you will be required to ship the product to us. The shipping charges borne by you for the return/replace will be refunded back to you to your provided bank detailsÂ . We will reimburse upto Rs. 100 as shipping charges.Â <br/><br/><span style='font-weight:600;'>Will there be any deductions over the transaction value in case of refunds?</span><br/> In case of refund you will receive just the product cost. The service cost such as courier charges/COD charges will not be refunded.<br/><br/> <a href='#00' class='pagetop-link'>Move to top</a> </p></div><h2><a class='faqanchor' ></a>Purchasing on V2Kart.com</h2><div class='item_container faqAccordion' id='d00'>  <p> <br/><span style='font-weight:600;'>I haven't received any SMS/e-mail confirmation about the order I just placed on V2Kart. What should I do?</span><br/> Please fill in our Contact Us form with your transaction details and we will look into it immediately and get back to you with the confirmation. <br/><br/><span style='font-weight:600;'>I have added a few products to my cart but I won't be buying them now. Can you save my list?</span><br/> Yes, absolutely. We will keep your cart saved with us. The selected items will not be removed unless you remove those. However, since our inventory sells out fast, it is advised that you complete your purchase as soon as you can. <br/><br/><span style='font-weight:600;'>Can I buy more than one product in one go?</span><br/> Yes, you can. As you click the Buy button on a product page, it gets added to your shopping cart. You can add as many products as you want and then pay for the entire order in one go! <br/><br/><span style='font-weight:600;'>I am interested in a product that is sold out. How can I buy it?</span><br/> Don't be disheartened if a product you like is not available currently. Click the Notify Me button/link on the product page. We will let you know the moment your selected product is back in stock. <br/><br/><span style='font-weight:600;'>I don't know how to buy online. What should I do?</span><br/> Don't worry if you have never bought online. Here are the steps to buy products and deals on V2Kart.<br/> 1. Click the Buy <span style='font-weight:600;'>button</span> on the product or deal you like.<br/> 2. Click the<span style='font-weight:600;'> Proceed to Payment</span> button.<br/> 3. Enter your name, e-mail ID and phone number next.<br/> 4. Enter your shipping address if you are buying products.<br/> 5. Click the <span style='font-weight:600;'>Proceed to Payment</span> button.<br/> 6. Select your payment mode (Credit card, Debit card, Netbanking, Cash on Delivery, Credit Card EMI).<br/> If you are not comfortable paying online, you can choose the Cash on Delivery option and pay on the actual delivery of your product. The option, however, does not apply if you are buying deals. <br/><br/><span style='font-weight:600;'>How do I know my purchase is complete?</span><br/> You will see a confirmation message on the screen along with your order number. If you have bought deals, you will also receive your V2Kart voucher over email and SMS to confirm your purchase. <br/><br/><span style='font-weight:600;'>I did not get an invoice with my product bought from V2Kart. What should I do?</span><br/> All V2Kart products are delivered along with an invoice. In case an invoice is not given to you along with your delivered product, please fill in our Contact Us form with your transaction details and we will look into it immediately.<br/><br/> <a href='#00' class='pagetop-link'>Move to top</a></p> </div>  <h2><a class='faqanchor' name='e00'></a>My account, login and alerts</h2><div class='item_container faqAccordion' id='e00' > <p> <br/><span style='font-weight:600;'>I don't remember my password. Help!</span><br/> Don't worry. Here's what you need to do:<br/> 1. Click <span style='font-weight:600;'>My Account</span> on the top right of the site page to access the login window.<br/> 2. Click the <span style='font-weight:600;'> Forgot your password </span>link available on the bottom right of the login window.<br/> 3. Enter your e-mail ID in the displayed field.<br/> We will send you a link in your e-mail.<br/> 4. You can reset your password instantly by clicking the link.<br/> <br/><br/><span style='font-weight:600;'>I am concerned about the privacy of my personal information I have shared with V2Kart.</span><br/> We understand that you value your privacy, and we respect it. V2Kart maintains complete confidentiality and privacy of the data that you share with us. Please go through our privacy policy in case you need more details. <br/><br/><span style='font-weight:600;'>Is it necessary for me to sign up before I buy anything on V2Kart?</span><br/> Not at all. You just need to enter a valid e-mail id before making a purchase. And choose the option of 'Continue without password'. <br/><br/><span style='font-weight:600;'>Are there any perks of signing up on V2Kart?</span><br/> Yes. There are definitely a few advantages of signing up:<br/> You will have quicker and smoother transactions<br/> Your past shipping addresses will be saved so that you don't have to enter them all over again in your next visit.<br/> You can track the history of every order with their details in your account.<br/> Thinking signing up is complicated? All you need to be ready with is your e-mail ID!<br/><br/> <a href='#00' class='pagetop-link'>Move to top</a> </p></div> <h2><a class='faqanchor'></a>Payments</h2><div class='item_container faqAccordion' id='f00'>  <p> <span style='font-weight:600;'>What is COD?</span><br/> COD refers to Cash On Delivery. It doesnâ€™t matter if you donâ€™t want to use your credit/debit card or use internet banking. You have the option of paying for the purchase at your doorstep. Just place your order and make cash payment upon the delivery of your order. <br/><br/><span style='font-weight:600;'>Can I pay COD (Cash On Delivery) for every product I buy on V2Kart?</span><br/> The cash-on-delivery option is not available on all products. The product details page indicates whether cash on delivery is applicable for a particular product. <br/><br/><span style='font-weight:600;'>My transaction failed but the money was deducted from my account. What do I do?</span><br/> Please fill in our 'Contact us' form available under the 'Any other query' section with your transaction details and we will look into it immediately.If your money has not reached us, it will surely be refunded back to your account. <br/><br/><span style='font-weight:600;'>How does the refund process work and what is the time limit?</span><br/> Once the order is cancelled at the merchantâ€™s website or in case of failed transactions, V2Kart's trustpay ensures that you get the amount to be refunded within 7-15 days of cancelling the order depending upon the bank. <br/><br/><span style='font-weight:600;'>What are the different modes of payment on V2Kart?</span><br/> You can use any one of the following payment methods:<br/> Credit card (Visa/ Master/ Amex)<br/> Credit card EMI (in 3 and 6 months installments)<br/> Debit card (All leading bank debit cards)<br/> Netbanking (For all leading banks )<br/> Cash on Delivery (Available on select deals and products) <br/><br/><span style='font-weight:600;'>Are there any hidden costs when I make a purchase on V2Kart?</span><br/> None. We will never hide any cost from you. The price and charges mentioned on the site are final.When you are buying deal vouchers, please go through the fine print to understand what you need to pay at the vendor's outlet (restaurant, salon, spa, entertaintment/adventure complex). <br/><br/><span style='font-weight:600;'>I would like to pay when my order is delivered. Is that possible?</span><br/> Absolutely! You can make use of our Cash on Delivery option. By selecting this payment option, you are required to pay money on the actual delivery of your product(s). <br/><br/><span style='font-weight:600;'>Can I pay by cheque upon delivery of my order?</span><br/> Sorry, we cannot accept cheques. It is advisable to keep the money ready when the delivery is expected.<br/><br/> <a href='#00' class='pagetop-link'>Move to top</a></p> </div></div></div></div></div>"
+;;paymentParagraph;"<div class='col-xs-12 col-sm-12 col-md-12'> <div class='heading'>Payment</div><div class='description cms-content staticpagedescription'> <p class='bold'>Q. How can I pay for my order at V2Kart.com?</p><p>We support the following payment options at V2Kart.com:</p><ul> <li style='margin-left:20px;list-style-type:disc;'>Cash On Delivery (available in select pincodes)</li><li style='margin-left:20px;list-style-type:disc;'>Credit Card</li><li style='margin-left:20px;list-style-type:disc;'>Debit Card</li><li style='margin-left:20px;list-style-type:disc;'>Net Banking</li></ul></br><p class='bold'>Q. What should I do if my payment fails?</p><p>Please retry making the payment after ensuring that the information entered is accurate, including all account details, billing addresses and passwords. If your payment still fails, you can use the Cash on Delivery(COD) payment option on the payment page to place your order.</p><p>If your payment is debited from your account after a payment failure, it will be credited back within 7-10 business days, after we receive a confirmation from the bank.</p></div></div>"
+;;trackOrderParagraph;"<div class='col-xs-12 col-sm-12 col-md-12'> <div class='heading'>Order Tracking and Delivery</div><div class='description cms-content staticpagedescription'> <p class='bold'>Q. How do I check the status of my order?</p><p>Once you place a order , you will recieve a SMS and a email .<br>At time of Dispatch we will send you a SMS with your tracking detail <br>If any unforseen event is there and a delay occurs we will update you from our end.</p><p class='bold'>Q. How can I check if V2Kart.com delivers to my PIN Code?</p>You can find out if V2Kart.com delivers to your PIN Code using the courier serviceability tool located on all product detail pages. Please enter your PIN code into the tool and choose your mode of payment to get this information.<br/>The PIN codes serviced by us are frequently updated, so if we do not deliver to your PIN code today, please come back and check to see if this has changed.</p><p class='bold'>Q. How long does it take for an order to be delivered to me?</p>We deliver most of our orders within 7 days from the order date. You can find out how long we will need to deliver your order to your specific pincode using the courier serviceability tool located on all product detail pages</p><p class='bold'>Q. How are orders placed on V2Kart.com delivered to me?</p>All orders placed on V2Kart.com are dispatched through our own courier service - V2Kart.com Logistics, or through other courier partners such as Aramex, Delhivery etc. </p><p class='bold'>Q. Does V2Kart.com deliver products outside India?</p>No. At this point, V2Kart.com delivers products only within India.</p><p class='bold'>Q. How will I know if my order is placed successfully?</p>1. We will send you a message. Do check your phone.</br>2. We will put through an e-mail with the details of your product. Be sure you go through that.</br>3. You can also check the order in the ""My Accounts"" tab.</p></div></div>"
+;;termsAndConditionParagraph;"<div class='col-xs-12 col-sm-12 col-md-12'> <div class='heading'>Terms and Conditions</div><div class='description cms-content staticpagedescription'> <p class='bold'> Use of the Website </p> <p> By accessing the website, you warrant and represent to the website owner that you are legally entitled to do so and to make use of information made available via the website. </p> <p class='bold'> Trademarks </p> The trademarks, names, logos and service marks (collectively ""trademarks"") displayed on this website are registered and unregistered trademarks of the website owner. Nothing contained on this website should be construed as granting any license or right to use any trademark without the prior written permission of the website owner. <p> </p> <p class='bold'> External links </p> External links may be provided for your convenience, but they are beyond the control of the website owner and no representation is made as to their content. Use or reliance on any external links and the content thereon provided is at your own risk. <p> </p> <p class='bold'> Warranties </p> The website owner makes no warranties, representations, statements or guarantees (whether express, implied in law or residual) regarding the website. <p> </p> <p class='bold'> Disclaimer of liability </p> The website owner shall not be responsible for and disclaims all liability for any loss, liability, damage (whether direct, indirect or consequential), personal injury or expense of any nature whatsoever which may be suffered by you or any third party (including your company), as a result of or which may be attributable, directly or indirectly, to your access and use of the website, any information contained on the website, your or your company's personal information or material and information transmitted over our system. In particular, neither the website owner nor any third party or data or content provider shall be liable in any way to you or to any other person, firm or corporation whatsoever for any loss, liability, damage (whether direct or consequential), personal injury or expense of any nature whatsoever arising from any delays, inaccuracies, errors in, or omission of any share price information or the transmission thereof, or for any actions taken in reliance thereon or occasioned thereby or by reason of non-performance or interruption, or termination thereof. We as a merchant shall be under no liability whatsoever in respect of any loss or damage arising directly or indirectly out of the decline of authorization for any Transaction, on Account of the Cardholder having exceeded the preset limit mutually agreed by us with our acquiring bank from time to time <p> </p> <p class='bold'> Conflict of terms </p> If there is a conflict or contradiction between the provisions of these website terms and conditions and any other relevant terms and conditions, policies or notices, the other relevant terms and conditions, policies or notices which relate specifically to a particular section or module of the website shall prevail in respect of your use of the relevant section or module of the website. <p> </p> <p class='bold'> Serviceability </p> Any provision of any relevant terms and conditions, policies and notices, which is or becomes unenforceable in any jurisdiction, whether due to being void, invalidity, illegality, unlawfulness or for any reason whatever, shall, in such jurisdiction only and only to the extent that it is so unenforceable, be treated as void and the remaining provisions of any relevant terms and conditions, policies and notices shall remain in full force and effect. <p> </p> <p class='bold'> Applicable laws (choice of venue and forum) </p> Use of this website shall in all respects be governed by the jurisdiction of the New Delhi , India, regardless of the laws that might be applicable under principles of conflicts of law. The parties agree that the courts located in New Delhi,india shall have exclusive jurisdiction over all controversies arising under this agreement and agree that venue is proper in those courts. <p> </p> </div></div>"
+;;returnsParagraph;"<div class='col-xs-12 col-sm-12 col-md-12'> <div class='heading'>Returns </div><div class='description cms-content staticpagedescription'> <p class='bold'>Q. What is V2Kart.com's Return and Exchange Policy?</p><p>V2Kart.com's Return and Exchange Policy offers you the option to return or exchange items purchased on V2Kart.com within 60 days of receipt. In case of returns, we will credit the amount you paid for the products as cashback into your V2Kart cashback account or will be credited to your bank account. If you choose to exchange the item for reason of mismatch of size or receipt of a defective item, you will be provided with a replacement of the item, free of cost. However an exchange is subject to availability of the item in our stock.</p><p class='bold'>The following EXCEPTIONS and RULES apply to this Policy:</p><p>Certain innerwear, cosmetics, socks, deodorants, perfumes, fashion accessories, hair accessories cannot be exchanged or returned. The list of such items includes</p><p>Briefs, Shape wear bottoms or any lingerie set that includes a brief.</p><p>Anklets, Bangles, Earrings, Bracelets, Brooches, Earrings, Pendants, Necklaces and Rings.</p><p>Mittens, Socks and Wrist-Bands</p><p>Due to their intimate nature, we handle returns and exchanges for innerwear, sleepwear and lingerie items differently:</p><p>Only self-ship return allowed for such items, the pickup facility will not be available.</p><p class='bold'>These items cannot be exchanged.</p><p>Fine jewelry products must be returned within 15 days from the day of delivery, To return your fine jewelry purchase, please call customer care</p><p>All items to be returned or exchanged must be unused and in their original condition with all original tags and packaging intact (for e.g. shoes must be packed in the original shoe box as well and returned), and should not be broken or tampered with.</p><p>Only size exchanges are allowed. Items can be exchanged for a similar size or a different size.</p><p>Exchanges are allowed only if your address is serviceable for an Exchange by our logistics team.</p><p>In case you had purchased an item which has a free gift/offer associated with it and you wish to return the item,maximum of Refunds/Free item MRP will be debited until the satisfactory receipt of all free gift(s)/offer item(s) that are shipped along with it.</p><p>If you choose to self-ship your returns, kindly pack the items securely to prevent any loss or damage during transit. For all self-shipped returns, we recommend you use a reliable courier service.</p><p>Once your return is received by us, you will be reimbursed maximum upto Rs. 100/- towards shipping costs per order/parcel, if self-shipped. This is subject to your return having met the requirements of this Policy.</p><p class='bold'>Q. What is V2Kart.com's 60 day return and exchange policy? How does it work?</p><p>V2Kart.com's 60 day returns and exchange policy gives you an option to return or exchange items purchased on V2Kart.com for any reason within 60 days of receipt of the item. We only ask that you don't use the product and preserve its original condition, tags, and packaging. You are welcome to try on a product but please take adequate measure to preserve its condition</p><p>There are two ways to return the product to us. In most locations we offer a free pick up service for your return. You will see a pickup option when you submit a return request. If we don't offer a pick up at your location, or if you prefer, you can ship an item back to us. In such cases, we will credit your cashback account with  maximum upto Rs. 100 to cover your cost of shipping the product back to us.</p><p>Once we pick up or receive your return, we will do a quality check of the product at our end and if the product passes our quality check we will credit the amount you paid for the products in your account/Credit Card . If you wish to receive a refund, please send an email with the following details from your registered email address to <a href='mailto: payment@V2Kart.com' title=' payment@V2Kart.com'>payment@V2Kart.com.</a> If the picked up product does not pass the quality check we shall return it back to you.</p><p class='bold'>Bank Details applicable for COD orders only.</p><ul> <li>Order Number</li><li>Bank Name</li><li>Account Holder Name</li><li>Bank Account Number</li><li>Branch Address</li><li>IFSC Code</li></ul> <h3>Exchange</h3><p>In case if you have received a faulty product then you can exchange an item purchased from V2Kart.com for a new size or the original size for no extra charge. However all exchanges are subject to stock availability and subject to your address being serviceable for an exchange. If you choose to exchange an item, our delivery representative will deliver the new item to you and simultaneously pick up the original item from you. Please note that we are only able to offer size exchanges. If you wish to exchange your item for an alternative product, we suggest that you return it to obtain a cash-back refund and purchase the new item separately.</p><p>The following products sold on V2Kart.com are exceptions to this policy:</p><p>Certain innerwear, cosmetics, socks, deodorants, perfumes, fashion accessories, hair accessories cannot be exchanged or returned. The list of items where returns or exchanges is not supported includes:</p><p>Bra, Vests, Briefs, Trunks and Lingerie.</p><p>Anklets, Bangles, Earrings, Bracelets, Brooches, Earrings, Pendants, Necklaces and Rings.</p><p>Mittens, Socks and Wrist-Bands.</p><p>Fine jewelry products must be returned within 15 days of delivery.</p><p class='bold'>Q. How do I return a product to V2Kart.com?</p><p>To return a product to V2Kart.com, please follow these steps:</p><p>Create a Returns Request online by going to the My Returns section of V2Kart.com. You can return almost all products purchased from V2Kart.com within 60 days of receiving the product. Follow the screens that come up after clicking on 'Return a Product' button. Please make a note of the Return ID that that we generate at the end of the process.</p><p>Fill out a returns form: You can use the returns form that was sent with the order or download and print one at the link available by clicking on your return ID. If you don't have the returns form or can't access a printer, please write the following information on a sheet of paper and use that sheet as the returns form:</p><ul> <li>Order No</li><li>Return Id</li></ul> <p>Keep the item ready for pick up or ship it to us: You can choose to schedule a pick-up of your order or self-ship your return to us. We offer pick-ups of your return in select locations - this option will be available to you when you submit your return online.</p><p>1. Pick-up: If you choose to schedule a pick-up, please put the product with accompanying tag and a filled out returns form in a packet. Leave the packet ready and open to expedite the return pickup. Our staff will initially examine the product at the time of pickup and a further quality check of the product will be conducted at our Distribution Center. Once your product has been approved by our quality staff we will credit your account with cashback.</p><p>2. Self-ship: If you choose to self-ship, please pack the product in its original package with accompanying tags and a filled out returns form. Kindly address the package to the address of the delivery center closest to you. We have listed out the addresses of the delivery centers in another section on this page.</p><p>We will send you a confirmation email as we receive the shipment at our warehouse. At any time, you can track the status of your return request by going to the My V2Kart section.</p><p class='bold'>Q. How do I place an exchange request on V2Kart.com?</p><p>If you would like to exchange some products purchased from V2Kart.com, please follow these steps:</p><p>Create an exchange request online. You can exchange any product purchased from V2Kart.com within 60 days of delivery by going to the My V2Kart section. Please select the item you wish to exchange. If your address is serviceable for exchange you will be able to proceed and generate an exchange id. Please note down your exchange id for future reference</p><p>Fill out a returns form for the original product that you are exchanging. You can use the returns form that was sent with the original order. If you don't have a returns form, please write the following information on a sheet of paper and use this sheet as the returns form.</p><ul> <li>Original Order Id,</li><li>Exchange Order Id</li></ul> <p>Place the product in a packet but do not seal it. In the packet, please include the product along with the tags that it came with and a completed returns form</p><p>Hand over the original product to our delivery staff and receive the exchange item from him. Please ensure that you have the original item available with you at the same address which has been selected for delivery of the exchange item.,</p><p>At any time, you can track the status of your exchange requests by going to the My V2Kart section.</p><p class='bold'>Q. How long would it take me to receive the refund for my return?</p><p>It can take up to 15 days for you to receive your refund. We take up to 2 days to process the refund once we receive the product at our returns processing facility. Therefore the return time really depends on the time it takes the courier company to deliver the packet to the returns processing facilty.</p><p class='bold'>Q. How do I return multiple products from a single order?</p><p>If you are returning multiple products from a single order, you will receive a separate Return ID and email for each item. However, you can ship all the products delivered in a single order in a single shipment. Please include the Return IDs for all the products in a single return form.</p><p class='bold'>Q. Does V2Kart.com pick up the product I want to return from my location?</p><p>Currently we pickup returns only in select PIN Codes. If your delivery location is serviceable, you will be able to see and select the pickup option when you queue your return online.</p><p>We will pick up the return within 72 hours of your placing the request. Please keep the return shipment ready.</p><p class='bold'>Q. I would like to Self-Ship the return myself to V2Kart.com. How can I do this?</p><p>If your pincode is not covered by our pickup service, you will need to self-ship the return item by courier. If we do not offer a return pick up service in your area or you choose to ship the return to us, please send the return package and the returns form inside to the nearest delivery centre. For all self-shipped returns, you will be reimbursed Rs. 100 towards your shipping costs. This is subject to your returns being inspected and successfully processed upon receipt at our end.</p><p class='bold'> Q. Where should I send my return?</p><p>You can send the return to any one of the following addresses depending on your location:</p></div></div>"
+
+
+################################################## Fixed Right Banner Components ######################################################################################
+
+INSERT_UPDATE Media;$contentCV[unique=true]	;code[unique=true]				        ;realfilename		          ;@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator] ;mime[default='image/png'];folder(qualifier)[default='images'];&imageRef
+				   ;;guarntee-icon.png;guarntee-icon.png ;$siteResource/images/guarntee-icon.png;image/png;;guarntee-icon.png
+				   ;;shipping-icon.png;shipping-icon.png ;$siteResource/images/shipping-icon.png;image/png;;shipping-icon.png						        							        
+				   ;;return-icon.png;return-icon.png  ;$siteResource/images/return-icon.png	;image/png;;return-icon.png
+
+
+UPDATE BannerComponent;$contentCV[unique=true];uid[unique=true];$picture[lang=$lang];content[lang=$lang];headline[lang=$lang]
+;;warrentyBannerComponent        	;guarntee-icon.png          ;Money Back;Guarantee
+;;freeShipingBannerComponent        ;shipping-icon.png          ;Shipping above Rs. 999;Free			   				   
+;;free-easyBannerComponent        	;return-icon.png         ;Free Return;60 Days
+################################################# Impex for Header Stripe Start ##########################################
+UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];content[lang=$lang]
+;;HeaderStripeParagraphComponent;"&nbsp;"
+################################################# Impex for Header Stripe End ##########################################

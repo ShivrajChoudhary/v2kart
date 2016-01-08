@@ -1,0 +1,9 @@
+$contentCatalog=v2kartContentCatalog
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+$picture=media(code, $contentCV);
+   
+$siteResource=jar:in.com.v2kart.initialdata.setup.InitialDataSystemSetup&/v2kartstore/import/sampledata/contentCatalogs/$contentCatalog
+   
+# Language
+$lang=en
+   

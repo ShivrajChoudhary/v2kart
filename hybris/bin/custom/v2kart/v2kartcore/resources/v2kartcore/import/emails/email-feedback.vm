@@ -1,0 +1,18 @@
+<html>
+<body>
+
+
+Feedback is as below :
+
+	<p>	Email      :  $ctx.feedbackData.email	 </p>
+    <p>	Phone No.    :  $ctx.feedbackData.mobileNumber </p>
+    <p>	Category  :  $ctx.feedbackData.category </p>
+    <p>	Rating :  $ctx.feedbackData.rating </p>
+    #if ( $ctx.feedbackData.message )
+    <p>	Message   :  $ctx.feedbackData.message </p>
+	#else
+		
+	#end
+    
+</body>
+</html>

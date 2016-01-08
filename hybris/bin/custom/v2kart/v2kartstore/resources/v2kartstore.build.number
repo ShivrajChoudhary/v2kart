@@ -1,0 +1,9 @@
+#Ant properties
+#Thu Jun 12 21:53:50 CEST 2014
+builddate=20140612 2153
+description=v2kartstore
+name=v2kartstore
+releasedate=20140530 1917
+vendor=hybris
+version=5.2.0.0
+version.api=5.2.0

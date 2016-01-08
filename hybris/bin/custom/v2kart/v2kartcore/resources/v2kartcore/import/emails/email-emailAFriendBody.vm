@@ -1,0 +1,35 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+</head>
+<body>
+<ul>
+	<p>
+		Your friend found this interesting and wants you to check it out.
+	</p>
+	<p>
+		$ctx.customerNotificationData.currentUserName has suggested you the following link:
+	</p>
+    <p>
+        <a href="$ctx.customerNotificationData.url">$ctx.customerNotificationData.name</a>
+    </p>
+    <p>
+    	<img src="$ctx.customerNotificationData.mediaUrl">
+    </p>
+    <p>
+    	Product Price : R$ctx.customerNotificationData.productPrice
+    <p>
+        In case the above link doesn't work, please copy and paste the following url in the address bar of your browser 
+    </p>
+    <p>
+        $ctx.customerNotificationData.url
+    </p>
+    <p>
+        $ctx.customerNotificationData.message
+    </p>
+    <p>
+        ${ctx.customerNotificationData.site}.com
+    </p>
+</ul>
+</body>
+</html>

@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    [y] hybris Platform
+
+    Copyright (c) 2000-2013 hybris AG
+    All rights reserved.
+
+    This software is the confidential and proprietary information of hybris
+    ("Confidential Information"). You shall not disclose such Confidential
+    Information and shall use it only in accordance with the terms of the
+    license agreement you entered into with hybris.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd"
+    profile="v2kart">
+
+    <!--
+        The hybris platform provides one single Spring application context for beans located at the jalo layer.
+        Each extension can add beans to this context by specifying them at this configuration file.
+
+        You can use and/or redefine beans defined at configuration files of other extensions as well as
+        adding new one.
+
+        If you want to locate this file at a different location or want to use several files for better,
+        structuring, please use the '<yourextension>.application-context' property at your project.properties file.
+        There you can specify a comma separated list of files where first is tried to find a file per classpath and
+        then per file system.
+
+
+        If you want to configure beans for your web module please have a look at
+        your web/webroot/WEB-INF/<extname>-web-spring.xml.
+    -->
+
+    <!-- Example how to override a manager -->
+    <!--
+        <bean id="core.productManager" class="in.com.v2kart.v2kartpayupaymentintegration.jalo.V2kartpayupaymentintegrationProductManager" init-method="init"
+        destroy-method="destroy" />
+    -->
+
+
+    <!-- Example how to configure the class to use for jalo session creation -->
+    <!--
+        <bean id="jalosession" class="de.hybris.platform.jalo.JaloSessionFactory">
+        <property name="targetClassName" value="in.com.v2kart.v2kartpayupaymentintegration.jalo.V2kartpayupaymentintegrationJaloSession"/>
+        </bean>
+    -->
+
+
+    <!-- Example how to override an item -->
+    <!--
+        <bean id="de.hybris.platform.jalo.product.Product" class="in.com.v2kart.v2kartpayupaymentintegration.jalo.V2kartpayupaymentintegrationProduct"
+        scope="prototype" />
+    -->
+
+    <!--
+        Example how to register and use an AOP aspect
+        Also see http://static.springframework.org/spring/docs/2.5.x/reference/aop.html
+    -->
+
+    <!--
+        <bean id="v2kartpayupaymentintegrationProfBean" class="in.com.v2kart.v2kartpayupaymentintegration.aop.V2kartpayupaymentintegrationProfilingAspect"/>
+        <aop:config proxy-target-class="true">
+        <aop:aspect id="v2kartpayupaymentintegrationProfAspect" ref="v2kartpayupaymentintegrationProfBean" >
+        <aop:pointcut id="profiledMethods"
+        expression="execution(* getModificationTime(..))" />
+        <aop:around pointcut-ref="profiledMethods" method="profile" />
+        </aop:aspect>
+        </aop:config>
+    -->
+
+
+    <!-- some other examples of a pointcut that matches everything:
+
+        <aop:pointcut id="profiledMethods"
+        expression="bean(de.hybris.platform.jalo.user.Customer) &amp;&amp;
+        !execution(* getPK(..))" />
+        <aop:pointcut id="profiledMethods" expression="execution(* *(..))" />
+    -->
+
+
+
+    <!-- V2 PAYU Payment Gateway -->
+
+    <bean id="createPAYUPaymentRequestStrategy" class="in.com.v2kart.v2kartpayupaymentintegration.services.impl.CreatePAYUPaymentRequestStrategyImpl">
+        <property name="cartService" ref="cartService" />
+        <property name="customerEmailResolutionService" ref="customerEmailResolutionService" />
+    </bean>
+
+    <bean id="payUPaymentResponseService" class="in.com.v2kart.v2kartpayupaymentintegration.services.impl.PAYUPaymentResponseServiceImpl"></bean>
+
+    <bean id="payUPaymentResponseStrategy" class="in.com.v2kart.core.payment.services.impl.V2PaymentResponseStrategyImpl">
+        <property name="createPaymentResultConverter" ref="createPAYUPaymentResultConverter" />
+    </bean>
+
+    <bean id="createPAYUPaymentResultConverter" parent="abstractPopulatingConverter">
+        <property name="targetClass" value="in.com.v2kart.v2kartpayupaymentintegration.data.response.PAYUPaymentResponse" />
+        <property name="populators">
+            <list>
+                <ref bean="payUResponsePaymentInfoPopulator" />
+            </list>
+        </property>
+    </bean>
+
+    <bean id="payUResponsePaymentInfoPopulator" class="in.com.v2kart.v2kartpayupaymentintegration.populator.response.PAYUResponsePaymentInfoPopulator"
+        parent="abstractResultPopulator" />
+
+    <bean id="payUPaymentResponseDataConverter" parent="abstractPopulatingConverter">
+        <property name="targetClass" value="de.hybris.platform.acceleratorservices.payment.data.PaymentData" />
+        <property name="populators">
+            <list>
+                <ref bean="payUPaymentResponseDataPopulator" />
+            </list>
+        </property>
+    </bean>
+
+    <bean id="payUPaymentRequestDataConverter" parent="abstractPopulatingConverter">
+        <property name="targetClass" value="de.hybris.platform.acceleratorservices.payment.data.PaymentData" />
+        <property name="populators">
+            <list>
+                <ref bean="payUPaymentRequestDataPopulator" />
+            </list>
+        </property>
+    </bean>
+
+    <bean id="payUPaymentResponseDataPopulator" class="in.com.v2kart.v2kartpayupaymentintegration.populator.response.PAYUPaymentResponseDataPopulator" />
+    <bean id="payUPaymentRequestDataPopulator" class="in.com.v2kart.v2kartpayupaymentintegration.populator.request.PAYURequestPopulator" />
+    <bean id="payUEncryptionService" class="in.com.v2kart.v2kartpayupaymentintegration.services.impl.PAYUEncryptionServiceImpl" />
+
+    <bean name="payUPaymentService" class="in.com.v2kart.v2kartpayupaymentintegration.services.impl.PAYUPaymentServiceImpl" parent="v2PaymentService"
+        scope="tenant">
+        <property name="createPAYUPaymentRequestStrategy" ref="createPAYUPaymentRequestStrategy" />
+        <property name="payUPaymentResponseStrategy" ref="payUPaymentResponseStrategy" />
+        <property name="payUPaymentResponseDataConverter" ref="payUPaymentResponseDataConverter" />
+        <property name="payUEncryptionService" ref="payUEncryptionService" />
+        <property name="payURefundPaymentCommand" ref="payURefundPaymentCommand" />
+    </bean>
+
+    <bean name="payURefundPaymentCommand" parent="payUCommand">
+        <property name="payUCommandResponseClass">
+            <value type="java.lang.Class">in.com.v2kart.v2kartpayupaymentintegration.data.response.PayURefundCommandResponse</value>
+        </property>
+    </bean>
+
+    <!-- Facade -->
+
+    <bean name="payUPaymentFacade" class="in.com.v2kart.v2kartpayupaymentintegration.facades.impl.PAYUPaymentFacadeImpl" parent="v2PaymentFacade">
+        <property name="payUPaymentService" ref="payUPaymentService" />
+        <property name="payUEncryptionService" ref="payUEncryptionService" />
+        <property name="payUPaymentRequestDataConverter" ref="payUPaymentRequestDataConverter" />
+    </bean>
+
+    <bean name="payUCommand" class="in.com.v2kart.v2kartpayupaymentintegration.services.impl.PayUCommandImpl" abstract="true">
+        <property name="postUrl" value="${post.payu.command.url}" />
+        <property name="payUCommandResponseClass">
+            <value type="java.lang.Class">in.com.v2kart.v2kartpayupaymentintegration.data.response.PayUAbstractCommandResponse</value>
+        </property>
+    </bean>
+
+</beans>

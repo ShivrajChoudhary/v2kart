@@ -1,0 +1,98 @@
+<?xml version="1.0"?>
+<!--
+2014 - V2kart
+ -->
+
+<project name="V2kart Config Build">
+
+	<property name="platformhome" location=".." />
+	<property name="hybris.config.dir" value="${platformhome}/config" />
+	<property name="project.config.common.dir" value="${platformhome}/config_template/hybris/common" />
+
+	<property name="project-env" value="${env}" />
+	<property name="project.config.environment.dir" value="${platformhome}/config_template/hybris/env/${project-env}" />
+
+	<exec dir="${basedir}" executable="hostname" outputproperty="host.name" />
+	<property name="project.config.server.dir" value="${platformhome}/config_template/hybris/server/${host.name}" />
+
+	<echo message="Project environment - [${project-env}] AND host - [${host.name}]" />
+
+
+	<!-- Generate hybris configurations by concatenating environment and common files together -->
+
+	<taskdef resource="net/sf/antcontrib/antlib.xml" classpath="${platformhome}/bin/platform/lib/ant-contrib-1.0b3.jar" />
+
+	<concat destfile="${hybris.config.dir}/local.properties" overwrite="yes">
+		<string>
+###################################################################################
+	
+#					COMMON ENVIRONMENT CONFIGURATIONS
+	
+###################################################################################
+</string>
+		<filelist dir="${project.config.common.dir}" files="local.properties" />
+		<string>
+	
+	
+###################################################################################
+		
+#					PROJECT ENVIRONMENT CONFIGURATIONS - [${project-env}]
+		
+###################################################################################
+		</string>
+		<filelist dir="${project.config.environment.dir}" files="local.properties" />
+	</concat>
+
+	<if>
+		<available file="${project.config.server.dir}/local.properties" />
+		<then>
+			<concat destfile="${hybris.config.dir}/local.properties" append="yes">
+				<string>
+
+
+###################################################################################
+		
+#					SERVER ENVIRONMENT CONFIGURATIONS - [${host.name}]
+		
+###################################################################################
+</string>
+				<filelist dir="${project.config.server.dir}" files="local.properties" />
+			</concat>
+		</then>
+	</if>
+
+
+	<!-- Copying the other configurations using 'Always overwrite' policy -->
+
+	<sequential>
+		<copy todir="${hybris.config.dir}" overwrite="yes" verbose="true">
+			<fileset dir="${project.config.common.dir}">
+				<exclude name="local.properties" />
+			</fileset>
+		</copy>
+
+		<copy todir="${hybris.config.dir}" overwrite="yes" verbose="true">
+			<fileset dir="${project.config.environment.dir}">
+				<exclude name="local.properties" />
+			</fileset>
+		</copy>
+		<if>
+			<available file="${project.config.server.dir}" />
+			<then>
+				<copy todir="${hybris.config.dir}" overwrite="yes" verbose="true">
+					<fileset dir="${project.config.server.dir}">
+						<exclude name="local.properties" />
+					</fileset>
+				</copy>
+			</then>
+		</if>
+		<if>
+			<available file="${hybris.config.dir}/key" />
+			<then>
+				<move todir="${hybris.config.dir}/licence" verbose="true" overwrite="true">
+					<fileset dir="${hybris.config.dir}/key" />
+				</move>
+			</then>
+		</if>
+	</sequential>
+</project>

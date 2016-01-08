@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    *******************************************************************************************************************
+    SUPERCSV PARSER CONFIGURATION FILE
+    *******************************************************************************************************************
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:util="http://www.springframework.org/schema/util"
+
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
+           http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd
+           ">
+
+    <!--
+        *******************************************************************************************************************
+        PRE-DEFINED CELL PROCESSOR CONSTRAINTS FOR SUPERCSV
+        *******************************************************************************************************************
+    -->
+
+    <bean id="trim" class="org.supercsv.cellprocessor.Trim">
+    </bean>
+
+    <bean id="trimOptional" class="org.supercsv.cellprocessor.Optional">
+        <constructor-arg>
+            <bean class="org.supercsv.cellprocessor.Trim" />
+        </constructor-arg>
+    </bean>
+
+    <bean id="parseBool" class="org.supercsv.cellprocessor.Trim">
+        <constructor-arg>
+            <bean class="org.supercsv.cellprocessor.ParseBool" />
+        </constructor-arg>
+    </bean>
+
+    <bean id="parseYesNoBool" class="org.supercsv.cellprocessor.Trim">
+        <constructor-arg>
+            <bean class="org.supercsv.cellprocessor.ParseBool">
+                <constructor-arg value="yes" />
+                <constructor-arg value="no" />
+            </bean>
+        </constructor-arg>
+    </bean>
+
+    <bean id="parseYesNoBoolOptional" class="org.supercsv.cellprocessor.Optional">
+        <constructor-arg ref="parseYesNoBool" />
+    </bean>
+
+    <bean id="parseInt" class="org.supercsv.cellprocessor.Trim">
+        <constructor-arg>
+            <bean class="org.supercsv.cellprocessor.ParseInt" />
+        </constructor-arg>
+    </bean>
+
+    <bean id="parseDouble" class="org.supercsv.cellprocessor.Trim">
+        <constructor-arg>
+            <bean class="org.supercsv.cellprocessor.ParseDouble" />
+        </constructor-arg>
+    </bean>
+
+
+    <bean id="parseDoubleOptional" class="org.supercsv.cellprocessor.Optional">
+        <constructor-arg ref="parseDouble" />
+    </bean>
+
+    <bean id="optionalStrMin6Max20" class="org.supercsv.cellprocessor.Optional">
+        <constructor-arg ref="strMin6Max20" />
+    </bean>
+
+    <bean id="parseLong" class="org.supercsv.cellprocessor.Trim">
+        <constructor-arg>
+            <bean class="org.supercsv.cellprocessor.ParseLong" />
+        </constructor-arg>
+    </bean>
+
+    <bean id="strMin1Max10" class="org.supercsv.cellprocessor.constraint.StrMinMax">
+        <constructor-arg value="1" />
+        <constructor-arg value="10" />
+    </bean>
+
+    <bean id="strMin0Max20" class="org.supercsv.cellprocessor.constraint.StrMinMax">
+        <constructor-arg value="0" />
+        <constructor-arg value="20" />
+    </bean>
+
+    <bean id="strMin1Max20" class="org.supercsv.cellprocessor.constraint.StrMinMax">
+        <constructor-arg value="1" />
+        <constructor-arg value="20" />
+    </bean>
+
+    <bean id="strMin1Max5" class="org.supercsv.cellprocessor.Trim">
+        <constructor-arg>
+            <bean class="org.supercsv.cellprocessor.constraint.StrMinMax">
+                <constructor-arg value="1" />
+                <constructor-arg value="5" />
+            </bean>
+        </constructor-arg>
+    </bean>
+
+    <bean id="strMin1Max6" class="org.supercsv.cellprocessor.constraint.StrMinMax">
+        <constructor-arg value="1" />
+        <constructor-arg value="6" />
+    </bean>
+
+    <bean id="strMin1Max4" class="org.supercsv.cellprocessor.constraint.StrMinMax">
+        <constructor-arg value="1" />
+        <constructor-arg value="4" />
+    </bean>
+
+    <bean id="strMin1Max3" class="org.supercsv.cellprocessor.constraint.StrMinMax">
+        <constructor-arg value="1" />
+        <constructor-arg value="3" />
+    </bean>
+
+
+    <bean id="strMin1Max2" class="org.supercsv.cellprocessor.constraint.StrMinMax">
+        <constructor-arg value="1" />
+        <constructor-arg value="2" />
+    </bean>
+
+    <bean id="optionalStrMin1Max2" class="org.supercsv.cellprocessor.Optional">
+        <constructor-arg ref="strMin1Max2" />
+    </bean>
+
+    <bean id="optionalStrMin1Max4" class="org.supercsv.cellprocessor.Optional">
+        <constructor-arg ref="strMin1Max4" />
+    </bean>
+
+    <bean id="optionalStrMin1Max3" class="org.supercsv.cellprocessor.Optional">
+        <constructor-arg ref="strMin1Max3" />
+    </bean>
+
+    <bean id="optionalStrMin1Max5" class="org.supercsv.cellprocessor.Optional">
+        <constructor-arg ref="strMin1Max5" />
+    </bean>
+
+    <bean id="strMin6Max20" class="org.supercsv.cellprocessor.constraint.StrMinMax">
+        <constructor-arg value="6" />
+        <constructor-arg value="20" />
+    </bean>
+
+    <bean id="optionalStrMin0Max20" class="org.supercsv.cellprocessor.Optional">
+        <constructor-arg ref="strMin0Max20" />
+    </bean>
+
+    <bean id="trunc100" class="org.supercsv.cellprocessor.Truncate">
+        <constructor-arg value="100" />
+    </bean>
+
+    <bean id="optionalTrunc100" class="org.supercsv.cellprocessor.Optional">
+        <constructor-arg ref="trunc100" />
+    </bean>
+
+    <bean id="trunc50" class="org.supercsv.cellprocessor.Truncate">
+        <constructor-arg value="50" />
+    </bean>
+
+    <bean id="trunc300" class="org.supercsv.cellprocessor.Truncate">
+        <constructor-arg value="300" />
+    </bean>
+
+    <bean id="optionalTrunc50" class="org.supercsv.cellprocessor.Optional">
+        <constructor-arg ref="trunc50" />
+    </bean>
+
+    <bean id="optionalTrunc300" class="org.supercsv.cellprocessor.Optional">
+        <constructor-arg ref="trunc300" />
+    </bean>
+
+    <bean id="trunc500" class="org.supercsv.cellprocessor.Truncate">
+        <constructor-arg value="500" />
+    </bean>
+
+    <bean id="optionalTrunc500" class="org.supercsv.cellprocessor.Optional">
+        <constructor-arg ref="trunc500" />
+    </bean>
+
+    <bean id="trunc10" class="org.supercsv.cellprocessor.Truncate">
+        <constructor-arg value="10" />
+    </bean>
+
+    <bean id="optionalTrunc10" class="org.supercsv.cellprocessor.Optional">
+        <constructor-arg ref="trunc10" />
+    </bean>
+
+    <bean id="dateFormat" class="java.text.SimpleDateFormat">
+        <constructor-arg value="dd-MM-yyyy" />
+    </bean>
+
+    <bean id="null" class="org.supercsv.cellprocessor.ConvertNullTo">
+        <constructor-arg value="" />
+    </bean>
+
+    <bean id="strMin5Max50" class="org.supercsv.cellprocessor.constraint.StrMinMax">
+        <constructor-arg value="5" />
+        <constructor-arg value="50" />
+    </bean>
+
+    <bean id="optionalStrMin3Max9" class="org.supercsv.cellprocessor.Optional">
+        <constructor-arg ref="strMin3Max9" />
+    </bean>
+
+    <bean id="strMin3Max9" class="org.supercsv.cellprocessor.constraint.StrMinMax">
+        <constructor-arg value="3" />
+        <constructor-arg value="9" />
+    </bean>
+
+    <bean id="optionalParseBool" class="org.supercsv.cellprocessor.Optional">
+        <constructor-arg ref="parseBool" />
+    </bean>
+
+    <bean id="optionalStrMin1Max20" class="org.supercsv.cellprocessor.Optional">
+        <constructor-arg ref="strMin1Max20" />
+    </bean>
+
+    <bean id="optionalTrunc200" class="org.supercsv.cellprocessor.Optional">
+        <constructor-arg ref="trunc200" />
+    </bean>
+
+    <bean id="trunc200" class="org.supercsv.cellprocessor.Truncate">
+        <constructor-arg value="200" />
+    </bean>
+
+
+    <bean id="strMin1Max30" class="org.supercsv.cellprocessor.constraint.StrMinMax">
+        <constructor-arg value="1" />
+        <constructor-arg value="30" />
+    </bean>
+
+    <bean id="optionalStrMin1Max30" class="org.supercsv.cellprocessor.Optional">
+        <constructor-arg ref="strMin1Max30" />
+    </bean>
+
+    <bean id="notNullOrEmptyString" class="org.supercsv.cellprocessor.constraint.StrNotNullOrEmpty">
+    </bean>
+
+    <bean id="optionalStr" class="org.supercsv.cellprocessor.Optional">
+    </bean>
+
+    <bean id="optionalParseInt" class="org.supercsv.cellprocessor.Optional">
+        <constructor-arg ref="parseInt" />
+    </bean>
+    
+
+
+    <bean id="v2ParseDate" class="org.supercsv.cellprocessor.ParseDate">
+        <constructor-arg value="ddMMyyyy" />
+    </bean>
+    <bean id="parsePriceType" class="in.com.v2kart.dataimport.importengine.cellprocessors.EnumCellProcessor">
+        <property name="enumMap" ref="priceTypeMap" />
+    </bean>
+    <util:map id='priceTypeMap'>
+        <entry key="MRP" value="#{T(in.com.v2kart.core.enums.V2PriceTypeEnum).MRP}" />
+        <entry key="CSP" value="#{T(in.com.v2kart.core.enums.V2PriceTypeEnum).CSP}" />
+    </util:map>
+    
+    <bean id="strMin1Max100" class="org.supercsv.cellprocessor.constraint.StrMinMax">
+        <constructor-arg value="1" />
+        <constructor-arg value="100" />
+    </bean>
+
+    <bean id="optionalStrMin1Max100" class="org.supercsv.cellprocessor.Optional">
+        <constructor-arg ref="strMin1Max100" />
+    </bean>
+    
+    <bean id="parseStringLowerCaseStrMin1Max100" class="in.com.v2kart.dataimport.importengine.cellprocessors.StringLowerCaseCellProcessor">
+        <constructor-arg ref="strMin1Max100" />
+    </bean>
+    
+    <bean id="parseOptionalStringLowerCaseStrMin1Max30" class="in.com.v2kart.dataimport.importengine.cellprocessors.StringLowerCaseCellProcessor">
+        <constructor-arg ref="optionalStrMin1Max30" />
+    </bean>
+
+</beans>
+

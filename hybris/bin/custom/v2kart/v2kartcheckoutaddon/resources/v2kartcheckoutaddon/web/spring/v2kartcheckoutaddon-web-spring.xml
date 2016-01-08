@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2014 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context.xsd">
+
+
+	<!-- Expose /acceleratoraddon/web/webroot/WEB-INF/messages/base.js.properties  resource bundle as javascript variables -->
+	<bean id="defaultV2kartcheckoutaddonJavaScriptMessageResourceAccessor" parent="abstractJavaScriptMessageResourceAccessor">
+		<property name="addOnName" value="v2kartcheckoutaddon"/>
+	</bean>
+
+	<bean id="defaultV2kartcheckoutaddonBeforeViewJsPropsHandlerAdaptee" parent="abstractBeforeViewJsPropsHandlerAdaptee" class="de.hybris.platform.addonsupport.interceptors.ExportJsPropertiesBeforeViewHandler">
+		<property name="messageSource" ref="defaultV2kartcheckoutaddonJavaScriptMessageResourceAccessor"/>
+	</bean>
+
+	<bean id="getV2kartcheckoutaddonBeforeViewHandler" parent="beforeViewHandlerAdapter">
+		<property name="adaptee">
+			<ref bean="defaultV2kartcheckoutaddonBeforeViewJsPropsHandlerAdaptee"/>
+		</property>
+	</bean>
+	<bean id="V2kartcheckoutaddonBeforeViewHandlerListMergeDirective" depends-on="beforeViewHandlersList" parent="listMergeDirective">
+		<property name="add" ref="getV2kartcheckoutaddonBeforeViewHandler"/>
+	</bean>
+    
+    
+    <bean name="v2AddressValidator" class="in.com.v2kart.checkoutaddon.storefront.forms.validation.V2AddressValidator"/>
+    
+    <bean id="v2DeliveryMethodCheckoutValidator" class="in.com.v2kart.checkoutaddon.storefront.controllers.pages.checkout.steps.validation.impl.V2DeliveryMethodCheckoutStepValidator" parent="deliveryMethodCheckoutValidator" >
+        <property name="v2CheckoutFacade" ref="acceleratorCheckoutFacade"/>
+    </bean>
+    <bean id="v2PaymentMethodCheckoutValidator" class="in.com.v2kart.checkoutaddon.storefront.controllers.pages.checkout.steps.validation.impl.V2PaymentCheckoutStepValidator" parent="defaultPaymentMethodCheckoutValidator" >
+        <property name="v2CheckoutFacade" ref="acceleratorCheckoutFacade"/>
+    </bean>
+    
+    
+    <bean name="deliveryAddressCheckoutStepController" class="in.com.v2kart.checkoutaddon.storefront.controllers.pages.checkout.steps.V2DeliveryAddressCheckoutStepController"/>
+    <bean name="deliveryMethodCheckoutStepController" class="in.com.v2kart.checkoutaddon.storefront.controllers.pages.checkout.steps.V2DeliveryMethodCheckoutStepController"/>
+    <bean name="paymentMethodCheckoutStepController" class="in.com.v2kart.checkoutaddon.storefront.controllers.pages.checkout.steps.V2PaymentMethodCheckoutStepController"/>
+    <bean name="hopPaymentResponseController" class="in.com.v2kart.checkoutaddon.storefront.controllers.pages.checkout.steps.V2HopPaymentResponseController"/>
+    <bean name="pickupLocationCheckoutStepController" class="in.com.v2kart.checkoutaddon.storefront.controllers.pages.checkout.steps.V2PickupLocationCheckoutStepController"/>
+    
+    <bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+            <property name="mappings">
+                <props merge="true">
+                	<prop key="/checkout/multi/delivery-address">deliveryAddressCheckoutStepController</prop>
+                	<prop key="/checkout/multi/delivery-method">deliveryMethodCheckoutStepController</prop>
+                    <prop key="/checkout/multi/payment-method">paymentMethodCheckoutStepController</prop>
+                    <prop key="/checkout/multi/hop">hopPaymentResponseController</prop>
+                    <prop key="/checkout/multi/pickup-location">pickupLocationCheckoutStepController</prop>
+                </props>
+            </property>
+    </bean> 
+    
+    
+    <alias name="v2DeliveryMethodCheckoutStep" alias="deliveryMethodCheckoutStep" />
+    <bean id="v2DeliveryMethodCheckoutStep"  parent="defaultDeliveryMethodCheckoutStep">
+        <property name="checkoutStepValidator" ref="v2DeliveryMethodCheckoutValidator"/>
+    </bean>
+    
+    <alias name="v2PaymentMethodCheckoutStep" alias="paymentMethodCheckoutStep" />
+    <bean id="v2PaymentMethodCheckoutStep" parent="defaultPaymentMethodCheckoutStep">
+        <property name="transitions">
+            <map>
+                <entry key="previous" value-ref="REDIRECT_TO_DELIVERY_ADDRESS"/>
+                <entry key="current" value-ref="REDIRECT_TO_PAYMENT_METHOD"/>
+                <entry key="next" value="redirect:/checkout/orderConfirmation/%s"/>
+            </map>
+        </property>
+        <property name="checkoutStepValidator" ref="v2PaymentMethodCheckoutValidator"/>
+    </bean>
+        
+    <alias name="v2MultiStepCheckoutGroup" alias="defaultCheckoutGroup" />
+    <bean id="v2MultiStepCheckoutGroup" parent="defaultMultiStepCheckoutGroup">
+        <property name="checkoutProgressBar">
+            <map>
+                <entry key="1" value-ref="deliveryAddressCheckoutStep"/>
+                <entry key="2" value-ref="deliveryMethodCheckoutStep"/>
+                <entry key="3" value-ref="paymentMethodCheckoutStep"/>
+            </map>
+        </property>
+    </bean>
+    
+
+</beans>

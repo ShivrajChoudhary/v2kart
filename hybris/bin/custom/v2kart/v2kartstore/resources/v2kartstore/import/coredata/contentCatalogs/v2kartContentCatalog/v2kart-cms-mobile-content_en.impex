@@ -1,0 +1,127 @@
+#
+# Import CMS content for the site
+#
+$contentCatalog=v2kartContentCatalog
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+$siteResource=jar:in.com.v2kart.constants.V2kartstoreConstants&/v2kartstore/import/coredata/contentCatalogs/$contentCatalog
+$picture=media(code, $contentCV);
+# Language
+$lang=en
+
+# CMS Link Components
+UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[lang=$lang]
+;;MobileAboutUsLink;"About Us"
+;;MobilePaymentLink;"Payment"
+;;MobileFooterFAQLink;"FAQ"
+;;MobilePrivacyPolicyLink;"Privacy Policy"
+;;MobileContactUsLink;"Contact"
+;;MobileTrackOrdersLink;"Track Order"
+;;MobileConnectLink;"Connect"
+;;MobileSellerLink;"Be a Dealer"
+;;MobileTwitterLink;"Twitter"
+;;MobileFacebookLink;"Facebook"
+;;MobileGoogleLink;"Google+"
+;;MobileYoutubeLink;"Youtube"
+;;MobilePinterestLink;"Pinterest"
+;;MobileTermsAndConditionLink;"Terms and Conditions"
+;;MobilePoliciesLink;"Policies"
+;;MobileCareersLink;"Careers"
+;;MobileShippingLink;"Shipping"
+;;MobileCancellationLink;"Cancellation"
+;;MobileReturnsLink;"Returns"
+;;MobileResponsibleDisclosurePolicyLink;"Disclosure"
+;;MobileLogoutLink;"Logout"
+;;MobileFeedbackLink;"Feedback"
+;;MobileMoreLink;"More"
+
+# v2kart Homepage
+
+# MOBILE
+INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true]   ;@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator] ;mime[default='image/jpeg'];&imageRef                                          ;folder(qualifier)[default='images'];altText
+                   ;                       ;MobileBanner1   	;$siteResource/images/banners/homepage/banner1.png   						;image/png                 ;V2_951x375_HomeCarouselYoursGracefully_EN_01   ;                                   ;"Get yourself the perfect ethnic wear..."
+				   ;                       ;MobileBanner2 		;$siteResource/images/banners/homepage/banner2.png							;image/png                 ;V2_951x375_HomeCarouselTopUpStyle-Winter_EN_01 ;                                   ;"Top up your Style this winter..."
+				   ;                       ;MobileBanner3       ;$siteResource/images/banners/homepage/banner3.png       					;image/png                 ;V2_951x375_HomeCarouselBestSavings_EN_01       ;                                   ;" A Complete Family Fashion Store..."
+				   ;                       ;MobileBanner4       ;$siteResource/images/banners/homepage/banner4.png       					;image/png                 ;V2_951x375_HomeCarouselKidsFashion_EN_01       ;                                   ;"Largest collection in store..."
+				   ;                       ;MobileBanner5  		;$siteResource/images/banners/homepage/banner1.png  						;image/png                 ;V2_951x375_HomeCarouselTheBestPriceEver_EN_01  ;                                   ;"Shopping with V2 save upto 70%..."
+
+INSERT_UPDATE Media ; $contentCV[unique=true]    ; code[unique=true]                                     ; realfilename        ; @media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator]                ; mime[default='image/jpeg']   ; altText                                  ; folder(qualifier)[default='images']
+                    ;                            ; /images/banners/womenCategoryPage/cat-img-banner11.jpg ; cat-img-banner1.jpg ; $siteResource/images/banners/womenCategoryPage/cat-img-banner1.jpg                        ;                              ; Rotating Banner Image 1                  ;
+                    ;                            ; /images/banners/womenCategoryPage/cat-img-banner22.jpg ; cat-img-banner2.jpg ; $siteResource/images/banners/womenCategoryPage/cat-img-banner2.jpg                        ;                              ; Rotating Banner Image 2                  ;
+                    ;                            ; /images/banners/womenCategoryPage/cat-img-banner33.jpg ; cat-img-banner3.jpg ; $siteResource/images/banners/womenCategoryPage/cat-img-banner3.jpg                        ;                              ; Rotating Banner Image 3                  ;
+                    ;                            ; /images/banners/womenCategoryPage/cat-img-banner44.jpg ; cat-img-banner4.jpg ; $siteResource/images/banners/womenCategoryPage/cat-img-banner4.jpg                        ;                              ; Rotating Banner Image 4                  ;
+                    ;                            ; /images/banners/womenCategoryPage/cat-img-banner55.jpg ; cat-img-banner5.jpg ; $siteResource/images/banners/womenCategoryPage/cat-img-banner5.jpg                        ;                              ; Rotating Banner Image 5                  ;
+                    ;                            ; /images/banners/womenCategoryPage/cat-img-banner66.jpg ; cat-img-banner6.jpg ; $siteResource/images/banners/womenCategoryPage/cat-img-banner6.jpg                        ;                              ; Rotating Banner Image 6                  ;
+
+# rotating mobile banner components                    
+INSERT_UPDATE BannerComponent;$contentCV[unique=true] ; uid[unique=true]                                      ; name                                                          ; &componentRef                                  ; urlLink          ; $picture
+# men category page                                                                                                                                                                                                                             
+                             ;                        ; MenCategoryRotatingBannerComponent1-mobile            ; Men Category rotating Banner Component 1             ; MenCategoryRotatingBannerComponent1-mobile            ; /men             ; /images/banners/womenCategoryPage/cat-img-banner11.jpg
+                             ;                        ; MenCategoryRotatingBannerComponent2-mobile            ; Men Category rotating Banner Component 2             ; MenCategoryRotatingBannerComponent2-mobile            ; /men             ; /images/banners/womenCategoryPage/cat-img-banner11.jpg
+                             ;                        ; MenCategoryRotatingBannerComponent3-mobile            ; Men Category rotating Banner Component 3             ; MenCategoryRotatingBannerComponent3-mobile            ; /men             ; /images/banners/womenCategoryPage/cat-img-banner11.jpg
+                             ;                        ; MenCategoryRotatingBannerComponent4-mobile            ; Men Category rotating Banner Component 4             ; MenCategoryRotatingBannerComponent4-mobile            ; /men             ; /images/banners/womenCategoryPage/cat-img-banner11.jpg
+                             ;                        ; MenCategoryRotatingBannerComponent5-mobile            ; Men Category rotating Banner Component 5             ; MenCategoryRotatingBannerComponent5-mobile            ; /men             ; /images/banners/womenCategoryPage/cat-img-banner11.jpg
+                             ;                        ; MenCategoryRotatingBannerComponent6-mobile            ; Men Category rotating Banner Component 6             ; MenCategoryRotatingBannerComponent6-mobile            ; /men             ; /images/banners/womenCategoryPage/cat-img-banner11.jpg
+# women category page                                                                                                                                                                                                                           
+                             ;                        ; WomenCategoryRotatingBannerComponent1-mobile          ; Women Category rotating Banner Component 1           ; WomenCategoryRotatingBannerComponent1-mobile          ; /women           ; /images/banners/womenCategoryPage/cat-img-banner11.jpg
+                             ;                        ; WomenCategoryRotatingBannerComponent2-mobile          ; Women Category rotating Banner Component 2           ; WomenCategoryRotatingBannerComponent2-mobile          ; /women           ; /images/banners/womenCategoryPage/cat-img-banner22.jpg
+                             ;                        ; WomenCategoryRotatingBannerComponent3-mobile          ; Women Category rotating Banner Component 3           ; WomenCategoryRotatingBannerComponent3-mobile          ; /women           ; /images/banners/womenCategoryPage/cat-img-banner33.jpg
+                             ;                        ; WomenCategoryRotatingBannerComponent4-mobile          ; Women Category rotating Banner Component 4           ; WomenCategoryRotatingBannerComponent4-mobile          ; /women           ; /images/banners/womenCategoryPage/cat-img-banner44.jpg
+                             ;                        ; WomenCategoryRotatingBannerComponent5-mobile          ; Women Category rotating Banner Component 5           ; WomenCategoryRotatingBannerComponent5-mobile          ; /women           ; /images/banners/womenCategoryPage/cat-img-banner55.jpg
+                             ;                        ; WomenCategoryRotatingBannerComponent6-mobile          ; Women Category rotating Banner Component 6           ; WomenCategoryRotatingBannerComponent6-mobile          ; /women           ; /images/banners/womenCategoryPage/cat-img-banner66.jpg
+# kids category page                                                                                                                                                                                                                            
+                             ;                        ; KidsCategoryRotatingBannerComponent1-mobile           ; Kids Category rotating Banner Component 1            ; KidsCategoryRotatingBannerComponent1-mobile           ; /kids            ; /images/banners/womenCategoryPage/cat-img-banner11.jpg
+                             ;                        ; KidsCategoryRotatingBannerComponent2-mobile           ; Kids Category rotating Banner Component 2            ; KidsCategoryRotatingBannerComponent2-mobile           ; /kids            ; /images/banners/womenCategoryPage/cat-img-banner22.jpg
+                             ;                        ; KidsCategoryRotatingBannerComponent3-mobile           ; Kids Category rotating Banner Component 3            ; KidsCategoryRotatingBannerComponent3-mobile           ; /kids            ; /images/banners/womenCategoryPage/cat-img-banner33.jpg
+                             ;                        ; KidsCategoryRotatingBannerComponent4-mobile           ; Kids Category rotating Banner Component 4            ; KidsCategoryRotatingBannerComponent4-mobile           ; /kids            ; /images/banners/womenCategoryPage/cat-img-banner44.jpg
+                             ;                        ; KidsCategoryRotatingBannerComponent5-mobile           ; Kids Category rotating Banner Component 5            ; KidsCategoryRotatingBannerComponent5-mobile           ; /kids            ; /images/banners/womenCategoryPage/cat-img-banner55.jpg
+                             ;                        ; KidsCategoryRotatingBannerComponent6-mobile           ; Kids Category rotating Banner Component 6            ; KidsCategoryRotatingBannerComponent6-mobile           ; /kids            ; /images/banners/womenCategoryPage/cat-img-banner66.jpg
+# winter category page                                                                                                                                                                                                                          
+                             ;                        ; WinterCategoryRotatingBannerComponent1-mobile         ; Winter Category rotating Banner Component 1          ; WinterCategoryRotatingBannerComponent1-mobile         ; /winter          ; /images/banners/womenCategoryPage/cat-img-banner11.jpg
+                             ;                        ; WinterCategoryRotatingBannerComponent2-mobile         ; Winter Category rotating Banner Component 2          ; WinterCategoryRotatingBannerComponent2-mobile         ; /winter          ; /images/banners/womenCategoryPage/cat-img-banner22.jpg
+                             ;                        ; WinterCategoryRotatingBannerComponent3-mobile         ; Winter Category rotating Banner Component 3          ; WinterCategoryRotatingBannerComponent3-mobile         ; /winter          ; /images/banners/womenCategoryPage/cat-img-banner33.jpg
+                             ;                        ; WinterCategoryRotatingBannerComponent4-mobile         ; Winter Category rotating Banner Component 4          ; WinterCategoryRotatingBannerComponent4-mobile         ; /winter          ; /images/banners/womenCategoryPage/cat-img-banner44.jpg
+                             ;                        ; WinterCategoryRotatingBannerComponent5-mobile         ; Winter Category rotating Banner Component 5          ; WinterCategoryRotatingBannerComponent5-mobile         ; /winter          ; /images/banners/womenCategoryPage/cat-img-banner55.jpg
+                             ;                        ; WinterCategoryRotatingBannerComponent6-mobile         ; Winter Category rotating Banner Component 6          ; WinterCategoryRotatingBannerComponent6-mobile         ; /winter          ; /images/banners/womenCategoryPage/cat-img-banner66.jpg
+                                                                                                                                                                                                                                                
+# home_furnishing category page                                                                                                                                                                                                                 
+                             ;                        ; HomeFurnishingCategoryRotatingBannerComponent1-mobile ; Home Furnishing Category rotating Banner Component 1 ; HomeFurnishingCategoryRotatingBannerComponent1-mobile ; /home_furnishing ; /images/banners/womenCategoryPage/cat-img-banner66.jpg
+                             ;                        ; HomeFurnishingCategoryRotatingBannerComponent2-mobile ; Home Furnishing Category rotating Banner Component 2 ; HomeFurnishingCategoryRotatingBannerComponent2-mobile ; /home_furnishing ; /images/banners/womenCategoryPage/cat-img-banner66.jpg
+                             ;                        ; HomeFurnishingCategoryRotatingBannerComponent3-mobile ; Home Furnishing Category rotating Banner Component 3 ; HomeFurnishingCategoryRotatingBannerComponent3-mobile ; /home_furnishing ; /images/banners/womenCategoryPage/cat-img-banner66.jpg
+                             ;                        ; HomeFurnishingCategoryRotatingBannerComponent4-mobile ; Home Furnishing Category rotating Banner Component 4 ; HomeFurnishingCategoryRotatingBannerComponent4-mobile ; /home_furnishing ; /images/banners/womenCategoryPage/cat-img-banner66.jpg
+                             ;                        ; HomeFurnishingCategoryRotatingBannerComponent5-mobile ; Home Furnishing Category rotating Banner Component 5 ; HomeFurnishingCategoryRotatingBannerComponent5-mobile ; /home_furnishing ; /images/banners/womenCategoryPage/cat-img-banner66.jpg
+                             ;                        ; HomeFurnishingCategoryRotatingBannerComponent6-mobile ; Home Furnishing Category rotating Banner Component 6 ; HomeFurnishingCategoryRotatingBannerComponent6-mobile ; /home_furnishing ; /images/banners/womenCategoryPage/cat-img-banner66.jpg
+# More category page                                                                                                                                                                                                                            
+                             ;                        ; MoreCategoryRotatingBannerComponent1-mobile           ; More Category rotating Banner Component 1            ; MoreCategoryRotatingBannerComponent1-mobile           ; /more            ; /images/banners/womenCategoryPage/cat-img-banner11.jpg
+                             ;                        ; MoreCategoryRotatingBannerComponent2-mobile           ; More Category rotating Banner Component 2            ; MoreCategoryRotatingBannerComponent2-mobile           ; /more            ; /images/banners/womenCategoryPage/cat-img-banner22.jpg
+                             ;                        ; MoreCategoryRotatingBannerComponent3-mobile           ; More Category rotating Banner Component 3            ; MoreCategoryRotatingBannerComponent3-mobile           ; /more            ; /images/banners/womenCategoryPage/cat-img-banner33.jpg
+                             ;                        ; MoreCategoryRotatingBannerComponent4-mobile           ; More Category rotating Banner Component 4            ; MoreCategoryRotatingBannerComponent4-mobile           ; /more            ; /images/banners/womenCategoryPage/cat-img-banner44.jpg
+                             ;                        ; MoreCategoryRotatingBannerComponent5-mobile           ; More Category rotating Banner Component 5            ; MoreCategoryRotatingBannerComponent5-mobile           ; /more            ; /images/banners/womenCategoryPage/cat-img-banner55.jpg
+                             ;                        ; MoreCategoryRotatingBannerComponent6-mobile           ; More Category rotating Banner Component 6            ; MoreCategoryRotatingBannerComponent6-mobile           ; /more            ; /images/banners/womenCategoryPage/cat-img-banner66.jpg					
+					
+UPDATE BannerComponent;$contentCV[unique=true];uid[unique=true]        		 ;headline[lang=$lang]                      ;$picture[lang=$lang]                             ;content[lang=$lang]
+					  ;                       ;YoursGracefullyMobileBanner   ;Get yourself the perfect ethnic wear...   ;MobileBanner1 ;""
+					  ;                       ;TopUpStyle-WinterMobileBanner ;Top up your Style this winter...          ;MobileBanner2 ;""
+					  ;                       ;BestSavingsMobileBanner       ;A Complete Family Fashion Store...        ;MobileBanner3 ;""
+					  ;                       ;KidsFashionMobileBanner       ;Largest collection in store...            ;MobileBanner4 ;""
+					  ;                       ;TheBestPriceEverMobileBanner  ;Shopping with V2 save upto 70%...         ;MobileBanner5 ;""
+# MOBILE -end
+
+INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true]                          ;@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator]  ;mime[default='image/jpeg'];&imageRef                                  ;folder(qualifier)[default='images'];altText
+				   ;					   ;Mobile_Men_Category						   ;$siteResource/images/banners/homepage/mobile-men-category.png				;image/png				   ;Mobile_Men_Category						   ;								   ;
+				   ;					   ;Mobile_Women_Category					   ;$siteResource/images/banners/homepage/mobile-women-category.png				;image/png				   ;Mobile_Women_Category					   ;								   ;
+				   ;					   ;Mobile_Kids_Category					   ;$siteResource/images/banners/homepage/mobile-kids-category.png				;image/png				   ;Mobile_Kids_Category					   ;								   ;
+				   ;					   ;Mobile_Men_Button						   ;$siteResource/images/banners/homepage/mens.png								;image/png				   ;Mobile_Men_Button						   ;								   ;
+				   ;					   ;Mobile_Women_Button					   	   ;$siteResource/images/banners/homepage/women.png								;image/png				   ;Mobile_Women_Button					   	   ;								   ;
+				   ;					   ;Mobile_Kids_Button					       ;$siteResource/images/banners/homepage/kids.png								;image/png				   ;Mobile_Kids_Button					   	   ;								   ;
+					
+UPDATE V2KartBannerComponent;$contentCV[unique=true];uid[unique=true];$picture[lang=$lang]
+							;						;MobileMenCategoryBanner;Mobile_Men_Category
+							;						;MobileWomenCategoryBanner;Mobile_Women_Category
+							;						;MobileKidsCategoryBanner;Mobile_Kids_Category
+							;						;MobileMenButtonBanner;Mobile_Men_Button
+							;						;MobileWomenButtonBanner;Mobile_Women_Button
+							;						;MobileKidsButtonBanner;Mobile_Kids_Button
+							
+# CMS Link Components
+UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[lang=$lang]
+;;MobileTrackYourOrderLink;"Track"

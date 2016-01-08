@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="SOOrderStatusUpdateService" targetNamespace="http://v2kretail.in/ecomm/ordr" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+    xmlns:tns="http://v2kretail.in/ecomm/ordr" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+    <wsdl:types>
+        <xs:schema xmlns:tns="http://v2kretail.in/ecomm/ordr" xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified"
+            elementFormDefault="unqualified" targetNamespace="http://v2kretail.in/ecomm/ordr">
+            <xs:element name="SoOrderStatusUpdateReq">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="SONo" type="xs:string" />
+                        <xs:element minOccurs="0" name="LSPName" type="xs:string" />
+                        <xs:element minOccurs="0" name="AWBNo" type="xs:string" />
+                        <xs:element minOccurs="0" name="DeliveryNo" type="xs:string" />
+			<xs:element minOccurs="0" name="DeliveryStatus" type="xs:string" />
+                        <xs:element minOccurs="0" name="WH" type="xs:string" />
+                        <xs:element minOccurs="0" name="InvoiceNo" type="xs:string" />
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="SoOrderStatusUpdateRes">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="RespCode" type="xs:string" />
+                        <xs:element name="RespMsg" type="xs:string" />
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+
+        </xs:schema>
+
+    </wsdl:types>
+    <wsdl:message name="SO_OrderStatusUpdateResponse">
+        <wsdl:part name="OrderStatusUpdateResponse" element="tns:SoOrderStatusUpdateRes">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="SO_OrderStatusUpdate">
+        <wsdl:part name="OrderStatusUpdateRequest" element="tns:SoOrderStatusUpdateReq">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:portType name="SO_OrderStatusUpdatePort">
+        <wsdl:operation name="SO_OrderStatusUpdate_Operation">
+            <wsdl:input name="SO_OrderStatusUpdate" message="tns:SO_OrderStatusUpdate">
+            </wsdl:input>
+            <wsdl:output name="SO_OrderStatusUpdateResponse" message="tns:SO_OrderStatusUpdateResponse">
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="SOOrderStatusUpdateServiceSoapBinding" type="tns:SO_OrderStatusUpdatePort">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+        <wsdl:operation name="SO_OrderStatusUpdate_Operation">
+            <soap:operation soapAction="http://sap.com/xi/WebService/soap1.1" style="document" />
+            <wsdl:input name="SO_OrderStatusUpdate">
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output name="SO_OrderStatusUpdateResponse">
+                <soap:body use="literal" />
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="SOOrderStatusUpdateService">
+        <wsdl:port name="SO_OrderStatusUpdatePort" binding="tns:SOOrderStatusUpdateServiceSoapBinding">
+            <soap:address location="" />
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2013 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+	<!--
+	The hybris platform provides one single Spring application context for beans located at the jalo layer.
+	Each extension can add beans to this context by specifying them at this configuration file.
+	 
+	You can use and/or redefine beans defined at configuration files of other extensions as well as
+	adding new one.
+		
+	If you want to locate this file at a different location or want to use several files for better,
+	structuring, please use the '<yourextension>.application-context' property at your project.properties file.
+	There you can specify a comma separated list of files where first is tried to find a file per classpath and
+	then per file system.
+
+	
+	If you want to configure beans for your web module please have a look at
+	your web/webroot/WEB-INF/<extname>-web-spring.xml.
+	-->
+	
+	<!--  Example how to override a manager -->
+	<!--
+	<bean id="core.productManager"   class="in.com.v2kart.v2kartebspaymentintegration.jalo.V2kartebspaymentintegrationProductManager" 	init-method="init"	destroy-method="destroy" />
+	-->
+	
+	
+ 	<!--  Example how to configure the class to use for jalo session creation -->
+	<!--
+	<bean id="jalosession"   class="de.hybris.platform.jalo.JaloSessionFactory">
+		<property name="targetClassName" value="in.com.v2kart.v2kartebspaymentintegration.jalo.V2kartebspaymentintegrationJaloSession"/>
+	</bean>
+	-->
+
+	
+	<!--  Example how to override an item  -->
+	<!-- 
+	<bean id="de.hybris.platform.jalo.product.Product" class="in.com.v2kart.v2kartebspaymentintegration.jalo.V2kartebspaymentintegrationProduct" scope="prototype" />		
+ 	-->
+
+	<!--  
+	 Example how to register and use an AOP aspect 
+     Also see http://static.springframework.org/spring/docs/2.5.x/reference/aop.html	
+     -->
+	
+	<!-- 
+	<bean id="v2kartebspaymentintegrationProfBean" class="in.com.v2kart.v2kartebspaymentintegration.aop.V2kartebspaymentintegrationProfilingAspect"/>
+	<aop:config proxy-target-class="true">
+  		<aop:aspect id="v2kartebspaymentintegrationProfAspect" ref="v2kartebspaymentintegrationProfBean" >
+    	  <aop:pointcut id="profiledMethods" 
+	      	expression="execution(* getModificationTime(..))" />  	            
+	   		<aop:around pointcut-ref="profiledMethods" method="profile" />
+  		</aop:aspect>
+	</aop:config>
+	 -->
+
+	
+	<!-- some other examples of a pointcut that matches everything:
+
+    	  <aop:pointcut id="profiledMethods" 
+	      	expression="bean(de.hybris.platform.jalo.user.Customer) &amp;&amp; 
+	      	            !execution(* getPK(..))" />  	            
+	       <aop:pointcut id="profiledMethods" expression="execution(* *(..))" />	
+	  -->
+	
+	<bean id="createEBSPaymentRequestStrategy" class="in.com.v2kart.v2kartebspaymentintegration.services.impl.CreateEBSPaymentRequestStrategyImpl">
+        <property name="cartService" ref="cartService" />
+        <property name="customerEmailResolutionService" ref="customerEmailResolutionService" />
+    </bean>		
+    
+    <bean id="ebsPaymentResponseStrategy" class="in.com.v2kart.core.payment.services.impl.V2PaymentResponseStrategyImpl">
+        <property name="createPaymentResultConverter" ref="createEBSPaymentResultConverter" />
+    </bean>
+    
+    <bean id="createEBSPaymentResultConverter" parent="abstractPopulatingConverter">
+        <property name="targetClass" value="in.com.v2kart.v2kartebspaymentintegration.data.response.EBSPaymentResponse" />
+        <property name="populators">
+            <list>
+                <ref bean="ebsResponsePaymentInfoPopulator" />
+            </list>
+        </property>
+    </bean>
+    
+    <bean id="ebsResponsePaymentInfoPopulator" class="in.com.v2kart.v2kartebspaymentintegration.populator.response.EBSResponsePaymentInfoPopulator"
+        parent="abstractResultPopulator" />
+
+    <bean id="ebsPaymentRequestDataConverter" parent="abstractPopulatingConverter">
+        <property name="targetClass" value="de.hybris.platform.acceleratorservices.payment.data.PaymentData" />
+        <property name="populators">
+            <list>
+                <ref bean="ebsPaymentRequestDataPopulator" />
+            </list>
+        </property>
+    </bean>
+    
+    <bean id="ebsPaymentResponseService" class="in.com.v2kart.v2kartebspaymentintegration.services.impl.EBSPaymentResponseServiceImpl">
+        <property name="siteConfigService" ref="siteConfigService"/>
+    </bean>
+
+    <bean id="ebsPaymentRequestDataPopulator" class="in.com.v2kart.v2kartebspaymentintegration.populator.request.EBSRequestPopulator" />
+    <bean id="ebsEncryptionService" class="in.com.v2kart.v2kartebspaymentintegration.services.impl.EBSEncryptionServiceImpl" />
+
+    <bean name="ebsPaymentService" class="in.com.v2kart.v2kartebspaymentintegration.services.impl.EBSPaymentServiceImpl" parent="v2PaymentService"
+        scope="tenant">
+        <property name="createEBSPaymentRequestStrategy" ref="createEBSPaymentRequestStrategy" />
+        <property name="ebsPaymentResponseStrategy" ref="ebsPaymentResponseStrategy"/>
+    </bean>
+
+    <!-- Facade -->
+
+    <bean name="ebsPaymentFacade" class="in.com.v2kart.v2kartebspaymentintegration.facades.impl.EBSPaymentFacadeImpl" parent="v2PaymentFacade">
+        <property name="ebsPaymentService" ref="ebsPaymentService" />
+        <property name="ebsEncryptionService" ref="ebsEncryptionService" />
+        <property name="ebsPaymentRequestDataConverter" ref="ebsPaymentRequestDataConverter"/>
+        <property name="orderConverter" ref="orderConverter" />
+        <property name="modelService" ref="modelService" />
+        <property name="commonI18NService" ref="commonI18NService" />
+    </bean>    
+			
+</beans>

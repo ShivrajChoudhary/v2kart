@@ -1,0 +1,103 @@
+## messageSource=classpath:/v2kartcore/messages/email-orderCancelPending_$lang.properties
+#macro( genHtmlBoldFont $text )
+<font color="#414a4f" size="2" face="Arial, Helvetica, sans-serif"><b>$text</b></font>
+#end
+#macro(genHtmlLinkStartTag $url)
+<a href="$url"><font color="#666666">
+#end
+#macro(genHtmlLinkEndTag)
+</font></a>
+#end
+#macro(genHtmlLink $url $textColor $bodyContent)
+<a href="$url"><font color="$textColor">$bodyContent</font></a>
+#end
+
+<html>
+	<head>
+	</head>
+	<body bgcolor="#ffffff"
+	#if ( $ctx.isGuest() )
+	    #set ($orderInfoUrl = "${ctx.baseUrl}/guest/order/${ctx.orderGuid}")
+	#else
+	    #set ($orderInfoUrl = "${ctx.baseUrl}/my-account/order/${ctx.orderCode}")
+	#end
+	<table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" bgcolor="#ffffff"
+		<tr>
+			<td>&nbsp;</td>
+		</tr>
+		<tr>
+			<td align="center" valign="top">
+				<table width="610" border="0" align="center" cellpadding="0" cellspacing="0" bordercolor="#fff">
+					<tr>
+						<td align="center" valign="top" bgcolor="#FFFFFF">
+							<table width="570" cellpadding="0" cellspacing="0" border="0" align="center">
+								<tr>
+									<td valign="middle">&nbsp;</td>
+								</tr>
+								<tr>
+									<td valign="middle">
+										${ctx.cmsSlotContents.SiteLogo}
+										<img src="${ctx.themeResourceUrl}/images/header_01.png" alt="" width="229" height="72" border="0" align="right" title="" />
+									</td>
+								</tr>
+								<tr>
+									<td height="30" align="right" valign="middle" bgcolor="#000000">
+										#if (! $ctx.isGuest())
+											<font color="#FFFFFF" size="2" face="Arial, Helvetica, sans-serif"><a href="${ctx.secureBaseUrl}/my-account"><font color="#FFFFFF">${ctx.messages.myAccount}</font></a> |
+										#end <a href="${ctx.baseUrl}/store-finder"><font color="#FFFFFF">${ctx.messages.storeFinder}</font></a> &nbsp;&nbsp;</font>
+									</td>
+								</tr>
+								<tr>
+									<td align="center" valign="middle">
+										<a href="${ctx.baseUrl}" style="display:block; margin-top:10px;margin-bottom:10px;">${ctx.cmsSlotContents.TopContent}</a>
+									</td>
+								</tr>
+								<tr>
+									<td>&nbsp;</td>
+								</tr>	
+								<tr>
+									<td align="left" valign="top">
+										<p style="margin:2px 0"><font color="#666666" size="2" face="Arial, Helvetica, sans-serif"><b>${ctx.messages.getMessage('salutation', ${ctx.title},${ctx.displayName})},</b></font></p><br/>
+										<p style="margin:2px 0"><font color="#666666" size="2" face="Arial, Helvetica, sans-serif">${ctx.messages.getMessage('greetings')}</font></p><br/>
+										
+										<p style="margin:2px 0"><font color="#666666" size="2" face="Arial, Helvetica, sans-serif">${ctx.messages.getMessage('cancelmessage', "#genHtmlLinkStartTag($orderInfoUrl)", "#genHtmlBoldFont(${ctx.order.code})", "#genHtmlLinkEndTag()")}</font></p><br/>
+ 										<p style="margin:2px 0"><font color="#666666" size="2" face="Arial, Helvetica, sans-serif">Please note your request id - ${ctx.requestId}. We shall get back to you with a confirmation within 24 hours.</font></p><br/>
+ 										<p style="margin:2px 0"><font color="#666666" size="2" face="Arial, Helvetica, sans-serif">${ctx.messages.getMessage('lookForward')}</font></p><br/>
+ 										<p style="margin:2px 0"><font color="#666666" size="2" face="Arial, Helvetica, sans-serif">${ctx.messages.getMessage('contactUsInfo')}</font></p><br/>
+										<p style="margin:2px 0"><font color="#666666" size="2" face="Arial, Helvetica, sans-serif">Happy Shopping!<br/><br/>
+ 											Warm Regards,<br/>
+ 											Team V2kart.</font></p>
+										<br/>
+									</td>
+								</tr>
+								<tr>
+									<td>&nbsp;</td>
+								</tr>
+								<tr>
+									<td align="center" valign="middle">
+										<a href="${ctx.baseUrl}" style="display:block; margin-top:10px;margin-bottom:10px;">${ctx.cmsSlotContents.BottomContent}</a>
+									</td>
+								</tr>
+								<tr>
+										<td height="30" align="right" valign="middle" bgcolor="#000000">
+											<font color="#FFFFFF" size="2" face="Arial, Helvetica, sans-serif">
+												<a href="${ctx.baseUrl}${ctx.messages.contactUsPage}"><font color="#FFFFFF">${ctx.messages.contactUs}</font></a> | 
+												<a href="${ctx.baseUrl}${ctx.messages.termsURL}"><font color="#FFFFFF">${ctx.messages.termsAndCondition}</font></a> 
+												&nbsp;&nbsp;</font>
+										</td>
+								</tr>
+								<tr>
+									<td>&nbsp;</td>
+								</tr>
+							</table>
+						</td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+		<tr>
+			<td>&nbsp;</td>
+		</tr>
+	</table>
+</body>
+</html>

@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2013 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+
+  
+-->
+<!--
+	ATTENTION: This is just an example file. You have to edit it according to your needs.
+-->
+
+<items 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+			xsi:noNamespaceSchemaLocation="items.xsd">
+
+	<collectiontypes>
+        <collectiontype code="LogEventStatusList" elementtype="ImportLogEventStatus" autocreate="true" generate="true" type="list" />
+         <collectiontype code="LogEventTypesList" elementtype="ImportLogEventType" autocreate="true" generate="true" type="list" />
+         <collectiontype code="LogEventHintList" elementtype="ImportLogEventHint" autocreate="true" generate="true" type="list" />
+    </collectiontypes>
+    <enumtypes>
+        <enumtype generate="true" code="ImportLogEventType" autocreate="true" dynamic="true">
+            <value code="CUSTOMER_IMPORT" />
+            <value code="PRODUCT_IMPORT" />
+            <value code="PRICE_IMPORT" />
+            <value code="INVENTORY_IMPORT" />
+            <value code="ORDER_IMPORT" />
+            <value code="SITE_IMPORT" />
+            <value code="WISHLIST_IMPORT" />
+            <value code="MEDIA_IMPORT"></value>
+        </enumtype>
+
+        <enumtype generate="true" code="ImportLogEventStatus" autocreate="true" dynamic="true">
+            <value code="INFO" />
+            <value code="WARN" />
+            <value code="SUCCESS" />
+            <value code="ERROR" />
+            <value code="FAILED" />
+        </enumtype>
+        
+        <enumtype generate="true" code="ImportLogEventHint" autocreate="true" dynamic="true">
+            <value code="PARSING_ERROR" />
+            <value code="CONSTRAINT_VIOLATION" />
+            <value code="IMPORT_SUMMARY" />
+            <value code="FILE_READ_SUMMARY" />
+            <value code="OTHERS" />
+        </enumtype>
+    </enumtypes>
+
+    <itemtypes>
+        <itemtype code="ImportLogEvent" autocreate="true" generate="true"
+            jaloclass="in.com.v2kart.importlog.jalo.log.ImportLogEvent">
+            <deployment table="nag_importlogevent" typecode="25001" />
+            <attributes>
+                <attribute autocreate="true" qualifier="eventType" type="ImportLogEventType">
+                    <modifiers />
+                    <persistence type="property" />
+                </attribute>
+                <attribute autocreate="true" qualifier="eventStatus" type="ImportLogEventStatus">
+                    <modifiers />
+                    <persistence type="property" />
+                </attribute>
+                <attribute autocreate="true" qualifier="eventHint" type="ImportLogEventHint">
+                    <modifiers />
+                    <persistence type="property" />
+                </attribute>
+                <attribute autocreate="true" qualifier="severity" type="Severity">
+                    <modifiers />
+                    <persistence type="property" />
+                </attribute>
+                <attribute autocreate="true" qualifier="message" type="java.lang.String">
+                    <persistence type="property">
+                    <columntype database="mysql">
+                            <value>text</value>
+                    </columntype>
+                    <columntype database="oracle">
+                            <value>varchar2(4000)</value>
+                        </columntype>
+                    </persistence>
+                </attribute>
+                <attribute autocreate="true" qualifier="threadIdentifier" type="java.lang.String">
+                    <persistence type="property">
+                    </persistence>
+                </attribute>
+                <attribute autocreate="true" qualifier="exceptionTrace" type="java.lang.String">
+                    <persistence type="property">
+                        <columntype database="mysql">
+                            <value>text</value>
+                        </columntype>
+                        <columntype database="oracle">
+                            <value>varchar2(4000)</value>
+                        </columntype>
+                    </persistence>
+                </attribute>
+            </attributes>
+        </itemtype>
+
+        <itemtype code="ImportLogEventMailCronJob" jaloclass="in.com.v2kart.importlog.jalo.log.ImportLogEventMailCronJob"
+            extends="CronJob" autocreate="true" generate="true">
+            <description>Job type to be used when scheduling cron jobs for sending e-mails for Log Events.</description>
+            <attributes>
+                <attribute qualifier="lastRunDate" type="java.util.Date">
+                    <description>Last datetime the job ran, next time it run it will only get log events from this date
+                        on
+                    </description>
+                    <persistence type="property" />
+                </attribute>
+                <attribute qualifier="eventStatuses" type="LogEventStatusList">
+                    <description>List of Log event status for this job.
+                        </description>
+                    <modifiers />
+                    <persistence type="property" />
+                </attribute>
+                <attribute qualifier="eventTypes" type="LogEventTypesList">
+                    <description>List of Log event types for this job.
+                        </description>
+                    <modifiers />
+                    <persistence type="property" />
+                </attribute>
+            </attributes>
+        </itemtype>
+    </itemtypes>
+</items>

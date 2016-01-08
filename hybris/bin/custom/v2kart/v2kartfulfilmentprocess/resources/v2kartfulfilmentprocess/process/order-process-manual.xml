@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<process xmlns="http://www.hybris.de/xsd/processdefinition" start="checkOrder" name="order-process-manual"
+    processClass="de.hybris.platform.orderprocessing.model.OrderProcessModel">
+
+    <action id="checkOrder" bean="checkOrderAction">
+        <transition name="OK" to="checkOrderPayment" />
+        <transition name="NOK" to="error" />
+    </action>
+
+    <action id="checkOrderPayment" bean="checkOrderPaymentAction">
+        <transition name="OK" to="sendOrderPlacedNotification" />
+        <transition name="NOK" to="sendPaymentFailedNotification" />
+    </action>
+
+    <action id="sendOrderPlacedNotification" bean="sendOrderPlacedNotificationAction">
+        <transition name="OK" to="splitOrder" />
+    </action>
+
+    <action id="splitOrder" bean="splitOrderAction">
+        <transition name="OK" to="success" />
+        <transition name="NOK" to="error" />
+    </action>
+
+    <action id="sendPaymentFailedNotification" bean="sendPaymentFailedNotificationAction">
+        <transition name="OK" to="failed" />
+    </action>
+
+    <end id="error" state="ERROR">All went wrong.</end>
+    <end id="failed" state="FAILED">Order not placed.</end>
+    <end id="success" state="SUCCEEDED">Order placed.</end>
+
+</process>

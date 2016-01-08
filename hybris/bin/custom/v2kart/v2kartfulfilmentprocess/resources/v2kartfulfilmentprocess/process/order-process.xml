@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<process xmlns="http://www.hybris.de/xsd/processdefinition" start="checkOrder" name="order-process"
+    processClass="de.hybris.platform.orderprocessing.model.OrderProcessModel">
+
+    <action id="checkOrder" bean="checkOrderAction">
+        <transition name="OK" to="checkOrderPayment" />
+        <transition name="NOK" to="error" />
+    </action>
+
+    <action id="checkOrderPayment" bean="checkOrderPaymentAction">
+        <transition name="OK" to="sendOrderPlacedNotification" />
+        <transition name="NOK" to="sendPaymentFailedNotification" />
+    </action>
+
+    <action id="sendOrderPlacedNotification" bean="sendOrderPlacedNotificationAction">
+        <transition name="OK" to="waitForUpdateCustomerToSAPErp" />
+    </action>
+
+    <action id="waitForUpdateCustomerToSAPErp" bean="waitForUpdateCustomerToSAPErpAction">
+        <transition name="OK" to="sendOrderToSAP" />
+        <transition name="NOK" to="waitForUpdateCustomerToSAPErp" />
+        <transition name="FAILED" to="error" />
+    </action>
+
+    <action id="sendOrderToSAP" bean="sendOrderToSAPAction">
+        <transition name="OK" to="success" />
+        <transition name="NOK" to="error" />
+    </action>
+
+    <action id="sendPaymentFailedNotification" bean="sendPaymentFailedNotificationAction">
+        <transition name="OK" to="failed" />
+    </action>
+
+    <end id="error" state="ERROR">All went wrong.</end>
+    <end id="failed" state="FAILED">Order not placed.</end>
+    <end id="success" state="SUCCEEDED">Order placed.</end>
+
+</process>

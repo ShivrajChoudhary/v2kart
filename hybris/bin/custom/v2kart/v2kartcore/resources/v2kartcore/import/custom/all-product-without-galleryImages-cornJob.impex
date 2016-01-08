@@ -1,0 +1,9 @@
+INSERT_UPDATE ServicelayerJob;code[unique=true];springId;springIdCronJobFactory;
+;v2AllProductWithoutImageJob;v2AllProductWithoutImageJob;;
+
+INSERT_UPDATE CronJob;code[unique=true];job(code);sessionLanguage(isocode)
+;v2AllProductWithoutImageJob;v2AllProductWithoutImageJob;en
+
+#INSERT_UPDATE Trigger;cronjob(code)[unique=true];cronExpression
+# Run the v2AllProductWithoutImageJob at 17:00 daily
+#;v2OrderFailureReportJob;0 0 0 * * ?;

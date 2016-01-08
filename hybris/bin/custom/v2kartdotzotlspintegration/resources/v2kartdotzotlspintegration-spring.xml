@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2013 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <bean id="webServiceClient" class="org.springframework.ws.client.core.WebServiceTemplate">
+        <property name="marshaller" ref="v2kartConsignmentIntegrationMarshaller" />
+        <property name="unmarshaller" ref="v2kartConsignmentIntegrationMarshaller" />
+    </bean>
+	
+    <bean id="dotzotTrackerService" class="in.com.v2kart.dotzotlspintegration.service.impl.DotzotTrackerServiceImpl">
+        <property name="wsClient" ref="webServiceClient" />
+        <property name="defaultConsignmentTrackURI" value="${consignment.tracking.dotzot.URI}" />
+        <property name="dotzotTrackerDao" ref="dotzotTrackerDao" />
+        <property name="soapActionCallbackUrl" value="${dotzot.soap.action.callback.url}"/>
+    </bean>
+			
+	<bean id="dotzotTrackerDao" class="in.com.v2kart.dotzotlspintegration.dao.impl.DotzotTrackerDaoImpl">
+        <property name="flexibleSearchService" ref="flexibleSearchService"/>
+        <property name="modelService" ref="modelService"/>
+        <property name="v2DeliveryConfirmationNotificationSender" ref="v2DeliveryConfirmationNotificationSender"/>
+    </bean>		
+    
+     <bean name="dotzotConsignmentStatusUpdateCronJob" class="in.com.v2kart.dotzotlspintegration.cronjob.DotzotConsignmentStatusUpdateCronJob" parent="abstractJobPerformable" >
+      <property name="dotzotTrackerService" ref="dotzotTrackerService" />
+    </bean>
+</beans>

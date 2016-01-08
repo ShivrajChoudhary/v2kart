@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2014 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+
+  
+--><extensioninfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="extensioninfo.xsd">
+
+	<extension abstractclassprefix="Generated" classprefix="V2kartcheckoutaddon" description="v2kartcheckoutaddon extension" managername="V2kartcheckoutaddonManager" managersuperclass="de.hybris.platform.jalo.extension.Extension" name="v2kartcheckoutaddon">
+
+		<!-- you should add all required extensions to this list, except platform extensions which are automatically required -->         
+		<requires-extension name="hmc"/>
+		<requires-extension name="addonsupport"/>
+        <requires-extension name="b2ccheckoutaddon"/>
+        <requires-extension name="v2kartpayupaymentintegration"/>
+        <requires-extension name="v2kartccavenuepaymentintegration"/>
+        <requires-extension name="v2kartebspaymentintegration"/>
+
+		<coremodule generated="true" manager="in.com.v2kart.checkoutaddon.storefront.jalo.V2kartcheckoutaddonManager" packageroot="in.com.v2kart.checkoutaddon.storefront"/>
+
+		<hmcmodule extensionclassname="in.com.v2kart.checkoutaddon.storefront.hmc.V2kartcheckoutaddonHMCExtension"/>
+					
+		
+
+	</extension>
+
+</extensioninfo>

@@ -1,0 +1,11 @@
+# ImpEx for Importing Categories into Merchandise Store
+   
+# Macros / Replacement Parameter definitions
+$productCatalog=v2kartProductCatalog
+   
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+$supercategories=source(code, $catalogVersion)[unique=true]
+$categories=target(code, $catalogVersion)[unique=true]
+   
+# Insert Categories
+INSERT_UPDATE Category;code[unique=true];allowedPrincipals(uid)[default='customergroup'];$catalogVersion

@@ -1,0 +1,41 @@
+$contentCatalog=v2kartContentCatalog
+$contentCatalogName=v2kart Content Catalog
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+$productCatalog=v2kartProductCatalog
+$productCatalogName=v2kart Product Catalog
+$productCV=catalogVersion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+$picture=media(code, $contentCV)                   ;
+$image=image(code, $contentCV)                     ;
+$media=media(code, $contentCV)                     ;
+$page=page(uid, $contentCV)                        ;
+$contentPage=contentPage(uid, $contentCV)          ;
+$product=product(code, $productCV)
+$category=category(code, $productCV)
+$siteResource=jar:in.com.v2kart.constants.V2kartstoreConstants&/v2kartstore/import/sampledata/contentCatalogs/$contentCatalog
+$productResource=jar:in.com.v2kart.constants.V2kartstoreConstants&/v2kartstore/import/sampledata/productCatalogs/$productCatalog
+$jarResourceCms=jar:in.com.v2kart.constants.V2kartstoreConstants&/v2kartstore/import/sampledata/cockpits/cmscockpit
+$lang=en
+
+
+# CONTENT PAGE
+INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;label;title[lang=$lang];masterTemplate(uid,$contentCV);defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
+#uidname   labeltitlemasterTemplate
+;;careersPage;    Careers Page;/careers;"Careers";ContentPage1Template;
+
+# CMSParagraphComponent 
+INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;;;;
+;;careersParagraph;Careers Paragraph;careersParagraph;;;;
+   
+INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];content[lang=$lang]
+;;careersParagraph;"<div class='col-xs-12 col-sm-12 col-md-12'> <div class='heading'>Why V2kart</div><div class='description cms-content staticpagedescription'><p>V2 Retail Limited (Formerly known as Vishal Retail Ltd) is one of fastest growing Retail Groups in India.The company offers a portfolio of products, including apparel and non-apparel. The company sells readymade ,apparels ,household merchandise and other consumer goods like footwear ,toys ,games ,handbags, fragrance , cosmetics ,home furnishing, décor product ,sports items crockery, novelties and gifts.</p><p>The company’s subsidiaries include VRL Movers Ltd, VRL Infrastructure Ltd. and VRL Retail Ventures Ltd.</p><p>V2 Retail Ltd offer affordable family fashion at prices to suit every pocket. The outlets cater to almost all price ranges. The showrooms have over 70,000 products range which fulfills all household needs. The cost benefit that is derived from the large central purchase of goods and services is passed on to the consumer.</p><p>We are looking for dynamic professionals who want to explore a steep learning curve to accelerated responsibility and success, while enjoying the journey and making it a learning experience for those they work with. If you are excited by what you've read above about us, and if you are an achiever with passion, energy, integrity and a mission to excel, this is the place for you. JOIN US!</p><p>If you wish to apply for any of the department, please send your resume to <a href='mailto:Hr@v2kart.com' title='Hr@v2kart.com'>Hr@v2kart.com</a>, also mention the department you wish to apply in the subject line.</p><p>Presently having 16 stores in various locations in India in the name of “V2 Value & Variety”, with one huge warehouse situated at Farrukh Nagar, Haryana.</p><p class='bold'>Send your resume to:</p><p><a href='mailto:careers@v2kart.com' title='careers@v2kart.com'>careers@v2kart.com</a></p></div></div>"
+
+#  CONTENT SLOT NAME
+INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='LandingPage2Template'];validComponentTypes(code)
+;CenterContentSlot-Careers;;CMSParagraphComponent
+   
+     
+INSERT_UPDATE ContentSlot                          ; $contentCV[unique=true]    ; uid[unique=true]                                     ; name                                                   ; active      ; cmsComponents(&componentRef)
+                                                   ;                            ; CenterContentSlot-Careers                              ; CenterContentSlot for Careers                          ; true        ; careersParagraph
+  
+INSERT_UPDATE ContentSlotForPage                   ; $contentCV[unique=true]    ; uid[unique=true]                                     ; position[unique=true]                ; page(uid,$contentCV)[unique=true][default='homepage']                             ; contentSlot(uid,$contentCV)[unique=true]
+                                                   ;                            ; CenterContentSlot-Careers                                  ; CenterContent                           ;    careersPage                                                                  ; CenterContentSlot-Careers

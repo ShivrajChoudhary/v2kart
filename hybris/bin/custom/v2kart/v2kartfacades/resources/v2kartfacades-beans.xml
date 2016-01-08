@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- [y] hybris Platform Copyright (c) 2000-2014 hybris AG All rights reserved. 
+	This software is the confidential and proprietary information of hybris ("Confidential 
+	Information"). You shall not disclose such Confidential Information and shall 
+	use it only in accordance with the terms of the license agreement you entered 
+	into with hybris. -->
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="beans.xsd">
+
+	<bean class="de.hybris.platform.commercefacades.product.data.ProductData">
+		<property name="genders"
+			type="java.util.List&lt;in.com.v2kart.facades.product.data.GenderData>" />
+		<property name="discountedPrice"
+			type="de.hybris.platform.commercefacades.product.data.PriceData" />
+		<property name="percentageDiscount" type="java.lang.Integer" />
+		<property name="size" type="java.util.List&lt;String>"></property>
+	<property name="weight"	type="java.lang.Double" />
+	</bean>
+
+	<bean class="in.com.v2kart.facades.product.data.GenderData">
+		<property name="code" type="String" />
+		<property name="name" type="String" />
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.user.data.RegisterData">
+		<property name="mobileNumber" type="String" />
+		<property name="gender" type="String"/>
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.user.data.CustomerData">
+		<property name="mobileNumber" type="String" />
+		<property name="walletCreditBalance" type="java.lang.Double" />
+		<property name="phoneNumbers" type="java.util.List&lt;String>" />
+		<property name="dateOfBirth" type="java.util.Date" />
+		<property name="maritalStatus" type="String" />
+		<property name="gender" type="String" />
+	</bean>
+
+	<bean class="in.com.v2kart.facades.core.data.WishlistData">
+		<property name="entries"
+			type="java.util.List&lt;de.hybris.platform.commercefacades.order.data.OrderEntryData>" />
+		<property name="name" type="java.lang.String" />
+		<property name="code" type="java.lang.String" />
+		<property name="hasDiscontinuedProducts" type="Boolean" />
+	</bean>
+
+	<bean class="in.com.v2kart.facades.core.data.V2SellerData">
+		<property name="name" type="java.lang.String" />
+		<property name="email" type="java.lang.String" />
+		<property name="phone" type="java.lang.String" />
+		<property name="message" type="java.lang.String" />
+		<property name="category" type="java.lang.String" />
+	</bean>
+    <bean class="in.com.v2kart.facades.core.data.V2FeedbackData">
+        <property name="message" type="java.lang.String" />
+        <property name="email" type="java.lang.String" />
+        <property name="mobileNumber" type="java.lang.String" />
+        <property name="rating" type="java.lang.String" />
+        <property name="category" type="java.lang.String" />
+    </bean>
+
+
+    <bean class="in.com.v2kart.facades.core.data.V2CustomerNotificationData">
+        <property name="productCode" type="String" />
+        <property name="type" type="String" />
+        <property name="notificationPrice" type="double" />
+        <property name="emailId" type="String" />
+        <property name="url" type="String" />
+        <property name="message" type="String" />
+        <property name="name" type="String" />
+        <property name="mediaUrl" type="String" />
+        <property name="productPrice" type="String" />
+        <property name="currentUserName" type="String" />
+        <property name="currentUserEmailId" type="String" />
+        <property name="site" type="String" />
+    </bean>
+
+    <bean class="de.hybris.platform.commercefacades.order.data.AbstractOrderData">
+        <property name="paymentMode" type="String" />
+        <property name="partialWalletMode" type="String"/>
+        <property name="codCharges" type="de.hybris.platform.commercefacades.product.data.PriceData" />
+        <property name="storeCreditPaymentInfo" type="in.com.v2kart.facades.order.data.V2StoreCreditPaymentInfoData" />
+        <property name="totalPayableBalance" type="de.hybris.platform.commercefacades.product.data.PriceData" />
+    </bean>
+
+    <bean class="de.hybris.platform.commercefacades.order.data.OrderEntryData">
+        <property name="giftWrap" type="boolean" />
+      
+    </bean>
+    <bean class="de.hybris.platform.commercefacades.order.data.AbstractOrderData">     
+        <property name="totalGiftWrapPrice" type="de.hybris.platform.commercefacades.product.data.PriceData"/>
+    </bean>
+    <bean class="de.hybris.platform.commercefacades.order.data.OrderHistoryData">
+        <property name="orderData" type="de.hybris.platform.commercefacades.order.data.OrderData"></property>
+    </bean>
+    <bean class="de.hybris.platform.commercefacades.order.data.ConsignmentData">
+        <property name="currentLocation" type="String" />
+        <property name="lspProvider" type="String" />
+        <property name="trackingUrl" type="String" />
+    </bean>
+
+    
+	<bean class="in.com.v2kart.facades.order.data.OrderModificationRecordData">
+		<property type="boolean" name="inProgress"/>
+		<property type="String" name="identifier"/>
+		<property type="String" name="orderCode"/>
+		<property type="java.util.List&lt;in.com.v2kart.facades.order.data.OrderModificationRecordEntryData>" name="modificationRecordEntries"/>
+	</bean>
+
+	<bean class="in.com.v2kart.facades.order.data.OrderModificationRecordEntryData">
+		<property type="String" name="code"/>
+		<property type="String" name="failedMessage"/>
+		<property type="String" name="notes"/>
+		<property type="String" name="status"/>
+		<property type="String" name="cancelReason"/>
+		<property type="String" name="cancelResult"/>
+		<property type="java.util.List&lt;in.com.v2kart.facades.order.data.OrderEntryModificationRecordEntryData>" name="orderEntryModificationRecordEntries"/>
+	</bean>
+
+    <bean class="in.com.v2kart.facades.order.data.OrderEntryModificationRecordEntryData">
+        <description>Data for cancelled order entries</description>
+        <property name="productInfo" type="java.lang.String" />
+        <property name="quantity" type="java.lang.Long" />
+        <property name="reason" type="java.lang.String" />
+        <property name="status" type="java.lang.String" />
+        <property type="String" name="notes"/>
+        <property type="de.hybris.platform.commercefacades.order.data.OrderEntryData" name="orderEntryData"/>
+    </bean>
+
+    <bean class="in.com.v2kart.facades.order.data.OrderEntryCancelRecordEntryData" extends="in.com.v2kart.facades.order.data.OrderEntryModificationRecordEntryData" />
+
+    <bean class="in.com.v2kart.facades.order.data.OrderEntryRefundRecordEntryData" extends="in.com.v2kart.facades.order.data.OrderEntryModificationRecordEntryData" />
+
+    <bean class="de.hybris.platform.commercefacades.order.data.OrderData">
+        <property name="isCancelable" type="Boolean" />
+         <property name="isReturnable" type="Boolean" />
+        <property name="cancelledOrderEntries" type="java.util.List&lt;in.com.v2kart.facades.order.data.OrderEntryModificationRecordEntryData>" />
+        <property name="modificationRecords" type="java.util.List&lt;in.com.v2kart.facades.order.data.OrderModificationRecordData>"/>
+        <property name="refundOrderEntries" type="java.util.List&lt;in.com.v2kart.facades.order.data.OrderEntryModificationRecordEntryData>" />
+    </bean>
+
+    <bean class="in.com.v2kart.facades.order.data.V2StoreCreditPaymentInfoData">
+        <property name="storeCreditAmount" type="java.math.BigDecimal" />
+        <property name="billingAddress" type="de.hybris.platform.commercefacades.user.data.AddressData" />
+    </bean>
+
+
+    <bean class="in.com.v2kart.facades.wallet.data.V2WalletTransactionData">
+        <property name="transactionDate" type="String"></property>
+        <property name="description" type="String"></property>
+        <property name="credit" type="Double"></property>
+        <property name="debit" type="Double"></property>
+    </bean>
+    
+    <bean class="in.com.v2kart.facades.cancel.data.CancelEntryData">
+         <property name="productName" type="String"></property>
+         <property name="maxQuantity" type="Long"></property>
+         <property name="orderEntry" type="Integer"></property>
+         <property name="reason" type="String"></property>
+         <property name="quantity" type="Integer"></property>
+         <property name="note" type="String"></property>
+     </bean>
+     
+     <bean class="in.com.v2kart.facades.cancel.data.CancelData">
+     	 <property name="orderCode" type="String"></property>
+         <property name="reason" type="String"></property>
+         <property name="cancelledEntries" type="java.util.List&lt;in.com.v2kart.facades.cancel.data.CancelEntryData>"/>
+         <property name="note" type="String"></property>
+         <property name="isFull" type="Boolean"></property>
+     </bean>
+     
+     <bean class="in.com.v2kart.facades.order.data.ReturnEntryData">
+         <property name="productName" type="String"></property>
+         <property name="maxQuantity" type="Long"></property>
+         <property name="orderEntry" type="Integer"></property>
+         <property name="reason" type="String"></property>
+         <property name="returnAction" type="String"></property>
+         <property name="quantity" type="Long"></property>
+         <property name="note" type="String"></property>
+     </bean>
+     
+     <bean class="in.com.v2kart.facades.order.data.ReturnData">
+     	 <property name="orderCode" type="String"></property>
+         <property name="reason" type="String"></property>
+         <property name="returnedEntries" type="java.util.List&lt;in.com.v2kart.facades.order.data.ReturnEntryData>"/>
+         <property name="note" type="String"></property>
+         <property name="returnAction" type="String"></property>
+         <property name="isFull" type="Boolean"></property>
+     </bean>
+     
+     
+
+	
+
+
+	<bean class="de.hybris.platform.commercefacades.order.data.CartData">
+		<property name="codCharges"
+			type="de.hybris.platform.commercefacades.product.data.PriceData" />
+		<property name="isCODChargesApplicable" type="boolean" />
+		<property name="shopMoreForFreeCOD"
+			type="de.hybris.platform.commercefacades.product.data.PriceData" />
+		<property name="shopMoreForFreeDelivery"
+			type="de.hybris.platform.commercefacades.product.data.PriceData" />
+		<property name="isPickup" type="boolean" />
+	</bean>
+	<bean class="de.hybris.platform.commercefacades.order.data.DeliveryModeData">
+		<property name="isPickUp" type="boolean" />
+	</bean>
+    <bean class="de.hybris.platform.commercefacades.storelocator.data.PointOfServiceData">
+    <property name="phoneNo" type="String"/>
+    </bean>
+    <bean class="in.com.v2kart.facades.notification.data.V2NotificationData">
+    	<property name="description" type="String"/>
+    	<property name="active" type="boolean"/>
+    	<property name="link" type="String"/>
+    	<property name="isPlp" type="boolean"/>
+    	<property name="isPdp" type="boolean"/>
+    	<property name="startDate" type="java.util.Date"/>
+    	<property name="endDate" type="java.util.Date"/>
+    	<property name="id" type="java.lang.String"/>
+        <property name="title" type="java.lang.String"/>
+    	
+    </bean>
+</beans>

@@ -1,0 +1,1149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    [y] hybris Platform
+
+    Copyright (c) 2000-2014 hybris AG
+    All rights reserved.
+
+    This software is the confidential and proprietary information of hybris
+    ("Confidential Information"). You shall not disclose such Confidential
+    Information and shall use it only in accordance with the terms of the
+    license agreement you entered into with hybris.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd 
+    http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.1.xsd"
+    profile="v2kart">
+
+    <!-- Spring Integration -->
+    <import resource="v2kartcore-daos.xml" />
+    <import resource="classpath:/v2kartcore/integration/hot-folder-store-v2kart-spring.xml" />
+    <import resource="classpath:/v2kartcore/integration/hot-folder-common-spring.xml" />
+
+    <!-- SystemSetup for the V2kartCore -->
+    <bean id="acceleratorCoreSystemSetup" class="in.com.v2kart.core.setup.CoreSystemSetup" parent="abstractCoreSystemSetup" />
+
+    <!-- Solr field value providers -->
+
+    <bean id="v2kartCategorySource" parent="abstractCategorySource">
+        <property name="rootCategory" value="categories" />
+        <!-- 'categories' is the root v2kart category -->
+    </bean>
+    <bean id="v2kartBrandCategorySource" parent="abstractCategorySource">
+        <property name="rootCategory" value="brands" />
+        <!-- 'brands' is the root of the brands hierarchy -->
+    </bean>
+    <bean id="v2kartCollectionCategorySource" parent="abstractCategorySource">
+        <property name="rootCategory" value="collections" /> <!-- 'collections' is the root of the collections hierarchy -->
+    </bean>
+
+    <bean id="abstractCategoryCodeValueProvider" abstract="true"
+        class="de.hybris.platform.commerceservices.search.solrfacetsearch.provider.impl.CategoryCodeValueProvider" parent="abstractPropertyFieldValueProvider">
+        <property name="fieldNameProvider" ref="solrFieldNameProvider" />
+        <property name="commonI18NService" ref="commonI18NService" />
+    </bean>
+    <bean id="abstractCategoryNameValueProvider" abstract="true"
+        class="de.hybris.platform.commerceservices.search.solrfacetsearch.provider.impl.CategoryNameValueProvider" parent="abstractPropertyFieldValueProvider">
+        <property name="fieldNameProvider" ref="solrFieldNameProvider" />
+        <property name="commonI18NService" ref="commonI18NService" />
+    </bean>
+
+    <bean id="v2kartCategoryCodeValueProvider" parent="abstractCategoryCodeValueProvider">
+        <property name="categorySource" ref="v2kartCategorySource" />
+    </bean>
+    <bean id="v2kartBrandCategoryCodeValueProvider" parent="abstractCategoryCodeValueProvider">
+        <property name="categorySource" ref="v2kartBrandCategorySource" />
+    </bean>
+    <bean id="v2kartCollectionCategoryCodeValueProvider" parent="abstractCategoryCodeValueProvider">
+        <property name="categorySource" ref="v2kartCollectionCategorySource" />
+    </bean>
+    <bean id="v2kartCategoryNameValueProvider" parent="abstractCategoryNameValueProvider">
+        <property name="categorySource" ref="v2kartCategorySource" />
+    </bean>
+    <bean id="v2kartBrandCategoryNameValueProvider" parent="abstractCategoryNameValueProvider">
+        <property name="categorySource" ref="v2kartBrandCategorySource" />
+    </bean>
+    <bean id="v2kartCollectionCategoryNameValueProvider" parent="abstractCategoryNameValueProvider">
+        <property name="categorySource" ref="v2kartCollectionCategorySource" />
+    </bean>
+
+    <bean id="image515ValueProvider" parent="abstractImageValueProvider">
+        <property name="mediaFormat" value="Product-420Wx525H" />
+    </bean>
+    <bean id="image300ValueProvider" parent="abstractImageValueProvider">
+        <property name="mediaFormat" value="Product-128Wx160H" />
+    </bean>
+    <bean id="image96ValueProvider" parent="abstractImageValueProvider">
+        <property name="mediaFormat" value="Product-92Wx115H" />
+    </bean>
+    <bean id="image65ValueProvider" parent="abstractImageValueProvider">
+        <property name="mediaFormat" value="Product-65Wx65H" />
+    </bean>
+    <bean id="image30ValueProvider" parent="abstractImageValueProvider">
+        <property name="mediaFormat" value="Product-30Wx30H" />
+    </bean>
+    <bean id="image157ValueProvider" parent="abstractImageValueProvider">
+        <property name="mediaFormat" value="Product-176Wx220H" />
+    </bean>
+	<bean id="image158ValueProvider" parent="abstractImageValueProvider">
+        <property name="mediaFormat" value="Product-220Wx275H" />
+    </bean>
+ 
+<bean id="productUrlValueProvider" class="de.hybris.platform.commerceservices.search.solrfacetsearch.provider.impl.ProductUrlValueProvider"
+        parent="abstractPropertyFieldValueProvider">
+        <property name="urlResolver" ref="productModelUrlResolver" />
+        <property name="fieldNameProvider" ref="solrFieldNameProvider" />
+        <property name="i18nService" ref="i18nService" />
+        <property name="commonI18NService" ref="commonI18NService" />
+    </bean>
+
+    <bean id="promotionCodeValueProvider" class="de.hybris.platform.commerceservices.search.solrfacetsearch.provider.impl.PromotionCodeValueProvider"
+        parent="abstractPropertyFieldValueProvider">
+        <property name="promotionsService" ref="promotionsService" />
+        <property name="fieldNameProvider" ref="solrFieldNameProvider" />
+    </bean>
+
+    <bean id="v2promotionCodeValueProvider" class="in.com.v2kart.core.search.solrfacetsearch.provider.impl.V2PromotionCodeValueProvider"
+        parent="promotionCodeValueProvider" />
+
+    <bean id="v2promotionFacetDisplayNameProvider" class="in.com.v2kart.core.search.solrfacetsearch.provider.impl.V2PromotionFacetDisplayNameProvider"
+        parent="promotionFacetDisplayNameProvider" />
+
+    <bean id="promotionImageValueProvider" class="de.hybris.platform.commerceservices.search.solrfacetsearch.provider.impl.PrimaryPromotionImageValueProvider"
+        parent="abstractPropertyFieldValueProvider">
+        <property name="promotionsService" ref="promotionsService" />
+        <property name="fieldNameProvider" ref="solrFieldNameProvider" />
+    </bean>
+
+    <bean id="colorFacetValueProvider" class="in.com.v2kart.core.search.solrfacetsearch.provider.impl.ColorFacetValueProvider" parent="abstractPropertyFieldValueProvider">
+        <property name="fieldNameProvider" ref="solrFieldNameProvider" />
+    </bean>
+
+    <bean id="v2ProductStockLevelStatusValueProvider" parent="productStockLevelStatusValueProvider"
+        class="in.com.v2kart.core.search.solrfacetsearch.provider.impl.V2ProductStockLevelStatusValueProvider">
+    </bean>
+
+    <bean id="colorFacetDisplayNameProvider" class="in.com.v2kart.core.search.solrfacetsearch.provider.impl.ColorFacetDisplayNameProvider">
+        <property name="enumerationService" ref="enumerationService" />
+        <property name="i18nService" ref="i18nService" />
+        <property name="commonI18NService" ref="commonI18NService" />
+    </bean>
+
+    <bean id="v2kartPointOfServiceFacetDisplayNameProvider" class="in.com.v2kart.core.search.solrfacetsearch.provider.impl.PointOfServiceFacetDisplayNameProvider">
+        <property name="pointOfServiceService" ref="pointOfServiceService" />
+    </bean>
+
+    <bean id="genderValueProvider" class="in.com.v2kart.core.search.solrfacetsearch.provider.impl.GenderValueProvider" parent="abstractPropertyFieldValueProvider">
+        <property name="fieldNameProvider" ref="solrFieldNameProvider" />
+    </bean>
+
+    <bean id="genderFacetDisplayNameProvider" class="in.com.v2kart.core.search.solrfacetsearch.provider.impl.GenderFacetDisplayNameProvider">
+        <property name="enumerationService" ref="enumerationService" />
+        <property name="i18nService" ref="i18nService" />
+        <property name="commonI18NService" ref="commonI18NService" />
+    </bean>
+
+    <bean id="v2ProductBoostingValueProvider" class="in.com.v2kart.core.search.solrfacetsearch.provider.impl.V2ProductBoostingValueProvider"
+        parent="springELValueProvider">
+        <property name="v2fieldNameProvider" ref="solrFieldNameProvider" />
+    </bean>
+
+    <bean id="v2CsCommerceClassificationPropertyValueProvider" class="in.com.v2kart.core.search.solrfacetsearch.provider.impl.V2CSCommerceClassificationPropertyValueProvider"
+        parent="classificationPropertyValueProvider" />
+
+    <bean id="v2StringValueProvider" parent="springELValueProvider" class="in.com.v2kart.core.search.solrfacetsearch.provider.impl.V2StringValueProvider">
+    </bean>
+
+    <!--
+        Event listeners are singletons, therefore the dependency for a bean in tenant-scope
+        must be configured with a lookup method.
+    -->
+    <bean id="orderCancelledEventListener" class="in.com.v2kart.core.event.OrderCancelledEventListener" parent="abstractSiteEventListener">
+        <property name="modelService" ref="modelService" />
+        <property name="businessProcessService" ref="businessProcessService" />
+    </bean>
+    <bean id="orderRefundEventListener" class="in.com.v2kart.core.event.OrderRefundEventListener" parent="abstractSiteEventListener">
+        <property name="modelService" ref="modelService" />
+        <property name="businessProcessService" ref="businessProcessService" />
+    </bean>
+    <bean id="customerRegistrationEventListener" class="in.com.v2kart.core.event.RegistrationEventListener" parent="abstractSiteEventListener">
+        <property name="modelService" ref="modelService" />
+        <property name="businessProcessService" ref="businessProcessService" />
+    </bean>
+    <bean id="forgottenPasswordEventListener" class="in.com.v2kart.core.event.ForgottenPasswordEventListener" parent="abstractSiteEventListener">
+        <property name="modelService" ref="modelService" />
+        <property name="businessProcessService" ref="businessProcessService" />
+    </bean>
+    <bean id="submitOrderEventListener" class="in.com.v2kart.core.event.SubmitOrderEventListener" parent="abstractSiteEventListener">
+        <property name="businessProcessService" ref="businessProcessService" />
+        <property name="modelService" ref="modelService" />
+        <property name="baseStoreService" ref="baseStoreService" />
+    </bean>
+    <bean id="orderConfirmationEventListener" class="in.com.v2kart.core.event.OrderConfirmationEventListener" parent="abstractSiteEventListener">
+        <property name="modelService" ref="modelService" />
+        <property name="businessProcessService" ref="businessProcessService" />
+    </bean>
+    <bean id="sendDeliveryMessageEventListener" class="in.com.v2kart.core.event.SendDeliveryMessageEventListener" parent="abstractEventListener">
+        <property name="modelService" ref="modelService" />
+        <property name="businessProcessService" ref="businessProcessService" />
+    </bean>
+    <bean id="sendReadyForPickupMessageEventListener" class="in.com.v2kart.core.event.SendReadyForPickupMessageEventListener" parent="abstractEventListener">
+        <property name="modelService" ref="modelService" />
+        <property name="businessProcessService" ref="businessProcessService" />
+    </bean>
+    <bean id="sendOrderPartiallyCanceledMessageEventListener" class="in.com.v2kart.core.event.SendOrderPartiallyCanceledMessageEventListener"
+        parent="abstractEventListener">
+        <property name="modelService" ref="modelService" />
+        <property name="businessProcessService" ref="businessProcessService" />
+    </bean>
+    <bean id="sendOrderPartiallyRefundedMessageEventListener" class="in.com.v2kart.core.event.SendOrderPartiallyRefundedMessageEventListener"
+        parent="abstractEventListener">
+        <property name="modelService" ref="modelService" />
+        <property name="businessProcessService" ref="businessProcessService" />
+    </bean>
+    <bean id="sendNotPickedUpConsignmentCanceledMessageEventListener" class="in.com.v2kart.core.event.SendNotPickedUpConsignmentCanceledMessageEventListener"
+        parent="abstractEventListener">
+        <property name="modelService" ref="modelService" />
+        <property name="businessProcessService" ref="businessProcessService" />
+    </bean>
+    <bean id="orderCompletedEventListener" class="in.com.v2kart.core.event.OrderCompletedEventListener" parent="abstractSiteEventListener">
+        <property name="modelService" ref="modelService" />
+        <property name="businessProcessService" ref="businessProcessService" />
+    </bean>
+
+    <!-- Process resources definition -->
+
+    <bean id="customerRegistrationEmailProcessDefinitionResource" class="de.hybris.platform.processengine.definition.ProcessDefinitionResource">
+        <property name="resource" value="classpath:/v2kartcore/processes/customerRegistrationEmailProcess.xml" />
+    </bean>
+    <bean id="forgottenPasswordEmailProcessDefinitionResource" class="de.hybris.platform.processengine.definition.ProcessDefinitionResource">
+        <property name="resource" value="classpath:/v2kartcore/processes/forgottenPasswordEmailProcess.xml" />
+    </bean>
+    <bean id="orderConfirmationEmailProcessDefinitionResource" class="de.hybris.platform.processengine.definition.ProcessDefinitionResource">
+        <property name="resource" value="classpath:/v2kartcore/processes/orderConfirmationEmailProcess.xml" />
+    </bean>
+    <bean id="sendDeliveryEmailProcessDefinitionResource" class="de.hybris.platform.processengine.definition.ProcessDefinitionResource">
+        <property name="resource" value="classpath:/v2kartcore/processes/sendDeliveryEmailProcess.xml" />
+    </bean>
+    <bean id="sendReadyForPickupEmailProcessDefinitionResource" class="de.hybris.platform.processengine.definition.ProcessDefinitionResource">
+        <property name="resource" value="classpath:/v2kartcore/processes/sendReadyForPickupEmailProcess.xml" />
+    </bean>
+    <bean id="sendOrderCancelledEmailProcessDefinitionResource" class="de.hybris.platform.processengine.definition.ProcessDefinitionResource">
+        <property name="resource" value="classpath:/v2kartcore/processes/sendOrderCancelledEmailProcess.xml" />
+    </bean>
+    <bean id="sendOrderRefundEmailProcessDefinitionResource" class="de.hybris.platform.processengine.definition.ProcessDefinitionResource">
+        <property name="resource" value="classpath:/v2kartcore/processes/sendOrderRefundEmailProcess.xml" />
+    </bean>
+
+    <bean id="orderRefundInitiationEmailProcessDefinitionResource" class="de.hybris.platform.processengine.definition.ProcessDefinitionResource">
+        <property name="resource" value="classpath:/v2kartcore/processes/orderRefundInitiationEmailProcess.xml" />
+    </bean>
+
+    <bean id="sendOrderPartiallyCanceledEmailProcessDefinitionResource" class="de.hybris.platform.processengine.definition.ProcessDefinitionResource">
+        <property name="resource" value="classpath:/v2kartcore/processes/sendOrderPartiallyCanceledEmailProcess.xml" />
+    </bean>
+    <bean id="sendOrderPartiallyRefundedEmailProcessDefinitionResource" class="de.hybris.platform.processengine.definition.ProcessDefinitionResource">
+        <property name="resource" value="classpath:/v2kartcore/processes/sendOrderPartiallyRefundedEmailProcess.xml" />
+    </bean>
+    <bean id="sendNotPickedUpConsignmentCanceledEmailProcessDefinitionResource" class="de.hybris.platform.processengine.definition.ProcessDefinitionResource">
+        <property name="resource" value="classpath:/v2kartcore/processes/sendNotPickedUpConsignmentCanceledEmailProcess.xml" />
+    </bean>
+
+    <bean id="orderDeliveryConfirmationEmailProcessDefinitionResource" class="de.hybris.platform.processengine.definition.ProcessDefinitionResource">
+        <property name="resource" value="classpath:/v2kartcore/processes/orderDeliveryConfirmationEmailProcess.xml" />
+    </bean>
+
+    <!-- Actions -->
+    <bean id="abstractAction" class="de.hybris.platform.processengine.action.AbstractAction" abstract="true">
+        <property name="modelService" ref="modelService" />
+        <property name="processParameterHelper" ref="processParameterHelper" />
+    </bean>
+
+    <bean id="sendEmail" class="de.hybris.platform.acceleratorservices.process.email.actions.SendEmailAction" parent="abstractAction">
+        <property name="emailService" ref="emailService" />
+    </bean>
+
+    <bean id="abstractGenerateEmailAction" class="de.hybris.platform.acceleratorservices.process.email.actions.GenerateEmailAction"
+        parent="abstractAction" abstract="true">
+        <property name="modelService" ref="modelService" />
+        <property name="cmsEmailPageService" ref="cmsEmailPageService" />
+        <property name="contextResolutionStrategy" ref="processContextResolutionStrategy" />
+        <property name="emailGenerationService" ref="emailGenerationService" />
+    </bean>
+
+    <bean id="generateCustomerRegistrationEmail" parent="abstractGenerateEmailAction">
+        <property name="frontendTemplateName" value="CustomerRegistrationEmailTemplate" />
+    </bean>
+
+    <bean id="generateForgottenPasswordEmail" parent="abstractGenerateEmailAction">
+        <property name="frontendTemplateName" value="ForgottenPasswordEmailTemplate" />
+    </bean>
+
+    <bean id="generateOrderConfirmationEmail" parent="abstractGenerateEmailAction">
+        <property name="frontendTemplateName" value="OrderConfirmationEmailTemplate" />
+    </bean>
+
+    <bean id="generateDeliverySentEmail" parent="abstractGenerateEmailAction">
+        <property name="frontendTemplateName" value="DeliverySentEmailTemplate" />
+    </bean>
+
+    <bean id="generateReadyForPickupEmail" parent="abstractGenerateEmailAction">
+        <property name="frontendTemplateName" value="ReadyForPickupEmailTemplate" />
+    </bean>
+
+    <bean id="generateOrderCancelledEmail" parent="abstractGenerateEmailAction">
+        <property name="frontendTemplateName" value="OrderCancelledEmailTemplate" />
+    </bean>
+
+    <bean id="generateOrderRefundEmail" parent="abstractGenerateEmailAction">
+        <property name="frontendTemplateName" value="OrderRefundEmailTemplate" />
+    </bean>
+
+    <bean id="generateOrderRefundInitiationEmail" parent="abstractGenerateEmailAction">
+        <property name="frontendTemplateName" value="OrderRefundInitiationEmailTemplate" />
+    </bean>
+
+    <bean id="generateOrderPartiallyCanceledEmail" parent="abstractGenerateEmailAction">
+        <property name="frontendTemplateName" value="OrderPartiallyCanceledEmailTemplate" />
+    </bean>
+    <bean id="generateOrderPartiallyRefundedEmail" parent="abstractGenerateEmailAction">
+        <property name="frontendTemplateName" value="OrderPartiallyRefundedEmailTemplate" />
+    </bean>
+    <bean id="generateNotPickedUpConsignmentCanceledEmail" parent="abstractGenerateEmailAction">
+        <property name="frontendTemplateName" value="NotPickedUpConsignmentCanceledEmailTemplate" />
+    </bean>
+
+    <bean id="generateOrderDeliveryConfirmationEmail" parent="abstractGenerateEmailAction">
+        <property name="frontendTemplateName" value="OrderDeliveryConfirmationEmailTemplate" />
+    </bean>
+
+    <bean id="removeSentEmail" class="de.hybris.platform.acceleratorservices.process.email.actions.RemoveSentEmailAction" parent="abstractAction">
+        <property name="modelService" ref="modelService" />
+    </bean>
+
+    <!-- Simple Suggestion Service -->
+    <alias alias="simpleSuggestionService" name="defaultSimpleSuggestionService" />
+    <bean id="defaultSimpleSuggestionService" class="in.com.v2kart.core.suggestion.impl.DefaultSimpleSuggestionService">
+        <property name="simpleSuggestionDao" ref="simpleSuggestionDao" />
+    </bean>
+    <alias alias="simpleSuggestionDao" name="defaultSimpleSuggestionDao" />
+    <bean id="defaultSimpleSuggestionDao" class="in.com.v2kart.core.suggestion.dao.impl.DefaultSimpleSuggestionDao" parent="abstractItemDao">
+        <property name="flexibleSearchService" ref="flexibleSearchService" />
+    </bean>
+
+    <bean id="mccSiteUrlHelper" class="in.com.v2kart.core.util.MccSiteUrlHelper">
+        <property name="siteBaseUrlResolutionService" ref="siteBaseUrlResolutionService" />
+        <property name="cmsSiteService" ref="cmsSiteService" />
+    </bean>
+
+
+    <!-- checkout flow configuration -->
+
+    <alias alias="checkoutFlowStrategy" name="uiExperienceCheckoutFlowStrategy" />
+    <bean id="uiExperienceCheckoutFlowStrategy" class="in.com.v2kart.core.checkout.flow.impl.UiExperienceCheckoutFlowStrategy">
+        <!-- This strategy looks up a strategy based on the current UI experience level -->
+        <property name="uiExperienceService" ref="uiExperienceService" />
+
+        <property name="experienceMappings">
+            <map>
+                <entry key="MOBILE" value-ref="multiStepCheckoutFlowStrategy" />
+            </map>
+        </property>
+
+        <!-- Default to site specific checkout -->
+        <property name="defaultStrategy" ref="pickUpInStoreCheckoutFlowStrategy" />
+    </bean>
+
+    <bean id="pickUpInStoreCheckoutFlowStrategy" class="in.com.v2kart.core.checkout.flow.impl.PickUpInStoreCheckoutFlowStrategy">
+        <property name="pickupStrategy" ref="pickupStrategy" />
+        <property name="defaultStrategy" ref="siteCheckoutFlowStrategy" />
+        <property name="multiStepCheckoutFlowStrategy" ref="multiStepCheckoutFlowStrategy" />
+    </bean>
+
+    <bean id="siteCheckoutFlowStrategy" class="in.com.v2kart.core.checkout.flow.impl.SiteCheckoutFlowStrategy">
+        <!-- This strategy looks up a strategy based on the current site UID -->
+        <property name="cmsSiteService" ref="cmsSiteService" />
+        <property name="siteMappings">
+            <map>
+                <entry key="v2kart" value-ref="multiStepCheckoutFlowStrategy" />
+            </map>
+        </property>
+        <!-- Default to SINGLE step checkout -->
+        <property name="defaultStrategy" ref="multiStepCheckoutFlowStrategy" />
+    </bean>
+
+    <bean id="newCustomerCheckoutFlowStrategy" class="in.com.v2kart.core.checkout.flow.impl.NewCustomerCheckoutFlowStrategy">
+        <!-- This strategy works out if the user has created any data -->
+        <property name="userService" ref="userService" />
+        <property name="customerAccountService" ref="customerAccountService" />
+        <property name="defaultStrategy" ref="multiStepCheckoutFlowStrategy" />
+        <property name="newCustomerStrategy" ref="multiStepCheckoutFlowStrategy" />
+    </bean>
+
+
+    <bean id="multiStepCheckoutFlowStrategy" class="in.com.v2kart.core.checkout.flow.impl.FixedCheckoutFlowStrategy">
+        <property name="checkoutFlow" value="MULTISTEP" />
+    </bean>
+
+    <!--Checkout PCI Strategies -->
+    <alias alias="checkoutPciStrategy" name="configuredCheckoutPciStrategy" />
+    <bean id="configuredCheckoutPciStrategy" class="in.com.v2kart.core.checkout.pci.impl.ConfiguredCheckoutPciStrategy">
+        <!-- This strategy looks in the session to see if HOP is the chosen option. HOP is only valid if configured in the application properties
+            file. Defaults to wsCheckoutPciStrategy. -->
+        <property name="siteConfigService" ref="siteConfigService" />
+
+        <!-- Default to the wsCheckoutPciStrategy -->
+        <property name="defaultCheckoutPciStrategy" ref="wsCheckoutPciStrategy" />
+    </bean>
+
+    <bean id="wsCheckoutPciStrategy" class="in.com.v2kart.core.checkout.pci.impl.FixedCheckoutPciStrategy">
+        <!-- Use the Payment extension web services to create credit card details -->
+        <property name="subscriptionPciOption" value="DEFAULT" />
+    </bean>
+    <bean id="hopCheckoutPciStrategy" class="in.com.v2kart.core.checkout.pci.impl.FixedCheckoutPciStrategy">
+        <!-- Use the Hosted Order Payment to create credit card details -->
+        <property name="subscriptionPciOption" value="HOP" />
+    </bean>
+
+    <!-- Product Reference Lookup Strategies -->
+    <alias name="v2kartCrossSellingProductReferenceTargetStrategy" alias="crossSellingProductReferenceTargetStrategy" />
+    <bean id="v2kartCrossSellingProductReferenceTargetStrategy" parent="defaultCrossSellingProductReferenceTargetStrategy">
+        <property name="productReferenceTargetStrategies">
+            <list merge="true">
+                <ref bean="v2kartSizeProductReferenceTargetStrategy" />
+            </list>
+        </property>
+    </bean>
+
+    <bean id="v2kartSizeProductReferenceTargetStrategy" class="in.com.v2kart.core.strategies.impl.V2kartSizeProductReferenceTargetStrategy">
+        <property name="commerceCategoryService" ref="commerceCategoryService" />
+        <property name="rootCategoryCode" value="categories" />
+    </bean>
+
+    <bean name="jspFragmentCacheRegion" class="in.com.v2kart.core.cache.impl.DefaultV2ManualCacheRegion">
+        <constructor-arg name="cacheName" value="cmsComponentCache" />
+        <property name="maxEntries" value="500" />
+        <property name="ttlSeconds" value="${jspFragmentCacheRegion.cache.ttl}" />
+    </bean>
+
+    <!--
+        *******************************************************************************************************************
+        JOBS SECTION
+        *******************************************************************************************************************
+    -->
+
+    <bean name="clearCacheJob" class="in.com.v2kart.core.cronjob.V2JSPFragmentClearCacheJob" parent="abstractJobPerformable">
+        <property name="jspFragmentCacheRegion" ref="jspFragmentCacheRegion" />
+    </bean>
+
+    <!-- bean for store locator -->
+    <alias alias="geoServiceWrapper" name="googleMapsGeoServiceWrapper" />
+
+    <!-- Bean for Google map tools -->
+    <alias name="v2GoogleMapTools" alias="googleMapTools" />
+    <bean id="v2GoogleMapTools" class="in.com.v2kart.core.maps.V2GoogleMapTools" scope="prototype" parent="defaultGoogleMapTools">
+        <property name="urlSigner" ref="v2UrlSigner" />
+        <property name="addressLocationParser" ref="firstPlacemarkWinsGoogleResponseParser" />
+        <property name="routeDataParser" ref="routeDataGoogleResponseParser" />
+        <property name="directionsUrlBuilder" ref="geolocationDirectionsUrlBuilder" />
+    </bean>
+
+    <bean name="notifyCustomerJob" class="in.com.v2kart.core.cronjob.V2NotifyCustomerCronJob" parent="abstractJobPerformable">
+        <property name="v2HtmlMailSender" ref="htmlMailSender" />
+        <property name="priceService" ref="commercePriceService" />
+        <property name="productModelUrlResolver" ref="productModelUrlResolver" />
+        <property name="commerceStockService" ref="commerceStockService" />
+        <property name="userService" ref="userService" />
+        <property name="siteConfigService" ref="siteConfigService" />
+    </bean>
+
+    <bean name="convertGalleryImagesjob" class="in.com.v2kart.core.cronjob.V2ConvertGalleryImagesCronjob" parent="abstractJobPerformable">
+        <property name="mediaService" ref="mediaService" />
+        <property name="mediaContainerService" ref="mediaContainerService" />
+        <property name="imageFormatMapping" ref="imageFormatMapping" />
+    </bean>
+
+    <bean id="v2UrlSigner" class="in.com.v2kart.core.maps.V2UrlSigner" scope="prototype" />
+
+    <alias name="v2PaymentService" alias="paymentService" />
+    <bean name="v2PaymentService" class="in.com.v2kart.core.payment.services.impl.V2PaymentServiceImpl" parent="defaultPaymentService"
+        scope="tenant">
+        <property name="cartService" ref="cartService" />
+        <property name="siteConfigService" ref="siteConfigService" />
+        <property name="userService" ref="userService" />
+        <property name="v2PaymentDao" ref="v2PaymentDao" />
+        <property name="keyGenerator" ref="paymentInfoCodeGenerator" />
+        <property name="storeCreditService" ref="storeCreditService" />
+    </bean>
+
+    <alias name="v2PaymentDao" alias="paymentDao" />
+    <bean name="v2PaymentDao" class="in.com.v2kart.core.payment.dao.impl.V2PaymentDaoImpl">
+        <property name="flexibleSearchService" ref="flexibleSearchService"></property>
+    </bean>
+
+    <bean id="paymentInfoCodeGenerator" class="de.hybris.platform.servicelayer.keygenerator.impl.PersistentKeyGenerator" init-method="init"
+        scope="tenant">
+        <property name="key" value="${keygen.paymentInfo.code.name}" />
+        <property name="digits" value="${keygen.paymentInfo.code.digits}" />
+        <property name="start" value="${keygen.paymentInfo.code.start}" />
+        <property name="numeric" value="${keygen.paymentInfo.code.numeric}" />
+        <property name="template" value="${keygen.paymentInfo.code.template}" />
+    </bean>
+
+    <alias alias="serviceabilityDao" name="v2ServiceabilityDao" />
+    <bean id="v2ServiceabilityDao" class="in.com.v2kart.core.serviceability.daos.impl.V2ServiceabilityDaoImpl">
+        <property name="flexibleSearchService" ref="flexibleSearchService" />
+        <property name="modelService" ref="modelService" />
+    </bean>
+    <alias alias="productSizeSortDao" name="v2ProductSizeSortDao" />
+    <bean id="v2ProductSizeSortDao" class="in.com.v2kart.core.product.sort.dao.impl.V2ProductSizeSortDaoImpl">
+        <property name="flexibleSearchService" ref="flexibleSearchService" />
+        <property name="modelService" ref="modelService" />
+    </bean>
+
+    <alias alias="countryZoneDeliveryModeDao" name="v2CountryZoneDeliveryModeDao" />
+    <bean id="v2CountryZoneDeliveryModeDao" class="in.com.v2kart.core.delivery.dao.impl.V2CountryZoneDeliveryModeDaoImpl" parent="defaultCountryZoneDeliveryModeDao" />
+   
+    <alias alias="notifcationDao" name="v2NotifcationDao" />
+    <bean id="v2NotifcationDao" class="in.com.v2kart.core.dao.impl.V2NotificationDaoImpl" />
+    
+    <alias alias="hexCodesDao" name="v2HexCodesDao" />
+    <bean id="v2HexCodesDao" class="in.com.v2kart.core.dao.impl.V2HexCodesDaoImpl" />
+
+    <!-- SMS Beans -->
+    <!-- Map Populators -->
+    <bean id="v2UserSmsDataMapPopulator" class="in.com.v2kart.core.sms.populator.V2UserSmsDataMapPopulator" />
+
+    <!-- SMS Service -->
+    <bean id="v2SmsService" class="in.com.v2kart.core.sms.impl.V2SmsServiceImpl" />
+
+    <!-- Customer Notify Beans -->
+    <alias name="v2CustomerNotificationService" alias="customerNotificationService" />
+    <bean id="v2CustomerNotificationService" class="in.com.v2kart.core.services.impl.V2NotifyCustomerServiceImpl">
+        <property name="customerNotificationDao" ref="customerNotificationDao" />
+        <property name="modelService" ref="modelService" />
+        <property name="productService" ref="productService" />
+        <property name="baseSiteService" ref="baseSiteService" />
+    </bean>
+
+    <alias name="v2CustomerNotificationDao" alias="customerNotificationDao" />
+    <bean id="v2CustomerNotificationDao" class="in.com.v2kart.core.dao.impl.V2NotifyCustomerDaoImpl">
+        <property name="modelService" ref="modelService" />
+    </bean>
+
+    <alias alias="htmlMailSender" name="htmlMailSenderImpl" />
+    <bean id="htmlMailSenderImpl" class="in.com.v2kart.core.email.impl.V2HtmlMailSenderImpl">
+    </bean>
+
+    <!-- Bean overriding for implementing threshold functionality in vouchers -->
+
+    <bean id="de.hybris.platform.voucher.jalo.PromotionVoucher" class="in.com.v2kart.core.jalo.V2PromotionVoucher" scope="prototype" />
+    <bean id="de.hybris.platform.voucher.jalo.SerialVoucher" class="in.com.v2kart.core.jalo.V2SerialVoucher" scope="prototype" />
+
+    <alias alias="voucherService" name="v2VoucherService" />
+    <bean id="v2VoucherService" class="in.com.v2kart.core.vouchers.impl.DefaultV2VoucherService" parent="defaultVoucherService" scope="tenant">
+    </bean>
+
+    <!-- Providers for V2Kart start here -->
+    <bean id="v2AbstractPriceInfoValueProvider" class="in.com.v2kart.core.search.solrfacetsearch.provider.impl.V2AbstractPriceInfoValueProvider"
+        parent="abstractPropertyFieldValueProvider" abstract="true">
+        <property name="promotionService" ref="promotionsService" />
+        <property name="baseSiteService" ref="baseSiteService" />
+        <property name="timeService" ref="timeService" />
+        <property name="fieldNameProvider" ref="solrFieldNameProvider" />
+        <property name="priceService" ref="priceService" />
+        <property name="commonI18NService" ref="commonI18NService" />
+    </bean>
+
+    <bean id="v2PriceValueProvider" class="in.com.v2kart.core.search.solrfacetsearch.provider.impl.V2PriceValueProvider" parent="v2AbstractPriceInfoValueProvider" />
+
+    <bean id="v2DiscountedPriceValueProvider" class="in.com.v2kart.core.search.solrfacetsearch.provider.impl.V2DiscountedPriceValueProvider"
+        parent="v2AbstractPriceInfoValueProvider" />
+
+    <bean id="v2AbstractPriceRangeValueProvider" class="in.com.v2kart.core.search.solrfacetsearch.provider.impl.V2AbstractPriceRangeValueProvider"
+        parent="abstractPropertyFieldValueProvider" abstract="true">
+        <property name="promotionService" ref="promotionsService" />
+        <property name="baseSiteService" ref="baseSiteService" />
+        <property name="timeService" ref="timeService" />
+        <property name="fieldNameProvider" ref="solrFieldNameProvider" />
+        <property name="priceService" ref="priceService" />
+        <property name="commonI18NService" ref="commonI18NService" />
+    </bean>
+
+    <bean id="v2PriceRangeProvider" class="in.com.v2kart.core.search.solrfacetsearch.provider.impl.V2PriceRangeProvider" parent="v2AbstractPriceRangeValueProvider" />
+
+
+    <bean id="v2DisplayProductWithPricesValueProvider" parent="abstractPropertyFieldValueProvider"
+        class="in.com.v2kart.core.search.solrfacetsearch.provider.impl.V2DisplayProductWithPricesValueProvider">
+        <property name="priceService" ref="priceService" />
+        <property name="fieldNameProvider" ref="solrFieldNameProvider" />
+    </bean>
+
+    <bean id="v2ProductReviewAverageRatingValueProvider" class="in.com.v2kart.core.search.solrfacetsearch.provider.impl.V2ProductReviewAverageRatingValueProvider"
+        parent="productReviewAverageRatingValueProvider">
+    </bean>
+
+    <alias name="v2kartSolrQueryPostProcessors" alias="solrQueryPostProcessors" />
+    <util:list id="v2kartSolrQueryPostProcessors">
+        <ref bean="priceRangeSolrSearchQueryPostProcessor" />
+        <ref bean="customSolrQueryPostProcessor" />
+    </util:list>
+
+    <bean id="priceRangeSolrSearchQueryPostProcessor" class="in.com.v2kart.core.search.solrfacetsearch.PriceRangeSolrSearchQueryPostProcessor" />
+    <bean id="v2SizeValueProvider" class="in.com.v2kart.core.search.solrfacetsearch.provider.impl.V2ProductSizeValueProvider" parent="abstractPropertyFieldValueProvider">
+        <property name="fieldNameProvider" ref="solrFieldNameProvider" />
+    </bean>
+
+    <bean id="customSolrQueryPostProcessor" class="in.com.v2kart.core.search.solrfacetsearch.V2SolrQueryPostProcessor" scope="tenant">
+    </bean>
+
+
+    <alias name="v2kartCommerceSolrSearchRequestConverter" alias="commerceSolrSearchRequestConverter" />
+    <bean id="v2kartCommerceSolrSearchRequestConverter" parent="abstractPopulatingConverter">
+        <lookup-method name="createTarget" bean="solrSearchResponse" />
+        <property name="populators">
+            <list>
+                <ref bean="v2kartSolrSearchRequestResponsePopulator" />
+            </list>
+        </property>
+    </bean>
+
+    <bean id="v2kartSolrSearchRequestResponsePopulator" class="in.com.v2kart.core.search.solrfacetsearch.populator.V2KartSolrSearchRequestResponsePopulator"
+        parent="defaultSolrSearchRequestResponsePopulator" />
+
+    <alias name="v2kartSolrSearchResponseConverter" alias="commerceSolrSearchResponseConverter" />
+    <bean id="v2kartSolrSearchResponseConverter" parent="defaultCommerceSolrSearchResponseConverter">
+        <lookup-method name="createTarget" bean="productCategorySearchPageData" />
+        <property name="populators">
+            <list merge="true">
+                <ref bean="v2kartSolrSearchResponsePopulator" />
+            </list>
+        </property>
+    </bean>
+
+    <bean id="v2kartSolrSearchResponsePopulator" class="in.com.v2kart.core.search.solrfacetsearch.populator.V2KartSolrSearchResponsePopulator" />
+
+
+    <alias name="v2kartSolrProductSearchService" alias="commerceProductSearchService" />
+    <bean id="v2kartSolrProductSearchService" parent="defaultCommerceSolrProductSearchService">
+        <property name="searchRequestConverter" ref="v2kartCommerceSolrSearchRequestConverter" />
+        <property name="searchResponseConverter" ref="v2kartSolrSearchResponseConverter" />
+    </bean>
+    <!-- Providers for V2Kart end here -->
+
+
+    <!--BeSeller Beans -->
+    <bean id="v2BeSellerDAO" class="in.com.v2kart.core.dao.impl.V2BeSellerDAOImpl">
+        <property name="modelService" ref="modelService" />
+    </bean>
+    <alias name="v2BeSellerService" alias="beSellerService" />
+    <bean id="v2BeSellerService" class="in.com.v2kart.core.services.impl.V2BeSellerServiceImpl">
+        <property name="v2BeSellerDAO" ref="v2BeSellerDAO" />
+        <property name="modelService" ref="modelService" />
+    </bean>
+    <!-- BeSeller Beans End -->
+
+    <alias name="v2FeedbackService" alias="feedbackService" />
+    <bean id="v2FeedbackService" class="in.com.v2kart.core.services.impl.V2FeedbackServiceImpl">
+        <property name="modelService" ref="modelService" />
+    </bean>
+    <alias name="v2NotificationService" alias="v2NotificationService" />
+    <bean id="v2NotificationService" class="in.com.v2kart.core.services.impl.V2NotificationServiceImpl">
+    </bean>
+
+    <!--Customised Price Factory -->
+    <bean id="europe1.manager" class="in.com.v2kart.core.price.V2CatalogAwareEurope1PriceFactory" init-method="init" destroy-method="destroy">
+        <property name="modelService" ref="modelService" />
+        <property name="retrieveChannelStrategy" ref="retrieveChannelStrategy" />
+    </bean>
+
+    <alias name="v2ServiceabilityService" alias="serviceabilityService" />
+    <bean id="v2ServiceabilityService" class="in.com.v2kart.core.serviceability.impl.V2ServiceabilityServiceImpl">
+        <property name="serviceabilityDao" ref="serviceabilityDao" />
+        <property name="cartService" ref="cartService" />
+        <property name="commonI18NService" ref="commonI18NService" />
+    </bean>
+
+    <!-- beans for CsCockpit Product Search -->
+
+    <alias name="v2SolrFacetSearchConfigSelectionStrategy" alias="v2SolrFacetSearchConfigSelectionStrategy" />
+    <bean id="v2SolrFacetSearchConfigSelectionStrategy" class="in.com.v2kart.core.search.solrfacetsearch.strategies.V2SolrFacetSearchConfigSelectionStrategy"
+        parent="defaultSolrFacetSearchConfigSelectionStrategy">
+    </bean>
+
+    <alias name="v2CommerceSearchSolrQueryPopulator" alias="v2CommerceSearchSolrQueryPopulator" />
+    <bean id="v2CommerceSearchSolrQueryPopulator" parent="defaultCommerceSearchSolrQueryPopulator">
+        <property name="catalogVersionService" ref="catalogVersionService" />
+        <property name="baseSiteService" ref="baseSiteService" />
+        <property name="facetSearchConfigConverter" ref="solrFacetSearchConfigConverter" />
+        <property name="commonI18NService" ref="commonI18NService" />
+        <property name="baseStoreService" ref="baseStoreService" />
+        <property name="solrFacetSearchConfigSelectionStrategy" ref="v2SolrFacetSearchConfigSelectionStrategy" />
+    </bean>
+
+    <alias name="v2CommerceSearchQueryPageableConverter" alias="v2CommerceSearchQueryPageableConverter" />
+    <bean id="v2CommerceSearchQueryPageableConverter" parent="abstractPopulatingConverter">
+        <lookup-method name="createTarget" bean="solrSearchRequest" />
+        <property name="populators">
+            <list>
+                <ref bean="v2CommerceSearchSolrQueryPopulator" />
+                <ref bean="commerceSearchPagePopulator" />
+                <ref bean="commerceSearchSortPopulator" />
+                <ref bean="commerceSearchTextPopulator" />
+                <ref bean="commerceSearchFiltersPopulator" />
+            </list>
+        </property>
+    </bean>
+    <alias name="v2ProductSizeSortService" alias="productSizeSortService" />
+    <bean id="v2ProductSizeSortService" class="in.com.v2kart.core.product.sort.impl.V2ProductSizeSortServiceImpl">
+        <property name="productSizeSortDao" ref="productSizeSortDao" />
+    </bean>
+
+    <alias name="v2CommerceProductSearchService" alias="v2CommerceProductSearchService" />
+    <bean id="v2CommerceProductSearchService" parent="defaultCommerceProductSearchService">
+        <property name="searchQueryPageableConverter" ref="v2CommerceSearchQueryPageableConverter" />
+        <property name="searchRequestConverter" ref="commerceSolrSearchRequestConverter" />
+        <property name="searchResponseConverter" ref="commerceSolrSearchResponseConverter" />
+    </bean>
+
+    <alias alias="dynamicAttributesConsignmentStatusDisplay" name="v2AcceleratorDynamicAttributesConsignmentStatusDisplayByMap" />
+    <bean id="v2AcceleratorDynamicAttributesConsignmentStatusDisplayByMap" class="in.com.v2kart.consignment.attribute.V2ConsignmentStatusDisplayDynamicAttributeHandler">
+        <property name="statusDisplayMap">
+            <map>
+                <entry key="COMM" value="COMM" />
+                <entry key="SHAD" value="SHAD" />
+                <entry key="SHBN" value="SHBN" />
+                <entry key="SHCL" value="SHCL" />
+                <entry key="SHCR" value="SHCR" />
+                <entry key="SHCT" value="SHCT" />
+                <entry key="SHDG" value="SHDG" />
+                <entry key="SHDL" value="SHDL" />
+                <entry key="SHDP" value="SHDP" />
+                <entry key="SHDR" value="SHDR" />
+                <entry key="SHDS" value="SHDS" />
+                <entry key="SHIB" value="SHIB" />
+                <entry key="SHIF" value="SHIF" />
+                <entry key="SHMC" value="SHMC" />
+                <entry key="SHMF" value="SHMF" />
+                <entry key="SHMR" value="SHMR" />
+                <entry key="SHOD" value="SHOD" />
+                <entry key="SHOH" value="SHOH" />
+                <entry key="SHOR" value="SHOR" />
+                <entry key="SHPM" value="SHPM" />
+                <entry key="SHPU" value="SHPU" />
+                <entry key="SHRH" value="SHRH" />
+                <entry key="SHSI" value="SHSI" />
+                <entry key="SHSP" value="SHSP" />
+                <entry key="SHTD" value="SHTD" />
+                <entry key="SHTU" value="SHTU" />
+                <entry key="SHUD" value="SHUD" />
+                <entry key="SHUP" value="SHUP" />
+                <entry key="IN_TRANSIT" value="inTransit" />
+                <entry key="DISPATCHED" value="dispatched" />
+                <entry key="PENDING" value="pending" />
+                <entry key="DELIVERED" value="delivered" />
+                <entry key="RETURNED" value="returned" />
+                <entry key="RTO" value="rto" />
+                <entry key="OPEN" value="open" />
+                <entry key="SCHEDULED" value="scheduled" />
+                <entry key="PICKEDUP" value="pickedUp" />
+                <entry key="DTO" value="dto" />
+                <entry key="CANCELED" value="canceled" />
+                <entry key="CLOSED" value="closed" />
+                <entry key="COLLECTED" value="collected" />
+            </map>
+        </property>
+        <property name="defaultStatus" value="processing" />
+    </bean>
+    <bean id="v2findCodCostStrategy" class="in.com.v2kart.core.order.strategies.calculation.impl.V2FindCODCostStrategyImpl" parent="abstractBusinessService">
+        <property name="cmsSiteService" ref="cmsSiteService" />
+        <property name="commonI18NService" ref="commonI18NService" />
+    </bean>
+
+    <!-- V2 Order Calculation Service -->
+    <alias name="v2CalculationService" alias="calculationService" />
+    <bean id="v2CalculationService" class="in.com.v2kart.core.order.V2CalculationServiceImpl" parent="defaultCalculationService">
+        <property name="findCODCostStrategy" ref="v2findCodCostStrategy" />
+        <property name="v2CommonI18NService" ref="commonI18NService" />
+        <property name="v2OrderRequiresCalculationStrategy" ref="orderRequiresCalculationStrategy" />
+        <property name="modelService" ref="modelService" />
+        <property name="promotionsService" ref="defaultPromotionsService" />
+    </bean>
+
+    <!-- Bean for overriding minimum stock level threshold -->
+    <alias alias="stockLevelStatusStrategy" name="v2CommerceStockLevelStatusStrategy" />
+    <bean id="v2CommerceStockLevelStatusStrategy" class="in.com.v2kart.core.commerceservices.stock.strategies.impl.V2CommerceStockLevelStatusStrategyImpl"
+        parent="commerceStockLevelStatusStrategy">
+        <property name="defaultLowStockThreshold" value="${website.v2kart.stock.minimum.threshold}" />
+        <property name="commerceStockLevelCalculationStrategy" ref="commerceStockLevelCalculationStrategy" />
+    </bean>
+
+    <!-- CloudFront media url generation strategy -->
+    <bean id="cloudFrontMediaURLStrategy" class="in.com.v2kart.core.media.CloudFrontMediaURLStrategy">
+        <constructor-arg ref="s3StorageServiceFactory" />
+    </bean>
+
+    <!-- V2CustomerDaoImpl -->
+    <alias alias="v2CustomerDao" name="v2CustomerDao" />
+    <bean id="v2CustomerDao" class="in.com.v2kart.core.dao.impl.V2CustomerDaoImpl" parent="abstractItemDao" />
+
+    <!-- Update customer failure cron job -->
+    <bean id="customerUpdateResendJob" class="in.com.v2kart.core.cronjob.V2FailureUpdateCustomerResendJob" parent="abstractJobPerformable">
+        <property name="v2CustomerDao" ref="v2CustomerDao" />
+        <property name="v2CustomerSapInboundIntegrationService" ref="v2CustomerSapInboundIntegrationService" />
+    </bean>
+
+    <!-- New customer failure cron job -->
+    <bean id="v2FailureNewCustomerResendJob" class="in.com.v2kart.core.cronjob.V2FailureNewCustomerResendJob" parent="abstractJobPerformable">
+        <property name="v2CustomerSapInboundIntegrationService" ref="v2CustomerSapInboundIntegrationService"></property>
+        <property name="v2CustomerDao" ref="v2CustomerDao" />
+    </bean>
+
+    <bean id="v2ExpireWaletAmountCronJob" class="in.com.v2kart.core.cronjob.V2ExpireWaletAmountCronJob" parent="abstractJobPerformable">
+        <property name="v2CustomerDao" ref="v2CustomerDao" />
+        <property name="v2WalletCreditDao" ref="v2WalletCreditDao" />
+        <property name="htmlMailSender" ref="htmlMailSender" />
+    </bean>
+
+    <bean id="v2WalletCreditExpireNotificationCronJob" class="in.com.v2kart.core.cronjob.V2WalletCreditExpireNotificationCronJob"
+        parent="abstractJobPerformable">
+        <property name="v2CustomerDao" ref="v2CustomerDao" />
+        <property name="v2WalletCreditDao" ref="v2WalletCreditDao" />
+        <property name="htmlMailSender" ref="htmlMailSender" />
+    </bean>
+
+    <bean id="v2FailureSalesOrderExtractJob" class="in.com.v2kart.core.cronjob.V2FailureSalesOrderExtractJob" parent="abstractJobPerformable">
+        <property name="v2SapInboundSaleOrderIntegrationService" ref="v2SapInboundSaleOrderIntegrationService" />
+        <property name="v2OrderDao" ref="orderDao" />
+    </bean>
+
+    <bean id="v2DeliveryConfirmationNotificationSender" class="in.com.v2kart.core.email.impl.V2DeliveryConfirmationNotificationSender">
+        <property name="v2SmsService" ref="v2SmsService" />
+        <property name="modelService" ref="modelService" />
+        <property name="v2UserSmsDataMapPopulator" ref="v2UserSmsDataMapPopulator" />
+        <property name="businessProcessService" ref="businessProcessService" />
+    </bean>
+
+    <alias name="v2SearchResponseFacetsPopulator" alias="commerceSearchResponseFacetsPopulator" />
+    <bean id="v2SearchResponseFacetsPopulator" class="in.com.v2kart.core.search.solrfacetsearch.populator.V2KartSearchResponseFacetPopulator"
+        parent="defaultCommerceSearchResponseFacetsPopulator">
+         <property name="categoryFacetName" value="category" />
+        <property name="baseCategoryName" value="categories" />
+    </bean>
+    <!-- @Since 1.2 -->
+    <bean id="v2CustomerWalletCreditAttributeHandler" class="in.com.v2kart.core.model.V2CustomerWalletCreditAttributeHandler">
+        <property name="storeCreditService" ref="storeCreditService" />
+    </bean>
+    <bean id="v2OrderTotalPayableAmountAttributeHandler" class="in.com.v2kart.core.model.V2OrderTotalPayableAmountAttributeHandler">
+    </bean>
+
+    <alias alias="v2RefundOrderProcessor" name="v2RefundOrderProcessor" />
+    <bean id="v2RefundOrderProcessor" class="in.com.v2kart.core.process.impl.V2RefundOrderProcessorImpl">
+        <property name="v2PaymentService" ref="paymentService" />
+        <property name="modelService" ref="modelService" />
+        <property name="refundService" ref="refundService" />
+        <property name="calculationService" ref="calculationService" />
+    </bean>
+
+    <bean id="v2kartConsignmentIntegrationMarshaller" class="org.springframework.oxm.jaxb.Jaxb2Marshaller">
+        <property name="contextPaths">
+            <list>
+                <value>in.com.v2kart.dotzotlspintegration.ws.consignment</value>
+                <value>in.com.v2kart.aramexintegration.ws.consignment</value>
+            </list>
+        </property>
+    </bean>
+    <bean id="promotions.manager" class=" de.hybris.platform.promotions.jalo.V2kartPromotionsManager" init-method="init"
+        destroy-method="destroy"></bean>
+
+
+    <alias alias="v2RefundAmountService" name="v2RefundAmountService" />
+    <bean id="v2RefundAmountService" class="in.com.v2kart.core.services.impl.V2RefundAmountServiceImpl">
+        <property name="modelService" ref="modelService" />
+        <property name="refundService" ref="refundService" />
+        <property name="calculationService" ref="calculationService" />
+        <property name="v2RefundOrderProcessor" ref="v2RefundOrderProcessor" />
+    </bean>
+    <!--
+
+        <bean id="v2ConsignmentIntegrationMarshaller" class="org.springframework.oxm.jaxb.Jaxb2Marshaller">
+        <property name="contextPath" value="in.com.v2kart.aramexintegration.ws.consignment" />
+        </bean>
+
+    -->
+
+
+    <alias alias="returnService" name="defaultReturnService" />
+    <bean id="defaultReturnService" class="de.hybris.platform.returns.impl.DefaultReturnService" parent="abstractBusinessService"
+        scope="tenant">
+        <property name="generator" ref="defaultRMAGenerator" />
+        <property name="refundService" ref="refundService" />
+        <property name="modificationHandler" ref="orderReturnRecordsHandler" />
+        <property name="returnableChecks">
+            <list>
+                <ref bean="v2ChecksExistingReturnEntry" />
+            </list>
+        </property>
+        <!--
+            Here you can add some additional returns handling logic. For example
+            Consignment (Warehouse) related business logic
+        -->
+        <!--
+            See: de.hybris.platform.returns.processor.ReturnEntryProcessor;
+            de.hybris.platform.returns.processor.ReplacementOrderProcessor;
+            de.hybris.platform.returns.processor.RefundOrderProcessor
+        -->
+        <!--
+            <property name="returnEntryProcessor"
+            ref="YOUR_RETUNRS_ENTRY_PROCESSOR" /> <property
+            name="replacementOrderProcessor"
+            ref="YOUR_REPLACEMEMNT_ORDER_PROCESSOR" /> <property
+            name="refundOrderProcessor" ref="YOUR_REFUND_ORDER_PROCESSOR" />
+        -->
+        <property name="replacementOrderDao" ref="replacementOrderDao" />
+        <property name="returnRequestDao" ref="returnRequestDao" />
+    </bean>
+
+    <alias alias="orderReturnRecordsHandler" name="v2OrderReturnRecordsHandler" />
+    <bean id="v2OrderReturnRecordsHandler" class="in.com.v2kart.core.handler.impl.V2OrderReturnRecordsHandlerImpl" parent="defaultOrderReturnRecordsHandler"
+        scope="tenant">
+    </bean>
+
+    <bean id="v2ChecksExistingReturnEntry" class="in.com.v2kart.core.strategies.impl.V2ReturnEntryBasedReturnableImpl" parent="defaultChecksExistingReturnEntry"
+        scope="tenant">
+    </bean>
+
+    <alias name="v2cartService" alias="cartService" />
+    <bean id="v2cartService" class="in.com.v2kart.core.order.V2CartServiceImpl" parent="defaultCartService">
+        <property name="countryZoneDeliveryModeDao" ref="countryZoneDeliveryModeDao" />
+    </bean>
+
+    <bean class="de.hybris.platform.processengine.definition.ProcessDefinitionResource" id="sendOrderCancelPendingEmailProcessDefinitionResource">
+        <property name="resource" value="classpath:/v2kartcore/processes/sendOrderCancelPendingEmailProcess.xml" />
+    </bean>
+
+    <bean id="generateOrderCancelPendingEmail" parent="abstractGenerateEmailAction">
+        <property name="frontendTemplateName" value="OrderCancelPendingEmailTemplate" />
+    </bean>
+
+    <alias alias="returnService" name="v2ReturnService" />
+    <bean id="v2ReturnService" class="in.com.v2kart.core.services.impl.V2ReturnServiceImpl" parent="defaultReturnService">
+        <property name="enumerationService" ref="enumerationService" />
+        <property name="calculationService" ref="calculationService" />
+        <property name="v2RefundService" ref="refundService" />
+        <property name="v2RefundOrderProcessor" ref="v2RefundOrderProcessor" />
+        <property name="businessProcessService" ref="businessProcessService" />
+    </bean>
+
+    <bean id="orderCancelPaymentServiceAdapter" class="in.com.v2kart.core.order.cancel.payment.adapter.impl.V2OrderCancelPaymentServiceAdapterImpl">
+        <property name="v2RefundOrderProcessor" ref="v2RefundOrderProcessor" />
+        <property name="calculationService" ref="calculationService" />
+        <property name="modelService" ref="modelService" />
+    </bean>
+
+    <bean id="v2ImmediateCancelRequestExecutor" class="in.com.v2kart.core.order.executor.impl.V2ImmediateCancelRequestExecutor" scope="prototype">
+        <property name="modelService" ref="modelService" />
+        <property name="orderCancelRecordsHandler" ref="orderCancelRecordsHandler" />
+        <property name="completeCancelStatusChangeStrategy" ref="setCancellledStrategy" />
+        <property name="partialCancelStatusChangeStrategy" ref="v2SetPartialCancellledStrategy" />
+        <property name="paymentServiceAdapter" ref="orderCancelPaymentServiceAdapter" />
+        <property name="v2RefundService" ref="refundService" />
+        <property name="notificationServiceAdapter" ref="orderCancelNotificationServiceAdapter" />
+        <property name="businessProcessService" ref="businessProcessService" />
+        <property name="v2RefundOrderProcessor" ref="v2RefundOrderProcessor" />
+        <property name="v2SapInboundSaleOrderIntegrationService" ref="v2SapInboundSaleOrderIntegrationService" />
+        <property name="calculationService" ref="calculationService" />
+        <property name="v2CancelOrderEntryStockHandler" ref="v2CancelOrderEntryStockHandler" />
+    </bean>
+
+    <alias name="sendEventOrderCancelNotification" alias="orderCancelNotificationServiceAdapter" />
+    <bean id="sendEventOrderCancelNotification" class="de.hybris.platform.ordercancel.impl.SendEventOrderCancelNotification">
+        <property name="eventService" ref="eventService" />
+    </bean>
+
+
+    <alias alias="orderCancelCallbackService" name="defaultOrderCancelService" />
+    <alias alias="orderCancelService" name="defaultOrderCancelService" />
+    <bean id="defaultOrderCancelService" class="de.hybris.platform.ordercancel.impl.DefaultOrderCancelService" scope="tenant">
+        <property name="modelService" ref="modelService" />
+        <property name="orderCancelDao" ref="orderCancelDao" />
+        <property name="orderCancelRecordsHandler" ref="orderCancelRecordsHandler" />
+        <property name="cancelDenialStrategies">
+            <list>
+                <ref bean="defaultRequestOriginDenialStrategy" />
+                <ref bean="partialCancelRulesViolationStrategy" />
+                <ref bean="orderStateDenialStrategy" />
+                <ref bean="sentToWarehouseDenialStrategy" />
+                <ref bean="shippingDenialStrategy" />
+            </list>
+        </property>
+        <property name="requestExecutorsMap">
+            <map>
+                <entry key="PENDINGORHOLDINGAREA" value-ref="v2ImmediateCancelRequestExecutor" />
+                <entry key="SENTTOWAREHOUSE" value-ref="v2ImmediateCancelRequestExecutor" />
+                <entry key="SHIPPING" value-ref="v2ImmediateCancelRequestExecutor" />
+                <entry key="PARTIALLYSHIPPED" value-ref="v2ImmediateCancelRequestExecutor" />
+            </map>
+        </property>
+        <property name="responseExecutorsMap">
+            <map>
+                <entry key="SENTTOWAREHOUSE" value-ref="warehouseResponseExecutor" />
+                <entry key="SHIPPING" value-ref="warehouseResponseExecutor" />
+                <entry key="PARTIALLYSHIPPED" value-ref="warehouseResponseExecutor" />
+            </map>
+        </property>
+        <property name="stateMappingStrategy" ref="defaultOrderCancelStateMappingStrategy" />
+        <property name="cancelableEntriesStrategy" ref="defaultCancelableEntriesStrategy" />
+    </bean>
+
+    <alias name="v2FindDeliveryCostStrategy" alias="findDeliveryCostStrategy" />
+    <bean id="v2FindDeliveryCostStrategy" class="in.com.v2kart.core.order.strategies.calculation.impl.V2FindDeliveryCostStrategyImpl"
+        parent="defaultFindDeliveryCostStrategy" />
+
+    <alias name="v2CommerceCartMergingStrategy" alias="commerceCartMergingStrategy" />
+    <bean id="v2CommerceCartMergingStrategy" class="in.com.v2kart.core.cart.strategies.V2CommerceCartMergingStrategy" parent="defaultCommerceCartMergingStrategy">
+    </bean>
+	
+	<alias alias="promotionsService" name="v2PromotionsService" />
+    <bean id="v2PromotionsService" class="in.com.v2kart.core.services.impl.V2PromotionService" parent="defaultPromotionsService">
+        <lookup-method name="getPromotionsManager" bean="promotions.manager" />
+    </bean>
+
+    <alias alias="refundService" name="v2RefundService" />
+    <bean id="v2RefundService" class="in.com.v2kart.core.services.impl.V2RefundServiceImpl" parent="defaultRefundService" scope="tenant">
+        <property name="calculationService" ref="calculationService" />
+        <property name="v2PromotionsService" ref="v2PromotionsService" />
+        <property name="orderReturnRecordsHandler" ref="orderReturnRecordsHandler" />
+        <property name="orderService" ref="orderService" />
+        <property name="modelService" ref="modelService" />
+    </bean>
+
+    <alias name="v2DefaultCartValidationStrategy" alias="cartValidationStrategy" />
+    <bean id="v2DefaultCartValidationStrategy" class="in.com.v2kart.core.cart.strategies.V2DefaultCartValidationStrategy" parent="defaultCartValidationStrategy" />
+
+    <bean id="v2WalletExpirationEmailContext" class="in.com.v2kart.core.process.email.context.V2WalletExpirationEmailContext">
+        <property name="customerConverter" ref="customerConverter" />
+    </bean>
+	
+	<alias alias="returnRequestDao" name="v2ReturnRequestDao" />
+	<bean id="v2ReturnRequestDao" class="in.com.v2kart.core.dao.impl.V2ReturnRequestDaoImpl"
+		parent="defaultReturnRequestDao" />
+
+	<alias alias="v2RefundEntryDao" name="v2RefundEntryDao" />
+	<bean id="v2RefundEntryDao" class="in.com.v2kart.core.dao.impl.V2RefundEntryDaoImpl" />
+
+    <!-- For creating different codes of order not in scope rite now -->
+
+    <!-- <bean id="v2CODSingleOrderCodeGenerator" class="de.hybris.platform.servicelayer.keygenerator.impl.PersistentKeyGenerator" parent="orderCodeGenerator">
+        <property name="key" value="${keygen.cod.single.order.code.name}"/>
+        <property name="start" value="${keygen.cod.single.order.code.start}"/>
+        </bean>
+
+        <bean id="v2CODMultipleOrderCodeGenerator" class="de.hybris.platform.servicelayer.keygenerator.impl.PersistentKeyGenerator" parent="orderCodeGenerator">
+        <property name="key" value="${keygen.cod.multiple.order.code.name}"/>
+        <property name="start" value="${keygen.cod.multiple.order.code.start}"/>
+        </bean>
+
+        <bean id="v2PrepaidSingleOrderCodeGenerator" class="de.hybris.platform.servicelayer.keygenerator.impl.PersistentKeyGenerator" parent="orderCodeGenerator">
+        <property name="key" value="${keygen.prepaid.single.order.code.name}"/>
+        <property name="start" value="${keygen.prepaid.single.order.code.start}"/>
+        </bean>
+
+        <bean id="v2PrepaidMultipleOrderCodeGenerator" class="de.hybris.platform.servicelayer.keygenerator.impl.PersistentKeyGenerator" parent="orderCodeGenerator">
+        <property name="key" value="${keygen.prepaid.multiple.order.code.name}"/>
+        <property name="start" value="${keygen.prepaid.multiple.order.code.start}"/>
+        </bean>
+	-->
+        <alias alias="createOrderFromCartStrategy" name="v2CreateOrderFromCartStrategy"/>
+	        <bean id="v2CreateOrderFromCartStrategy" class="in.com.v2kart.core.order.strategies.impl.V2CreateOrderFromCartStrategy">
+		        <property name="cartValidator" ref="cartValidator"/>
+		        <property name="cloneAbstractOrderStrategy" ref="cloneAbstractOrderStrategy"/>
+	        <property name="keyGenerator" ref="customOrderCodeGenerator"/>
+        </bean> 
+        
+        <!-- Added for generating order key  -->
+		<bean id="customOrderCodeGenerator" class="de.hybris.platform.servicelayer.keygenerator.impl.PersistentKeyGenerator" init-method="init" scope="tenant">
+           <property name="key" value="${keygen.customorder.code.name}"/>
+           <property name="digits" value="${keygen.customorder.code.digits}"/>
+           <property name="start" value="${keygen.customorder.code.start}"/>
+           <property name="numeric" value="${keygen.customorder.code.numeric}"/>
+           <property name="template" value="${keygen.customorder.code.template}"/>
+       </bean> 
+        <!-- Added By Shivraj 
+Bean For Order Failure Report 
+ -->
+ <bean id="v2OrderFailureReportJob" class="in.com.v2kart.core.cronjob.V2OrderFailureReportJob" parent="abstractJobPerformable">
+        <property name="v2OrderDao" ref="orderDao" />
+    <property name="fileDir" value="${order.excelFileDir.report}"></property>
+    </bean>
+<!-- Added By Shivraj 
+Bean For Order Report 
+ -->
+ 	<bean id="v2OrderReportJob" class="in.com.v2kart.core.cronjob.V2OrderReportJob" parent="abstractJobPerformable">
+        <property name="flexibleSearchService" ref="flexibleSearchService" />
+      <property name="fileDir" value="${order.excelFileDir.report}"></property>
+    </bean>
+  <!-- Bean for getting All Product Without Sales Unit  -->      
+      <bean id="v2AllProductWithoutSalesUnitJob" class="in.com.v2kart.core.cronjob.V2AllProductWithoutSalesUnitJob" parent="abstractJobPerformable">
+  	  <property name="fileDir" value="${order.excelFileDir.report}"></property>
+      </bean>
+   <!-- this class is used for generating Excel file for filter Image Product -->   
+      <bean id="filteredProductImage" class="in.com.v2kart.core.excel.FilteredProductImageImpl">
+      </bean>
+  <!-- Bean for getting All Product Without gallery Images   -->      
+      <bean id="v2AllProductWithoutImageJob" class="in.com.v2kart.core.cronjob.V2AllProductWithoutImageJob" parent="abstractJobPerformable">
+  	  <property name="fileDir" value="${order.excelFileDir.report}"></property>
+      </bean>
+  <!-- Bean for getting Stock availablity   -->      
+      <bean id="v2StockAvailabilityCronJob" class="in.com.v2kart.core.cronjob.V2StockAvailabilityCronJob" parent="abstractJobPerformable">
+  	  <property name="fileDir" value="${order.excelFileDir.report}"></property>
+      </bean>
+      
+      <bean id="v2ProductReportStagedCronJob" class="in.com.v2kart.core.cronjob.V2ProductReportStagedCronJob" parent="abstractJobPerformable">
+  	  <property name="fileDir" value="${order.excelFileDir.report}"></property>
+      </bean>
+      <bean id="v2ProductReportOnlineCronJob" class="in.com.v2kart.core.cronjob.V2ProductReportOnlineCronJob" parent="abstractJobPerformable">
+  	  <property name="fileDir" value="${order.excelFileDir.report}"></property>
+      </bean>
+      
+      <alias name="v2CancelOrderEntryStockHandler" alias="v2CancelOrderEntryStockHandler"/>
+	<bean id="v2CancelOrderEntryStockHandler"
+		class="in.com.v2kart.core.order.cancel.releasestock.impl.V2CancelOrderEntryStockHandlerImpl">
+		<property name="modelService" ref="modelService" />
+		<property name="orderCancelDao" ref="orderCancelDao" />
+		<property name="v2StockService" ref="v2StockService" />
+	</bean>
+	
+      <!--   <alias alias="v2SizeProfileDAO" name="defaultV2SizeProfileDAO" />
+    <bean id="defaultV2SizeProfileDAO" class="in.com.v2kart.core.dao.impl.V2SizeProfileDAOImpl">
+        <property name="flexibleSearchService" ref="flexibleSearchService" />
+        <property name="modelService" ref="modelService"></property>
+    </bean>
+      
+          <alias alias="v2SizeProfileService" name="defaultV2SizeProfileService" />
+    <bean id="defaultV2SizeProfileService" class="in.com.v2kart.core.services.impl.V2SizeProfileServiceImpl">
+        <property name="v2SizeProfileDAO" ref="v2SizeProfileDAO" />
+    </bean> -->
+<!-- <bean id="CancellationApprovalWithShippingChargeCronJob" class="in.com.v2kart.core.cronjob.CancellationApprovalWithShippingChargeCronJob"/>
+<bean id="CancellationApprovalWithoutShippingChargeCronJob" class="in.com.v2kart.core.cronjob.CancellationApprovalWithoutShippingChargeCronJob"/>
+<bean id="warrantyApproveActionJob" class="in.com.v2kart.core.cronjob.WarrantyApproveActionJob"/>
+<bean id="warrantyDisApproveActionJob" class="in.com.v2kart.core.cronjob.WarrantyDisApproveActionJob"/>
+<bean id="v2ApprovalStatusChangeCronJob" class="in.com.v2kart.core.cronjob.V2ApprovalStatusChangeCronJob">
+<property name="flexibleSearchService" ref="flexibleSearchService"/>
+<property name="modelService" ref="modelService"/>
+<property name="sessionService" ref="sessionService"/>
+</bean> -->
+<bean id="v2FailureCancelOrderResendJob"
+		class="in.com.v2kart.core.cronjob.V2FailureCancelOrderResendJob"
+		parent="abstractJobPerformable">
+		<property name="flexibleSearchService" ref="flexibleSearchService" />
+		<property name="orderCancelDao" ref="orderCancelDao" />
+		<property name="v2kartSapOrderCancelStrategy" ref="v2kartSapOrderCancelStrategy" />
+		<property name="v2ImmediateCancelRequestExecutor" ref="v2ImmediateCancelRequestExecutor" />
+		<property name="orderCancelRecordsHandler" ref="orderCancelRecordsHandler" />
+		<property name="v2RefundOrderProcessor" ref="v2RefundOrderProcessor" />
+		<property name="v2SapInboundSaleOrderIntegrationService" ref="v2SapInboundSaleOrderIntegrationService" />
+    <property name="v2CancelOrderEntryStockHandler" ref="v2CancelOrderEntryStockHandler" />
+    	</bean>
+</beans>

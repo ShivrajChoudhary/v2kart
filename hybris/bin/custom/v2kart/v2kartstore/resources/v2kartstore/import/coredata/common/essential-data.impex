@@ -1,0 +1,130 @@
+# Import essential data for the Accelerator
+#
+# Includes:
+# * Languages
+# * Currencies
+# * Titles
+# * Vendors
+# * Warehouses
+# * Supported Credit/Debit cards
+# * User Groups
+# * DistanceUnits for Storelocator
+# * MediaFolders
+# * MediaFormats
+# * Tax & Tax Groups
+# * Jobs
+
+$storeUid=v2kart
+$vendor=v2kart
+
+# Languages
+INSERT_UPDATE Language;isocode[unique=true];fallbackLanguages(isocode);active[default=true]
+;en;;;
+#;de;en;;
+#;ja;en;;
+#;zh;en;;
+
+# Currencies
+INSERT_UPDATE Currency;isocode[unique=true];conversion;digits;symbol
+					  ;INR                 ;1         ;0    ;Rs.
+#;GBP;1;2;£
+#;EUR;1;2;€
+#;USD;1,4;2;$
+#;JPY;120;0;¥
+
+
+# SiteMap Language Currencies
+INSERT_UPDATE SiteMapLanguageCurrency;&siteMapLanguageCurrency;language(isoCode)[unique=true];currency(isocode)[unique=true];
+									 ;enINR                   ;en                            ;INR
+#;enUsd;en;USD
+#;enJpy;en;JPY
+#;enGbp;en;GBP
+#;enEur;en;EUR
+#;jaUsd;ja;USD
+#;jaJpy;ja;JPY
+#;jaGbp;ja;GBP
+#;jaEur;ja;EUR
+#;deUsd;de;USD
+#;deJpy;de;JPY
+#;deGbp;de;GBP
+#;deEur;de;EUR
+#;zhUsd;zh;USD
+#;zhJpy;zh;JPY
+#;zhGbp;zh;GBP
+#;zhEur;zh;EUR
+
+
+# Disable preview for email pages
+UPDATE CMSPageType;code[unique=true];previewDisabled
+                  ;EmailPage        ;true
+
+# Titles
+INSERT_UPDATE Title;code[unique=true]
+;mr
+;mrs
+;miss
+;dr
+;rev
+;ms
+
+# Media Folders
+INSERT_UPDATE MediaFolder;qualifier[unique=true];path[unique=true]
+;images;images
+;email-body;email-body
+;email-attachments;email-attachments
+
+# Media formats
+INSERT_UPDATE MediaFormat;qualifier[unique=true]
+;1200Wx1200H
+;515Wx515H
+;365Wx246H
+;300Wx300H
+;96Wx96H
+;65Wx65H
+;30Wx30H
+;157Wx235H
+
+# Tax & Tax Groups
+INSERT_UPDATE UserTaxGroup;code[unique=true]
+
+INSERT_UPDATE ProductTaxGroup;code[unique=true]
+
+INSERT_UPDATE Tax;code[unique=true];value;currency(isocode)
+
+INSERT_UPDATE ServicelayerJob;code[unique=true];springId[unique=true]
+;cartRemovalJob;cartRemovalJob
+;siteMapMediaJob;siteMapMediaJob
+
+INSERT_UPDATE V2PaymentMode;code[unique=true];description[lang=en]
+; CASH ; Cash
+; CCAV ; CC Avenue
+; CCVN ; CC Avenue
+; PAYU ; PayU Payment
+; EBS  ; EBS
+
+INSERT_UPDATE V2PaymentMode;code[unique=true];description[lang=en];mode[unique=true]
+; ZENT      ; PayU Net banking;PAYUNB
+; ZCAR      ; PayU Credit card;PAYUCC
+; ZCDC      ; PayU Debit card;PAYUDC
+
+; CCAV_ZENT ; CCAvene Net banking;CCAVNetBanking
+; CCAV_ZCAR ; CCAvene Credit card;CCAVCA
+; CCAV_ZCDC ; CCAvene Debit card;CCAVDC
+; CCAVCashcard;CCAvenue Cash Card;CCAVCashcard 
+; ZECC      ;       Cash payment;CASH
+; EBS_ZENT      ; EBS Net banking;EBSNB
+; EBS_ZCAR      ; EBS Credit card;EBSCA
+; EBS_ZCDC      ; EBS Debit card;EBSDC
+
+INSERT_UPDATE V2LogisticServiceProvider;code[unique=true];name;trackingUrl
+;DELHIVERY;Delhivery;
+;ARAMEX;Aramex;
+;DTDC;DTDC;https://www.dtdc.com/
+;DOTZOT;Dotzot
+;ECOM;Ecom
+
+INSERT_UPDATE ComponentTypeGroups2ComponentType;source(code)[unique=true];target(code)[unique=true]
+;mobile;ProductCarouselComponent
+;mobile;V2KartBannerComponent
+;mobile;RotatingImagesComponent
+;wide;V2KartBannerComponent

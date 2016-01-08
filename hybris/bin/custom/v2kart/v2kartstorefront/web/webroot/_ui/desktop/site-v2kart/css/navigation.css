@@ -1,0 +1,155 @@
+/*
+## Navigation
+********************************************************************/
+
+.navigationbarcollectioncomponent{
+	position:relative;
+	z-index:100;
+	clear: both;
+}
+
+
+/*
+#### 1. Navigation Level
+********************************************************************/
+
+.navigationbarcollectioncomponent  li.La{
+	 display:table-cell; width:1%;
+	text-align:center;
+
+}
+
+
+.navigationbarcollectioncomponent  li.La > a{
+	display:block;	
+	padding: 10px 20px 10px;
+	font-family: 'Rockwell'; font-size:17px; font-weight:normal;   color:#000;
+}
+
+
+.navigationbarcollectioncomponent li.La:hover{
+
+}
+.navigationbarcollectioncomponent li.parent > a.active{ 
+	}
+
+.navigationbarcollectioncomponent li.parent:hover > a{ 
+	color:#fff;
+	background:#000;
+	text-decoration:none;
+	margin:0 0 0px 0;	
+	/*box-shadow: 4px 4px 4px rgba(0,0,0,0.4);*/
+}
+
+.navigationbarcollectioncomponent li.parent:hover > a{ 
+	border-left:1px dotted #a5a5a5;
+	border-right:1px dotted #a5a5a5;
+	padding-left:19px;
+	padding-right:19px;
+}
+
+/*
+#### 2. Navigation Level
+********************************************************************/
+.navigationbarcollectioncomponent ul.Lb{
+	display:none;
+}
+
+
+.navigationbarcollectioncomponent li.La:hover ul.Lb,
+.navigationbarcollectioncomponent li.La a:focus + ul.Lb{
+	display:block;
+}
+
+
+
+
+.navigationbarcollectioncomponent ul.Lb{
+	position:absolute;
+	background:rgba(253, 253, 253, 0.98);
+	left:0;	
+	text-align:left;
+	padding:10px 15px;
+	border-top:4px solid #000;
+	z-index:99;	
+	width: 100%;
+	
+	
+	box-shadow: 0px 4px 4px rgba(0,0,0,0.4);
+}
+
+ @media all and (-ms-high-contrast:none)
+     {
+      .navigationbarcollectioncomponent ul.Lb{  } /* IE10 */
+     *::-ms-backdrop, .navigationbarcollectioncomponent ul.Lb {} /* IE11 */
+     }
+
+.navigationbarcollectioncomponent ul.Lb li.container{ position:relative;padding: 0;
+    position: relative;
+    width: auto;}
+
+
+.navigationbarcollectioncomponent ul.Lb li.Lb{
+	float:left;padding-right: 15px; height:auto;  width:172px;
+	
+} 
+.navigationbarcollectioncomponent ul.Lb li.Lb:last-child{ padding-right:10px;}
+.navigationbarcollectioncomponent ul.Lb li.banner { float:right}
+.navigationbarcollectioncomponent ul.Lb li.banner img{border:1px solid #ccc; max-width:100%;}
+
+
+.navigationbarcollectioncomponent ul.Lb li.Lb span.nav-submenu-title{
+	display:block;	
+	font-size:1.1em;
+	margin:0 0 2px 0;
+	font-weight:normal; color:#000;font-family: 'Rockwell';
+}
+
+
+
+
+.navigationbarcollectioncomponent ul.Lb li.Lb .Lc{	
+	font-size: 12px;   
+    padding: 1px 0;
+}
+
+.navigationbarcollectioncomponent ul.Lb li.Lb ul.Lc{ margin-bottom:5px;}
+
+.navigationbarcollectioncomponent ul.Lb li.Lb .Lc a{ color:#000;}
+.navigationbarcollectioncomponent ul.Lb li.Lb .Lc a:hover{ color:#ee3139;}
+
+
+/*
+#### Special Offer
+********************************************************************/
+
+.navigationbarcollectioncomponent > ul > li:last-child{
+	
+}
+
+
+
+
+
+.navigationbarcollectioncomponent .La.special_offer{
+	background:#eee;
+	
+}
+
+
+
+@media (max-width: 767px){
+	.navigationbarcollectioncomponent ul.Lb{ position:relative; padding:10px 0}	
+	.topNavigation .col-md-12{ padding-left:0; padding-right:0;}
+	.navigationbarcollectioncomponent ul.Lb li.Lb{ min-height:50px;}
+	.navigationbarcollectioncomponent li.La:hover ul.Lb,
+	.navigationbarcollectioncomponent li.La a:focus + ul.Lb{
+		display:none;
+	}
+
+}
+
+.leftmenu {
+	width: 750px;
+	border : 0px solid black;
+}

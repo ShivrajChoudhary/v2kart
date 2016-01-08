@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="SOCreateOutSync" targetNamespace="urn:v2k:ia:eai:ecom:ord" xmlns:p1="urn:v2k:ia:eai:ecom:ord"
+    xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd"
+    xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+    <wsdl:documentation />
+    <wsp:UsingPolicy wsdl:required="true" />
+    <wsp:Policy wsu:Id="OP_SOCreateOutSync" />
+    <wsdl:types>
+        <xsd:schema targetNamespace="urn:v2k:ia:eai:ecom:ord" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="urn:v2k:ia:eai:ecom:ord">
+
+            <xsd:element name="SOCreateReq">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="OrderCreationReq" maxOccurs="unbounded">
+                            <xsd:complexType>
+                                <xsd:sequence>
+                                    <xsd:element name="SONo" type="xsd:string" />
+                                    <xsd:element name="SalesOrg" type="xsd:string" />
+                                    <xsd:element name="CreateDate" type="xsd:string" minOccurs="0" />
+                                    <xsd:element name="DeliveryType" type="xsd:string" />
+                                    <xsd:element name="FreightCondType" type="xsd:string" minOccurs="0" />
+                                    <xsd:element name="Freight" type="xsd:string" minOccurs="0" />
+                                    <xsd:element name="CODCondType" type="xsd:string" minOccurs="0" />
+                                    <xsd:element name="CODCharges" type="xsd:string" minOccurs="0" />
+                                    <xsd:element name="SAPCustId" type="xsd:string" />
+                                    <xsd:element name="ShippingAddress">
+                                        <xsd:complexType>
+                                            <xsd:sequence>
+                                                <xsd:element name="FName" type="xsd:string" />
+                                                <xsd:element name="LName" type="xsd:string" />
+                                                <xsd:element name="AddLine1" type="xsd:string" />
+                                                <xsd:element name="AddLine2" type="xsd:string" minOccurs="0" />
+                                                <xsd:element name="AddLine3" type="xsd:string" minOccurs="0" />
+                                                <xsd:element name="City" type="xsd:string" />
+                                                <xsd:element name="Region" type="xsd:string" minOccurs="0" />
+                                                <xsd:element name="Country" type="xsd:string" />
+                                                <xsd:element name="PostCode" type="xsd:string" />
+                                                <xsd:element name="Mobile" type="xsd:string" />
+                                            </xsd:sequence>
+                                        </xsd:complexType>
+                                    </xsd:element>
+
+                                    <xsd:element name="BillingAddress">
+                                        <xsd:complexType>
+                                            <xsd:sequence>
+                                                <xsd:element name="AddLine1" type="xsd:string" />
+                                                <xsd:element name="AddLine2" type="xsd:string" minOccurs="0" />
+                                                <xsd:element name="AddLine3" type="xsd:string" minOccurs="0" />
+                                                <xsd:element name="City" type="xsd:string" />
+                                                <xsd:element name="Region" type="xsd:string" minOccurs="0" />
+                                                <xsd:element name="Country" type="xsd:string" />
+                                                <xsd:element name="PostCode" type="xsd:string" />
+                                                <xsd:element name="Mobile" type="xsd:string" />
+                                            </xsd:sequence>
+                                        </xsd:complexType>
+                                    </xsd:element>
+                                    <xsd:element name="CondTypeDisc" type="xsd:string" minOccurs="0" />
+                                    <xsd:element name="OrderTotalDis" type="xsd:string" minOccurs="0" />
+                                    <xsd:element name="singleEntryOrder" type="xsd:string" />
+                                    <xsd:element name="ItemDtls" maxOccurs="unbounded">
+                                        <xsd:complexType>
+                                            <xsd:sequence>
+                                                <xsd:element name="ItmNumber" type="xsd:string" />
+                                                <xsd:element name="ArtNumber" type="xsd:string" />
+                                                <xsd:element name="ItmName" type="xsd:string" />
+                                                <xsd:element name="ReqQty" type="xsd:decimal" />
+                                                <xsd:element name="UOM" type="xsd:string" />
+                                                <xsd:element name="SingleUnitMRP" type="xsd:string" />
+                                                <xsd:element name="CondTypeDisc" type="xsd:string" minOccurs="0" />
+                                                <xsd:element name="SingleUnitDis" type="xsd:string" minOccurs="0" />
+                                            </xsd:sequence>
+                                        </xsd:complexType>
+                                    </xsd:element>
+                                    <xsd:element name="PaymentDtls">
+                                        <xsd:complexType>
+                                            <xsd:sequence>
+                                                <xsd:element name="PaymentGateway" type="xsd:string" />
+                                                <xsd:element name="MediaType" type="xsd:string" />
+                                                <xsd:element name="CardType" type="xsd:string" />
+                                                <xsd:element name="Amount" type="xsd:decimal" />
+                                            </xsd:sequence>
+                                        </xsd:complexType>
+                                    </xsd:element>
+                                </xsd:sequence>
+                            </xsd:complexType>
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="SOCreateRes">
+                <xsd:complexType>
+
+                    <xsd:sequence>
+                        <xsd:element name="OrderCreationRes" maxOccurs="unbounded">
+                            <xsd:complexType>
+                                <xsd:sequence>
+                                    <xsd:element name="RespCode" type="xsd:string" />
+                                    <xsd:element name="RespMsg" type="xsd:string" />
+                                    <xsd:element name="SAPCode" type="xsd:string" minOccurs="0" />
+                                </xsd:sequence>
+                            </xsd:complexType>
+                        </xsd:element>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+        </xsd:schema>
+    </wsdl:types>
+    <wsdl:message name="SOCreateReq">
+        <wsdl:documentation />
+        <wsdl:part name="SOCreateReq" element="p1:SOCreateReq" />
+    </wsdl:message>
+    <wsdl:message name="SOCreateRes">
+        <wsdl:documentation />
+        <wsdl:part name="SOCreateRes" element="p1:SOCreateRes" />
+    </wsdl:message>
+    <wsdl:portType name="SOCreateOutSync">
+        <wsdl:documentation />
+        <wsdl:operation name="SOCreateOutSync">
+            <wsdl:documentation />
+            <wsp:Policy>
+                <wsp:PolicyReference URI="#OP_SOCreateOutSync" />
+            </wsp:Policy>
+            <wsdl:input message="p1:SOCreateReq" />
+            <wsdl:output message="p1:SOCreateRes" />
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="SOCreateOutSyncBinding" type="p1:SOCreateOutSync">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+        <wsdl:operation name="SOCreateOutSync">
+            <soap:operation soapAction="http://sap.com/xi/WebService/soap1.1" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+            <wsdl:input>
+                <soap:body use="literal" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="SOCreateOutSyncService">
+        <wsdl:port name="HTTP_Port" binding="p1:SOCreateOutSyncBinding">
+            <soap:address location="" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+        </wsdl:port>
+        <wsdl:port name="HTTPS_Port" binding="p1:SOCreateOutSyncBinding">
+            <soap:address location="" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

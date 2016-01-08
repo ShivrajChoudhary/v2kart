@@ -1,0 +1,32 @@
+$defaultCatalog=Default
+$defaultCatalogVersion=Staged
+$catalogVersion=catalogVersion(catalog(id[default='$defaultCatalog']),version[default='$defaultCatalogVersion'])[unique=true,default='$defaultCatalog:$defaultCatalogVersion']
+$jasperreports_folder=jasperreports
+$reportPath=jar:in.com.v2kart.cockpits.setup.CockpitSystemSetup&/v2kartcockpits/reportcockpit/reports/oracle
+
+INSERT_UPDATE Media;code[unique=true];$catalogVersion;mime;realfilename;@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite=true]
+;icon_jasperreport_wizard;;image/gif; defaultWizardNode.gif; jar:de.hybris.platform.cockpit.jalo.CockpitManager&/v2kartcockpits/reportcockpit/defaultWizardNode.gif
+
+INSERT_UPDATE JasperMedia;code[unique=true];realfilename;@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite=true];folder(qualifier)[default=$jasperreports_folder];icon(code)[default=icon_jasperreport_wizard];$catalogVersion;mime[default='text/xml']
+;averageOrderValueBySite;averageOrderValueBySite.jrxml;$reportPath/averageOrderValueBySite.jrxml
+;salesByCountryAndSite;salesByCountryAndSite.jrxml;$reportPath/salesByCountryAndSite.jrxml
+;salesPerRegionBySite;salesPerRegionBySite.jrxml;$reportPath/salesPerRegionBySite.jrxml
+;salesPerCategoryBySite;salesPerCategoriesBySite.jrxml;$reportPath/salesPerCategoriesBySite.jrxml
+;topSellingProductsBySite;topSellingProductsBySite.jrxml;$reportPath/topSellingProductsBySite.jrxml
+;orderVolumeBySite;orderVolumeBySite.jrxml;$reportPath/orderVolumeBySite.jrxml
+;salesByHourAndSite;salesByHourAndSite.jrxml;$reportPath/salesByHourAndSite.jrxml
+;totalSalesBySite;totalSalesBySite.jrxml;$reportPath/totalSalesBySite.jrxml
+
+
+INSERT_UPDATE JasperMedia;code[unique=true];folder(qualifier);icon(code);title[lang=en];reportDescription[lang=en];$catalogVersion;mime;realfilename;@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite=true]
+;averageOrderValue;$jasperreports_folder;icon_jasperreport_wizard;Average order value;This widget displays the average order value for time range; ;text/xml; averageOrderValue.jrxml; $reportPath/averageOrderValue.jrxml
+;salesByCountry;$jasperreports_folder;icon_jasperreport_wizard;Sales by country;This Widget displays revenue by Country; ;text/xml; salesByCountry.jrxml; $reportPath/salesByCountry.jrxml
+;salesPerRegion;$jasperreports_folder;icon_jasperreport_wizard;Sales per region;This widget displays sales for each region of a country; ;text/xml; salesPerRegion.jrxml; $reportPath/salesPerRegion.jrxml
+;salesPerCategory;$jasperreports_folder;icon_jasperreport_wizard;Sales per category;This widget shows sales per category for a given time frame; ;text/xml; salesPerCategories.jrxml; $reportPath/salesPerCategories.jrxml
+;topSellingProducts;$jasperreports_folder;icon_jasperreport_wizard;Top selling products;Displays a list of the top 5 selling products across the system; ;text/xml; topSellingProducts.jrxml; $reportPath/topSellingProducts.jrxml
+;orderVolume;$jasperreports_folder;icon_jasperreport_wizard;Order volume;Displays how many orders have been placed over a given time period; ;text/xml; orderVolume.jrxml; $reportPath/orderVolume.jrxml
+;salesByHour;$jasperreports_folder;icon_jasperreport_wizard;Sales by hour;Displays overall Sales by the hour over a 24 hours period; ;text/xml; salesByHour.jrxml; $reportPath/salesByHour.jrxml
+;totalSales;$jasperreports_folder;icon_jasperreport_wizard;Total sales;Displays total sales in a given time period; ;text/xml; totalSales.jrxml; $reportPath/totalSales.jrxml
+;styleVariantProduct;$jasperreports_folder;icon_jasperreport_wizard;Total Style Variant Product;Display Total Style Variant Product; ;text/xml;styleVariantProduct.jrxml;$reportPath/styleVariantProduct.jrxml
+;genericVariantProduct;$jasperreports_folder;icon_jasperreport_wizard;Total Genaric Variant Product;Display Total Genaric Variant Product; ;text/xml;genericVariantProduct.jrxml;$reportPath/genericVariantProduct.jrxml
+;sizeVariantProduct;$jasperreports_folder;icon_jasperreport_wizard;Total Size Variant Product;Display Total size Variant Product; ;text/xml;sizeVariantProduct.jrxml;$reportPath/sizeVariantProduct.jrxml

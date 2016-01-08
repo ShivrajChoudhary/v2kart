@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    [y] hybris Platform
+
+    Copyright (c) 2000-2013 hybris AG
+    All rights reserved.
+
+    This software is the confidential and proprietary information of hybris
+    ("Confidential Information"). You shall not disclose such Confidential
+    Information and shall use it only in accordance with the terms of the
+    license agreement you entered into with hybris.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:util="http://www.springframework.org/schema/util"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd
+           http://www.springframework.org/schema/util 
+           http://www.springframework.org/schema/util/spring-util-3.0.xsd"
+    profile="admin">
+
+    <!-- import engine config -->
+    <import resource="v2dataimport-importengine.xml" />
+
+    <!-- feed reader strategy -->
+    <bean name="feedReaderStrategy" class="in.com.v2kart.dataimport.strategies.impl.FeedReaderStrategyImpl" />
+
+    <!-- ******************************************************************************************************************* -->
+    <!-- IMPORT SERVICE SECTION -->
+    <!-- ******************************************************************************************************************* -->
+
+    <bean name="dozerBeanMapper" class="org.dozer.DozerBeanMapper">
+        <constructor-arg>
+            <list>
+                <value></value>
+            </list>
+        </constructor-arg>
+    </bean>
+
+    <!-- base import service -->
+    <alias alias="baseImportService" name="baseImportServiceImpl" />
+    <bean name="baseImportServiceImpl" class="in.com.v2kart.dataimport.services.impl.BaseImportServiceImpl" parent="abstractBusinessService">
+        <property name="catalogVersion" value="Staged" />
+        <property name="masterCatalogName" value="v2kartProductCatalog" />
+        <property name="siteCatalogMap">
+            <map>
+            </map>
+        </property>
+    </bean>
+    
+    <!-- Product import service -->
+    <alias alias="v2ProductImportService" name="v2ProductImportServiceImpl" />
+    <bean name="v2ProductImportServiceImpl" class="in.com.v2kart.dataimport.services.impl.V2ProductImportServiceImpl" parent="baseImportService" />
+    
+     <!-- Media import service -->
+    <alias alias="v2MediaAssetImportService" name="v2MediaAssetImportServiceImpl" />
+    <bean name="v2MediaAssetImportServiceImpl" class="in.com.v2kart.dataimport.services.impl.V2MediaAssetImportServiceImpl"
+        parent="baseImportService">
+        <property name="processedRootDirectory" value="${processed.rootDirectory}" />
+    </bean>
+
+    <bean name="v2StoreInventoryConverter" class="in.com.v2kart.dataimport.converters.V2StoreInventoryConverter" parent="defaultDozerBasedConverter">
+    </bean>
+
+    <!-- ******************************************************************************************************************* -->
+    <!-- IMPORT COMMANDS -->
+    <!-- ******************************************************************************************************************* -->
+    <!-- -->
+
+    <!-- base import command -->
+    <alias alias="importCommand" name="abstractImportCommand" />
+    <bean name="abstractImportCommand" abstract="true" class="in.com.v2kart.dataimport.commands.AbstractImportCommand" />
+    
+     <!-- Product import command -->
+    <bean name="productImportCommand" class="in.com.v2kart.dataimport.commands.impl.V2ProductImportCommand" parent="importCommand">
+        <property name="v2ProductImportService" ref="v2ProductImportService" />
+        <property name="logEventType" value="#{T(in.com.v2kart.importlog.enums.ImportLogEventType).PRODUCT_IMPORT}"></property>
+    </bean>
+    
+    <!-- Price import command -->
+    <bean name="priceImportCommand" class="in.com.v2kart.dataimport.commands.PriceImportCommand" parent="importCommand">
+        <property name="v2PriceImportService" ref="v2PriceImportService" />
+        <property name="logEventType" value="#{T(in.com.v2kart.importlog.enums.ImportLogEventType).PRICE_IMPORT}"></property>
+    </bean>
+    
+     <!-- Media import command -->
+    <bean name="mediaAssetImportCommand" class="in.com.v2kart.dataimport.commands.MediaAssetImportCommand" parent="importCommand">
+        <property name="v2MediaAssetImportService" ref="v2MediaAssetImportService" />
+        <property name="logEventType" value="#{T(in.com.v2kart.importlog.enums.ImportLogEventType).MEDIA_IMPORT}"></property>
+    </bean>
+
+
+    <!-- ******************************************************************************************************************* -->
+    <!-- POPULATOR SECTION -->
+    <!-- ******************************************************************************************************************* -->
+
+    <!-- BasePopulator -->
+    <bean name="baseImportPopulator" class="in.com.v2kart.dataimport.populators.BasePopulator">
+        <property name="modelService" ref="modelService" />
+        <property name="dozerBeanMapper" ref="dozerBeanMapper" />
+    </bean>
+
+    <!-- Store Inventory import command -->
+    <bean name="storeInventoryImportCommand" class="in.com.v2kart.dataimport.commands.StoreInventoryImportCommand" parent="importCommand">
+        <property name="v2StoreImportService" ref="v2StoreImportService" />
+        <property name="logEventType" value="#{T(in.com.v2kart.importlog.enums.ImportLogEventType).INVENTORY_IMPORT}"></property>
+    </bean>
+
+    <!-- Store Inventory import service -->
+    <alias alias="v2StoreImportService" name="v2StoreImportServiceImpl" />
+    <bean name="v2StoreImportServiceImpl" class="in.com.v2kart.dataimport.services.impl.V2InventoryImportServiceImpl" parent="baseImportService" />
+
+    <!-- Price import service -->
+    <alias alias="v2PriceImportService" name="v2PriceImportServiceImpl" />
+    <bean name="v2PriceImportServiceImpl" class="in.com.v2kart.dataimport.services.impl.V2PriceImportServiceImpl" parent="baseImportService" />
+
+    <!-- ******************************************************************************************************************* -->
+    <!-- CONVERTER SECTION -->
+    <!-- ******************************************************************************************************************* -->
+
+    <bean name="defaultDozerBasedConverter" class="in.com.v2kart.dataimport.converters.DefaultDozerBasedConverter">
+        <property name="modelService" ref="modelService" />
+        <property name="dozerBeanMapper" ref="dozerBeanMapper" />
+    </bean>
+
+    <bean name="v2PriceConverter" class="in.com.v2kart.dataimport.converters.V2PriceConverter" parent="defaultDozerBasedConverter">
+    </bean>
+    <!-- ******************************************************************************************************************* -->
+    <!-- CRON JOB SECTION -->
+    <!-- ******************************************************************************************************************* -->
+    <bean name="v2DataImportJob" class="in.com.v2kart.dataimport.jobs.BaseImportJob" parent="abstractJobPerformable">
+        <property name="importCommandList">
+            <list>
+                <!-- Insert import command beans here as ref -->
+                <ref bean="productImportCommand" />
+                <ref bean="priceImportCommand" />
+                <ref bean="storeInventoryImportCommand" />
+                <ref bean="mediaAssetImportCommand" />
+            </list>
+        </property>
+    </bean>
+    
+     <bean name="v2MediaImportJob" class="in.com.v2kart.dataimport.jobs.BaseImportJob" parent="abstractJobPerformable">
+        <property name="importCommandList">
+            <list>
+                <ref bean="mediaAssetImportCommand" />
+            </list>
+        </property>
+    </bean>
+    
+    
+
+</beans>

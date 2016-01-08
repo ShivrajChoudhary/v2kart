@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  ~ [y] hybris Platform
+  ~
+  ~ Copyright (c) 2000-2014 hybris AG
+  ~ All rights reserved.
+  ~
+  ~ This software is the confidential and proprietary information of hybris
+  ~ ("Confidential Information"). You shall not disclose such Confidential
+  ~ Information and shall use it only in accordance with the terms of the
+  ~ license agreement you entered into with hybris.
+  -->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+	                       http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- Validators -->
+	<bean id="minimalAddressValidator" class="in.com.v2kart.commercewebservices.validator.CompositeValidator">
+		<property name="validators">
+			<list>
+				<bean class="in.com.v2kart.commercewebservices.validator.FieldNotEmptyOrTooLongValidator">
+					<property name="fieldPath" value="firstName"/>
+					<property name="maxLength" value="255"/>
+				</bean>
+				<bean class="in.com.v2kart.commercewebservices.validator.FieldNotEmptyOrTooLongValidator">
+					<property name="fieldPath" value="lastName"/>
+					<property name="maxLength" value="255"/>
+				</bean>
+				<bean class="in.com.v2kart.commercewebservices.validator.FieldNotEmptyOrTooLongValidator">
+					<property name="fieldPath" value="line1"/>
+					<property name="maxLength" value="255"/>
+				</bean>
+				<bean class="in.com.v2kart.commercewebservices.validator.FieldNotEmptyOrTooLongValidator">
+					<property name="fieldPath" value="town"/>
+					<property name="maxLength" value="255"/>
+				</bean>
+				<bean class="in.com.v2kart.commercewebservices.validator.FieldNotEmptyOrTooLongValidator">
+					<property name="fieldPath" value="postalCode"/>
+					<property name="maxLength" value="10"/>
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="commonAddressValidator" class="in.com.v2kart.commercewebservices.validator.CompositeValidator">
+		<property name="validators">
+			<list>
+				<ref bean="minimalAddressValidator"/>
+				<bean class="in.com.v2kart.commercewebservices.validator.FieldNotEmptyOrTooLongValidator">
+					<property name="fieldPath" value="titleCode"/>
+					<property name="maxLength" value="255"/>
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="japaneseAddressValidator" class="in.com.v2kart.commercewebservices.validator.CompositeValidator">
+		<property name="validators">
+			<list>
+				<ref bean="minimalAddressValidator"/>
+				<bean class="in.com.v2kart.commercewebservices.validator.FieldNotEmptyOrTooLongValidator">
+					<property name="fieldPath" value="line2"/>
+					<property name="maxLength" value="255"/>
+				</bean>
+				<bean class="in.com.v2kart.commercewebservices.validator.FieldNotEmptyOrTooLongValidator">
+					<property name="fieldPath" value="region.isocode"/>
+					<property name="maxLength" value="7"/>
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="chineseAddressValidator" class="in.com.v2kart.commercewebservices.validator.CompositeValidator">
+		<property name="validators">
+			<list>
+				<ref bean="commonAddressValidator"/>
+				<bean class="in.com.v2kart.commercewebservices.validator.FieldNotEmptyOrTooLongValidator">
+					<property name="fieldPath" value="region.isocode"/>
+					<property name="maxLength" value="7"/>
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<alias name="defaultAddressValidator" alias="addressValidator"/>
+	<bean id="defaultAddressValidator"
+	      class="in.com.v2kart.commercewebservices.validator.CountryAwareAddressValidator">
+		<property name="commonAddressValidator" ref="commonAddressValidator"/>
+		<property name="countrySpecificAddressValidators">
+			<map>
+				<entry key="JP" value-ref="japaneseAddressValidator"/>
+				<entry key="CN" value-ref="chineseAddressValidator"/>
+			</map>
+		</property>
+	</bean>
+
+	<alias name="defaultPaymentAddressValidator" alias="paymentAddressValidator"/>
+	<bean id="defaultPaymentAddressValidator"
+	      class="in.com.v2kart.commercewebservices.validator.CompositeValidator">
+		<property name="validators">
+			<list>
+				<bean class="in.com.v2kart.commercewebservices.validator.FieldNotEmptyValidator">
+					<property name="fieldPath" value="billingAddress.titleCode"/>
+				</bean>
+				<bean class="in.com.v2kart.commercewebservices.validator.FieldNotEmptyValidator">
+					<property name="fieldPath" value="billingAddress.firstName"/>
+				</bean>
+				<bean class="in.com.v2kart.commercewebservices.validator.FieldNotEmptyValidator">
+					<property name="fieldPath" value="billingAddress.lastName"/>
+				</bean>
+				<bean class="in.com.v2kart.commercewebservices.validator.FieldNotEmptyValidator">
+					<property name="fieldPath" value="billingAddress.line1"/>
+				</bean>
+				<bean class="in.com.v2kart.commercewebservices.validator.FieldNotEmptyValidator">
+					<property name="fieldPath" value="billingAddress.town"/>
+				</bean>
+				<bean class="in.com.v2kart.commercewebservices.validator.FieldNotEmptyOrTooLongValidator">
+					<property name="fieldPath" value="billingAddress.postalCode"/>
+					<property name="maxLength" value="10"/>
+				</bean>
+				<bean class="in.com.v2kart.commercewebservices.validator.FieldNotEmptyOrTooLongValidator">
+					<property name="fieldPath" value="billingAddress.country.isocode"/>
+					<property name="maxLength" value="2"/>
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<alias name="defaultDeliveryAddressValidator" alias="deliveryAddressValidator"/>
+	<bean id="defaultDeliveryAddressValidator"
+	      class="in.com.v2kart.commercewebservices.validator.DeliveryAddressValidator">
+	</bean>
+
+	<alias name="defaultPlaceOrderCartValidator" alias="placeOrderCartValidator"/>
+	<bean id="defaultPlaceOrderCartValidator"
+	      class="in.com.v2kart.commercewebservices.validator.PlaceOrderCartValidator">
+	</bean>
+
+	<bean id="pointOfServiceValidator"
+	      class="in.com.v2kart.commercewebservices.validator.PointOfServiceValidator">
+		<property name="pointOfServiceService" ref="pointOfServiceService"/>
+	</bean>
+
+</beans>

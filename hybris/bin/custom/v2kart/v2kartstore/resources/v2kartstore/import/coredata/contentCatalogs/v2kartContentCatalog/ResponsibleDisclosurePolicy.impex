@@ -1,0 +1,41 @@
+$contentCatalog=v2kartContentCatalog
+$contentCatalogName=v2kart Content Catalog
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+$productCatalog=v2kartProductCatalog
+$productCatalogName=v2kart Product Catalog
+$productCV=catalogVersion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+$picture=media(code, $contentCV)                   ;
+$image=image(code, $contentCV)                     ;
+$media=media(code, $contentCV)                     ;
+$page=page(uid, $contentCV)                        ;
+$contentPage=contentPage(uid, $contentCV)          ;
+$product=product(code, $productCV)
+$category=category(code, $productCV)
+$siteResource=jar:in.com.v2kart.constants.V2kartstoreConstants&/v2kartstore/import/sampledata/contentCatalogs/$contentCatalog
+$productResource=jar:in.com.v2kart.constants.V2kartstoreConstants&/v2kartstore/import/sampledata/productCatalogs/$productCatalog
+$jarResourceCms=jar:in.com.v2kart.constants.V2kartstoreConstants&/v2kartstore/import/sampledata/cockpits/cmscockpit
+$lang=en
+
+
+# CONTENT PAGE
+INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;label;title[lang=$lang];masterTemplate(uid,$contentCV);defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
+#	uid												name											label										title											masterTemplate
+;;responsibleDisclosurePolicyPage;     	 Disclosure Policy Page;	/disclosurePolicy;		"Disclosure Policy";		ContentPage1Template;
+
+# CMSParagraphComponent 
+INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;;;;
+;;responsibleDisclosurePolicyParagraph;Disclosure Policy Paragraph;responsibleDisclosurePolicyParagraph;;;;
+   
+INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];content[lang=$lang]
+;;responsibleDisclosurePolicyParagraph;"<div class='col-xs-12 col-sm-12 col-md-12'> <div class='heading'>Disclosure Policy</div><div class='description cms-content staticpagedescription'> <p><strong>Disclaimer:</strong></p><p>At V2Kart.com we take the security of our systems seriously, and it is our constant endeavor to make our website a safe place for our customers to browse. However, in the rare case when some security researcher or member of the general public identifies a vulnerability in our systems, and responsibly shares the details of it with us, we appreciate their contribution, work closely with them to address such issues with urgency, and if they want, publicly acknowledge their contribution.</p><p><strong>Q. HOW TO REPORT AN ISSUE?</strong></p><p> If you happen to have identified a vulnerability on any of our web properties, we request you to follow the steps outlined below:</p> <ol> <li style='margin-left:15px;'>Please contact us immediately by sending an email to <a href='mailto:customercare@v2kart.com' title='customercare@v2kart.com'>customercare@v2kart.com</a> with the necessary details to recreate the vulnerability scenario. This may include screenshots, videos or simple text instructions.</li><li style='margin-left:15px;'> If possible, share with us your contact details (email, phone number), so that our security team can reach out to you if further inputs are needed to identify or close the problem...</li><li style='margin-left:15px;'>If you intend to make the information public for educational or other such needs, please give us reasonable time to appropriately fix the problem before making such information public. Our security team will work with you to estimate and commit to such time frame.</li><li style='margin-left:15px;'>If the identified vulnerability can be used to potentially extract information of our customers or systems, or impair our systems' ability to function normally, then please refrain from actually exploiting such a vulnerability. This is absolutely necessary for us to consider your disclosure a responsible one. While we appreciate the inputs of Whitehat hackers, we may take legal recourse if the identified vulnerabilities are exploited for unlawful gains or getting access to restricted customer or system information or impairing our systems.</li></ol></br> <p><strong>ACKNOWLEDGEMENTS:</strong> We do not have a bounty/cash reward program for such disclosures, but we express our gratitude for your contribution in different ways. For genuine ethical disclosures, we would be glad to publicly acknowledge your contribution in this section on our website. Of course, this will be done if you want a public acknowledgement.</p></div></div>"
+  		
+#  CONTENT SLOT NAME
+INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='LandingPage2Template'];validComponentTypes(code)
+;CenterContentSlot-ResponsibleDisclosurePolicy;;CMSParagraphComponent
+										   
+												     
+INSERT_UPDATE ContentSlot                          ; $contentCV[unique=true]    ; uid[unique=true]                                     ; name                                                   ; active      ; cmsComponents(&componentRef)
+                                                   ;                            ; CenterContentSlot-ResponsibleDisclosurePolicy    	   ; CenterContentSlot for Responsible Disclosure Policy        ; true        ; responsibleDisclosurePolicyParagraph
+  
+INSERT_UPDATE ContentSlotForPage                   ; $contentCV[unique=true]    ; uid[unique=true]                                     ; position[unique=true]                ; page(uid,$contentCV)[unique=true][default='homepage']                             ; contentSlot(uid,$contentCV)[unique=true]
+                                                   ;                            ; CenterContentSlot-ResponsibleDisclosurePolicy        ; CenterContent                         	  ;    responsibleDisclosurePolicyPage                                                ; CenterContentSlot-ResponsibleDisclosurePolicy

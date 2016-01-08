@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="SI_CancellationChange_S_OB"
+	targetNamespace="http://v2retail.com" xmlns:p2="urn:v2k:ia:eai:ecom:ord"
+	xmlns:p1="http://v2retail.com" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy"
+	xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd"
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+	<wsdl:documentation />
+	<wsp:UsingPolicy wsdl:required="true" />
+	<wsp:Policy wsu:Id="OP_SI_CancellationChange_S_OB" />
+	<wsdl:types>
+		<xsd:schema targetNamespace="urn:v2k:ia:eai:ecom:ord"
+			xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="urn:v2k:ia:eai:ecom:ord">
+			<xsd:element name="SOModifyCancelReq">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="OrderModifyCancelReq" maxOccurs="unbounded">
+							<xsd:complexType>
+								<xsd:sequence>
+									<xsd:element name="SONo" type="xsd:string" />
+									<xsd:element name="SalesOrg" type="xsd:string" />
+									<xsd:element name="CreateDate" type="xsd:string"
+										minOccurs="0" />
+									<xsd:element name="DeliveryType" type="xsd:string" />
+									<xsd:element name="FreightCondType" type="xsd:string"
+										minOccurs="0" />
+									<xsd:element name="Freight" type="xsd:string"
+										minOccurs="0" />
+									<xsd:element name="CODCondType" type="xsd:string"
+										minOccurs="0" />
+									<xsd:element name="CODCharges" type="xsd:string"
+										minOccurs="0" />
+									<xsd:element name="SAPCustId" type="xsd:string" />
+									<xsd:element name="ItemDtls" maxOccurs="unbounded">
+										<xsd:complexType>
+											<xsd:sequence>
+												<xsd:element name="ItmNumber" type="xsd:string" />
+												<xsd:element name="ArtNumber" type="xsd:string" />
+												<xsd:element name="ReqQty" type="xsd:decimal" />
+												<xsd:element name="UOM" type="xsd:string" />
+												<xsd:element name="SingleUnitMRP" type="xsd:string" />
+												<xsd:element name="CondTypeDisc" type="xsd:string"
+													minOccurs="0" />
+												<xsd:element name="SingleUnitDis" type="xsd:string"
+													minOccurs="0" />
+											</xsd:sequence>
+										</xsd:complexType>
+									</xsd:element>
+									<xsd:element name="PaymentDtls" maxOccurs="unbounded">
+										<xsd:complexType>
+											<xsd:sequence>
+												<xsd:element name="PaymentGateway" type="xsd:string" />
+												<xsd:element name="MediaType" type="xsd:string" />
+												<xsd:element name="CardType" type="xsd:string" />
+												<xsd:element name="Amount" type="xsd:decimal" />
+											</xsd:sequence>
+										</xsd:complexType>
+									</xsd:element>
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="SOModifyCancelRes">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="OrderModifyCancelRes" maxOccurs="unbounded">
+							<xsd:complexType>
+								<xsd:sequence>
+									<xsd:element name="RespCode" type="xsd:string" />
+									<xsd:element name="RespMsg" type="xsd:string" />
+									<xsd:element name="SONo" type="xsd:string"
+										minOccurs="0" />
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:schema>
+	</wsdl:types>
+	<wsdl:message name="p2.SOModifyCancelReq">
+		<wsdl:documentation />
+		<wsdl:part name="SOModifyCancelReq" element="p2:SOModifyCancelReq" />
+	</wsdl:message>
+	<wsdl:message name="p2.SOModifyCancelRes">
+		<wsdl:documentation />
+		<wsdl:part name="SOModifyCancelRes" element="p2:SOModifyCancelRes" />
+	</wsdl:message>
+	<wsdl:portType name="SI_CancellationChange_S_OB">
+		<wsdl:documentation />
+		<wsdl:operation name="SI_CancellationChange_S_OB">
+			<wsdl:documentation />
+			<wsp:Policy>
+				<wsp:PolicyReference URI="#OP_SI_CancellationChange_S_OB" />
+			</wsp:Policy>
+			<wsdl:input message="p1:p2.SOModifyCancelReq" />
+			<wsdl:output message="p1:p2.SOModifyCancelRes" />
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="SI_CancellationChange_S_OBBinding"
+		type="p1:SI_CancellationChange_S_OB">
+		<soap:binding style="document"
+			transport="http://schemas.xmlsoap.org/soap/http" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+		<wsdl:operation name="SI_CancellationChange_S_OB">
+			<soap:operation soapAction="http://sap.com/xi/WebService/soap1.1"
+				xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+			<wsdl:input>
+				<soap:body use="literal" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="SI_CancellationChange_S_OBService">
+		<wsdl:port name="HTTP_Port" binding="p1:SI_CancellationChange_S_OBBinding">
+			<soap:address
+				location="http://piprd:50000/XISOAPAdapter/MessageServlet?senderParty=&amp;senderService=BC_V2Retail&amp;receiverParty=&amp;receiverService=&amp;interface=SI_CancellationChange_S_OB&amp;interfaceNamespace=http%3A%2F%2Fv2retail.com"
+				xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+		</wsdl:port>
+		<wsdl:port name="HTTPS_Port" binding="p1:SI_CancellationChange_S_OBBinding">
+			<soap:address
+				location="https://piprd:50001/XISOAPAdapter/MessageServlet?senderParty=&amp;senderService=BC_V2Retail&amp;receiverParty=&amp;receiverService=&amp;interface=SI_CancellationChange_S_OB&amp;interfaceNamespace=http%3A%2F%2Fv2retail.com"
+				xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

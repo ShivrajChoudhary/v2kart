@@ -1,0 +1,31 @@
+#
+# Import CMS content for the site
+#
+
+$contentCatalog=v2kartContentCatalog
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+
+# Language
+$lang=en
+
+# Content Pages
+UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];title[lang=$lang]
+ ;;account;"My Account"
+ ;;add-edit-address;"Add Address"
+ ;;address-book;"My Address"
+ ;;cartPage;"Your Shopping Bag"
+ ;;checkout-login;"Proceed to Checkout"
+ ;;faq;"Frequently Asked Questions"
+ ;;homepage;"Homepage"
+ ;;login;"Login"
+ ;;multiStepCheckoutSummaryPage;"Checkout"
+ ;;notFound;"Not Found"
+ ;;order;"Order Details"
+ ;;orderConfirmationPage;"Order Confirmation"
+ ;;orders;"My Orders"
+ ;;payment-details;"Payment Details"
+ ;;profile;"Profile"
+ ;;searchEmpty;"No Results"
+ ;;storefinderPage;"Find A Store"
+ ;;termsAndConditions;"Terms and Conditions"
+ ;;updatePassword;"Update Password"

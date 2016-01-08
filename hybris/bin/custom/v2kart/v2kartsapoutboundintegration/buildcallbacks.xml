@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project name="v2kartsapoutboundintegration_buildcallbacks">
+
+    <property name="v2kartsapoutboundintegrationExtensionBaseDir" value="${ext.v2kartsapoutboundintegration.path}"/>
+
+    <property name="sapoutboundinputPath" value="${v2kartsapoutboundintegrationExtensionBaseDir}/resources/ws/definitions"/>
+    <property name="sapoutboundoutputFolder" value="${v2kartsapoutboundintegrationExtensionBaseDir}/gensrc/in/com/v2kart/sapoutboundintegration/ws"/>
+	
+    <macrodef name="v2kartsapoutboundintegration_before_build">
+
+        <sequential>
+            <echo message="Creating Java files out of WSDL"/>
+            <taskdef classname="com.sun.tools.ws.ant.WsImport" name="v2kart_wsimport">
+                <classpath>
+                    <fileset dir="${v2kartsapoutboundintegrationExtensionBaseDir}/lib/">
+                        <include name="**.jar"/>
+                    </fileset>
+                </classpath>
+            </taskdef>
+
+            <!--  Order -->
+            <if>
+                <not>
+                    <available file="${sapoutboundinputPath}/order/update"/>
+                </not>
+                <then>
+                    <mkdir dir="${sapoutboundoutputFolder}/order/update"/>
+                    <echo message="Creating WS classes"/>
+                    <xjc destdir="${v2kartsapoutboundintegrationExtensionBaseDir}/gensrc/" extension="true" package="in.com.v2kart.sapoutboundintegration.ws.order.update" removeOldOutput="no" schema="${sapoutboundinputPath}/V2SOOrderStatusUpdate.wsdl">
+                        <arg value="-wsdl"/>
+                        <produces dir="${sapoutboundoutputFolder}/order/update" includes="**/*"/>
+                    </xjc>
+                </then>
+            </if>
+
+            <!--  Return Order -->
+                                   <if>
+                                       <not>
+                                           <available file="${sapoutboundinputPath}/order/returnupdate"/>
+                                       </not>
+                                       <then>
+                                           <mkdir dir="${sapoutboundoutputFolder}/order/returnupdate"/>
+                                           <echo message="Creating WS classes for return order"/>
+                                           <xjc destdir="${v2kartsapoutboundintegrationExtensionBaseDir}/gensrc/" extension="true" package="in.com.v2kart.sapoutboundintegration.ws.order.returnupdate" removeOldOutput="no" schema="${sapoutboundinputPath}/V2RSOOrderStatusUpdate.wsdl">
+                                               <arg value="-wsdl"/>
+                                               <produces dir="${sapoutboundoutputFolder}/order/returnupdate" includes="**/*"/>
+                                           </xjc>
+                                       </then>
+                                   </if>
+
+        </sequential>
+    </macrodef>
+
+
+
+    <!-- 
+	    Called whenever 'ant ear' is used. this callback can be used to modify the content of the ear file
+	
+	     ${ear.path}: 			path to ear
+	 -->
+    <macrodef name="v2kartsapoutboundintegration_before_ear">
+        <sequential>
+
+            <!-- you can do anything before the EAR file is being packed -->
+
+        </sequential>
+    </macrodef>
+
+</project>

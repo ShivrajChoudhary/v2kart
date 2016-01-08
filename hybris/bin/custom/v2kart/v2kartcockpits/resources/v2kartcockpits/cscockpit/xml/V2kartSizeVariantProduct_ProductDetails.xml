@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<list-view>
+    <group name="General">
+        <custom class="de.hybris.platform.cscockpit.services.config.impl.ProductThumbnailColumn" name="Thumbnail" visible="true">
+            <label key="v2kartcockpits.V2kartVariantProduct.style" />
+        </custom>
+        <group name="ProductDetails">
+            <label key="config.general.description" />
+
+            <custom class="de.hybris.platform.cscockpit.services.config.impl.ProductDescriptionColumn" name="Description" visible="true">
+                <label key="config.general.description" />
+            </custom>
+        </group>
+        <!-- <group name="Genders">
+            <label key="v2kartcockpits.V2kart.genders" />
+            <property qualifier="Product.genders" visible="true" />
+        </group> -->
+        <!-- <group name="Style">
+            <label key="v2kartcockpits.V2kartVariantProduct.style" />
+            <property qualifier="V2kartStyleVariantProduct.style" visible="true" />
+        </group> -->
+        <group name="SwatchColour">
+            <label key="v2kartcockpits.V2kartVariantProduct.colour" />
+            <property qualifier="V2kartStyleVariantProduct.swatchColors" visible="true" />
+        </group>
+        <group name="Size">
+            <label key="v2kartcockpits.V2kartSizeVariantProduct.size" />
+            <property qualifier="V2kartSizeVariantProduct.size" visible="true" />
+        </group>
+    </group>
+</list-view>

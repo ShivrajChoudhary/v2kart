@@ -1,0 +1,67 @@
+#
+# Import the Solr configuration for the store
+#
+$prefix=v2kart
+$productCatalog=$prefixProductCatalog
+$contentCatalogName=$prefixContentCatalog
+$catalogVersions=catalogVersions(catalog(id),version);
+$serverConfigName=$prefixSolrServerConfig
+$indexConfigName=$prefixSolrIndexConfig
+$searchConfigName=$prefixPageSize
+$facetSearchConfigName=$prefixIndex
+$facetSearchConfigDescription=v2kart Solr Index
+$searchIndexNamePrefix=$prefix
+$solrIndexedType=$prefixCsProductType
+$indexBaseSite=$prefix
+$indexLanguages=en
+$indexCurrencies=INR
+$priceRangeINR=$prefixPriceRangeINR
+
+
+#For v2kart classification
+$classificationCatalog=v2KartClassification
+$classSystemVersion=systemVersion(catalog(id[default=$classificationCatalog]),version[default='1.0'])
+$classCatalogVersion=catalogVersion(catalog(id[default=$classificationCatalog]),version[default='1.0'])
+$classAttribute=classificationAttribute(code,$classSystemVersion)
+$classClass=classificationClass(code,$classCatalogVersion)
+$classAttributeAssignment=classAttributeAssignment($classClass,$classAttribute,$classSystemVersion)
+$contentCatalogVersion=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalogName]),CatalogVersion.version[default=Staged])[default=$contentCatalogName:Staged]
+$productCatalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+
+
+# Define price range set
+INSERT_UPDATE SolrValueRangeSet;name[unique=true];qualifier;type;solrValueRanges(&rangeValueRefID)
+
+# Define Megapixel ranges
+INSERT_UPDATE SolrValueRange;&rangeValueRefID;solrValueRangeSet(name)[unique=true];name[unique=true];from;to
+
+
+INSERT_UPDATE SolrIndexedProperty;solrIndexedType(identifier)[unique=true];name[unique=true]							;type(code) ;sortableType(code);currency[default=false];localized[default=false];multiValue[default=false];facet[default=false];facetType(code) ;facetSort(code);priority;visible;fieldValueProvider							;customFacetSortProvider				;rangeSets(name)			;$classAttributeAssignment
+								 ;$solrIndexedType						  ;fabric 										;string		;				   ; 					   ;    					; 	true				  ;true				   ;MultiSelectOr	;Custom			;500	 ;true	 ;v2CsCommerceClassificationPropertyValueProvider   ;										;							;apps_classification_class:::fabric::::
+								 ;$solrIndexedType						  ;subfabric 									;string		;				   ; 					   ;    					; 	true				  ;true				   ;MultiSelectOr	;Custom			;500	 ;true	 ;v2CsCommerceClassificationPropertyValueProvider   ;										;							;apps_classification_class:::subfabric::::
+								 ;$solrIndexedType						  ;fitting										;string		;				   ; 					   ;    					; 	true				  ;true				   ;MultiSelectOr	;Custom			;500	 ;true	 ;v2CsCommerceClassificationPropertyValueProvider   ;										;							;apps_classification_class:::fitting::::
+		 						 ;$solrIndexedType						  ;sleeves										;string		;				   ; 					   ;    					; 	true				  ;true				   ;MultiSelectOr	;Custom			;500	 ;true	 ;v2CsCommerceClassificationPropertyValueProvider   ;										;							;apps_classification_class:::sleeves::::
+		 						 ;$solrIndexedType						  ;neck											;string		;				   ; 					   ;    					; 	true				  ;true				   ;MultiSelectOr	;Custom			;500	 ;true	 ;v2CsCommerceClassificationPropertyValueProvider   ;										;							;apps_classification_class:::neck::::
+								 ;$solrIndexedType						  ;ankle										;string		;				   ; 					   ;    					; 	true				  ;true				   ;MultiSelectOr	;Custom			;500	 ;true	 ;v2CsCommerceClassificationPropertyValueProvider   ;										;							;footwear_classification_class:::ankle::::
+								 ;$solrIndexedType						  ;heel											;string		;				   ; 					   ;    					; 	true				  ;true				   ;MultiSelectOr	;Custom			;500	 ;true	 ;v2CsCommerceClassificationPropertyValueProvider   ;										;							;footwear_classification_class:::heal::::
+								 ;$solrIndexedType						  ;closure										;string		;				   ; 					   ;    					; 	true				  ;true				   ;MultiSelectOr	;Custom			;500	 ;true	 ;v2CsCommerceClassificationPropertyValueProvider   ;										;							;footwear_classification_class:::closure::::
+								 ;$solrIndexedType						  ;uppermaterial								;string		;				   ; 					   ;    					; 	true				  ;true				   ;MultiSelectOr	;Custom			;500	 ;true	 ;v2CsCommerceClassificationPropertyValueProvider   ;										;							;footwear_classification_class:::uppermaterial::::
+								 ;$solrIndexedType						  ;shape										;string 	;				   ; 					   ;    					;   true				  ;true				   ;MultiSelectOr	;Custom			;500	 ;true	 ;v2CsCommerceClassificationPropertyValueProvider   ;										;							;footwear_classification_class:::shape::::
+								 ;$solrIndexedType						  ;pockets										;string 	;				   ; 					   ;    					; 						  ;true				   ;MultiSelectOr	;Custom			;500	 ;true	 ;v2CsCommerceClassificationPropertyValueProvider   ;										;							;mens_classification_class:::pockets::::
+								 ;$solrIndexedType						  ;basematerial									;string		;				   ; 					   ;    					; 						  ;true				   ;MultiSelectOr	;Custom			;500	 ;true	 ;v2CsCommerceClassificationPropertyValueProvider   ;										;							;gm_classification_class:::basematerial::::
+								 ;$solrIndexedType						  ;dialmaterial									;string		;				   ; 					   ;    					; 						  ;true				   ;MultiSelectOr	;Custom			;500	 ;true	 ;v2CsCommerceClassificationPropertyValueProvider   ;										;							;watches_classification_class:::dialmaterial::::
+								 ;$solrIndexedType						  ;dialshape									;string		;				   ; 					   ;    					; 						  ;true				   ;MultiSelectOr	;Custom			;500	 ;true	 ;v2CsCommerceClassificationPropertyValueProvider   ;										;							;watches_classification_class:::dialshape::::
+								 ;$solrIndexedType						  ;framematerial								;string		;				   ; 					   ;    					; 						  ;true				   ;MultiSelectOr	;Custom			;500	 ;true	 ;v2CsCommerceClassificationPropertyValueProvider   ;										;							;sunglasses_classification_class:::framematerial::::
+								 ;$solrIndexedType						  ;lenstechnology								;string		;				   ; 					   ;    					; 						  ;true				   ;MultiSelectOr	;Custom			;500	 ;true	 ;v2CsCommerceClassificationPropertyValueProvider   ;										;							;sunglasses_classification_class:::lenstechnology::::
+								 ;$solrIndexedType						  ;walletfold									;string		;				   ; 					   ;    					; 						  ;true				   ;MultiSelectOr	;Custom			;500	 ;true	 ;v2CsCommerceClassificationPropertyValueProvider   ;										;							;wallets_classification_class:::fold::::
+								 ;$solrIndexedType						  ;umberllafold									;string		;				   ; 					   ;    					; 						  ;true				   ;MultiSelectOr	;Custom			;500	 ;true	 ;v2CsCommerceClassificationPropertyValueProvider   ;										;							;umbrella_classification_class:::fold::::
+								 ;$solrIndexedType						  ;buckleshape									;string		;				   ; 					   ;    					; 						  ;true				   ;MultiSelectOr	;Custom			;500	 ;true	 ;v2CsCommerceClassificationPropertyValueProvider   ;										;							;belts_classification_class:::buckleshape::::
+								 ;$solrIndexedType						  ;sockspacksize								;string		;				   ; 					   ;    					; 						  ;true				   ;MultiSelectOr	;Custom			;500	 ;true	 ;v2CsCommerceClassificationPropertyValueProvider   ;										;							;socks_classification_class:::packsize::::
+								 ;$solrIndexedType						  ;homefurnishingpacksize						;string		;				   ; 					   ;    					; 						  ;true				   ;MultiSelectOr	;Custom			;500	 ;true	 ;v2CsCommerceClassificationPropertyValueProvider   ;										;							;homefurnishing_classification_class:::packsize::::
+								 ;$solrIndexedType						  ;idealfor										;string		;				   ; 					   ;    					; 						  ;true				   ;MultiSelectOr	;Custom			;500	 ;true	 ;v2CsCommerceClassificationPropertyValueProvider   ;										;							;fragrance_classification_class:::idealfor::::
+								 ;$solrIndexedType						  ;fragrance									;string		;				   ; 					   ;    					; 						  ;true				   ;MultiSelectOr	;Custom			;500	 ;true	 ;v2CsCommerceClassificationPropertyValueProvider   ;										;							;fragrance_classification_class:::fragrance::::
+								 ;$solrIndexedType						  ;compatiblelaptopsize							;string		;				   ; 					   ;    					; 						  ;true				   ;MultiSelectOr	;Custom			;500	 ;true	 ;v2CsCommerceClassificationPropertyValueProvider   ;										;							;backpacks_classification_class:::compatiblelaptopsize::::
+								 ;$solrIndexedType						  ;dimension length								;string		;				   ; 					   ;    					; 						  ;true				   ;MultiSelectOr	;Custom			;500	 ;true	 ;v2CsCommerceClassificationPropertyValueProvider   ;										;							;size_dimensions_classification_class:::length::::
+								 ;$solrIndexedType						  ;chest										;string		;				   ; 					   ;    					; 						  ;true				   ;MultiSelectOr	;Custom			;500	 ;true	 ;v2CsCommerceClassificationPropertyValueProvider   ;										;							;size_dimensions_classification_class:::chest::::
+								 ;$solrIndexedType						  ;bust											;string		;				   ; 					   ;    					; 						  ;true				   ;MultiSelectOr	;Custom			;500	 ;true	 ;v2CsCommerceClassificationPropertyValueProvider   ;										;							;size_dimensions_classification_class:::bust::::
+								 ;$solrIndexedType						  ;waist										;string		;				   ; 					   ;    					; 						  ;true				   ;MultiSelectOr	;Custom			;500	 ;true	 ;v2CsCommerceClassificationPropertyValueProvider   ;										;							;size_dimensions_classification_class:::waist::::

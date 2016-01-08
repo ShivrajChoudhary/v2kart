@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    [y] hybris Platform
+
+    Copyright (c) 2000-2014 hybris AG
+    All rights reserved.
+
+    This software is the confidential and proprietary information of hybris
+    ("Confidential Information"). You shall not disclose such Confidential
+    Information and shall use it only in accordance with the terms of the
+    license agreement you entered into with hybris.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="v2kartStoreSystemSetup" class="in.com.v2kart.setup.V2StoreSystemSetup" parent="abstractCoreSystemSetup">
+        <property name="coreDataImportService" ref="coreDataImportService" />
+        <property name="sampleDataImportService" ref="sampleDataImportService" />
+    </bean>
+
+    <alias name="v2kartCoreDataImportService" alias="coreDataImportService" />
+    <bean id="v2kartCoreDataImportService" class="in.com.v2kart.setup.V2CoreDataImportService" parent="defaultCoreDataImportService">
+        <property name="envSolr" value="${solr.default.mode}" />
+    </bean>
+
+    <alias name="v2kartSampleDataImportService" alias="sampleDataImportService" />
+    <bean id="v2kartSampleDataImportService" class="in.com.v2kart.setup.V2SampleDataImportService" parent="defaultSampleDataImportService">
+    </bean>
+
+</beans>

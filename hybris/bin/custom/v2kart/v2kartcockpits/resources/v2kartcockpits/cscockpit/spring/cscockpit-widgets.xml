@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    [y] hybris Platform
+
+    Copyright (c) 2000-2014 hybris AG
+    All rights reserved.
+
+    This software is the confidential and proprietary information of hybris
+    ("Confidential Information"). You shall not disclose such Confidential
+    Information and shall use it only in accordance with the terms of the
+    license agreement you entered into with hybris.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <alias alias="csProductUrlStrategy" name="acceleratorCsProductUrlStrategy" />
+    <bean id="acceleratorCsProductUrlStrategy" class="in.com.v2kart.cockpits.cscockpit.widgets.controllers.strategies.impl.AcceleratorProductUrlStrategy"
+        parent="defaultBaseCsProductUrlStrategy">
+        <property name="siteBaseUrlResolutionService" ref="siteBaseUrlResolutionService" />
+    </bean>
+
+    <!-- order actions widget -->
+    <alias alias="csOrderActionsWidgetConfig" name="v2OrderActionsWidgetConfig" />
+    <bean id="v2OrderActionsWidgetConfig" parent="csBaseWidgetConfig">
+        <property name="widgetTitle" value="cscockpit.widget.order.ordermanagement" />
+        <property name="widgetRenderer" ref="v2OrderActionsWidgetRenderer" />
+        <property name="widgetController" ref="csOrderManagementActionsWidgetController" />
+        <property name="widgetModel">
+            <bean class="de.hybris.platform.cockpit.widgets.models.impl.DefaultItemWidgetModel" />
+        </property>
+        <property name="widgetAdapter">
+            <bean class="de.hybris.platform.cscockpit.widgets.adapters.UpdateWidgetAdapter" />
+        </property>
+    </bean>
+
+    <alias alias="csRefundRequestCreateWidgetConfig" name="v2RefundRequestCreateWidgetConfig" />
+    <bean id="v2RefundRequestCreateWidgetConfig" parent="csBaseWidgetConfig">
+        <property name="widgetTitle" value="cscockpit.widget.order.returnRefund.create" />
+        <property name="widgetRenderer" ref="csRefundRequestCreateWidgetRenderer" />
+        <property name="widgetController" ref="csReturnsController" />
+        <property name="widgetClass" value="de.hybris.platform.cockpit.widgets.impl.DefaultInputWidget" />
+        <property name="widgetSclass" value="defaultWidgetFrame csReturnsCreateWidgetFrame" />
+        <property name="widgetModel">
+            <bean class="de.hybris.platform.cockpit.widgets.models.impl.DefaultListWidgetModel" />
+        </property>
+    </bean>
+
+    <alias alias="csRefundRequestCreateWidgetRenderer" name="v2RefundRequestCreateWidgetRenderer" />
+    <bean id="v2RefundRequestCreateWidgetRenderer" parent="abstractWidgetRenderer"
+        class="in.com.v2kart.cockpits.cscockpit.widgets.renderers.impl.V2RefundRequestCreateWidgetRenderer">
+        <property name="productInfoConfigurationCode" value="returnsOrderEntryList" />
+        <property name="listConfigurationCode" value="refundEntryList" />
+        <property name="listEditorConfigurationCode" value="refundEntryEdit" />
+        <property name="listConfigurationType" value="RefundEntry" />
+        <property name="popupWidgetHelper" ref="popupWidgetHelper" />
+    </bean>
+
+    <alias alias="v2OrderActionsWidgetRenderer" name="v2OrderActionsWidgetRenderer" />
+    <bean id="v2OrderActionsWidgetRenderer" parent="abstractWidgetRenderer"
+        class="in.com.v2kart.cockpits.cscockpit.widgets.renderers.impl.V2OrderManagementActionsWidgetRenderer">
+        <property name="popupWidgetHelper" ref="popupWidgetHelper" />
+    </bean>
+
+    <alias alias="csReturnsController" name="v2DefaultCsReturnsController" />
+    <bean id="v2DefaultCsReturnsController" parent="defaultCsReturnsController"
+        class="in.com.v2kart.cockpits.cscockpit.widgets.controllers.impl.V2DefaultReturnsController" scope="session">
+        <property name="orderManagementActionsWidgetController" ref="csOrderManagementActionsWidgetController" />
+        <property name="commonI18NService" ref="commonI18NService" />
+        <property name="impersonationService" ref="impersonationService" />
+        <property name="v2RefundService" ref="refundService" />
+        <property name="v2ReturnService" ref="returnService" />
+        <property name="v2RefundOrderProcessor" ref="v2RefundOrderProcessor" />
+        <property name="businessProcessService" ref="businessProcessService" />
+        <property name="calculationService" ref="calculationService" />
+        <property name="ebsPaymentFacade" ref="ebsPaymentFacade" />
+        <property name="payuPaymentService" ref="payUPaymentService" />
+    </bean>
+
+    <alias alias="csOrderManagementActionsWidgetController" name="v2DefaultCsOrderManagementActionsWidgetController" />
+    <bean id="v2DefaultCsOrderManagementActionsWidgetController" parent="defaultCsOrderManagementActionsWidgetController"
+        class="in.com.v2kart.cockpits.cscockpit.widgets.controllers.impl.V2DefaultOrderManagementActionsWidgetController" scope="session">
+        <property name="v2ReturnService" ref="returnService" />
+    </bean>
+
+    <!-- full cancellation popup -->
+    <alias name="v2FullOrderCancellationWidgetConfig" alias="csFullOrderCancellationWidgetConfig" />
+    <bean id="v2FullOrderCancellationWidgetConfig" parent="defaultCsFullOrderCancellationWidgetConfig">
+        <property name="widgetController" ref="v2CancellationController" />
+    </bean>
+
+    <alias name="v2FullOrderCancellationWidgetRenderer" alias="csFullOrderCancellationWidgetRenderer" />
+    <bean id="v2FullOrderCancellationWidgetRenderer" parent="defaultCsFullOrderCancellationWidgetRenderer"
+        class="in.com.v2kart.cockpits.cscockpit.widgets.renderers.impl.V2FullOrderCancellationWidgetRenderer">
+        <property name="v2CancelReasons">
+            <map merge="true">
+                <entry key="NotInterestedAnyMore" value="Not Interested Any More" />
+                <entry key="OrderDuplicateProductByMistake" value="Order Duplicate Product By Mistake" />
+                <entry key="PurchasedWrongProduct" value="Purchased Wrong Product" />
+                <entry key="DelayInDelivery" value="Delay In Delivery" />
+                <entry key="Other" value="Other" />
+            </map>
+        </property>
+    </bean>
+
+    <!-- full cancellation confirm popup -->
+    <alias alias="v2FullOrderCancelConfirmationWidgetConfig" name="defaultV2FullOrderCancelConfirmationWidgetConfig" />
+    <bean id="defaultV2FullOrderCancelConfirmationWidgetConfig" parent="csBaseWidgetConfig">
+        <property name="widgetTitle" value="cscockpit.widget.order.fullcancellation.confirm" />
+        <property name="widgetRenderer" ref="v2FullOrderCancelConfirmationWidgetRenderer" />
+        <property name="widgetController" ref="v2CancellationController" />
+        <property name="widgetClass" value="de.hybris.platform.cockpit.widgets.impl.DefaultInputWidget" />
+        <property name="widgetSclass" value="defaultWidgetFrame csReturnsConfirmWidgetFrame" />
+        <property name="widgetModel">
+            <bean class="de.hybris.platform.cockpit.widgets.models.impl.DefaultListWidgetModel" />
+        </property>
+    </bean>
+
+    <alias alias="v2FullOrderCancelConfirmationWidgetRenderer" name="defaultV2FullOrderCancelConfirmationWidgetRenderer" />
+    <bean id="defaultV2FullOrderCancelConfirmationWidgetRenderer" parent="abstractWidgetRenderer"
+        class="in.com.v2kart.cockpits.cscockpit.widgets.renderers.impl.V2FullOrderCancelConfirmationWidgetRenderer">
+        <property name="commonI18NService" ref="commonI18NService" />
+        <property name="sessionService" ref="sessionService" />
+        <property name="popupWidgetHelper" ref="popupWidgetHelper" />
+        <property name="formatFactory" ref="formatFactory" />
+    </bean>
+
+    <!-- partial cancellation popup -->
+    <alias name="v2PartialOrderCancellationWidgetConfig" alias="csPartialOrderCancellationWidgetConfig" />
+    <bean id="v2PartialOrderCancellationWidgetConfig" parent="defaultCsPartialOrderCancellationWidgetConfig">
+        <property name="widgetController" ref="v2CancellationController" />
+    </bean>
+
+    <alias name="v2PartialOrderCancellationWidgetRenderer" alias="csPartialOrderCancellationWidgetRenderer" />
+    <bean id="v2PartialOrderCancellationWidgetRenderer" parent="defaultCsPartialOrderCancellationWidgetRenderer"
+        class="in.com.v2kart.cockpits.cscockpit.widgets.renderers.impl.V2PartialOrderCancellationWidgetRenderer">
+        <property name="v2CancelReasons">
+            <map merge="true">
+                <entry key="NotInterestedAnyMore" value="Not Interested Any More" />
+                <entry key="OrderDuplicateProductByMistake" value="Order Duplicate Product By Mistake" />
+                <entry key="PurchasedWrongProduct" value="Purchased Wrong Product" />
+                <entry key="DelayInDelivery" value="Delay In Delivery" />
+                <entry key="Other" value="Other" />
+            </map>
+        </property>
+    </bean>
+
+    <!-- partial cancellation confirm popup -->
+    <!-- full cancellation confirm popup -->
+    <alias alias="v2PartialOrderCancelConfirmationWidgetConfig" name="defaultV2PartialOrderCancelConfirmationWidgetConfig" />
+    <bean id="defaultV2PartialOrderCancelConfirmationWidgetConfig" parent="csBaseWidgetConfig">
+        <property name="widgetTitle" value="cscockpit.widget.order.partialCancellation.confirm" />
+        <property name="widgetRenderer" ref="v2PartialOrderCancelConfirmationWidgetRenderer" />
+        <property name="widgetController" ref="v2CancellationController" />
+        <property name="widgetClass" value="de.hybris.platform.cockpit.widgets.impl.DefaultInputWidget" />
+        <property name="widgetSclass" value="defaultWidgetFrame csReturnsConfirmWidgetFrame" />
+        <property name="widgetModel">
+            <bean class="de.hybris.platform.cockpit.widgets.models.impl.DefaultListWidgetModel" />
+        </property>
+    </bean>
+
+    <alias alias="v2PartialOrderCancelConfirmationWidgetRenderer" name="defaultV2PartialOrderCancelConfirmationWidgetRenderer" />
+    <bean id="defaultV2PartialOrderCancelConfirmationWidgetRenderer" parent="abstractWidgetRenderer"
+        class="in.com.v2kart.cockpits.cscockpit.widgets.renderers.impl.V2PartialOrderCancelConfirmationWidgetRenderer">
+        <property name="commonI18NService" ref="commonI18NService" />
+        <property name="sessionService" ref="sessionService" />
+        <property name="popupWidgetHelper" ref="popupWidgetHelper" />
+        <property name="formatFactory" ref="formatFactory" />
+    </bean>
+
+    <!-- cancellation controller for partial and full cancellation popups -->
+    <alias name="defaultV2CancellationController" alias="v2CancellationController" />
+    <bean id="defaultV2CancellationController" parent="defaultCsCancellationController"
+        class="in.com.v2kart.cockpits.cscockpit.widgets.controllers.impl.V2CancellationControllerImpl">
+        <property name="refundAmountService" ref="v2RefundAmountService" />
+        <property name="refundService" ref="refundService" />
+        <property name="orderCancelRecordsHandler" ref="orderCancelRecordsHandler" />
+        <property name="stateMappingStrategy" ref="defaultOrderCancelStateMappingStrategy" />
+        <property name="cancelRequestExecutor" ref="v2ImmediateCancelRequestExecutor" />
+        <property name="paymentServiceAdapter" ref="orderCancelPaymentServiceAdapter" />
+        <property name="completeCancelStatusChangeStrategy" ref="setCancellledStrategy" />
+        <property name="partialCancelStatusChangeStrategy" ref="v2SetPartialCancellledStrategy" />
+        <property name="calculationService" ref="calculationService" />
+        <property name="ebsPaymentFacade" ref="ebsPaymentFacade" />
+        <property name="payuPaymentService" ref="payUPaymentService" />
+        <property name="commonI18NService" ref="commonI18NService" />
+    </bean>
+
+    <!-- edit customer details widget -->
+    <alias alias="csCustomerEditWidgetConfig" name="defaultCsCustomerEditWidgetConfig" />
+    <bean id="defaultCsCustomerEditWidgetConfig" parent="csBaseWidgetConfig">
+        <property name="widgetTitle" value="cscockpit.widget.customer.edit" />
+        <property name="widgetRenderer" ref="csCustomerEditWidgetRenderer" />
+        <property name="widgetController" ref="csCustomerController" />
+        <property name="widgetClass" value="de.hybris.platform.cockpit.widgets.impl.DefaultInputWidget" />
+        <property name="widgetSclass" value="defaultWidgetFrame csCustomerEditWidgetFrame" />
+        <property name="widgetModel">
+            <bean class="de.hybris.platform.cscockpit.widgets.models.impl.CustomerItemWidgetModel" />
+        </property>
+        <property name="widgetAdapter">
+            <bean class="de.hybris.platform.cscockpit.widgets.adapters.CustomerEditAdapter">
+                <property name="cockpitTypeService" ref="cockpitTypeService" />
+            </bean>
+        </property>
+    </bean>
+
+    <alias alias="csCustomerEditWidgetRenderer" name="defaultCsCustomerEditWidgetRenderer" />
+    <bean id="defaultCsCustomerEditWidgetRenderer" parent="abstractWidgetRenderer"
+        class="in.com.v2kart.cockpits.cscockpit.widgets.renderers.impl.V2CustomerDetailsEditWidgetRenderer">
+        <property name="editorConfigurationCode" value="editCustomerDetails" />
+        <property name="footerRenderer">
+            <bean class="in.com.v2kart.cockpits.cscockpit.widgets.renderers.impl.V2ConfigurableItemWidgetDetailRenderer" parent="configurableItemWidgetDetailRenderer">
+            </bean>
+        </property>
+    </bean>
+
+    <alias name="configurableItemWidgetDetailRenderer" alias="configurableItemWidgetDetailRenderer" />
+    <bean id="configurableItemWidgetDetailRenderer" class="de.hybris.platform.cscockpit.widgets.renderers.details.impl.ConfigurableItemWidgetDetailRenderer"
+        parent="abstractWidgetDetailRenderer">
+        <property name="configurationCode" value="customerReadonlyDetails" />
+    </bean>
+
+    <!-- create customer widget -->
+    <alias alias="csCustomerCreateWidgetRenderer" name="v2CsCustomerCreateWidgetRenderer" />
+    <bean id="v2CsCustomerCreateWidgetRenderer" parent="defaultCsCustomerCreateWidgetRenderer"
+        class="in.com.v2kart.cockpits.cscockpit.widgets.renderers.impl.V2CustomerCreateWidgetRenderer">
+    </bean>
+
+    <!-- create customer controller -->
+    <alias alias="csCustomerCreateController" name="v2CsCustomerCreateController" />
+    <bean id="v2CsCustomerCreateController" parent="defaultCsCustomerCreateController"
+        class="in.com.v2kart.cockpits.cscockpit.widgets.controllers.impl.V2DefaultCustomerCreateController" scope="session" />
+
+    <!-- customer search widget -->
+    <alias alias="csCustomerSearchWidgetConfig" name="defaultCsCustomerSearchWidgetConfig" />
+    <bean id="defaultCsCustomerSearchWidgetConfig" parent="csBaseWidgetConfig">
+        <property name="widgetTitle" value="cscockpit.widget.customer.search" />
+        <property name="widgetRenderer" ref="v2csCustomerSearchWidgetRenderer" />
+        <property name="widgetController" ref="csCustomerSearchController" />
+        <property name="widgetClass" value="de.hybris.platform.cockpit.widgets.impl.DefaultListboxWidget" />
+        <property name="widgetSclass" value="defaultWidgetFrame csCustomerSearchWidgetFrame" />
+        <property name="widgetModel">
+            <bean class="de.hybris.platform.cscockpit.widgets.models.impl.TextSearchWidgetModel" />
+        </property>
+        <property name="widgetAdapter">
+            <bean class="de.hybris.platform.cscockpit.widgets.adapters.TextSearchResultAdapter">
+                <property name="cockpitTypeService" ref="cockpitTypeService" />
+            </bean>
+        </property>
+    </bean>
+
+    <alias alias="v2csCustomerSearchWidgetRenderer" name="v2CsCustomerSearchWidgetRenderer" />
+    <bean id="v2CsCustomerSearchWidgetRenderer" parent="csCustomerSearchWidgetRenderer"
+        class="in.com.v2kart.cockpits.cscockpit.widgets.renderers.impl.V2CustomerSearchWidgetRenderer">
+        <property name="listConfigurationCode" value="customerBrowseList" />
+        <property name="listConfigurationType" value="Customer" />
+        <property name="itemAppender">
+            <bean class="de.hybris.platform.cscockpit.widgets.controllers.dispatcher.impl.PopupCloseAppender">
+                <property name="popupWidgetHelper" ref="popupWidgetHelper" />
+                <property name="itemAppender">
+                    <bean class="de.hybris.platform.cscockpit.widgets.controllers.dispatcher.impl.CustomerAppender" parent="csBaseAppender" />
+                </property>
+            </bean>
+        </property>
+    </bean>
+
+    <alias alias="propertyRendererHelper" name="v2PropertyRendererHelper" />
+    <bean id="v2PropertyRendererHelper" class="in.com.v2kart.cockpits.cscockpit.utils.V2PropertyRendererHelper" parent="defaultCsPropertyRendererHelper"
+        scope="session" />
+
+    <alias alias="propertyEditorHelper" name="v2PropertyEditorHelper" />
+    <bean id="v2PropertyEditorHelper" parent="defaultCsPropertyEditorHelper" class="in.com.v2kart.cockpits.cscockpit.utils.V2PropertyEditorHelper"
+        scope="session">
+    </bean>
+
+    <alias alias="csRefundConfirmationWidgetRenderer" name="V2CsRefundConfirmationWidgetRenderer" />
+    <bean id="V2CsRefundConfirmationWidgetRenderer" parent="defaultCsRefundConfirmationWidgetRenderer"
+        class="in.com.v2kart.cockpits.cscockpit.widgets.renderers.impl.V2RefundConfirmationWidgetRenderer">
+    </bean>
+</beans>

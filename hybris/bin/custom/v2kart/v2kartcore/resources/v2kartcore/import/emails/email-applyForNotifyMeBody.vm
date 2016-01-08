@@ -1,0 +1,21 @@
+<html>
+<body>
+<ul>
+	<p style="text-transform: capitalize;">
+		Dear $ctx.customerNotificationData.currentUserName,
+	</p>
+	<p>
+		Thanks for your interest in $ctx.customerNotificationData.name .
+	</p>
+    <p>
+       You will be Notified by Email when it becomes available.
+    </p>
+    <p>
+        Sincerely,
+    </p>
+    <p>
+         ${ctx.customerNotificationData.site}.com
+    </p>
+</ul>
+</body>
+</html>

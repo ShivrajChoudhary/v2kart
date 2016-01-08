@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+    [y] hybris Platform
+
+    Copyright (c) 2000-2014 hybris AG
+    All rights reserved.
+
+    This software is the confidential and proprietary information of hybris
+    ("Confidential Information"). You shall not disclose such Confidential
+    Information and shall use it only in accordance with the terms of the
+    license agreement you entered into with hybris.
+
+
+-->
+<items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="items.xsd">
+    <enumtypes>
+        <enumtype code="OrderStatus" autocreate="false" generate="true" dynamic="true">
+            <value code="CONFIRMED" />
+            <value code="PARTIAL_PROCESSED" />
+            <!-- Sending to SAP or SAP response FAILURE STATUS -->
+            <value code="SENT_TO_SAP_FAILURE" />
+            <value code="SAP_CREATION_FAILURE" />
+            <value code="READY_TO_SHIP" />
+            <value code="DISPATCHED" />
+            <value code="PENDING" />
+            <value code="WAITING_FOR_UPDATE_CUSTOMER_TO_SAPERP" />
+            <value code="UPDATE_CUSTOMER_TO_SAPERP_FAILED" />
+             <value code="RETURN_SENT_TO_SAP_FAILED" />
+            <value code="CANCELLATION_SENT_TO_SAP_FAILED" />
+        </enumtype>
+        <enumtype code="ConsignmentStatus" autocreate="false" generate="true" dynamic="true">
+            <value code="READY_TO_DISPATCH" />
+        </enumtype> 
+    </enumtypes>
+    <itemtypes>
+        <itemtype code="ConsignmentProcess" autocreate="false" generate="false">
+            <attributes>
+                <attribute qualifier="done" type="boolean">
+                    <description>Mark process as done</description>
+                    <modifiers optional="false" initial="false" />
+                    <persistence type="property" />
+                    <defaultvalue>Boolean.FALSE</defaultvalue>
+                </attribute>
+
+                <attribute qualifier="waitingForConsignment" type="boolean">
+                    <description>Mark that process is waiting for consignment</description>
+                    <modifiers optional="false" initial="false" />
+                    <persistence type="property" />
+                    <defaultvalue>Boolean.FALSE</defaultvalue>
+                </attribute>
+
+                <attribute qualifier="warehouseConsignmentState" type="WarehouseConsignmentState">
+                    <description>State of warehouse process.</description>
+                    <persistence type="property" />
+                    <modifiers initial="false" optional="true" />
+                </attribute>
+
+            </attributes>
+        </itemtype>
+        
+        <itemtype code="OrderCancelRecordEntry" autocreate="false" generate="false">
+        	<attributes>
+        		 <attribute qualifier="orderModificationRefundInfo" type="V2OrderModificationRefundInfo">
+                    <description>OrderModificationRefundInfo</description>
+                    <modifiers optional="true" initial="false" />
+                    <persistence type="property" />
+                </attribute>
+        	</attributes>
+        </itemtype>
+        
+		<itemtype code="V2OrderModificationRefundInfo" 
+				generate="true" 
+				jaloclass="in.com.v2kart.fulfilmentprocess.jalo.V2OrderModificationRefundInfo" 
+				autocreate="true">
+
+			<deployment table="v2RefundInfo" typecode="2025" />
+			<attributes>
+				<attribute qualifier="amountTobeRefunded" type="java.math.BigDecimal">
+					<persistence type="property" />
+					<modifiers optional="false" />
+					<defaultvalue>new java.math.BigDecimal("0.0")</defaultvalue>
+				</attribute>
+				<attribute qualifier="refundToWallet" type="java.lang.Boolean">
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+					<defaultvalue>Boolean.TRUE</defaultvalue>
+				</attribute>
+				<attribute qualifier="refundToPaymentGateway" type="java.lang.Boolean">
+					<modifiers read="true" write="true" search="true"
+						optional="true" />
+					<persistence type="property" />
+					<defaultvalue>Boolean.FALSE</defaultvalue>
+				</attribute>
+			</attributes>
+		</itemtype>
+    </itemtypes>
+</items>

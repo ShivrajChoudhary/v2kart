@@ -1,0 +1,843 @@
+# ImpEx for Importing CMS Mobile Content
+
+$contentCatalog=v2kartContentCatalog
+$contentCatalogName=v2kart Content Catalog
+$productCatalog=v2kartProductCatalog
+$productCatalogName=v2kart Product Catalog
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+$productCV=catalogVersion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+$picture=media(code, $contentCV);
+$image=image(code, $contentCV);
+$media=media(code, $contentCV);
+$page=page(uid, $contentCV);
+$contentPage=contentPage(uid, $contentCV);
+$siteResource=jar:in.com.v2kart.initialdata.setup.InitialDataSystemSetup&/v2kartstore/import/coredata/contentCatalogs/$contentCatalog
+$productResource=jar:in.com.v2kart.initialdata.setup.InitialDataSystemSetup&/v2kartstore/import/coredata/productCatalogs/$productCatalog
+$jarResourceCms=jar:in.com.v2kart.initialdata.setup.InitialDataSystemSetup&/v2kartstore/import/coredata/cockpits/cmscockpit
+$lang=en
+
+#Header
+# CMS Navigation Nodes #
+INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;children(uid,$contentCV)[mode=append]
+;root;;root;;
+
+INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;parent(uid, $contentCV);links(uid,$contentCV);&nodeRef
+;MobileAccountLeftNavNode;;My Account;SiteRootNode;AccountProfileLink,AccountAddressBookLink,AccountOrderHistoryLink,AccountWishlistLink,AccountWalletLink,AccountPasswordLink,MobileLogoutLink;MobileAccountLeftNavNode
+
+# Navigation Bar Component
+INSERT_UPDATE AccountNavigationComponent;$contentCV[unique=true];uid[unique=true];name;navigationNode(&nodeRef);styleClass;&componentRef
+;;MobileAccountLeftNavigationComponent;Account Left Navigation Component;MobileAccountLeftNavNode;;MobileAccountLeftNavigationComponent
+
+INSERT_UPDATE NavigationBarCollectionComponent;$contentCV[unique=true];uid[unique=true];name;components(uid, $contentCV);&componentRef;visible
+;;MobileNavBarComponent;Mobile Navigation Bar Collection Component;menBarComponent,kidsBarComponent,homeBarComponent,moreBarComponent;MobileNavBarComponent;true
+
+
+INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];realfilename;@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/jpeg'];altText;folder(qualifier)[default='images']
+;; /images/theme/mobile-v2kart-logo.png;v2kart-logo.png; $siteResource/images/theme/mobile-v2kart-logo.png;image/png;V2kart Store;
+
+INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];realfilename;@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/jpeg'];altText;folder(qualifier)[default='images']
+;;/images/theme/v2kart-mobile-logo.png;v2kart-mobile-logo.png; $siteResource/images/theme/v2kart-mobile-logo.png;image/png;V2kart Store;
+
+# Site Logo Component
+INSERT_UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;urlLink;$picture
+;;MobileSiteLogoComponent;Site Logo Component;MobileSiteLogoComponent; "/";/images/theme/v2kart-mobile-logo.png
+
+# Lightbox Banner for Mini Cart
+INSERT_UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;urlLink
+;;MobileLightboxHomeDeliveryBannerComponent;Lightbox Home Delivery Banner Component;MobileLightboxHomeDeliveryBannerComponent;
+
+# CMS Mini Cart Component
+INSERT_UPDATE MiniCartComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;totalDisplay(code);shownProductCount;lightboxBannerComponent(&componentRef)
+;;MobileMiniCart;Mobile Mini Cart;MobileMiniCart;SUBTOTAL;3;MobileLightboxHomeDeliveryBannerComponent
+
+INSERT_UPDATE StoreFinderComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef
+;;MobileStoreFinderComponent;Store Finder Component;MobileStoreFinderComponent
+
+INSERT_UPDATE AccountControlComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef
+;;MobileAccountControlComponent;Account Profile Component;MobileAccountControlComponent
+
+# CMS SearchBox Components
+INSERT_UPDATE SearchBoxComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;displaySuggestions
+;;MobileSearchBox;Mobile Search Box;MobileSearchBox;false
+
+INSERT_UPDATE BreadcrumbComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef
+;;MobileBreadcrumbComponent;Breadcrumb CMS Component;MobileBreadcrumbComponent
+
+# Content Slots
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents(uid, $contentCV)
+;;MobileNavigationSlot;MobileNavBarComponent,MobileStoreFinderComponent,MobileAccountControlComponent,MobileMiniCart
+;;MobileBottomHeaderSlot;MobileSiteLogoComponent,MobileSearchBox,MobileBreadcrumbComponent
+
+# Footer
+
+INSERT_UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];name;url;&linkRef;&componentRef;target(code)[default='sameWindow'];styleAttributes
+;;MobileSellerLink;Customer Support Link;/beADealer;MobileSellerLink;MobileSellerLink;;data-icon="footer ui-icon-footer-support";
+;;MobileConnectLink;Connect Link;"#connect-button";MobileConnectLink;MobileConnectLink;;id="connect-button" data-icon="footerone ui-icon-footer-connect";
+;;MobileFeedbackLink;Feedback Link;"/feedback";MobileFeedbackLink;MobileFeedbackLink;;
+;;MobileFacebookLink;Mobile Facebook Link;"https://www.facebook.com/pages/V2-Retail-Limited/771324409609729?ref=hl";MobileFacebookLink;MobileFacebookLink;newWindow;;
+;;MobilePinterestLink;Mobile Pinterest Link;"https://in.pinterest.com/v2kart/";MobilePinterestLink;MobilePinterestLink;newWindow;;
+;;MobileTwitterLink;Mobile Twitter Link;"https://twitter.com/ValueKart";MobileTwitterLink;MobileTwitterLink;newWindow;;
+;;MobileGoogleLink;Mobile Google Link;"https://plus.google.com/u/0/110903225773280935429/posts";MobileGoogleLink;MobileGoogleLink;newWindow;;
+;;MobileYoutubeLink;Mobile Youtube Link;"https://www.youtube.com/channel/UCYBaj5wWwWLD975q_4N8YYQ";MobileYoutubeLink;MobileYoutubeLink;newWindow;;
+;;MobileAboutUsLink;About Us Link;/aboutUs;MobileAboutUsLink;MobileAboutUsLink;;data-icon="footer ui-icon-footer-aboutus";
+;;MobileFooterFAQLink;Footer FAQ Link;/faq;MobileFooterFAQLink;MobileFooterFAQLink;;data-icon="footer ui-icon-footer-faq";
+;;MobileTermsAndConditionLink;Terms And Condition Link;/termsAndCondition;MobileTermsAndConditionLink;MobileTermsAndConditionLink;;data-icon="footer ui-icon-footer-terms";
+;;MobilePoliciesLink;Contact US Link;"#policy-button";MobilePoliciesLink;MobilePoliciesLink;;id="policy-button"data-icon="footerone ui-icon-footer-policies";
+;;MobileMoreLink;More Link;"#";MobileMoreLink;MobileMoreLink;;id="more-button"data-icon="footerone ui-icon-footer-more";
+;;MobileCareersLink;Careers Link;/careers;MobileCareersLink;MobileCareersLink;;data-icon="footerone ui-icon-footer-careers";
+;;MobilePrivacyPolicyLink;Policy Link;/privacyPolicy;MobilePrivacyPolicyLink;MobilePrivacyPolicyLink;sameWindow;;
+;;MobileTrackOrdersLink;Track Order Link;/trackOrder;MobileTrackOrdersLink;MobileTrackOrdersLink;sameWindow;;
+;;MobileContactUsLink;Contact US Link;/contactUs;MobileContactUsLink;MobileContactUsLink;;data-icon="footerone ui-icon-footer-contact";
+;;MobileShippingLink;Shipping Link;/shipping;MobileShippingLink;MobileShippingLink;sameWindow;;;
+;;MobileCancellationLink;Cancellation Link;/cancellation;MobileCancellationLink;MobileCancellationLink;sameWindow;;;
+;;MobileReturnsLink;Returns Link;/returns;MobileReturnsLink;MobileReturnsLink;sameWindow;;;
+;;MobileResponsibleDisclosurePolicyLink;Disclosure Policy Link;/disclosurePolicy;MobileResponsibleDisclosurePolicyLink;MobileResponsibleDisclosurePolicyLink;sameWindow;;;
+;;MobilePaymentLink;Payment Link;/payment;MobilePaymentLink;MobilePaymentLink;sameWindow;;
+;;MobileLogoutLink;Logout Link;/logout;MobileLogoutLink;MobileLogoutLink;sameWindow;;
+;;AccountPasswordLink;Password Link;/my-account/update-password;AccountPasswordLink;AccountPasswordLink;sameWindow;;
+
+# CMS Navigation Nodes
+INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;parent(uid, $contentCV);links(uid, $contentCV);&nodeRef
+;MobileFooterNavNode;;Mobile Footer Navigation Node;;MobileTrackYourOrderLink,MobileFooterFAQLink,MobileConnectLink,MobileMoreLink,MobileAboutUsLink,MobileTermsAndConditionLink,MobileSellerLink,MobilePoliciesLink,MobileCareersLink,MobileContactUsLink,MobileFeedbackLink;MobileFooterNavNode
+;MobileFollowUsNavNode;;Follow Us;;MobileFacebookLink,MobileTwitterLink,MobileGoogleLink,MobilePinterestLink,MobileYoutubeLink;MobileFollowUsNavNode
+;MobilePolicyNavNode;;Policies;;MobilePrivacyPolicyLink,MobileResponsibleDisclosurePolicyLink,MobilePaymentLink,MobileTrackOrdersLink,MobileShippingLink,MobileCancellationLink,MobileReturnsLink;MobilePolicyNavNode
+
+# Update CMS Footer Component with Nav Nodes
+INSERT_UPDATE FooterComponent;$contentCV[unique=true];uid[unique=true];navigationNodes(&nodeRef)
+;;MobileFooterComponent;MobileFooterNavNode
+;;MobileNavContent;MobileFollowUsNavNode
+;;MobilePolicyContent;MobilePolicyNavNode
+
+# Content Slots
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents(uid, $contentCV)
+;;MobileFooterSlot;MobileFooterComponent
+;;MobileNavContentSlot;MobileNavContent
+;;MobilePolicyContentSlot;MobilePolicyContent
+
+
+# CMS Footer Component
+INSERT_UPDATE FooterComponent;$contentCV[unique=true];uid[unique=true];wrapAfter;&componentRef
+;;MobileFooterComponent;4;MobileFooterComponent
+;;MobileNavContent;4;MobileNavContent
+;;MobilePolicyContent;4;MobilePolicyContent
+
+# Homepage
+INSERT_UPDATE RotatingImagesComponent;$contentCV[unique=true];uid[unique=true]            		 ;name                 ;banners(&componentRef)                                                                                   ;&componentRef
+									 ;                       ;V2HomepageCarouselComponent-Mobile ;V2 Homepage Carousel ;YoursGracefullyMobileBanner,TopUpStyle-WinterMobileBanner,BestSavingsMobileBanner,KidsFashionMobileBanner,TheBestPriceEverMobileBanner ;V2HomepageCarouselComponent-Mobile
+
+INSERT_UPDATE BannerComponent;$contentCV[unique=true];uid[unique=true]          	  ;name                        ;&componentRef        	   		 ;urlLink
+							 ;                       ;YoursGracefullyMobileBanner     ;Yours Gracefully Banner     ;YoursGracefullyMobileBanner	     ;/Categories/Women/Footwear/Shoes/c/shoes
+							 ;                       ;TopUpStyle-WinterMobileBanner   ;Top Up Style Winter Banner  ;TopUpStyle-WinterMobileBanner    ;/Categories/Women/Footwear/Shoes/c/shoes
+                             ;                       ;BestSavingsMobileBanner         ;Best Savings Banner         ;BestSavingsMobileBanner          ;/Categories/Women/Footwear/Shoes/c/shoes
+                             ;                       ;KidsFashionMobileBanner         ;Kids Fashion Banner         ;KidsFashionMobileBanner          ;/Categories/Women/Footwear/Shoes/c/shoes
+                             ;                       ;TheBestPriceEverMobileBanner    ;The Best Price Ever Banner  ;TheBestPriceEverMobileBanner     ;/Categories/Women/Footwear/Shoes/c/shoes
+                             
+INSERT_UPDATE V2KartBannerComponent;$contentCV[unique=true];uid[unique=true];name;title;&componentRef;urlLink
+								   ;					   ;MobileMenCategoryBanner;Mobile Men Category Banner;Men;MobileMenCategoryBanner;/MENS/c/men
+								   ;					   ;MobileWomenCategoryBanner;Mobile Women Category Banner;Women;MobileWomenCategoryBanner;/WOMEN/c/women
+								   ;					   ;MobileKidsCategoryBanner;Mobile Kids Category Banner;Kids;MobileKidsCategoryBanner;/KIDS/c/kids
+								   ;					   ;MobileMenButtonBanner;Mobile Men Button Banner;Men;MobileMenButtonBanner;/MENS/c/men
+								   ;					   ;MobileWomenButtonBanner;Mobile Women Button Banner;Women;MobileWomenButtonBanner;/WOMEN/c/women
+								   ;					   ;MobileKidsButtonBanner;Mobile Kids Button Banner;Kids;MobileKidsButtonBanner;/KIDS/c/kids
+								   								   		
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true]         ;name                         ;active ;cmsComponents(uid,$contentCV);;;
+                         ;                       ;Section1Slot-MobileHomepage   ;Section1 Slot for V2kart Mobile Homepage ;true   ;V2HomepageCarouselComponent-Mobile  ;;;
+                         ;                       ;Section2Slot-MobileHomePage   ;Section2 Slot for V2kart Mobile Homepage ;true   ;MobileMenCategoryBanner  ;;;
+                         ;                       ;Section3Slot-MobileHomePage   ;Section3 Slot for V2kart Mobile Homepage ;true   ;MobileWomenCategoryBanner  ;;;
+                         ;                       ;Section4Slot-MobileHomePage   ;Section4 Slot for V2kart Mobile Homepage ;true   ;MobileKidsCategoryBanner  ;;;
+                         ;                       ;Section5Slot-MobileHomePage   ;Section5 Slot for V2kart Mobile Homepage ;true   ;V2kartNowTrendingProductCarouselComponent,V2kartNewlyLaunchProductCarouselComponent,V2kartTopSellingProductCarouselComponent  ;;;
+						 ;						 ;CategoryButtonMenSlot-MobileHomePage;Men Category Button Slot for V2kart Mobile HomePage;true;MobileMenButtonBanner	;;;
+						 ;						 ;CategoryButtonWomenSlot-MobileHomePage;Women Category Button Slot for V2kart Mobile HomePage;true;MobileWomenButtonBanner;;;
+						 ;						 ;CategoryButtonKidsSlot-MobileHomePage;Kids Category Button Slot for V2kart Mobile HomePage;true;MobileKidsButtonBanner	;;;										 								
+
+INSERT_UPDATE ContentSlotForPage; $contentCV[unique=true]; uid[unique=true]  		; position[unique=true] ; page(uid,$contentCV)[unique=true][default='mobile-homepage']; contentSlot(uid,$contentCV)[unique=true]
+                                ;                        ; Section1-MobileHomepage  ; Section1              ;    mobile-homepage                                       	 ; Section1Slot-MobileHomepage
+								;						 ; Section2-MobileHomePage  ; Section2				;	 mobile-homepage										 ; Section2Slot-MobileHomePage
+								;						 ; Section3-MobileHomePage  ; Section3				;	 mobile-homepage										 ; Section3Slot-MobileHomePage
+								;						 ; Section4-MobileHomePage  ; Section4				;	 mobile-homepage										 ; Section4Slot-MobileHomePage
+								;						 ; Section5-MobileHomepage  ; Section5				;	 mobile-homepage										 ; Section5Slot-MobileHomePage
+						 		;						 ; CategoryButtonMen-MobileHomepage;CategoryButtonSlot1 ;	 mobile-homepage										 ; CategoryButtonMenSlot-MobileHomePage
+								;						 ; CategoryButtonWomen-MobileHomepage;CategoryButtonSlot2 ;	 mobile-homepage										 ; CategoryButtonWomenSlot-MobileHomePage
+								;						 ; CategoryButtonKids-MobileHomepage;CategoryButtonSlot3 ;	 mobile-homepage										 ; CategoryButtonKidsSlot-MobileHomePage
+
+# ProductList
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef);;;
+;;MobileProductListSlot;Product List slot;true;MobileProductList;;;
+
+INSERT_UPDATE CMSProductListComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef
+;;MobileProductList;Mobile Product List Component;MobileProductList
+
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef);;;
+;;MobileProductGridSlot;Product List slot;true;MobileProductGrid;;;
+
+INSERT_UPDATE ProductGridComponent;$contentCV[unique=true];uid[unique=true];name;actions(uid,$contentCV);&componentRef
+;;MobileProductGrid;Product Grid Component;;MobileProductGrid
+
+
+
+################# ProductDetails Page Starts Here ###########################
+# Content Slots
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents(uid, $contentCV)
+;;MobileAddToCartSlot;MobileAddToCart
+;;MobileTabsSlot;TabPanelContainer
+;; MobileUpSellingSlot       ; Similar
+;; MobileCrossSellingSlot    ; accessories
+
+# CMS ProductAddToCart Components
+INSERT_UPDATE ProductAddToCartComponent;$contentCV[unique=true];uid[unique=true];name;actions(&actionRef);&componentRef
+;;MobileAddToCart;Mobile Product Add To Cart;MobileAddToCartAction,MobilePickUpInStoreAction;MobileAddToCart
+
+
+# CMS AddToCart Action
+INSERT_UPDATE AddToCartAction;$contentCV[unique=true];uid[unique=true];url;name;restrictions(uid,$contentCV);&actionRef
+;;MobileAddToCartAction;/cart/add;Mobile Product Add To Cart Action;MobileActionRestriction;MobileAddToCartAction
+
+# CMS PickUpInStoreAction Action
+INSERT_UPDATE PickUpInStoreAction;$contentCV[unique=true];uid[unique=true];url;name;restrictions(uid,$contentCV);&actionRef
+;;MobilePickUpInStoreAction;/store-pickup/{productCode}/pointOfServices;Mobile Pickup in Store Action;MobileActionRestriction;MobilePickUpInStoreAction
+
+# CMS Action Restrictions
+INSERT_UPDATE CMSActionRestriction;$contentCV[unique=true];uid[unique=true];name;
+;;MobileActionRestriction;A Mobile CMSAction restriction;
+################# ProductDetails Page Ends Here ###########################
+
+
+########################################## Static Pages Starts here ######################################
+
+###### Create Pages ############
+
+INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);label;restrictions(uid,$contentCV);title;defaultPage[default='false'];approvalStatus(code)[default='approved'];homepage[default='false'];onlyOnerestrictionMustApply[default='true'];
+;;aboutUsMobile;About Us Mobile;MobileContentPage1Template;/aboutUs;MobileExperienceRestriction;"About Us | V2kart Site"
+;;contactUsMobile;Contact Us Mobile;MobileContentPage1Template;/contactUs;MobileExperienceRestriction;"Contact Us | V2kart Site"
+;;paymentMobile;Payment Mobile;MobileContentPage1Template;/payment;MobileExperienceRestriction;"Payment | V2kart Site"
+;;trackYourOrderMobile;Track Order Mobile;MobileContentPage1Template;/trackOrder;MobileExperienceRestriction;"Track your Order | V2kart Site"
+;;mobile-faq;FAQ Mobile;MobileContentPage1Template;/faq;MobileExperienceRestriction;"Frequently Asked Questions | V2kart Site"
+;;privacyPolicyPageMobile;Privacy Policy Mobile;MobileContentPage1Template;/privacyPolicy;MobileExperienceRestriction;"Privacy Policy | V2kart Site"
+;;shippingMobile;Shipping Mobile;MobileContentPage1Template;/shipping;MobileExperienceRestriction;"Shipping | V2kart Site"
+;;returnsMobile;Returns Mobile;MobileContentPage1Template;/returns;MobileExperienceRestriction;"Returns | V2kart Site"
+;;cancellationMobile;Cancellation Mobile;MobileContentPage1Template;/cancellation;MobileExperienceRestriction;"Cancellation | V2kart Site"
+;;responsibleMobile;Disclosure Policy Mobile;MobileContentPage1Template;/disclosurePolicy;MobileExperienceRestriction;"Disclosure Policy | V2kart Site"
+;;careersMobile;Careers Mobile;MobileContentPage1Template;/careers;MobileExperienceRestriction;"Careers | V2kart Site"
+;;termsMobile;Terms Mobile;MobileContentPage1Template;/termsAndCondition;MobileExperienceRestriction;"Terms And Conditions | V2kart Site"
+
+###### About Us #########
+ 
+# ContentSlot 
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(uid,$contentCV);;;
+;;CenterContentSlot-aboutUsMobile;CenterContent Slot for aboutUs Page Mobile;true;aboutUsParagraph;;;
+
+# ContentSlotForPage 
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='aboutUs'];contentSlot(uid,$contentCV)[unique=true];;;
+;;CenterContent-aboutUsMobile;CenterContent;aboutUsMobile;CenterContentSlot-aboutUsMobile;;;
+
+
+######## Contact Us ############
+ 
+# ContentSlot 
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(uid,$contentCV);;;
+;;CenterContentSlot-contactUsMobile;CenterContent Slot for contactUs Page Mobile;true;contactUsParagraph;;;
+
+# ContentSlotForPage 
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='contactUs'];contentSlot(uid,$contentCV)[unique=true];;;
+;;CenterContent-contactUsMobile;CenterContent;contactUsMobile;CenterContentSlot-contactUsMobile;;;
+
+
+############# Payment ###############
+
+# ContentSlot 
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(uid,$contentCV);;;
+;;CenterContentSlot-paymentMobile;CenterContent Slot for payment Page Mobile;true;paymentParagraph;;;
+
+# ContentSlotForPage 
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='payment'];contentSlot(uid,$contentCV)[unique=true];;;
+;;CenterContent-paymentMobile;CenterContent;paymentMobile;CenterContentSlot-paymentMobile;;;
+
+
+########### Track your order ################
+ 
+# ContentSlot 
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(uid,$contentCV);;;
+;;CenterContentSlot-trackOrderMobile;CenterContent Slot for trackYourOrder Page Mobile;true;trackOrderParagraph;;;
+
+
+# ContentSlotForPage 
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='trackYourOrder'];contentSlot(uid,$contentCV)[unique=true];;;
+;;CenterContent-trackOrderMobile;CenterContent;trackYourOrderMobile;CenterContentSlot-trackOrderMobile;;;
+
+################### FAQ ######################
+
+# ContentSlot 
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(uid,$contentCV);;;
+;;CenterContentSlot-faqMobile;CenterContent Slot for FAQ Page Mobile;true;FAQMenuParagraph;;;
+
+
+# ContentSlotForPage 
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='mobile-faq'];contentSlot(uid,$contentCV)[unique=true];;;
+;;CenterContent-faqMobile;CenterContent;mobile-faq;CenterContentSlot-faqMobile;;;
+
+
+################### Privacy Policy ######################
+
+# ContentSlot 
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(uid,$contentCV);;;
+;;CenterContentSlot-privacyPolicyMobile;CenterContent Slot for Privacy Policy Page Mobile;true;PrivacyPolicy;;;
+
+
+# ContentSlotForPage 
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='careersPageMobile'];contentSlot(uid,$contentCV)[unique=true];;;
+;;CenterContent-privacyPolicyMobile;CenterContent;privacyPolicyPageMobile;CenterContentSlot-privacyPolicyMobile;;;
+
+###### Shipping #########
+ 
+# ContentSlot 
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(uid,$contentCV);;;
+;;CenterContentSlot-shippingMobile;CenterContent Slot for Shipping Page Mobile;true;shippingParagraph;;;
+
+# ContentSlotForPage 
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='shippingMobile'];contentSlot(uid,$contentCV)[unique=true];;;
+;;CenterContent-shippingMobile;CenterContent;shippingMobile;CenterContentSlot-shippingMobile;;;
+
+###### Returns #########
+ 
+# ContentSlot 
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(uid,$contentCV);;;
+;;CenterContentSlot-returnsMobile;CenterContent Slot for Returns Page Mobile;true;returnsParagraph;;;
+
+# ContentSlotForPage 
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='returnsMobile'];contentSlot(uid,$contentCV)[unique=true];;;
+;;CenterContent-returnsMobile;CenterContent;returnsMobile;CenterContentSlot-returnsMobile;;;
+
+###### Cancellation #########
+ 
+# ContentSlot 
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(uid,$contentCV);;;
+;;CenterContentSlot-cancellationMobile;CenterContent Slot for Cancelltion Page Mobile;true;cancellationParagraph;;;
+
+# ContentSlotForPage 
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='cancellationMobile'];contentSlot(uid,$contentCV)[unique=true];;;
+;;CenterContent-cancellationMobile;CenterContent;cancellationMobile;CenterContentSlot-cancellationMobile;;;
+
+###### Terms and Condition #########
+ 
+# ContentSlot 
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(uid,$contentCV);;;
+;;CenterContentSlot-termsMobile;CenterContent Slot for Terms And Condition Page Mobile;true;termsAndConditionParagraph;;;
+
+# ContentSlotForPage 
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='termsMobile'];contentSlot(uid,$contentCV)[unique=true];;;
+;;CenterContent-termsMobile;CenterContent;termsMobile;CenterContentSlot-termsMobile;;;
+
+###### Careers #########
+ 
+# ContentSlot 
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(uid,$contentCV);;;
+;;CenterContentSlot-careersMobile;CenterContent Slot for Careers Page Mobile;true;careersParagraph;;;
+
+# ContentSlotForPage 
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='careersMobile'];contentSlot(uid,$contentCV)[unique=true];;;
+;;CenterContent-careersMobile;CenterContent;careersMobile;CenterContentSlot-careersMobile;;;
+
+###### Responsible Disclosure Policy #########
+ 
+# ContentSlot 
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(uid,$contentCV);;;
+;;CenterContentSlot-responsibleMobile;CenterContent Slot for Responsible Disclosure Poolicy Page Mobile;true;responsibleDisclosurePolicyParagraph;;;
+
+# ContentSlotForPage 
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='responsibleMobile'];contentSlot(uid,$contentCV)[unique=true];;;
+;;CenterContent-responsibleMobile;CenterContent;responsibleMobile;CenterContentSlot-responsibleMobile;;;
+
+########################################## Static Pages Ends here ######################################
+
+
+
+###### v2kart Store Finder Page ######
+
+
+
+UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef)
+;;MobileMiddleContentSlot;Middle Slot for Store Finder Page;true;JSPStoreFinderComponent
+
+INSERT_UPDATE JspIncludeComponent;$contentCV[unique=true];uid[unique=true];name;page;actions(uid,$contentCV);&componentRef
+;;JSPStoreFinderComponent;Store Finder Component;storeFinderContent.jsp;ViewStoreAction;JSPStoreFinderComponent
+
+###### v2kart Store Finder Page ends ######
+
+# My Account
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='mobile-account'];contentSlot(uid,$contentCV)[unique=true];;;
+;;BodyContent-MobileAccountPage;BodyContent;;BodyContentSlot-MobileAccountPage;;;
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(uid, $contentCV);;;
+;;BodyContentSlot-MobileAccountPage;Body Content Slot for Mobile My Account Homepage;true;MobileAccountLeftNavigationComponent;;;
+
+# Account Address Book
+
+# ContentSlot
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(uid, $contentCV);;;
+;;BodyContentSlot-MobileAddressBookPage;Body Content Slot for Account Address Book;true;AccountAddressBookComponent;;;
+# ContentSlotForPage
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='mobile-address-book'];contentSlot(uid,$contentCV)[unique=true];;;
+;;BodyContent-MobileAddressBookPage;BodyContent;;BodyContentSlot-MobileAddressBookPage;;;
+
+# Account Add Edit Address
+
+# ContentSlot
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(uid, $contentCV);;;
+;;BodyContentSlot-MobileAddEditAddressPage;Body Content Slot for Add Edit Address;true;AccountAddEditAddressComponent;;;
+# ContentSlotForPage
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='mobile-add-edit-address'];contentSlot(uid,$contentCV)[unique=true];;;
+;;BodyContent-MobileAddEditAddressPage;BodyContent;;BodyContentSlot-MobileAddEditAddressPage;;;
+
+
+###### Account Profile Landing Page
+# ContentSlot
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(uid, $contentCV);;;
+;;BodyContentSlot-profileMobile;Body Content Slot for My Account Profile Mobile;true;AccountProfileComponent;;;
+# ContentSlotForPage
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='mobile-profile'];contentSlot(uid,$contentCV)[unique=true];;;
+;;BodyContent-profileMobile;BodyContent;;BodyContentSlot-profileMobile;;;
+
+###### Account Update Password
+# ContentSlot
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(uid, $contentCV);;;
+;;BodyContentSlot-updatePasswordMobile;Body Content Slot for Update Password Mobile;true;UpdatePasswordComponent;;;
+# ContentSlotForPage
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='mobile-updatePassword'];contentSlot(uid,$contentCV)[unique=true];;;
+;;BodyContent-updatePasswordMobile;BodyContent;;BodyContentSlot-updatePasswordMobile;;;
+
+###### Account Update Profile
+# ContentSlot
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(uid, $contentCV);;;
+;;BodyContentSlot-update-profileMobile;Body Content Slot for Update Profile Mobile;true;UpdateProfileComponent;;;
+# ContentSlotForPage
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='mobile-update-profile'];contentSlot(uid,$contentCV)[unique=true];;;
+;;BodyContent-update-profileMobile;BodyContent;;BodyContentSlot-update-profileMobile;;;
+
+#Customer Login
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(uid, $contentCV);;;
+;;TopContentSlot-login-mobile;Mobile Top Content Slot for Customer Login;true;ReturningCustomerLoginComponent;;;
+
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='mobile-login'];contentSlot(uid,$contentCV)[unique=true];;;
+;;TopContent-login-mobile;TopContentSlot;;TopContentSlot-login-mobile;;;
+
+INSERT_UPDATE JspIncludeComponent;$contentCV[unique=true];uid[unique=true];name;page;&componentRef
+;;MobileAccountRegisterDisplayComponent;Mobile Account Register Display Component;accountRegisterDisplay.jsp;MobileAccountRegisterDisplayComponent
+;;MobileCheckoutRegisterDisplayComponent;Mobile Checkout Register Display Component;checkoutRegisterDisplay.jsp;MobileCheckoutRegisterDisplayComponent
+;;MobileReturningCustomerCheckoutLoginComponent;Mobile Returning Customer Checkout Login Component;checkoutReturningCustomerLogin.jsp;MobileReturningCustomerCheckoutLoginComponent;
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef);;;
+;;MobileBottomContentSlot-register-mobile;Mobile Bottom Content Slot for Account Register;true;MobileAccountRegisterDisplayComponent;;;
+
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='mobile-register'];contentSlot(uid,$contentCV)[unique=true];;;
+;;MobileBottomContent-register-mobile;BottomContentSlot;;MobileBottomContentSlot-register-mobile;;;
+
+### Customer Checkout Login
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef);;;
+;;MobileTopContentSlot-checkout-login-mobile;Mobile Top Content Slot for Checkout Login;true;MobileReturningCustomerCheckoutLoginComponent;;;
+
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='mobile-checkout-login'];contentSlot(uid,$contentCV)[unique=true];;;
+;;MobileTopContent-checkout-login-mobile;TopContentSlot;;MobileTopContentSlot-checkout-login-mobile;;;
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef);;;
+;;MobileBottomContentSlot-checkout-register-mobile;Mobile Bottom Content Slot for Checkout Register;true;MobileCheckoutRegisterDisplayComponent;;;
+
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='mobile-checkout-register'];contentSlot(uid,$contentCV)[unique=true];;;
+;;MobileBottomContent-checkout-register-mobile;BottomContentSlot;;MobileBottomContentSlot-checkout-register-mobile;;;
+
+###### Cart Page ######
+
+INSERT_UPDATE  ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(uid, $contentCV)
+;;MobileTopContent-cartPage;TopSlotforCartPage;true;CartComponent,CartCouponCodeComponent,CartTotalsComponent,CheckoutComponent
+;;MobileEmptyCartMiddleContent;EmptyCartMiddleSlotforCartPage;true;EmptyCartParagraphComponent
+;;MobileEmptyCartBottomContent;BottomContentSlotforCartPage;true;
+
+
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='mobile-cartPage'];contentSlot(uid,$contentCV)[unique=true]
+;;MobileTop-cartPage;TopContentSlot;;MobileTopContent-cartPage
+
+######  Account Order History
+
+# ContentSlot
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(uid, $contentCV);;;
+;;MobileBodyContent-orders;Mobile Body Content Slot for My Account Order History;true;AccountOrderHistoryComponent;;;
+
+# ContentSlotForPage
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='mobile-orders'];contentSlot(uid,$contentCV)[unique=true];;;
+;;MobileBodyContent-orders;BodyContent;;MobileBodyContent-orders;;;
+
+###### Account Order Detail
+
+# ContentSlot
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(uid, $contentCV);;;
+;;MobileBodyContent-orderdetails;Mobile Body Content Slot for My Account Order Details;true;AccountOrderDetailsTotalsComponent,AccountOrderDetailsShippingComponent,AccountOrderDetailsItemsComponent;;;
+
+# ContentSlotForPage
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='mobile-order'];contentSlot(uid,$contentCV)[unique=true];;;
+;;MobileBodyContent-orderdetails;BodyContent;;MobileBodyContent-orderdetails;;;
+
+# Error Pages #
+INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);label;defaultPage[default='false'];approvalStatus(code)[default='approved'];homepage[default='false'];restrictions(uid,$contentCV)[default='MobileExperienceRestriction'];onlyOneRestrictionMustApply[default='false']
+;;mobile-servererror;Mobile Not Found Page;MobileErrorPageTemplate;/serverError
+
+###### Account wishlist
+
+INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);label;defaultPage[default='false'];approvalStatus(code)[default='approved'];homepage[default='false'];previewImage(code, $contentCV)[default='MobileContentPageModel__function_preview'];restrictions(uid,$contentCV)[default='MobileExperienceRestriction'];onlyOneRestrictionMustApply[default='false']
+;;mobile-wishlist;Mobile Wishlist Page;MobileAccountPageTemplate;wishlist
+
+# ContentSlot
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(uid, $contentCV);;;
+;;MobileBodyContentSlot-wishlist;Mobile Body Content Slot for My Account Wish List;true;AccountWishlistComponent;;;
+
+# ContentSlotForPage
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='mobile-wishlist'];contentSlot(uid,$contentCV)[unique=true];;;
+;;MobileBodyContent-wishlist;BodyContent;;MobileBodyContentSlot-wishlist;;;
+
+## Search Results Page ## 
+
+#### SearchResultListPage
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(uid, $contentCV);;;
+;;MobileSearchResultsListSlot;Search Result List Slot for Search List;true;SearchResultsList;;;
+
+
+### Search Empty Page ###
+
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true]; position[unique=true];page(uid,$contentCV)[unique=true][default='mobile-searchEmpty']; contentSlot(uid,$contentCV)[unique=true]
+;; MobileMiddle-searchEmpty; MiddleContent;; MobileMiddleContent-searchEmpty
+
+INSERT_UPDATE ContentSlot ;$contentCV[unique=true];uid[unique=true] ; name; active; cmsComponents(uid, $contentCV)
+;; MobileMiddleContent-searchEmpty; Middle Slot for searchEmpty; true; NoSearchResultsParagraphComponent
+
+#Be A Seller 
+
+# ContentSlot
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(uid, $contentCV);;;
+;;BodyContentSlot-MobilebeASeller;Mobile Body Content Slot for Be A Seller;true;BeASellerComponent;;;
+
+# ContentSlotForPage
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='mobile-beASeller'];contentSlot(uid,$contentCV)[unique=true];;;
+;;BodyContent-MobilebeASeller;BodyContent;;BodyContentSlot-MobilebeASeller;;;
+
+
+
+######################################## Category Home Pages Start##########################################
+
+INSERT_UPDATE PageTemplate;$contentCV[unique=true];uid[unique=true];name;frontendTemplateName;restrictedPageTypes(code);active[default=true]
+;;MobileCategoryHomePageTemplate;Mobile Category Home Page Template;category/categoryHomePage;ContentPage
+
+INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='MobileCategoryHomePageTemplate'];validComponentTypes(code);compTypeGroup(code)
+;SiteLogo;;;logo
+;SearchBox;;;searchbox
+;NavigationBar;;;navigation
+;NavigationMenuBar;;;navigation
+;TopContent;;;mobile
+;BottomContent;;;mobile
+;Footer;;;footer
+;NavContent;;FooterComponent;navigation
+;PolicyContent;;FooterComponent;navigation
+;TopHeaderSlot;;;mobile
+;NavigationSlot;;;mobile
+;BottomHeaderSlot;;;mobile
+;TopRotatingBanner;;RotatingImagesComponent;
+;BannerSection1;;SimpleBannerComponent;
+;BannerSection2;;SimpleBannerComponent;
+;BannerSection3;;SimpleBannerComponent;
+;CarouselSection;;ProductCarouselComponent;
+
+
+INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='MobileCategoryHomePageTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
+;;MobileSiteLogo-CategoryHomePage;SiteLogo;;MobileSiteLogoSlot;true
+;;MobileSearchBox-CategoryHomePage;SearchBox;;MobileSearchBoxSlot;true
+;;MobileNavigationBar-CategoryHomePage;NavigationBar;;MobileNavigationBarSlot;true
+;;MobileNavigationMenuBar-CategoryHomePage;NavigationMenuBar;;MobileNavigationMenuBarSlot;true
+;;MobileFooter-CategoryHomePage;Footer;;MobileFooterSlot;true
+;;MobileNavContent-CategoryHomePage;NavContent;;MobileNavContentSlot;true
+;;MobilePolicyContent-CategoryHomePage;PolicyContent;;MobilePolicyContentSlot;true
+;;MobileTopHeaderSlot-CategoryHomePage;TopHeaderSlot;;MobileTopHeaderSlot;true
+;;MobileNavigationSlot-CategoryHomePage;NavigationSlot;;MobileNavigationSlot;true
+;;MobileBottomHeaderSlot-CategoryHomePage;BottomHeaderSlot;;MobileBottomHeaderSlot;true
+
+
+
+
+INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);label;defaultPage[default='false'];approvalStatus(code)[default='approved'];restrictions(uid,$contentCV)[default='MobileExperienceRestriction'];onlyOneRestrictionMustApply[default='false']
+                         ;                       ; mobile-MenCategoryHomePage                      ; Mobile Men                                                           ; MobileCategoryHomePageTemplate                   ; /men
+                         ;                       ; mobile-WomenCategoryHomePage                    ; Mobile Women                                                         ; MobileCategoryHomePageTemplate                   ; /women
+                         ;                       ; mobile-KidsCategoryHomePage                     ; Mobile Kids                                                          ; MobileCategoryHomePageTemplate                   ; /kids
+                         ;                       ; mobile-WinterCategoryHomePage                   ; Mobile Winter                                                        ; MobileCategoryHomePageTemplate                   ; /winter
+                         ;                       ; mobile-HomeFurnishingCategoryHomePage           ; Mobile Home Furnishing                                               ; MobileCategoryHomePageTemplate                   ; /home_furnishing
+                         ;                       ; mobile-MoreCategoryHomePage                     ; Mobile More                                                          ; MobileCategoryHomePageTemplate                   ; /more
+
+INSERT_UPDATE RotatingImagesComponent;$contentCV[unique=true] ; uid[unique=true]                                              ; name                                                     ; banners(&componentRef)                                                                                                                                                                                                                                                                    ; &componentRef
+                                     ;                        ; MenCategoryRotatingCarouselBannerComponent-Mobile             ; Men Category rotating Mobile Banner Component            ; MenCategoryRotatingBannerComponent1-mobile,MenCategoryRotatingBannerComponent2-mobile,MenCategoryRotatingBannerComponent3-mobile,MenCategoryRotatingBannerComponent4-mobile,MenCategoryRotatingBannerComponent5-mobile,MenCategoryRotatingBannerComponent6-mobile                                                                   ; MenCategoryRotatingCarouselBannerComponent-Mobile
+                                     ;                        ; WomenCategoryRotatingCarouselBannerComponent-Mobile           ; Women Category rotating Mobile Banner Component          ; WomenCategoryRotatingBannerComponent1-mobile,WomenCategoryRotatingBannerComponent2-mobile,WomenCategoryRotatingBannerComponent3-mobile,WomenCategoryRotatingBannerComponent4-mobile,WomenCategoryRotatingBannerComponent5-mobile,WomenCategoryRotatingBannerComponent6-mobile                                                      ; WomenCategoryRotatingCarouselBannerComponent-Mobile
+                                     ;                        ; KidsCategoryRotatingCarouselBannerComponent-Mobile            ; Kids Category rotating Mobile Banner Component           ; KidsCategoryRotatingBannerComponent1-mobile,KidsCategoryRotatingBannerComponent2-mobile,KidsCategoryRotatingBannerComponent3-mobile,KidsCategoryRotatingBannerComponent4-mobile,KidsCategoryRotatingBannerComponent5-mobile,KidsCategoryRotatingBannerComponent6-mobile                                                             ; KidsCategoryRotatingCarouselBannerComponent-Mobile
+                                     ;                        ; WinterCategoryRotatingCarouselBannerComponent-Mobile          ; Winter Category rotating Mobile Banner Component         ; WinterCategoryRotatingBannerComponent1-mobile,WinterCategoryRotatingBannerComponent2-mobile,WinterCategoryRotatingBannerComponent3-mobile,WinterCategoryRotatingBannerComponent4-mobile,WinterCategoryRotatingBannerComponent5-mobile,WinterCategoryRotatingBannerComponent6-mobile                                                 ; WinterCategoryRotatingCarouselBannerComponent-Mobile
+                                     ;                        ; HomeFurnishingCategoryRotatingCarouselBannerComponent-Mobile  ; HomeFurnishing Category rotating Mobile Banner Component ; HomeFurnishingCategoryRotatingBannerComponent1-mobile,HomeFurnishingCategoryRotatingBannerComponent2-mobile,HomeFurnishingCategoryRotatingBannerComponent3-mobile,HomeFurnishingCategoryRotatingBannerComponent4-mobile,HomeFurnishingCategoryRotatingBannerComponent5-mobile,HomeFurnishingCategoryRotatingBannerComponent6-mobile ; HomeFurnishingCategoryRotatingCarouselBannerComponent-Mobile
+                                     ;                        ; MoreCategoryRotatingCarouselBannerComponent-Mobile            ; More Category rotating Mobile Banner Component           ; MoreCategoryRotatingBannerComponent1-mobile,MoreCategoryRotatingBannerComponent2-mobile,MoreCategoryRotatingBannerComponent3-mobile,MoreCategoryRotatingBannerComponent4-mobile,MoreCategoryRotatingBannerComponent5-mobile,MoreCategoryRotatingBannerComponent6-mobile                                                             ; MoreCategoryRotatingCarouselBannerComponent-Mobile 
+
+INSERT_UPDATE ContentSlot; $contentCV[unique=true]; uid[unique=true]                                                   		 ; name                                                                 ; active  ; cmsComponents(uid, $contentCV)
+# men category page banner slots
+                         ;                        ; MobileTopRotatingBannerSlot-mobile-MenCategoryHomePage                          ; Mobile Men category page Rotating Banner Slot                               ; true    ; MenCategoryRotatingCarouselBannerComponent-Mobile                         
+                         ;                        ; MobileBannerSection1Slot-mobile-MenCategoryHomePage                             ; Mobile Men category page Section1 Banner Slot                               ; true    ; MenCategoryBannerComponent1,MenCategoryBannerComponent2,MenCategoryBannerComponent3
+                         ;                        ; MobileBannerSection2Slot-mobile-MenCategoryHomePage                             ; Mobile Men category page Section2 Banner Slot                               ; true    ; MenCategoryBannerComponent4
+                         ;                        ; MobileBannerSection3Slot-mobile-MenCategoryHomePage                             ; Mobile Men category page Section3 Banner Slot                               ; true    ; MenCategoryBannerComponent5
+                         ;                        ; MobileCarouselSectionSlot-mobile-MenCategoryHomePage                            ; Mobile Men category page Carousel Section Slot                              ; true    ; MenCategoryPageBestSellerProductCarouselComponent
+                         
+                         ;                        ; AppBannerSection1Slot-mobile-MenCategoryHomePage                             ; App Men category page Section1 Banner Slot                               ; true    ; AppMenCategoryBannerComponent1,AppMenCategoryBannerComponent2,AppMenCategoryBannerComponent3
+                         ;                        ; AppBannerSection2Slot-mobile-MenCategoryHomePage                             ; App Men category page Section2 Banner Slot                               ; true    ; AppMenCategoryBannerComponent4
+                         ;                        ; AppBannerSection3Slot-mobile-MenCategoryHomePage                             ; App Men category page Section3 Banner Slot                               ; true    ; AppMenCategoryBannerComponent5
+
+# women category page banner slots
+                         ;                        ; MobileTopRotatingBannerSlot-mobile-WomenCategoryHomePage                        ; Mobile Women category page Rotating Banner Slot                             ; true    ; WomenCategoryRotatingCarouselBannerComponent-Mobile 
+                         ;                        ; MobileBannerSection1Slot-mobile-WomenCategoryHomePage                           ; Mobile Women category page Section1 Banner Slot                             ; true    ; WomenCategoryBannerComponent1,WomenCategoryBannerComponent2,WomenCategoryBannerComponent3
+                         ;                        ; MobileBannerSection2Slot-mobile-WomenCategoryHomePage                           ; Mobile Women category page Section2 Banner Slot                             ; true    ; WomenCategoryBannerComponent4
+                         ;                        ; MobileBannerSection3Slot-mobile-WomenCategoryHomePage                           ; Mobile Women category page Section3 Banner Slot                             ; true    ; WomenCategoryBannerComponent5
+                         ;                        ; MobileCarouselSectionSlot-mobile-WomenCategoryHomePage                          ; Mobile Women category page Carousel Section Slot                            ; true    ; WomenCategoryPageBestSellerProductCarouselComponent
+                         
+                         ;                        ; AppBannerSection1Slot-mobile-WomenCategoryHomePage                           ; App Women category page Section1 Banner Slot                             ; true    ; AppWomenCategoryBannerComponent1,AppWomenCategoryBannerComponent2,AppWomenCategoryBannerComponent3
+                         ;                        ; AppBannerSection2Slot-mobile-WomenCategoryHomePage                           ; App Women category page Section2 Banner Slot                             ; true    ; AppWomenCategoryBannerComponent4
+                         ;                        ; AppBannerSection3Slot-mobile-WomenCategoryHomePage                           ; App Women category page Section3 Banner Slot                             ; true    ; AppWomenCategoryBannerComponent5
+
+# kids category page banner slots
+                         ;                        ; MobileTopRotatingBannerSlot-mobile-KidsCategoryHomePage                         ; Mobile Kids category page Rotating Banner Slot                              ; true    ; KidsCategoryRotatingCarouselBannerComponent-Mobile 
+                         ;                        ; MobileBannerSection1Slot-mobile-KidsCategoryHomePage                            ; Mobile Kids category page Section1 Banner Slot                              ; true    ; KidsCategoryBannerComponent1,KidsCategoryBannerComponent2,KidsCategoryBannerComponent3
+                         ;                        ; MobileBannerSection2Slot-mobile-KidsCategoryHomePage                            ; Mobile Kids category page Section2 Banner Slot                              ; true    ; KidsCategoryBannerComponent4
+                         ;                        ; MobileBannerSection3Slot-mobile-KidsCategoryHomePage                            ; Mobile Kids category page Section3 Banner Slot                              ; true    ; KidsCategoryBannerComponent5
+                         ;                        ; MobileCarouselSectionSlot-mobile-KidsCategoryHomePage                           ; Mobile Kids category page Carousel Section Slot                             ; true    ; KidsCategoryPageBestSellerProductCarouselComponent
+                         
+                         ;                        ; AppBannerSection1Slot-mobile-KidsCategoryHomePage                            ; App Kids category page Section1 Banner Slot                              ; true    ; AppKidsCategoryBannerComponent1,AppKidsCategoryBannerComponent2,AppKidsCategoryBannerComponent3
+                         ;                        ; AppBannerSection2Slot-mobile-KidsCategoryHomePage                            ; App Kids category page Section2 Banner Slot                              ; true    ; AppKidsCategoryBannerComponent4
+                         ;                        ; AppBannerSection3Slot-mobile-KidsCategoryHomePage                            ; App Kids category page Section3 Banner Slot                              ; true    ; AppKidsCategoryBannerComponent5
+
+# winter category page banner slots
+                         ;                        ; MobileTopRotatingBannerSlot-mobile-WinterCategoryHomePage                       ; Mobile Winter category page Rotating Banner Slot                            ; true    ; WinterCategoryRotatingCarouselBannerComponent-Mobile 
+                         ;                        ; MobileBannerSection1Slot-mobile-WinterCategoryHomePage                          ; Mobile Winter category page Section1 Banner Slot                            ; true    ; WinterCategoryBannerComponent1,WinterCategoryBannerComponent2,WinterCategoryBannerComponent3
+                         ;                        ; MobileBannerSection2Slot-mobile-WinterCategoryHomePage                          ; Mobile Winter category page Section2 Banner Slot                            ; true    ; WinterCategoryBannerComponent4
+                         ;                        ; MobileBannerSection3Slot-mobile-WinterCategoryHomePage                          ; Mobile Winter category page Section3 Banner Slot                            ; true    ; WinterCategoryBannerComponent5
+                         ;                        ; MobileCarouselSectionSlot-mobile-WinterCategoryHomePage                         ; Mobile Winter category page Carousel Section Slot                           ; true    ; WinterCategoryPageBestSellerProductCarouselComponent
+              
+# home_furnishing category page banner slots             
+                         ;                        ; MobileTopRotatingBannerSlot-mobile-HomeFurnishingCategoryHomePage               ; Mobile HomeFurnishing category page Rotating Banner Slot                    ; true    ; HomeFurnishingCategoryRotatingCarouselBannerComponent-Mobile 
+                         ;                        ; MobileBannerSection1Slot-mobile-HomeFurnishingCategoryHomePage                  ; Mobile HomeFurnishing category page Section1 Banner Slot                    ; true    ; HomeFurnishingCategoryBannerComponent1,HomeFurnishingCategoryBannerComponent2,HomeFurnishingCategoryBannerComponent3
+                         ;                        ; MobileBannerSection2Slot-mobile-HomeFurnishingCategoryHomePage                  ; Mobile HomeFurnishing category page Section2 Banner Slot                    ; true    ; HomeFurnishingCategoryBannerComponent4
+                         ;                        ; MobileBannerSection3Slot-mobile-HomeFurnishingCategoryHomePage                  ; Mobile HomeFurnishing category page Section3 Banner Slot                    ; true    ; HomeFurnishingCategoryBannerComponent5
+                         ;                        ; MobileCarouselSectionSlot-mobile-HomeFurnishingCategoryHomePage                 ; Mobile HomeFurnishing category page Carousel Section Slot                   ; true    ; HomeFurnishingCategoryPageBestSellerProductCarouselComponent
+                         
+                         ;                        ; AppBannerSection1Slot-mobile-HomeFurnishingCategoryHomePage                  ; App HomeFurnishing category page Section1 Banner Slot                    ; true    ; AppHomeFurnishingCategoryBannerComponent1,AppHomeFurnishingCategoryBannerComponent2,AppHomeFurnishingCategoryBannerComponent3
+                         ;                        ; AppBannerSection2Slot-mobile-HomeFurnishingCategoryHomePage                  ; App HomeFurnishing category page Section2 Banner Slot                    ; true    ; AppHomeFurnishingCategoryBannerComponent4
+                         ;                        ; AppBannerSection3Slot-mobile-HomeFurnishingCategoryHomePage                  ; App HomeFurnishing category page Section3 Banner Slot                    ; true    ; AppHomeFurnishingCategoryBannerComponent5
+
+# More category page banner slots
+                         ;                        ; MobileTopRotatingBannerSlot-mobile-MoreCategoryHomePage                         ; Mobile More category page Rotating Banner Slot                              ; true    ; MoreCategoryRotatingCarouselBannerComponent-Mobile 
+                         ;                        ; MobileBannerSection1Slot-mobile-MoreCategoryHomePage                            ; Mobile More category page Section1 Banner Slot                              ; true    ; MoreCategoryBannerComponent1,MoreCategoryBannerComponent2,MoreCategoryBannerComponent3
+                         ;                        ; MobileBannerSection2Slot-mobile-MoreCategoryHomePage                            ; Mobile More category page Section2 Banner Slot                              ; true    ; MoreCategoryBannerComponent4
+                         ;                        ; MobileBannerSection3Slot-mobile-MoreCategoryHomePage                            ; Mobile More category page Section3 Banner Slot                              ; true    ; MoreCategoryBannerComponent5
+                         ;                        ; MobileCarouselSectionSlot-mobile-MoreCategoryHomePage                           ; Mobile More category page Carousel Section Slot                             ; true    ; MoreCategoryPageBestSellerProductCarouselComponent
+                         
+# App Homepage category banner slots
+
+						 ;                       ;AppSection2Slot-MobileHomePage   ;App Section2 Slot for V2kart Mobile Homepage ;true   ;AppMenCategoryBanner  ;;;
+                         ;                       ;AppSection3Slot-MobileHomePage   ;App Section3 Slot for V2kart Mobile Homepage ;true   ;AppWomenCategoryBanner  ;;;
+                         ;                       ;AppSection4Slot-MobileHomePage   ;App Section4 Slot for V2kart Mobile Homepage ;true   ;AppKidsCategoryBanner  ;;;
+						 
+						 
+						 
+INSERT_UPDATE ContentSlotForPage; $contentCV[unique=true]; uid[unique=true]                                                    ; position[unique=true]                        ; page(uid,$contentCV)[unique=true]                         ; contentSlot(uid,$contentCV)[unique=true]
+# men category page
+                                ;                        ; MobileTopRotatingBanner-mobile-MenCategoryHomePage                               ; TopRotatingBanner                            ; mobile-MenCategoryHomePage                                       ; MobileTopRotatingBannerSlot-mobile-MenCategoryHomePage
+                                ;                        ; MobileBannerSection1-mobile-MenCategoryHomePage                                  ; BannerSection1                               ; mobile-MenCategoryHomePage                                       ; MobileBannerSection1Slot-mobile-MenCategoryHomePage
+                                ;                        ; MobileBannerSection2-mobile-MenCategoryHomePage                                  ; BannerSection2                               ; mobile-MenCategoryHomePage                                       ; MobileBannerSection2Slot-mobile-MenCategoryHomePage
+                                ;                        ; MobileBannerSection3-mobile-MenCategoryHomePage                                  ; BannerSection3                               ; mobile-MenCategoryHomePage                                       ; MobileBannerSection3Slot-mobile-MenCategoryHomePage
+                                ;                        ; MobileCarouselSection-mobile-MenCategoryHomePage                                 ; CarouselSection                              ; mobile-MenCategoryHomePage                                       ; MobileCarouselSectionSlot-mobile-MenCategoryHomePage
+
+# women category page                                
+                                ;                        ; MobileTopRotatingBanner-mobile-WomenCategoryHomePage                             ; TopRotatingBanner                            ; mobile-WomenCategoryHomePage                                     ; MobileTopRotatingBannerSlot-mobile-WomenCategoryHomePage
+                                ;                        ; MobileBannerSection1-mobile-WomenCategoryHomePage                                ; BannerSection1                               ; mobile-WomenCategoryHomePage                                     ; MobileBannerSection1Slot-mobile-WomenCategoryHomePage
+                                ;                        ; MobileBannerSection2-mobile-WomenCategoryHomePage                                ; BannerSection2                               ; mobile-WomenCategoryHomePage                                     ; MobileBannerSection2Slot-mobile-WomenCategoryHomePage
+                                ;                        ; MobileBannerSection3-mobile-WomenCategoryHomePage                                ; BannerSection3                               ; mobile-WomenCategoryHomePage                                     ; MobileBannerSection3Slot-mobile-WomenCategoryHomePage
+                                ;                        ; MobileCarouselSection-mobile-WomenCategoryHomePage                               ; CarouselSection                              ; mobile-WomenCategoryHomePage                                     ; MobileCarouselSectionSlot-mobile-WomenCategoryHomePage
+
+# kids category page                                
+                                ;                        ; MobileTopRotatingBanner-mobile-KidsCategoryHomePage                              ; TopRotatingBanner                            ; mobile-KidsCategoryHomePage                                      ; MobileTopRotatingBannerSlot-mobile-KidsCategoryHomePage
+                                ;                        ; MobileBannerSection1-mobile-KidsCategoryHomePage                                 ; BannerSection1                               ; mobile-KidsCategoryHomePage                                      ; MobileBannerSection1Slot-mobile-KidsCategoryHomePage
+                                ;                        ; MobileBannerSection2-mobile-KidsCategoryHomePage                                 ; BannerSection2                               ; mobile-KidsCategoryHomePage                                      ; MobileBannerSection2Slot-mobile-KidsCategoryHomePage
+                                ;                        ; MobileBannerSection3-mobile-KidsCategoryHomePage                                 ; BannerSection3                               ; mobile-KidsCategoryHomePage                                      ; MobileBannerSection3Slot-mobile-KidsCategoryHomePage
+                                ;                        ; MobileCarouselSection-mobile-KidsCategoryHomePage                                ; CarouselSection                              ; mobile-KidsCategoryHomePage                                      ; MobileCarouselSectionSlot-mobile-KidsCategoryHomePage
+
+# winter category page                                
+                                ;                        ; MobileTopRotatingBanner-mobile-WinterCategoryHomePage                            ; TopRotatingBanner                            ; mobile-WinterCategoryHomePage                                    ; MobileTopRotatingBannerSlot-mobile-WinterCategoryHomePage
+                                ;                        ; MobileBannerSection1-mobile-WinterCategoryHomePage                               ; BannerSection1                               ; mobile-WinterCategoryHomePage                                    ; MobileBannerSection1Slot-mobile-WinterCategoryHomePage
+                                ;                        ; MobileBannerSection2-mobile-WinterCategoryHomePage                               ; BannerSection2                               ; mobile-WinterCategoryHomePage                                    ; MobileBannerSection2Slot-mobile-WinterCategoryHomePage
+                                ;                        ; MobileBannerSection3-mobile-WinterCategoryHomePage                               ; BannerSection3                               ; mobile-WinterCategoryHomePage                                    ; MobileBannerSection3Slot-mobile-WinterCategoryHomePage
+                                ;                        ; MobileCarouselSection-mobile-WinterCategoryHomePage                              ; CarouselSection                              ; mobile-WinterCategoryHomePage                                    ; MobileCarouselSectionSlot-mobile-WinterCategoryHomePage
+
+# home_furnishing category page                                
+                                ;                        ; MobileTopRotatingBanner-mobile-HomeFurnishingCategoryHomePage                    ; TopRotatingBanner                            ; mobile-HomeFurnishingCategoryHomePage                            ; MobileTopRotatingBannerSlot-mobile-HomeFurnishingCategoryHomePage
+                                ;                        ; MobileBannerSection1-mobile-HomeFurnishingCategoryHomePage                       ; BannerSection1                               ; mobile-HomeFurnishingCategoryHomePage                            ; MobileBannerSection1Slot-mobile-HomeFurnishingCategoryHomePage
+                                ;                        ; MobileBannerSection2-mobile-HomeFurnishingCategoryHomePage                       ; BannerSection2                               ; mobile-HomeFurnishingCategoryHomePage                            ; MobileBannerSection2Slot-mobile-HomeFurnishingCategoryHomePage
+                                ;                        ; MobileBannerSection3-mobile-HomeFurnishingCategoryHomePage                       ; BannerSection3                               ; mobile-HomeFurnishingCategoryHomePage                            ; MobileBannerSection3Slot-mobile-HomeFurnishingCategoryHomePage
+                                ;                        ; MobileCarouselSection-mobile-HomeFurnishingCategoryHomePage                      ; CarouselSection                              ; mobile-HomeFurnishingCategoryHomePage                            ; MobileCarouselSectionSlot-mobile-HomeFurnishingCategoryHomePage
+
+# More category page                               
+                                ;                        ; MobileTopRotatingBanner-mobile-MoreCategoryHomePage                              ; TopRotatingBanner                            ; mobile-MoreCategoryHomePage                                      ; MobileTopRotatingBannerSlot-mobile-MoreCategoryHomePage
+                                ;                        ; MobileBannerSection1-mobile-MoreCategoryHomePage                                 ; BannerSection1                               ; mobile-MoreCategoryHomePage                                      ; MobileBannerSection1Slot-mobile-MoreCategoryHomePage
+                                ;                        ; MobileBannerSection2-mobile-MoreCategoryHomePage                                 ; BannerSection2                               ; mobile-MoreCategoryHomePage                                      ; MobileBannerSection2Slot-mobile-MoreCategoryHomePage
+                                ;                        ; MobileBannerSection3-mobile-MoreCategoryHomePage                                 ; BannerSection3                               ; mobile-MoreCategoryHomePage                                      ; MobileBannerSection3Slot-mobile-MoreCategoryHomePage
+                                ;                        ; MobileCarouselSection-mobile-MoreCategoryHomePage                                ; CarouselSection                              ; mobile-MoreCategoryHomePage                                      ; MobileCarouselSectionSlot-mobile-MoreCategoryHomePage
+                      
+					  
+######################################## Category Home Pages End##########################################					  
+
+######################################## My Account Wallet Page Start ##########################################					  
+
+INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);label;defaultPage[default='false'];approvalStatus(code)[default='approved'];homepage[default='false'];previewImage(code, $contentCV)[default='MobileContentPageModel__function_preview'];restrictions(uid,$contentCV)[default='MobileExperienceRestriction'];onlyOneRestrictionMustApply[default='false']
+;;mobile-wallet;Mobile Wallet Page;MobileAccountPageTemplate;wallet
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(uid, $contentCV);;;
+;;MobileBodyContentSlot-wallet;Mobile Body Content Slot for My Account Wallet;true;AccountWalletComponent;;;
+
+# ContentSlotForPage
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='mobile-wallet'];contentSlot(uid,$contentCV)[unique=true];;;
+;;MobileBodyContent-wallet;BodyContent;;MobileBodyContentSlot-wallet;;;
+
+######################################## My Account Wallet Page End ##########################################
+
+######################################## Pick up from store ##############################################
+
+INSERT_UPDATE PageTemplate;$contentCV[unique=true];uid[unique=true];name;frontendTemplateName;restrictedPageTypes(code);active[default=true]
+;;MobilePickupInStorePageTemplate;Mobile Pick up in store page Template;product/pickupInStorePage;ContentPage
+
+
+INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='MobilePickupInStorePageTemplate'];validComponentTypes(code);compTypeGroup(code)
+;SiteLogo;;;logo
+;SearchBox;;;searchbox
+;NavigationBar;;;navigation
+;NavigationMenuBar;;;navigation
+;SearchResultsGridSlot;;;mobile
+;Footer;;;footer
+;NavContent;;FooterComponent;navigation
+;PolicyContent;;FooterComponent;navigation
+;TopHeaderSlot;;;mobile
+;NavigationSlot;;;mobile
+;BottomHeaderSlot;;;mobile
+
+INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position;pageTemplate(uid,$contentCV)[default='MobilePickupInStorePageTemplate'];contentSlot(uid,$contentCV);allowOverwrite
+;;MobileSiteLogo-PickupInStorePage;SiteLogo;;MobileSiteLogoSlot;true
+;;MobileSearchBox-PickupInStorePage;SearchBox;;MobileSearchBoxSlot;true
+;;MobileHomepageLink-PickupInStorePage;HomepageNavLink;;MobileHomepageNavLinkSlot;true
+;;MobileNavigationBar-PickupInStorePage;NavigationBar;;MobileNavigationBarSlot;true
+;;MobileNavigationMenuBar-PickupInStorePage;NavigationMenuBar;;MobileNavigationMenuBarSlot;true
+;;MobileFooter-PickupInStorePage;Footer;;MobileFooterSlot;true
+;;MobileNavContent-PickupInStorePage;NavContent;;MobileNavContentSlot;true
+;;MobilePolicyContent-PickupInStorePage;PolicyContent;;MobilePolicyContentSlot;true
+;;MobileTopHeaderSlot-PickupInStorePage;TopHeaderSlot;;MobileTopHeaderSlot;true
+;;MobileNavigationSlot-PickupInStorePage;NavigationSlot;;MobileNavigationSlot;true
+;;MobileBottomHeaderSlot-PickupInStorePage;BottomHeaderSlot;;MobileBottomHeaderSlot;true
+;;MobileSearchResultsGridSlot-PickupInStorePage;SearchResultsGridSlot;;MobileSearchResultsGridSlot;true
+
+
+INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);label;defaultPage[default='false'];approvalStatus(code)[default='approved'];homepage[default='false'];previewImage(code, $contentCV)[default='MobileContentPageModel__function_preview'];restrictions(uid,$contentCV)[default='MobileExperienceRestriction'];onlyOneRestrictionMustApply[default='false']
+;;mobile-pickupInStore;Mobile Pick up in store page Template;MobilePickupInStorePageTemplate;/pickupInStorePage	
+
+#####################################End of pick up from store###############################################	
+
+#######################################  Track your order Page Start ##############################################
+
+INSERT_UPDATE PageTemplate;$contentCV[unique=true];uid[unique=true];name;frontendTemplateName;restrictedPageTypes(code);active[default=true]
+;;TrackYourOrderHomePageTemplate;Track Your Order  Home Page Template;guest/trackYourOrderHomePage;ContentPage
+
+# Simple Content Page Templates
+INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='TrackYourOrderHomePageTemplate'];validComponentTypes(code);compTypeGroup(code)
+;SiteLogo;;;logo
+;SearchBox;;;searchbox
+;NavigationBar;;;navigation
+;NavigationMenuBar;;;navigation
+;Footer;;;footer
+;TopHeaderSlot;;;mobile
+;BottomHeaderSlot;;;mobile
+;NavigationSlot;;;mobile
+
+INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='TrackYourOrderHomePageTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
+;;MobileSiteLogo-TrackYourOrderHomePage;SiteLogo;;MobileSiteLogoSlot;true
+;;MobileSearchBox-TrackYourOrderHomePage;SearchBox;;MobileSearchBoxSlot;true
+;;MobileNavigationBar-TrackYourOrderHomePage;NavigationBar;;MobileNavigationBarSlot;true
+;;MobileNavigationMenuBar-TrackYourOrderHomePage;NavigationMenuBar;;MobileNavigationMenuBarSlot;true
+;;MobileFooter-TrackYourOrderHomePage;Footer;;MobileFooterSlot;true
+;;MobileTopHeaderSlot-TrackYourOrderHomePage;TopHeaderSlot;;MobileTopHeaderSlot;true
+;;MobileBottomHeaderSlot-TrackYourOrderHomePage;BottomHeaderSlot;;MobileBottomHeaderSlot;true
+;;MobileNavigationSlot-TrackYourOrderHomePage;NavigationSlot;;MobileNavigationSlot;true
+			
+INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);label;defaultPage[default='false'];approvalStatus(code)[default='approved'];homepage[default='false'];restrictions(uid,$contentCV)[default='MobileExperienceRestriction'];onlyOneRestrictionMustApply[default='true']
+;;TrackYourOrderMobile;Track Your Order;TrackYourOrderHomePageTemplate;/trackguestorder
+                                                  
+INSERT_UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];name;url;&linkRef;&componentRef;target(code)[default='sameWindow'];styleAttributes
+;;MobileTrackYourOrderLink;TrackYourOrderLink Link;&#35 ;MobileTrackYourOrderLink;MobileTrackYourOrderLink;sameWindow;data-icon="footer ui-icon-footer-trackorder track_order";
+
+#######################################  Track your order Page End ##############################################
+
+
+########################################### Cancel Order Page Start ######################################################
+
+INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);label;defaultPage[default='false'];approvalStatus(code)[default='approved'];homepage[default='false'];previewImage(code, $contentCV)[default='MobileContentPageModel__function_preview'];restrictions(uid,$contentCV)[default='MobileExperienceRestriction'];onlyOneRestrictionMustApply[default='false']
+;;mobile-cancelOrder;Mobile Cancel Order Page;MobileAccountPageTemplate;/cancelOrder
+
+INSERT_UPDATE JspIncludeComponent;$contentCV[unique=true];uid[unique=true];name;page;actions(uid,$contentCV);&componentRef
+;;AccountCancelOrderComponent;Account Cancel Order Component;accountCancelOrderPage.jsp;;AccountCancelOrderComponent
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(uid, $contentCV);;;
+;;MobileBodyContentSlot-cancelOrder;Mobile Body Content Slot for My Account Cancel Order;true;AccountCancelOrderComponent;;;
+
+# ContentSlotForPage
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='mobile-cancelOrder'];contentSlot(uid,$contentCV)[unique=true];;;
+;;MobileBodyContent-cancelOrder;BodyContent;;MobileBodyContentSlot-cancelOrder;;;   
+
+########################################### Cancel Order Page End ######################################################
+
+########################################### Return Order Page Start ######################################################
+
+INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);label;defaultPage[default='false'];approvalStatus(code)[default='approved'];homepage[default='false'];previewImage(code, $contentCV)[default='MobileContentPageModel__function_preview'];restrictions(uid,$contentCV)[default='MobileExperienceRestriction'];onlyOneRestrictionMustApply[default='false']
+;;mobile-returnOrder;Mobile Return Order Page;MobileAccountPageTemplate;/returnOrder
+
+INSERT_UPDATE JspIncludeComponent;$contentCV[unique=true];uid[unique=true];name;page;actions(uid,$contentCV);&componentRef
+;;AccountReturnOrderComponent;Account Return Order Component;accountReturnOrderPage.jsp;;AccountReturnOrderComponent
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(uid, $contentCV);;;
+;;MobileBodyContentSlot-returnOrder;Mobile Body Content Slot for My Account Return Order;true;AccountReturnOrderComponent;;;
+
+# ContentSlotForPage
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='mobile-returnOrder'];contentSlot(uid,$contentCV)[unique=true];;;
+;;MobileBodyContent-returnOrder;BodyContent;;MobileBodyContentSlot-returnOrder;;;   
+
+########################################### Return Order Page End ######################################################
+
+########################################## Feedback page starts ########################################################
+
+INSERT_UPDATE JspIncludeComponent;$contentCV[unique=true];uid[unique=true];name;page;actions(uid,$contentCV);&componentRef
+;;MobileFeedbackComponent;Mobile Feedback Component;accountFeedbackPage.jsp;;MobileFeedbackComponent
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(uid, $contentCV)
+;;MobileBodyContentSlot-feedback;Mobile Body Content slot for Feedback page;true;MobileFeedbackComponent
+
+INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='mobile-feedback'] ;contentSlot(uid,$contentCV)[unique=true]
+;;MobileBodyContent-feedback;BodyContent;;MobileBodyContentSlot-feedback
+
+######################################## Feedback page ends ##############################################################
+
+######################################## Native Home Page Offer Components Starts ##############################################################
+INSERT_UPDATE BannerComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;urlLink;$picture
+;;OfferZone1BannerComponent1;Offer Zone1 Banner1;OfferZone1BannerComponent1;/c/men;/images/banners/womenCategoryPage/cat-img2.jpg
+;;OfferZone1BannerComponent2;Offer Zone1 Banner2;OfferZone1BannerComponent2;/c/men;/images/banners/womenCategoryPage/cat-img3.jpg
+;;OfferZone1BannerComponent3;Offer Zone1 Banner3;OfferZone1BannerComponent3;/c/men;/images/banners/womenCategoryPage/cat-img4.jpg
+;;OfferZone2BannerComponent1;Offer Zone2 Banner1;OfferZone2BannerComponent1;/c/men;/images/banners/womenCategoryPage/cat-img2.jpg
+;;OfferZone2BannerComponent2;Offer Zone2 Banner2;OfferZone2BannerComponent2;/c/men;/images/banners/womenCategoryPage/cat-img3.jpg
+;;OfferZone2BannerComponent3;Offer Zone2 Banner3;OfferZone2BannerComponent3;/c/men;/images/banners/womenCategoryPage/cat-img4.jpg
+;;OfferZone3BannerComponent1;Offer Zone3 Banner1;OfferZone3BannerComponent1;/c/men;/images/banners/womenCategoryPage/cat-img2.jpg
+;;OfferZone3BannerComponent2;Offer Zone3 Banner1;OfferZone3BannerComponent2;/c/men;/images/banners/womenCategoryPage/cat-img3.jpg
+;;OfferZone3BannerComponent3;Offer Zone3 Banner1;OfferZone3BannerComponent3;/c/men;/images/banners/womenCategoryPage/cat-img4.jpg
+
+INSERT_UPDATE V2OfferZoneComponents;$contentCV[unique=true];uid[unique=true];name;offerZoneComponents(uid,$contentCV);&componentRef
+;;OfferZoneComponents;Offer Zone Banners;OfferZone1BannerComponent1,OfferZone1BannerComponent2,OfferZone1BannerComponent3,OfferZone2BannerComponent1,OfferZone2BannerComponent2,OfferZone2BannerComponent3,OfferZone3BannerComponent1,OfferZone3BannerComponent2,OfferZone3BannerComponent3;OfferZoneComponents
+
+######################################## Native Home Page Offer Components Starts ##############################################################
+

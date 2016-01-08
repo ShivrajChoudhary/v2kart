@@ -1,0 +1,21 @@
+<html>
+<body>
+<ul>
+	<p style="text-transform: capitalize;">
+		Dear $ctx.customerNotificationData.currentUserName,
+	</p>
+	<p>
+		We are glad to inform you that $ctx.customerNotificationData.name is back in stock.
+	</p>
+    <p>
+       Click here to buy now. <a href="$ctx.customerNotificationData.url">$ctx.customerNotificationData.name</a>
+    </p>
+    <p>
+        Sincerely,
+    </p>
+    <p>
+         ${ctx.customerNotificationData.site}.com
+    </p>
+</ul>
+</body>
+</html>

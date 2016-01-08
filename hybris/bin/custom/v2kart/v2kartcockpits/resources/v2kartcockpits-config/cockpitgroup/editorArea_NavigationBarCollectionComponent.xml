@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<editor xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="editor.xsd">
+<group qualifier="General" visible="true" tabbed="false" initially-opened="true" show-if-empty="true" show-in-create-mode="true" position="1" printable="true">
+<label lang="zh">基本</label>
+<label lang="ru">Базовая</label>
+<label lang="pt">Básico</label>
+<label lang="en">Basic</label>
+<label lang="de">Stammdaten</label>
+<label lang="es_CO">Básica</label>
+<label lang="ja">基本</label>
+<label lang="zh_TW">基本</label>
+<label lang="it">Base</label>
+<label lang="es">Básica</label>
+<label lang="ko">기본</label>
+<label lang="fr">Données de base</label>
+<property qualifier="CMSItem.name" visible="true"/>
+<property qualifier="CMSItem.catalogVersion" visible="true" editor="shortListEditor"/>
+<property qualifier="AbstractCMSComponent.visible" visible="true"/>
+</group>
+
+<group qualifier="editorial" visible="true" initially-opened="false">
+        <label key="config.general.editorial" />
+        <property qualifier="NavigationBarCollectionComponent.components"/>
+    </group>
+    
+<group qualifier="visibility" visible="true" tabbed="false" initially-opened="true" show-if-empty="true" show-in-create-mode="true" position="2" printable="true">
+<label lang="zh">上下文可见性</label>
+<label lang="ru">Видимость контекста</label>
+<label lang="pt">Visibilidade do contexto</label>
+<label lang="en">Context Visibility</label>
+<label lang="de">Kontextsichtbarkeit</label>
+<label lang="es_CO">Visibilidad del contexto</label>
+<label lang="ja">コンテキスト可視性</label>
+<label lang="zh_TW">上下文可见性</label>
+<label lang="it">Visibilità di contesto</label>
+<label lang="es">Visibilidad del contexto</label>
+<label lang="ko">컨텍스트 가시성</label>
+<label lang="fr">Visibilité du contexte</label>
+<property qualifier="AbstractCMSComponent.restrictions" visible="true">
+<parameter>
+<name>allowCreate</name>
+<value>true</value>
+</parameter>
+</property>
+<property qualifier="AbstractCMSComponent.onlyOneRestrictionMustApply" visible="true"/>
+</group>
+<group qualifier="admin" visible="true" tabbed="false" initially-opened="true" show-if-empty="true" show-in-create-mode="true" position="3" printable="true">
+<label lang="zh">管理</label>
+<label lang="ru">Администрирование</label>
+<label lang="pt">Administração</label>
+<label lang="en">Administration</label>
+<label lang="de">Verwaltung</label>
+<label lang="es_CO">Administración</label>
+<label lang="ja">管理</label>
+<label lang="zh_TW">管理</label>
+<label lang="it">Amministrazione</label>
+<label lang="es">Administración</label>
+<label lang="ko">관리</label>
+<label lang="fr">Administration</label>
+<property qualifier="CMSItem.uid" visible="true"/>
+<property qualifier="AbstractCMSComponent.slots" visible="true"/>
+<property qualifier="AbstractCMSComponent.actions" visible="true"/>
+<property qualifier="AbstractCMSComponent.container" visible="true"/>
+<property qualifier="Item.pk" visible="true"/>
+<property qualifier="Item.creationtime" visible="true"/>
+<property qualifier="Item.modifiedtime" visible="true"/>
+</group>
+<custom-group qualifier="unassigned" visible="false" class="de.hybris.platform.cockpit.services.config.impl.UnassignedEditorSectionConfiguration" initially-opened="false" show-if-empty="true" printable="true">
+<label lang="zh">其他</label>
+<label lang="ru">Другая</label>
+<label lang="pt">Outro</label>
+<label lang="en">Other</label>
+<label lang="de">Andere</label>
+<label lang="es_CO">Otros</label>
+<label lang="ja">その他</label>
+<label lang="zh_TW">其他</label>
+<label lang="it">Altro</label>
+<label lang="es">Otros</label>
+<label lang="ko">기타</label>
+<label lang="fr">Autre</label>
+</custom-group>
+</editor>

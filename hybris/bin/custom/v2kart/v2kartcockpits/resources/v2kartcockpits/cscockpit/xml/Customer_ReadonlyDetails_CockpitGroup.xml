@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<list-view unassigned-group-name="Other">
+	<group name="General">
+		<property qualifier="Customer.type" visible="true" />
+		<property qualifier="Principal.UID" visible="true" />
+		<property qualifier="Customer.contactEmail" visible="true" />
+		<property qualifier="Customer.customerID" visible="true" />
+		<property qualifier="Customer.creationTime" visible="true" />
+		<!-- <property qualifier="Customer.dateOfBirth" visible="true" />
+		<property qualifier="Customer.maritalStatus" visible="true"/> -->
+		<property qualifier="Customer.mobileNumber" visible="true"/>	
+		
+	</group>
+</list-view>

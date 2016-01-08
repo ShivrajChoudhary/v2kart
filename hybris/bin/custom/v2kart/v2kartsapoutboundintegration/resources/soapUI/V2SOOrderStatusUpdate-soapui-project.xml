@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project name="V2SOOrderStatusUpdate" resourceRoot="" soapui-version="4.0.1.1" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" wsaVersion="NONE" name="SOOrderStatusUpdateServiceSoapBinding" type="wsdl" bindingName="{http://v2kretail.in/ecomm/ordr}SOOrderStatusUpdateServiceSoapBinding" soapVersion="1_1" anonymous="optional" definition="file:/D:/HYBRIS_DEV/V2/hybris/bin/custom/v2kart/v2kartsapoutboundintegration/resources/ws/definitions/V2SOOrderStatusUpdate.wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="file:\D:\HYBRIS_DEV\V2\hybris\bin\custom\v2kart\v2kartsapoutboundintegration\resources\ws\definitions\V2SOOrderStatusUpdate.wsdl"><con:part><con:url>file:\D:\HYBRIS_DEV\V2\hybris\bin\custom\v2kart\v2kartsapoutboundintegration\resources\ws\definitions\V2SOOrderStatusUpdate.wsdl</con:url><con:content><![CDATA[<wsdl:definitions name="SOOrderStatusUpdateService" targetNamespace="http://v2kretail.in/ecomm/ordr" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://v2kretail.in/ecomm/ordr" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+  <wsdl:types>
+    <xs:schema attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://v2kretail.in/ecomm/ordr" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="SoOrderStatusUpdateReq">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="SONo" type="xs:string"/>
+            <xs:element minOccurs="0" name="LSPName" type="xs:string"/>
+            <xs:element minOccurs="0" name="AWBNo" type="xs:string"/>
+            <xs:element minOccurs="0" name="DeliveryNo" type="xs:string"/>
+            <xs:element minOccurs="0" name="DeliveryStatus" type="xs:string"/>
+            <xs:element minOccurs="0" name="WH" type="xs:string"/>
+            <xs:element minOccurs="0" name="InvoiceNo" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="SoOrderStatusUpdateRes">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="RespCode" type="xs:string"/>
+            <xs:element name="RespMsg" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="SO_OrderStatusUpdateResponse">
+    <wsdl:part name="OrderStatusUpdateResponse" element="tns:SoOrderStatusUpdateRes"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="SO_OrderStatusUpdate">
+    <wsdl:part name="OrderStatusUpdateRequest" element="tns:SoOrderStatusUpdateReq"></wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="SO_OrderStatusUpdatePort">
+    <wsdl:operation name="SO_OrderStatusUpdate_Operation">
+      <wsdl:input name="SO_OrderStatusUpdate" message="tns:SO_OrderStatusUpdate"></wsdl:input>
+      <wsdl:output name="SO_OrderStatusUpdateResponse" message="tns:SO_OrderStatusUpdateResponse"></wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="SOOrderStatusUpdateServiceSoapBinding" type="tns:SO_OrderStatusUpdatePort">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="SO_OrderStatusUpdate_Operation">
+      <soap:operation soapAction="http://sap.com/xi/WebService/soap1.1" style="document"/>
+      <wsdl:input name="SO_OrderStatusUpdate">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="SO_OrderStatusUpdateResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="SOOrderStatusUpdateService">
+    <wsdl:port name="SO_OrderStatusUpdatePort" binding="tns:SOOrderStatusUpdateServiceSoapBinding">
+      <soap:address location=""/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://localhost:9001/admin/ws/soap/SO_OrderStatusUpdatePort</con:endpoint></con:endpoints><con:operation isOneWay="false" action="http://sap.com/xi/WebService/soap1.1" name="SO_OrderStatusUpdate_Operation" bindingOperationName="SO_OrderStatusUpdate_Operation" type="Request-Response" outputName="SO_OrderStatusUpdateResponse" inputName="SO_OrderStatusUpdate" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:9001/admin/ws/soap/SO_OrderStatusUpdatePort</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ordr="http://v2kretail.in/ecomm/ordr">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ordr:SoOrderStatusUpdateReq>
+         <SONo>00000001</SONo>
+         <!--Optional:-->
+         <LSPName>BLUEDART</LSPName>
+         <!--Optional:-->
+         <AWBNo>1jggh23</AWBNo>
+         <!--Optional:-->
+         <DeliveryNo>Cons-1</DeliveryNo>
+         <!--Optional:-->
+         <DeliveryStatus>DISPATCHED</DeliveryStatus>
+         <!--Optional:-->
+         <WH>DH25</WH>
+         <!--Optional:-->
+         <InvoiceNo>nsdf655</InvoiceNo>
+      </ordr:SoOrderStatusUpdateReq>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:username>hybris</con:username><con:password>nagv2kart$123</con:password></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://sap.com/xi/WebService/soap1.1"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:properties/><con:wssContainer/></con:soapui-project>

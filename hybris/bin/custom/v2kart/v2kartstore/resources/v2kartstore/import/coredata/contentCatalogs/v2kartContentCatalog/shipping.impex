@@ -1,0 +1,41 @@
+$contentCatalog=v2kartContentCatalog
+$contentCatalogName=v2kart Content Catalog
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+$productCatalog=v2kartProductCatalog
+$productCatalogName=v2kart Product Catalog
+$productCV=catalogVersion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+$picture=media(code, $contentCV)                   ;
+$image=image(code, $contentCV)                     ;
+$media=media(code, $contentCV)                     ;
+$page=page(uid, $contentCV)                        ;
+$contentPage=contentPage(uid, $contentCV)          ;
+$product=product(code, $productCV)
+$category=category(code, $productCV)
+$siteResource=jar:in.com.v2kart.constants.V2kartstoreConstants&/v2kartstore/import/sampledata/contentCatalogs/$contentCatalog
+$productResource=jar:in.com.v2kart.constants.V2kartstoreConstants&/v2kartstore/import/sampledata/productCatalogs/$productCatalog
+$jarResourceCms=jar:in.com.v2kart.constants.V2kartstoreConstants&/v2kartstore/import/sampledata/cockpits/cmscockpit
+$lang=en
+
+
+# CONTENT PAGE
+INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;label;title[lang=$lang];masterTemplate(uid,$contentCV);defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
+#uidname   labeltitlemasterTemplate
+;;shippingPage;    Shipping Page;/shipping;"Shipping";ContentPage1Template;
+
+# CMSParagraphComponent 
+INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;;;;
+;;shippingParagraph;Shipping Paragraph;shippingParagraph;;;;
+   
+INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];content[lang=$lang]
+;;shippingParagraph;"<div class='col-xs-12 col-sm-12 col-md-12'> <div class='heading'>Shipping </div><div class='description cms-content staticpagedescription'> <p class='bold'>Q. What is V2Kart.com&#39;s Shipping Policy?</p><p>We strive to deliver products purchased from V2Kart in excellent condition and in the fastest time possible. If this is your first order with V2Kart, shipping will be completely FREE. Also, for all the subsequent purchases of Rs. 1000* or more, we will deliver the order to your doorstep free of cost. Shipping charge as follows:   </p><ul><li style='margin-left:20px;list-style-type:disc;'>Upto Rs. 999 purchase -Actual delivery cost will be applicable.</li><li style='margin-left:20px;list-style-type:disc;'>Above Rs. 1000 purchase - Free Shipping</li><li style='margin-left:20px;list-style-type:disc;font-weight:bold;'>Shipping Days: 4-5 Business Days except few pincodes</li></ul></br><p>If the order is cancelled, lost or un-delivered to your preferred location, we will refund the complete order amount including any shipping charges.</p><p>If you cancel part of the order, shipping charges will not be refunded.</p><p>If you return an order delivered to you, original shipping charges will not be refunded. However if you self-ship your returns, you will be reimbursed based on V2Kart.com's Returns Policy.</p><p><small>*Order value is calculated after applying discounts.</small></p><p class='bold'>Q. What are the additional COD charges on V2Kart products?</p><p>COD charges will be applicable upto Rs. 999 order value and beyond this it is Free.</p><p>Minimum threshold to avail COD as payment mode is Rs.200</p><p>Maximum threshold to avail COD as payment mode is Rs.5000</p><p><small>*Order value is calculated after applying discounts.</small></p></div></div>"
+
+#  CONTENT SLOT NAME
+INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='LandingPage2Template'];validComponentTypes(code)
+;CenterContentSlot-shipping;;CMSParagraphComponent
+   
+     
+INSERT_UPDATE ContentSlot                          ; $contentCV[unique=true]    ; uid[unique=true]                                     ; name                                                   ; active      ; cmsComponents(&componentRef)
+                                                   ;                            ; CenterContentSlot-shipping                              ; CenterContentSlot for Shipping                          ; true        ; shippingParagraph
+  
+INSERT_UPDATE ContentSlotForPage                   ; $contentCV[unique=true]    ; uid[unique=true]                                     ; position[unique=true]                ; page(uid,$contentCV)[unique=true][default='homepage']                             ; contentSlot(uid,$contentCV)[unique=true]
+                                                   ;                            ; CenterContentSlot-shipping                                  ; CenterContent                           ;    shippingPage                                                                  ; CenterContentSlot-shipping

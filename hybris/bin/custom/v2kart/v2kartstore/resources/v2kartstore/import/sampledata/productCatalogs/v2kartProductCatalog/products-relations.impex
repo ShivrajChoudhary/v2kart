@@ -1,0 +1,25 @@
+# ImpEx for Related Products into Merchandise Store
+  
+# Macros / Replacement Parameter definitions
+$productCatalog=v2kartProductCatalog
+  
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+  
+# Insert Product References
+INSERT_UPDATE ProductReference;source(code,$catalogVersion)[unique=true];target(code,$catalogVersion)[unique=true];referenceType(code);active[default=true];preselected[default=false]
+ ;1114008707036;1111002374;ACCESSORIES;true;false
+ ;1114008707036;1111003096;ACCESSORIES;true;false
+ ;1114008707036;1111003580;ACCESSORIES;true;false
+ ;1114008707036;1111003581;ACCESSORIES;true;false
+ ;1114008707036;1111003901;ACCESSORIES;true;false
+ ;1114008707036;1114008707;ACCESSORIES;true;false
+ ;1114008707036;1114008778;ACCESSORIES;true;false
+ 
+ ;1114008707036;1114010116;SIMILAR;true;false
+ ;1114008707036;1114010560;SIMILAR;true;false
+ ;1114008707036;1114010561;SIMILAR;true;false
+ ;1114008707036;1114010562;SIMILAR;true;false
+ ;1114008707036;1114010565;SIMILAR;true;false
+ ;1114008707036;1114010567;SIMILAR;true;false
+ ;1114008707036;1114010632;SIMILAR;true;false
+ 

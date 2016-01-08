@@ -1,0 +1,242 @@
+# ImpEx for Importing Category Classifications
+
+# Macros / Replacement Parameter definitions
+$productCatalog=v2kartProductCatalog
+$productCatalogName=v2kart Product Catalog
+$classificationCatalog=v2KartClassification
+
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+$classCatalogVersion=catalogversion(catalog(id[default='$classificationCatalog']),version[default='1.0'])[unique=true,default='$classificationCatalog:1.0']
+$classSystemVersion=systemVersion(catalog(id[default='$classificationCatalog']),version[default='1.0'])[unique=true]
+$class=classificationClass(ClassificationClass.code,$classCatalogVersion)[unique=true]
+$supercategories=source(code, $classCatalogVersion)[unique=true]
+$categories=target(code, $catalogVersion)[unique=true]
+$attribute=classificationAttribute(code,$classSystemVersion)[unique=true]
+$unit=unit(code,$classSystemVersion)
+
+# Insert Classifications
+INSERT_UPDATE ClassificationClass;$classCatalogVersion;code[unique=true];allowedPrincipals(uid)[default='customergroup']
+;;apps_classification_class;
+;;gm_classification_class;
+;;mens_classification_class;
+;;womens_classification_class;
+;;footwear_classification_class;
+;;watches_classification_class;
+;;sunglasses_classification_class;
+;;wallets_classification_class;
+;;umbrella_classification_class;
+;;belts_classification_class;
+;;socks_classification_class;
+;;homefurnishing_classification_class;
+;;fragrance_classification_class;
+;;backpacks_classification_class;
+;;size_dimensions_classification_class;
+
+
+# Insert Classification Attributes
+INSERT_UPDATE ClassificationAttribute;$classSystemVersion;code[unique=true]
+###### apps_classification_class ########
+;;fabric
+;;fitting
+;;sleeves
+;;neck
+;;subfabric
+
+###### gm_classification_class ########
+;;basematerial
+
+###### mens_classification_class ########
+;;pockets
+
+###### footwear_classification_class ########
+;;ankle
+;;heal
+;;closure
+;;shape
+;;uppermaterial
+
+###### watches_classification_class ########
+;;dialmaterial
+;;dialshape
+
+###### sunglasses_classification_class ########
+;;framematerial
+;;lenstechnology
+
+###### wallets_classification_class  umbrella_classification_class ########
+;;fold
+
+###### belts_classification_class ########
+;;buckleshape
+
+###### socks_classification_class  homefurnishing_classification_class ########
+;;packsize
+
+###### fragrance_classification_class ########
+;;idealfor
+;;fragrance
+
+###### backpacks_classification_class ########
+;;compatiblelaptopsize
+
+###### size_dimensions_classification_class ########
+;;length
+;;lengthType
+;;chest
+;;bust
+;;waist
+
+# Links ClassificationClasses to Categories
+INSERT_UPDATE CategoryCategoryRelation;$supercategories;$categories;
+;mens_classification_class;men
+
+;womens_classification_class;women
+
+;apps_classification_class;formal_wear
+
+;apps_classification_class;men_casual_lowers
+;apps_classification_class;women_casual_lowers
+
+;apps_classification_class;men_casual_uppers
+;apps_classification_class;women_casual_uppers
+
+;apps_classification_class;men_ethnic_wear
+;apps_classification_class;women_ethnic_wear
+
+;apps_classification_class;suits
+
+;apps_classification_class;party_wear
+;apps_classification_class;innerwear
+
+;apps_classification_class;boys_winter_wear
+;apps_classification_class;infant_winter_wear
+;apps_classification_class;girls_winter_wear
+;apps_classification_class;women_winter_wear;
+
+;apps_classification_class;nightwear_and_lingeries
+
+;apps_classification_class;boys_clothing
+;apps_classification_class;girls_clothing
+;apps_classification_class;infant_clothing
+
+;gm_classification_class;women_footwear
+;gm_classification_class;men_footwear
+;gm_classification_class;kids_footwear
+
+;gm_classification_class;men_accessories
+;gm_classification_class;women_accessories
+
+;gm_classification_class;fragrances
+
+;gm_classification_class;backpacks_and_bags
+;gm_classification_class;pouch_and_cases
+;gm_classification_class;table_and_living_linen
+;gm_classification_class;suitcase_and_trolleys
+;gm_classification_class;bed_linen
+;gm_classification_class;bath_linen
+;gm_classification_class;covers_linen
+;gm_classification_class;kitchen_linen
+;gm_classification_class;toys
+;gm_classification_class;home_decor
+;gm_classification_class;sports
+;gm_classification_class;fitness
+;gm_classification_class;games
+
+;footwear_classification_class;kids_footwear
+;footwear_classification_class;men_footwear
+;footwear_classification_class;women_footwear
+
+;watches_classification_class;men_watches
+;watches_classification_class;women_watches
+
+;sunglasses_classification_class;men_sunglasses
+;sunglasses_classification_class;women_sunglasses
+
+;wallets_classification_class;wallets
+;wallets_classification_class;wallets_and_clutches
+
+;umbrella_classification_class;men_umbrellas
+;umbrella_classification_class;women_umbrellas
+
+;belts_classification_class;men_belts
+;belts_classification_class;women_belts
+
+;socks_classification_class;men_socks
+;socks_classification_class;women_socks
+
+;homefurnishing_classification_class;home_furnishing
+
+;fragrance_classification_class;fragrances
+
+;backpacks_classification_class;backpacks_and_bags
+;backpacks_classification_class;pouch_and_cases
+;backpacks_classification_class;suitcase_and_trolleys
+
+;size_dimensions_classification_class;men_casual_lowers
+;size_dimensions_classification_class;men_casual_uppers
+;size_dimensions_classification_class;men_ethnic_wear
+;size_dimensions_classification_class;men_footwear
+;size_dimensions_classification_class;formal_wear
+;size_dimensions_classification_class;party_wear
+;size_dimensions_classification_class;men_winter_wear
+;size_dimensions_classification_class;innerwear
+
+;size_dimensions_classification_class;women_footwear
+;size_dimensions_classification_class;women_casual_lowers
+;size_dimensions_classification_class;women_casual_uppers
+;size_dimensions_classification_class;women_winter_wear
+;size_dimensions_classification_class;nightwear_and_lingeries
+
+;size_dimensions_classification_class;boys_clothing
+;size_dimensions_classification_class;boys_winter_wear
+;size_dimensions_classification_class;kids_footwear
+;size_dimensions_classification_class;girls_clothing
+;size_dimensions_classification_class;girls_winter_wear
+;size_dimensions_classification_class;infant_clothing
+;size_dimensions_classification_class;infant_winter_wear
+
+INSERT_UPDATE ClassAttributeAssignment;$class;$attribute;position;$unit;attributeType(code[default=string]);multiValued[default=false];range[default=false];localized[default=true]
+;apps_classification_class;fabric;1;;;
+;apps_classification_class;fitting;3;;;
+;apps_classification_class;sleeves;4;;;
+;apps_classification_class;neck;5;;;
+;apps_classification_class;subfabric;2;;;
+
+;mens_classification_class;pockets;1;;;
+
+#;womens_classification_class;length;1;;;
+
+;gm_classification_class;basematerial;1;;;
+
+;footwear_classification_class;ankle;3;;;
+;footwear_classification_class;heal;2;;;
+;footwear_classification_class;shape;5;;;
+;footwear_classification_class;closure;4;;;
+;footwear_classification_class;uppermaterial;1;;;
+
+;watches_classification_class;dialmaterial;1;;;
+;watches_classification_class;dialshape;2;;;
+
+;sunglasses_classification_class;framematerial;1;;;
+;sunglasses_classification_class;lenstechnology;2;;;
+
+;wallets_classification_class;fold;1;;;
+
+;umbrella_classification_class;fold;1;;;
+
+;belts_classification_class;buckleshape;1;;;
+
+;socks_classification_class;packsize;1;;;
+
+;homefurnishing_classification_class;packsize;1;;;
+
+;fragrance_classification_class;idealfor;1;;;
+;fragrance_classification_class;fragrance;2;;;
+
+;backpacks_classification_class;compatiblelaptopsize;1;;;
+
+;size_dimensions_classification_class;lengthType;1;;;
+;size_dimensions_classification_class;length;2;;;
+;size_dimensions_classification_class;chest;3;;;
+;size_dimensions_classification_class;bust;4;;;
+;size_dimensions_classification_class;waist;5;;;

@@ -1,0 +1,886 @@
+<wsdl:definitions xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" targetNamespace="http://tempuri.org/">
+<wsdl:types>
+<s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+<s:element name="ConsignmentTrackEvents_Details_New">
+<s:complexType>
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="userName" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" name="password" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" name="clientId" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" name="DOCNO" type="s:string"/>
+</s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="ConsignmentTrackEvents_Details_NewResponse">
+<s:complexType>
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="ConsignmentTrackEvents_Details_NewResult" type="tns:ArrayOfConsignmentTrack"/>
+</s:sequence>
+</s:complexType>
+</s:element>
+<s:complexType name="ArrayOfConsignmentTrack">
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="unbounded" name="ConsignmentTrack" nillable="true" type="tns:ConsignmentTrack"/>
+</s:sequence>
+</s:complexType>
+<s:complexType name="ConsignmentTrack">
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="ERROR" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" name="DOCKNO" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" name="TRANSIT_LOCATION" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" name="ACTIVITY" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" name="EVENTDATE" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" name="EVENTTIME" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" name="NEXT_LOCATION" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" name="TRACKING_CODE" type="s:string"/>
+</s:sequence>
+</s:complexType>
+<s:element name="TrackConsignment_Header_New">
+<s:complexType>
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="userName" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" name="password" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" name="clientId" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" name="DOCNO" type="s:string"/>
+</s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="TrackConsignment_Header_NewResponse">
+<s:complexType>
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="TrackConsignment_Header_NewResult" type="tns:ArrayOfConsignment"/>
+</s:sequence>
+</s:complexType>
+</s:element>
+<s:complexType name="ArrayOfConsignment">
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="unbounded" name="Consignment" nillable="true" type="tns:Consignment"/>
+</s:sequence>
+</s:complexType>
+<s:complexType name="Consignment">
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="ERROR" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" name="DOCKNO" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" name="PICKUP_DATE" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" name="ORDER_NO" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" name="CURRENT_STATUS" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" name="DELIVERED_ON" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" name="DELIVERED_TIME" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" name="DELIVERED_TO" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" name="REMARKS" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" name="CSGE_NAME" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" name="CONTACT_NO" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" name="CSGE_ADDR" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" name="CITY" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" name="PINCODE" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" name="PAYMENT" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" name="VALUE_OF_SHIPMENT" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" name="SAID_TO_CONTAIN" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" name="ORIGIN" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" name="DESTINATION" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" name="NO_OF_PIECES" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" name="WEIGHT" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" name="RTO_ON" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" name="RTO_REASON" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" name="NDR_REASON" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" name="NDR_DATE" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" name="RELATION" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" name="COD_AMOUNT" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" name="DOCU_TYPE" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" name="SERVICE_TYPE" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" name="CURRLOC" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" name="CURRDT" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" name="CURRDT_TM" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" name="TRACKING_CODE" type="s:string"/>
+</s:sequence>
+</s:complexType>
+<s:element name="ConsignmentTrackEvents_Details">
+<s:complexType>
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="DOCNO" type="s:string"/>
+</s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="ConsignmentTrackEvents_DetailsResponse">
+<s:complexType>
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="ConsignmentTrackEvents_DetailsResult" type="tns:ArrayOfConsignmentTrack"/>
+</s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="UserCredentials" type="tns:UserCredentials"/>
+<s:complexType name="UserCredentials">
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="clientId" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" name="userName" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" name="password" type="s:string"/>
+</s:sequence>
+<s:anyAttribute/>
+</s:complexType>
+<s:element name="ConsignmentTrackEvents_DetailsEbay">
+<s:complexType>
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="DOCNO" type="s:string"/>
+</s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="ConsignmentTrackEvents_DetailsEbayResponse">
+<s:complexType>
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="ConsignmentTrackEvents_DetailsEbayResult" type="tns:ArrayOfConsignmentTrack"/>
+</s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="PushOrderData_New">
+<s:complexType>
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="userName" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" name="password" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" name="clientId" type="s:string"/>
+<s:element minOccurs="0" maxOccurs="1" name="xmlBatch" type="s:string"/>
+</s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="PushOrderData_NewResponse">
+<s:complexType>
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="PushOrderData_NewResult" type="s:string"/>
+</s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="PushOrderData">
+<s:complexType>
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="xmlBatch" type="s:string"/>
+</s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="PushOrderDataResponse">
+<s:complexType>
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="PushOrderDataResult" type="s:string"/>
+</s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="PushOrderDataEbay">
+<s:complexType>
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="xmlBatch" type="s:string"/>
+</s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="PushOrderDataEbayResponse">
+<s:complexType>
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="PushOrderDataEbayResult" type="s:string"/>
+</s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="TrackConsignment_Header">
+<s:complexType>
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="DOCNO" type="s:string"/>
+</s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="TrackConsignment_HeaderResponse">
+<s:complexType>
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="TrackConsignment_HeaderResult" type="tns:ArrayOfConsignment"/>
+</s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="TrackConsignment_HeaderEbay">
+<s:complexType>
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="DOCNO" type="s:string"/>
+</s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="TrackConsignment_HeaderEbayResponse">
+<s:complexType>
+<s:sequence>
+<s:element minOccurs="0" maxOccurs="1" name="TrackConsignment_HeaderEbayResult" type="tns:ArrayOfConsignment"/>
+</s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="ArrayOfConsignmentTrack" nillable="true" type="tns:ArrayOfConsignmentTrack"/>
+<s:element name="ArrayOfConsignment" nillable="true" type="tns:ArrayOfConsignment"/>
+<s:element name="string" nillable="true" type="s:string"/>
+</s:schema>
+</wsdl:types>
+<wsdl:message name="ConsignmentTrackEvents_Details_NewSoapIn">
+<wsdl:part name="parameters" element="tns:ConsignmentTrackEvents_Details_New"/>
+</wsdl:message>
+<wsdl:message name="ConsignmentTrackEvents_Details_NewSoapOut">
+<wsdl:part name="parameters" element="tns:ConsignmentTrackEvents_Details_NewResponse"/>
+</wsdl:message>
+<wsdl:message name="TrackConsignment_Header_NewSoapIn">
+<wsdl:part name="parameters" element="tns:TrackConsignment_Header_New"/>
+</wsdl:message>
+<wsdl:message name="TrackConsignment_Header_NewSoapOut">
+<wsdl:part name="parameters" element="tns:TrackConsignment_Header_NewResponse"/>
+</wsdl:message>
+<wsdl:message name="ConsignmentTrackEvents_DetailsSoapIn">
+<wsdl:part name="parameters" element="tns:ConsignmentTrackEvents_Details"/>
+</wsdl:message>
+<wsdl:message name="ConsignmentTrackEvents_DetailsSoapOut">
+<wsdl:part name="parameters" element="tns:ConsignmentTrackEvents_DetailsResponse"/>
+</wsdl:message>
+<wsdl:message name="ConsignmentTrackEvents_DetailsUserCredentials">
+<wsdl:part name="UserCredentials" element="tns:UserCredentials"/>
+</wsdl:message>
+<wsdl:message name="ConsignmentTrackEvents_DetailsEbaySoapIn">
+<wsdl:part name="parameters" element="tns:ConsignmentTrackEvents_DetailsEbay"/>
+</wsdl:message>
+<wsdl:message name="ConsignmentTrackEvents_DetailsEbaySoapOut">
+<wsdl:part name="parameters" element="tns:ConsignmentTrackEvents_DetailsEbayResponse"/>
+</wsdl:message>
+<wsdl:message name="ConsignmentTrackEvents_DetailsEbayUserCredentials">
+<wsdl:part name="UserCredentials" element="tns:UserCredentials"/>
+</wsdl:message>
+<wsdl:message name="PushOrderData_NewSoapIn">
+<wsdl:part name="parameters" element="tns:PushOrderData_New"/>
+</wsdl:message>
+<wsdl:message name="PushOrderData_NewSoapOut">
+<wsdl:part name="parameters" element="tns:PushOrderData_NewResponse"/>
+</wsdl:message>
+<wsdl:message name="PushOrderDataSoapIn">
+<wsdl:part name="parameters" element="tns:PushOrderData"/>
+</wsdl:message>
+<wsdl:message name="PushOrderDataSoapOut">
+<wsdl:part name="parameters" element="tns:PushOrderDataResponse"/>
+</wsdl:message>
+<wsdl:message name="PushOrderDataUserCredentials">
+<wsdl:part name="UserCredentials" element="tns:UserCredentials"/>
+</wsdl:message>
+<wsdl:message name="PushOrderDataEbaySoapIn">
+<wsdl:part name="parameters" element="tns:PushOrderDataEbay"/>
+</wsdl:message>
+<wsdl:message name="PushOrderDataEbaySoapOut">
+<wsdl:part name="parameters" element="tns:PushOrderDataEbayResponse"/>
+</wsdl:message>
+<wsdl:message name="PushOrderDataEbayUserCredentials">
+<wsdl:part name="UserCredentials" element="tns:UserCredentials"/>
+</wsdl:message>
+<wsdl:message name="TrackConsignment_HeaderSoapIn">
+<wsdl:part name="parameters" element="tns:TrackConsignment_Header"/>
+</wsdl:message>
+<wsdl:message name="TrackConsignment_HeaderSoapOut">
+<wsdl:part name="parameters" element="tns:TrackConsignment_HeaderResponse"/>
+</wsdl:message>
+<wsdl:message name="TrackConsignment_HeaderUserCredentials">
+<wsdl:part name="UserCredentials" element="tns:UserCredentials"/>
+</wsdl:message>
+<wsdl:message name="TrackConsignment_HeaderEbaySoapIn">
+<wsdl:part name="parameters" element="tns:TrackConsignment_HeaderEbay"/>
+</wsdl:message>
+<wsdl:message name="TrackConsignment_HeaderEbaySoapOut">
+<wsdl:part name="parameters" element="tns:TrackConsignment_HeaderEbayResponse"/>
+</wsdl:message>
+<wsdl:message name="TrackConsignment_HeaderEbayUserCredentials">
+<wsdl:part name="UserCredentials" element="tns:UserCredentials"/>
+</wsdl:message>
+<wsdl:message name="ConsignmentTrackEvents_Details_NewHttpGetIn">
+<wsdl:part name="userName" type="s:string"/>
+<wsdl:part name="password" type="s:string"/>
+<wsdl:part name="clientId" type="s:string"/>
+<wsdl:part name="DOCNO" type="s:string"/>
+</wsdl:message>
+<wsdl:message name="ConsignmentTrackEvents_Details_NewHttpGetOut">
+<wsdl:part name="Body" element="tns:ArrayOfConsignmentTrack"/>
+</wsdl:message>
+<wsdl:message name="TrackConsignment_Header_NewHttpGetIn">
+<wsdl:part name="userName" type="s:string"/>
+<wsdl:part name="password" type="s:string"/>
+<wsdl:part name="clientId" type="s:string"/>
+<wsdl:part name="DOCNO" type="s:string"/>
+</wsdl:message>
+<wsdl:message name="TrackConsignment_Header_NewHttpGetOut">
+<wsdl:part name="Body" element="tns:ArrayOfConsignment"/>
+</wsdl:message>
+<wsdl:message name="ConsignmentTrackEvents_DetailsHttpGetIn">
+<wsdl:part name="DOCNO" type="s:string"/>
+</wsdl:message>
+<wsdl:message name="ConsignmentTrackEvents_DetailsHttpGetOut">
+<wsdl:part name="Body" element="tns:ArrayOfConsignmentTrack"/>
+</wsdl:message>
+<wsdl:message name="ConsignmentTrackEvents_DetailsEbayHttpGetIn">
+<wsdl:part name="DOCNO" type="s:string"/>
+</wsdl:message>
+<wsdl:message name="ConsignmentTrackEvents_DetailsEbayHttpGetOut">
+<wsdl:part name="Body" element="tns:ArrayOfConsignmentTrack"/>
+</wsdl:message>
+<wsdl:message name="PushOrderData_NewHttpGetIn">
+<wsdl:part name="userName" type="s:string"/>
+<wsdl:part name="password" type="s:string"/>
+<wsdl:part name="clientId" type="s:string"/>
+<wsdl:part name="xmlBatch" type="s:string"/>
+</wsdl:message>
+<wsdl:message name="PushOrderData_NewHttpGetOut">
+<wsdl:part name="Body" element="tns:string"/>
+</wsdl:message>
+<wsdl:message name="PushOrderDataHttpGetIn">
+<wsdl:part name="xmlBatch" type="s:string"/>
+</wsdl:message>
+<wsdl:message name="PushOrderDataHttpGetOut">
+<wsdl:part name="Body" element="tns:string"/>
+</wsdl:message>
+<wsdl:message name="PushOrderDataEbayHttpGetIn">
+<wsdl:part name="xmlBatch" type="s:string"/>
+</wsdl:message>
+<wsdl:message name="PushOrderDataEbayHttpGetOut">
+<wsdl:part name="Body" element="tns:string"/>
+</wsdl:message>
+<wsdl:message name="TrackConsignment_HeaderHttpGetIn">
+<wsdl:part name="DOCNO" type="s:string"/>
+</wsdl:message>
+<wsdl:message name="TrackConsignment_HeaderHttpGetOut">
+<wsdl:part name="Body" element="tns:ArrayOfConsignment"/>
+</wsdl:message>
+<wsdl:message name="TrackConsignment_HeaderEbayHttpGetIn">
+<wsdl:part name="DOCNO" type="s:string"/>
+</wsdl:message>
+<wsdl:message name="TrackConsignment_HeaderEbayHttpGetOut">
+<wsdl:part name="Body" element="tns:ArrayOfConsignment"/>
+</wsdl:message>
+<wsdl:message name="ConsignmentTrackEvents_Details_NewHttpPostIn">
+<wsdl:part name="userName" type="s:string"/>
+<wsdl:part name="password" type="s:string"/>
+<wsdl:part name="clientId" type="s:string"/>
+<wsdl:part name="DOCNO" type="s:string"/>
+</wsdl:message>
+<wsdl:message name="ConsignmentTrackEvents_Details_NewHttpPostOut">
+<wsdl:part name="Body" element="tns:ArrayOfConsignmentTrack"/>
+</wsdl:message>
+<wsdl:message name="TrackConsignment_Header_NewHttpPostIn">
+<wsdl:part name="userName" type="s:string"/>
+<wsdl:part name="password" type="s:string"/>
+<wsdl:part name="clientId" type="s:string"/>
+<wsdl:part name="DOCNO" type="s:string"/>
+</wsdl:message>
+<wsdl:message name="TrackConsignment_Header_NewHttpPostOut">
+<wsdl:part name="Body" element="tns:ArrayOfConsignment"/>
+</wsdl:message>
+<wsdl:message name="ConsignmentTrackEvents_DetailsHttpPostIn">
+<wsdl:part name="DOCNO" type="s:string"/>
+</wsdl:message>
+<wsdl:message name="ConsignmentTrackEvents_DetailsHttpPostOut">
+<wsdl:part name="Body" element="tns:ArrayOfConsignmentTrack"/>
+</wsdl:message>
+<wsdl:message name="ConsignmentTrackEvents_DetailsEbayHttpPostIn">
+<wsdl:part name="DOCNO" type="s:string"/>
+</wsdl:message>
+<wsdl:message name="ConsignmentTrackEvents_DetailsEbayHttpPostOut">
+<wsdl:part name="Body" element="tns:ArrayOfConsignmentTrack"/>
+</wsdl:message>
+<wsdl:message name="PushOrderData_NewHttpPostIn">
+<wsdl:part name="userName" type="s:string"/>
+<wsdl:part name="password" type="s:string"/>
+<wsdl:part name="clientId" type="s:string"/>
+<wsdl:part name="xmlBatch" type="s:string"/>
+</wsdl:message>
+<wsdl:message name="PushOrderData_NewHttpPostOut">
+<wsdl:part name="Body" element="tns:string"/>
+</wsdl:message>
+<wsdl:message name="PushOrderDataHttpPostIn">
+<wsdl:part name="xmlBatch" type="s:string"/>
+</wsdl:message>
+<wsdl:message name="PushOrderDataHttpPostOut">
+<wsdl:part name="Body" element="tns:string"/>
+</wsdl:message>
+<wsdl:message name="PushOrderDataEbayHttpPostIn">
+<wsdl:part name="xmlBatch" type="s:string"/>
+</wsdl:message>
+<wsdl:message name="PushOrderDataEbayHttpPostOut">
+<wsdl:part name="Body" element="tns:string"/>
+</wsdl:message>
+<wsdl:message name="TrackConsignment_HeaderHttpPostIn">
+<wsdl:part name="DOCNO" type="s:string"/>
+</wsdl:message>
+<wsdl:message name="TrackConsignment_HeaderHttpPostOut">
+<wsdl:part name="Body" element="tns:ArrayOfConsignment"/>
+</wsdl:message>
+<wsdl:message name="TrackConsignment_HeaderEbayHttpPostIn">
+<wsdl:part name="DOCNO" type="s:string"/>
+</wsdl:message>
+<wsdl:message name="TrackConsignment_HeaderEbayHttpPostOut">
+<wsdl:part name="Body" element="tns:ArrayOfConsignment"/>
+</wsdl:message>
+<wsdl:portType name="Cust_WS_Ver2Soap">
+<wsdl:operation name="ConsignmentTrackEvents_Details_New">
+<wsdl:input message="tns:ConsignmentTrackEvents_Details_NewSoapIn"/>
+<wsdl:output message="tns:ConsignmentTrackEvents_Details_NewSoapOut"/>
+</wsdl:operation>
+<wsdl:operation name="TrackConsignment_Header_New">
+<wsdl:input message="tns:TrackConsignment_Header_NewSoapIn"/>
+<wsdl:output message="tns:TrackConsignment_Header_NewSoapOut"/>
+</wsdl:operation>
+<wsdl:operation name="ConsignmentTrackEvents_Details">
+<wsdl:input message="tns:ConsignmentTrackEvents_DetailsSoapIn"/>
+<wsdl:output message="tns:ConsignmentTrackEvents_DetailsSoapOut"/>
+</wsdl:operation>
+<wsdl:operation name="ConsignmentTrackEvents_DetailsEbay">
+<wsdl:input message="tns:ConsignmentTrackEvents_DetailsEbaySoapIn"/>
+<wsdl:output message="tns:ConsignmentTrackEvents_DetailsEbaySoapOut"/>
+</wsdl:operation>
+<wsdl:operation name="PushOrderData_New">
+<wsdl:input message="tns:PushOrderData_NewSoapIn"/>
+<wsdl:output message="tns:PushOrderData_NewSoapOut"/>
+</wsdl:operation>
+<wsdl:operation name="PushOrderData">
+<wsdl:input message="tns:PushOrderDataSoapIn"/>
+<wsdl:output message="tns:PushOrderDataSoapOut"/>
+</wsdl:operation>
+<wsdl:operation name="PushOrderDataEbay">
+<wsdl:input message="tns:PushOrderDataEbaySoapIn"/>
+<wsdl:output message="tns:PushOrderDataEbaySoapOut"/>
+</wsdl:operation>
+<wsdl:operation name="TrackConsignment_Header">
+<wsdl:input message="tns:TrackConsignment_HeaderSoapIn"/>
+<wsdl:output message="tns:TrackConsignment_HeaderSoapOut"/>
+</wsdl:operation>
+<wsdl:operation name="TrackConsignment_HeaderEbay">
+<wsdl:input message="tns:TrackConsignment_HeaderEbaySoapIn"/>
+<wsdl:output message="tns:TrackConsignment_HeaderEbaySoapOut"/>
+</wsdl:operation>
+</wsdl:portType>
+<wsdl:portType name="Cust_WS_Ver2HttpGet">
+<wsdl:operation name="ConsignmentTrackEvents_Details_New">
+<wsdl:input message="tns:ConsignmentTrackEvents_Details_NewHttpGetIn"/>
+<wsdl:output message="tns:ConsignmentTrackEvents_Details_NewHttpGetOut"/>
+</wsdl:operation>
+<wsdl:operation name="TrackConsignment_Header_New">
+<wsdl:input message="tns:TrackConsignment_Header_NewHttpGetIn"/>
+<wsdl:output message="tns:TrackConsignment_Header_NewHttpGetOut"/>
+</wsdl:operation>
+<wsdl:operation name="ConsignmentTrackEvents_Details">
+<wsdl:input message="tns:ConsignmentTrackEvents_DetailsHttpGetIn"/>
+<wsdl:output message="tns:ConsignmentTrackEvents_DetailsHttpGetOut"/>
+</wsdl:operation>
+<wsdl:operation name="ConsignmentTrackEvents_DetailsEbay">
+<wsdl:input message="tns:ConsignmentTrackEvents_DetailsEbayHttpGetIn"/>
+<wsdl:output message="tns:ConsignmentTrackEvents_DetailsEbayHttpGetOut"/>
+</wsdl:operation>
+<wsdl:operation name="PushOrderData_New">
+<wsdl:input message="tns:PushOrderData_NewHttpGetIn"/>
+<wsdl:output message="tns:PushOrderData_NewHttpGetOut"/>
+</wsdl:operation>
+<wsdl:operation name="PushOrderData">
+<wsdl:input message="tns:PushOrderDataHttpGetIn"/>
+<wsdl:output message="tns:PushOrderDataHttpGetOut"/>
+</wsdl:operation>
+<wsdl:operation name="PushOrderDataEbay">
+<wsdl:input message="tns:PushOrderDataEbayHttpGetIn"/>
+<wsdl:output message="tns:PushOrderDataEbayHttpGetOut"/>
+</wsdl:operation>
+<wsdl:operation name="TrackConsignment_Header">
+<wsdl:input message="tns:TrackConsignment_HeaderHttpGetIn"/>
+<wsdl:output message="tns:TrackConsignment_HeaderHttpGetOut"/>
+</wsdl:operation>
+<wsdl:operation name="TrackConsignment_HeaderEbay">
+<wsdl:input message="tns:TrackConsignment_HeaderEbayHttpGetIn"/>
+<wsdl:output message="tns:TrackConsignment_HeaderEbayHttpGetOut"/>
+</wsdl:operation>
+</wsdl:portType>
+<wsdl:portType name="Cust_WS_Ver2HttpPost">
+<wsdl:operation name="ConsignmentTrackEvents_Details_New">
+<wsdl:input message="tns:ConsignmentTrackEvents_Details_NewHttpPostIn"/>
+<wsdl:output message="tns:ConsignmentTrackEvents_Details_NewHttpPostOut"/>
+</wsdl:operation>
+<wsdl:operation name="TrackConsignment_Header_New">
+<wsdl:input message="tns:TrackConsignment_Header_NewHttpPostIn"/>
+<wsdl:output message="tns:TrackConsignment_Header_NewHttpPostOut"/>
+</wsdl:operation>
+<wsdl:operation name="ConsignmentTrackEvents_Details">
+<wsdl:input message="tns:ConsignmentTrackEvents_DetailsHttpPostIn"/>
+<wsdl:output message="tns:ConsignmentTrackEvents_DetailsHttpPostOut"/>
+</wsdl:operation>
+<wsdl:operation name="ConsignmentTrackEvents_DetailsEbay">
+<wsdl:input message="tns:ConsignmentTrackEvents_DetailsEbayHttpPostIn"/>
+<wsdl:output message="tns:ConsignmentTrackEvents_DetailsEbayHttpPostOut"/>
+</wsdl:operation>
+<wsdl:operation name="PushOrderData_New">
+<wsdl:input message="tns:PushOrderData_NewHttpPostIn"/>
+<wsdl:output message="tns:PushOrderData_NewHttpPostOut"/>
+</wsdl:operation>
+<wsdl:operation name="PushOrderData">
+<wsdl:input message="tns:PushOrderDataHttpPostIn"/>
+<wsdl:output message="tns:PushOrderDataHttpPostOut"/>
+</wsdl:operation>
+<wsdl:operation name="PushOrderDataEbay">
+<wsdl:input message="tns:PushOrderDataEbayHttpPostIn"/>
+<wsdl:output message="tns:PushOrderDataEbayHttpPostOut"/>
+</wsdl:operation>
+<wsdl:operation name="TrackConsignment_Header">
+<wsdl:input message="tns:TrackConsignment_HeaderHttpPostIn"/>
+<wsdl:output message="tns:TrackConsignment_HeaderHttpPostOut"/>
+</wsdl:operation>
+<wsdl:operation name="TrackConsignment_HeaderEbay">
+<wsdl:input message="tns:TrackConsignment_HeaderEbayHttpPostIn"/>
+<wsdl:output message="tns:TrackConsignment_HeaderEbayHttpPostOut"/>
+</wsdl:operation>
+</wsdl:portType>
+<wsdl:binding name="Cust_WS_Ver2Soap" type="tns:Cust_WS_Ver2Soap">
+<soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+<wsdl:operation name="ConsignmentTrackEvents_Details_New">
+<soap:operation soapAction="http://tempuri.org/ConsignmentTrackEvents_Details_New" style="document"/>
+<wsdl:input>
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="TrackConsignment_Header_New">
+<soap:operation soapAction="http://tempuri.org/TrackConsignment_Header_New" style="document"/>
+<wsdl:input>
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="ConsignmentTrackEvents_Details">
+<soap:operation soapAction="http://tempuri.org/ConsignmentTrackEvents_Details" style="document"/>
+<wsdl:input>
+<soap:body use="literal"/>
+<soap:header message="tns:ConsignmentTrackEvents_DetailsUserCredentials" part="UserCredentials" use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="ConsignmentTrackEvents_DetailsEbay">
+<soap:operation soapAction="http://tempuri.org/ConsignmentTrackEvents_DetailsEbay" style="document"/>
+<wsdl:input>
+<soap:body use="literal"/>
+<soap:header message="tns:ConsignmentTrackEvents_DetailsEbayUserCredentials" part="UserCredentials" use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="PushOrderData_New">
+<soap:operation soapAction="http://tempuri.org/PushOrderData_New" style="document"/>
+<wsdl:input>
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="PushOrderData">
+<soap:operation soapAction="http://tempuri.org/PushOrderData" style="document"/>
+<wsdl:input>
+<soap:body use="literal"/>
+<soap:header message="tns:PushOrderDataUserCredentials" part="UserCredentials" use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="PushOrderDataEbay">
+<soap:operation soapAction="http://tempuri.org/PushOrderDataEbay" style="document"/>
+<wsdl:input>
+<soap:body use="literal"/>
+<soap:header message="tns:PushOrderDataEbayUserCredentials" part="UserCredentials" use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="TrackConsignment_Header">
+<soap:operation soapAction="http://tempuri.org/TrackConsignment_Header" style="document"/>
+<wsdl:input>
+<soap:body use="literal"/>
+<soap:header message="tns:TrackConsignment_HeaderUserCredentials" part="UserCredentials" use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="TrackConsignment_HeaderEbay">
+<soap:operation soapAction="http://tempuri.org/TrackConsignment_HeaderEbay" style="document"/>
+<wsdl:input>
+<soap:body use="literal"/>
+<soap:header message="tns:TrackConsignment_HeaderEbayUserCredentials" part="UserCredentials" use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+</wsdl:binding>
+<wsdl:binding name="Cust_WS_Ver2Soap12" type="tns:Cust_WS_Ver2Soap">
+<soap12:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+<wsdl:operation name="ConsignmentTrackEvents_Details_New">
+<soap12:operation soapAction="http://tempuri.org/ConsignmentTrackEvents_Details_New" style="document"/>
+<wsdl:input>
+<soap12:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap12:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="TrackConsignment_Header_New">
+<soap12:operation soapAction="http://tempuri.org/TrackConsignment_Header_New" style="document"/>
+<wsdl:input>
+<soap12:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap12:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="ConsignmentTrackEvents_Details">
+<soap12:operation soapAction="http://tempuri.org/ConsignmentTrackEvents_Details" style="document"/>
+<wsdl:input>
+<soap12:body use="literal"/>
+<soap12:header message="tns:ConsignmentTrackEvents_DetailsUserCredentials" part="UserCredentials" use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap12:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="ConsignmentTrackEvents_DetailsEbay">
+<soap12:operation soapAction="http://tempuri.org/ConsignmentTrackEvents_DetailsEbay" style="document"/>
+<wsdl:input>
+<soap12:body use="literal"/>
+<soap12:header message="tns:ConsignmentTrackEvents_DetailsEbayUserCredentials" part="UserCredentials" use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap12:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="PushOrderData_New">
+<soap12:operation soapAction="http://tempuri.org/PushOrderData_New" style="document"/>
+<wsdl:input>
+<soap12:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap12:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="PushOrderData">
+<soap12:operation soapAction="http://tempuri.org/PushOrderData" style="document"/>
+<wsdl:input>
+<soap12:body use="literal"/>
+<soap12:header message="tns:PushOrderDataUserCredentials" part="UserCredentials" use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap12:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="PushOrderDataEbay">
+<soap12:operation soapAction="http://tempuri.org/PushOrderDataEbay" style="document"/>
+<wsdl:input>
+<soap12:body use="literal"/>
+<soap12:header message="tns:PushOrderDataEbayUserCredentials" part="UserCredentials" use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap12:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="TrackConsignment_Header">
+<soap12:operation soapAction="http://tempuri.org/TrackConsignment_Header" style="document"/>
+<wsdl:input>
+<soap12:body use="literal"/>
+<soap12:header message="tns:TrackConsignment_HeaderUserCredentials" part="UserCredentials" use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap12:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="TrackConsignment_HeaderEbay">
+<soap12:operation soapAction="http://tempuri.org/TrackConsignment_HeaderEbay" style="document"/>
+<wsdl:input>
+<soap12:body use="literal"/>
+<soap12:header message="tns:TrackConsignment_HeaderEbayUserCredentials" part="UserCredentials" use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap12:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+</wsdl:binding>
+<wsdl:binding name="Cust_WS_Ver2HttpGet" type="tns:Cust_WS_Ver2HttpGet">
+<http:binding verb="GET"/>
+<wsdl:operation name="ConsignmentTrackEvents_Details_New">
+<http:operation location="/ConsignmentTrackEvents_Details_New"/>
+<wsdl:input>
+<http:urlEncoded/>
+</wsdl:input>
+<wsdl:output>
+<mime:mimeXml part="Body"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="TrackConsignment_Header_New">
+<http:operation location="/TrackConsignment_Header_New"/>
+<wsdl:input>
+<http:urlEncoded/>
+</wsdl:input>
+<wsdl:output>
+<mime:mimeXml part="Body"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="ConsignmentTrackEvents_Details">
+<http:operation location="/ConsignmentTrackEvents_Details"/>
+<wsdl:input>
+<http:urlEncoded/>
+</wsdl:input>
+<wsdl:output>
+<mime:mimeXml part="Body"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="ConsignmentTrackEvents_DetailsEbay">
+<http:operation location="/ConsignmentTrackEvents_DetailsEbay"/>
+<wsdl:input>
+<http:urlEncoded/>
+</wsdl:input>
+<wsdl:output>
+<mime:mimeXml part="Body"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="PushOrderData_New">
+<http:operation location="/PushOrderData_New"/>
+<wsdl:input>
+<http:urlEncoded/>
+</wsdl:input>
+<wsdl:output>
+<mime:mimeXml part="Body"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="PushOrderData">
+<http:operation location="/PushOrderData"/>
+<wsdl:input>
+<http:urlEncoded/>
+</wsdl:input>
+<wsdl:output>
+<mime:mimeXml part="Body"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="PushOrderDataEbay">
+<http:operation location="/PushOrderDataEbay"/>
+<wsdl:input>
+<http:urlEncoded/>
+</wsdl:input>
+<wsdl:output>
+<mime:mimeXml part="Body"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="TrackConsignment_Header">
+<http:operation location="/TrackConsignment_Header"/>
+<wsdl:input>
+<http:urlEncoded/>
+</wsdl:input>
+<wsdl:output>
+<mime:mimeXml part="Body"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="TrackConsignment_HeaderEbay">
+<http:operation location="/TrackConsignment_HeaderEbay"/>
+<wsdl:input>
+<http:urlEncoded/>
+</wsdl:input>
+<wsdl:output>
+<mime:mimeXml part="Body"/>
+</wsdl:output>
+</wsdl:operation>
+</wsdl:binding>
+<wsdl:binding name="Cust_WS_Ver2HttpPost" type="tns:Cust_WS_Ver2HttpPost">
+<http:binding verb="POST"/>
+<wsdl:operation name="ConsignmentTrackEvents_Details_New">
+<http:operation location="/ConsignmentTrackEvents_Details_New"/>
+<wsdl:input>
+<mime:content type="application/x-www-form-urlencoded"/>
+</wsdl:input>
+<wsdl:output>
+<mime:mimeXml part="Body"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="TrackConsignment_Header_New">
+<http:operation location="/TrackConsignment_Header_New"/>
+<wsdl:input>
+<mime:content type="application/x-www-form-urlencoded"/>
+</wsdl:input>
+<wsdl:output>
+<mime:mimeXml part="Body"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="ConsignmentTrackEvents_Details">
+<http:operation location="/ConsignmentTrackEvents_Details"/>
+<wsdl:input>
+<mime:content type="application/x-www-form-urlencoded"/>
+</wsdl:input>
+<wsdl:output>
+<mime:mimeXml part="Body"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="ConsignmentTrackEvents_DetailsEbay">
+<http:operation location="/ConsignmentTrackEvents_DetailsEbay"/>
+<wsdl:input>
+<mime:content type="application/x-www-form-urlencoded"/>
+</wsdl:input>
+<wsdl:output>
+<mime:mimeXml part="Body"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="PushOrderData_New">
+<http:operation location="/PushOrderData_New"/>
+<wsdl:input>
+<mime:content type="application/x-www-form-urlencoded"/>
+</wsdl:input>
+<wsdl:output>
+<mime:mimeXml part="Body"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="PushOrderData">
+<http:operation location="/PushOrderData"/>
+<wsdl:input>
+<mime:content type="application/x-www-form-urlencoded"/>
+</wsdl:input>
+<wsdl:output>
+<mime:mimeXml part="Body"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="PushOrderDataEbay">
+<http:operation location="/PushOrderDataEbay"/>
+<wsdl:input>
+<mime:content type="application/x-www-form-urlencoded"/>
+</wsdl:input>
+<wsdl:output>
+<mime:mimeXml part="Body"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="TrackConsignment_Header">
+<http:operation location="/TrackConsignment_Header"/>
+<wsdl:input>
+<mime:content type="application/x-www-form-urlencoded"/>
+</wsdl:input>
+<wsdl:output>
+<mime:mimeXml part="Body"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="TrackConsignment_HeaderEbay">
+<http:operation location="/TrackConsignment_HeaderEbay"/>
+<wsdl:input>
+<mime:content type="application/x-www-form-urlencoded"/>
+</wsdl:input>
+<wsdl:output>
+<mime:mimeXml part="Body"/>
+</wsdl:output>
+</wsdl:operation>
+</wsdl:binding>
+<wsdl:service name="Cust_WS_Ver2">
+<wsdl:port name="Cust_WS_Ver2Soap" binding="tns:Cust_WS_Ver2Soap">
+<soap:address location="http://webxpress.cloudapp.net/DMS_DOTZOT/services/cust_ws_ver2.asmx"/>
+</wsdl:port>
+<wsdl:port name="Cust_WS_Ver2Soap12" binding="tns:Cust_WS_Ver2Soap12">
+<soap12:address location="http://webxpress.cloudapp.net/DMS_DOTZOT/services/cust_ws_ver2.asmx"/>
+</wsdl:port>
+<wsdl:port name="Cust_WS_Ver2HttpGet" binding="tns:Cust_WS_Ver2HttpGet">
+<http:address location="http://webxpress.cloudapp.net/DMS_DOTZOT/services/cust_ws_ver2.asmx"/>
+</wsdl:port>
+<wsdl:port name="Cust_WS_Ver2HttpPost" binding="tns:Cust_WS_Ver2HttpPost">
+<http:address location="http://webxpress.cloudapp.net/DMS_DOTZOT/services/cust_ws_ver2.asmx"/>
+</wsdl:port>
+</wsdl:service>
+</wsdl:definitions>

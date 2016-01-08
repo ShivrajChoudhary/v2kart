@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<base>
+	<search>
+		<search-properties>
+			<property qualifier="Region.name"/>
+			<property qualifier="Region.isocode"/>
+			<property qualifier="Region.active"/>
+		</search-properties>
+		<sort-properties>
+		<property qualifier="Item.modifiedtime"/>
+			<property qualifier="Region.name"/>
+			<property qualifier="Region.isocode"/>
+			<property qualifier="Region.active"/>
+		</sort-properties>
+	</search>
+	<label spring-bean="regionModelLabelProvider"/>
+</base>

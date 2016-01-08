@@ -1,0 +1,44 @@
+$contentCatalog=v2kartContentCatalog
+$contentCatalogName=v2kart Content Catalog
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+$productCatalog=v2kartProductCatalog
+$productCatalogName=v2kart Product Catalog
+$productCV=catalogVersion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+$picture=media(code, $contentCV)                   ;
+$image=image(code, $contentCV)                     ;
+$media=media(code, $contentCV)                     ;
+$page=page(uid, $contentCV)                        ;
+$contentPage=contentPage(uid, $contentCV)          ;
+$product=product(code, $productCV)
+$category=category(code, $productCV)
+$siteResource=jar:in.com.v2kart.constants.V2kartstoreConstants&/v2kartstore/import/sampledata/contentCatalogs/$contentCatalog
+$productResource=jar:in.com.v2kart.constants.V2kartstoreConstants&/v2kartstore/import/sampledata/productCatalogs/$productCatalog
+$jarResourceCms=jar:in.com.v2kart.constants.V2kartstoreConstants&/v2kartstore/import/sampledata/cockpits/cmscockpit
+$lang=en
+
+
+# CONTENT PAGE
+INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;label;title[lang=$lang];masterTemplate(uid,$contentCV);defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
+#	uid							name			label				title				masterTemplate
+;;corporateBlogPage;     	Corporate Blog Page;	/corporateBlog;		"Corporate Blog";		ContentPage1Template;
+
+
+# CMSParagraphComponent 
+INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;;;;
+;;corporateBlogParagraph;Corporate Blog Paragraph;corporateBlogParagraph;;;;
+
+   
+INSERT_UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];content[lang=$lang]
+;;corporateBlogParagraph;<div class="col-xs-12 col-sm-12 col-md-12"><div class="heading">Corporate Blog</div><div class="description cms-content"><p>Page Coming Soon.</p></div></div>
+
+		
+#  CONTENT SLOT NAME
+INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='LandingPage2Template'];validComponentTypes(code)
+;CenterContentSlot-CorporateBlog;;CMSParagraphComponent
+										   
+												     
+INSERT_UPDATE ContentSlot                          ; $contentCV[unique=true]    ; uid[unique=true]                                     ; name                                                   ; active      ; cmsComponents(&componentRef)
+                                                   ;                            ; CenterContentSlot-CorporateBlog                       	   ; CenterContentSlot for Corporate Blog      	                ; true        ; corporateBlogParagraph
+  
+INSERT_UPDATE ContentSlotForPage                   ; $contentCV[unique=true]    ; uid[unique=true]                                     ; position[unique=true]                ; page(uid,$contentCV)[unique=true][default='homepage']                             ; contentSlot(uid,$contentCV)[unique=true]
+                                                   ;                            ; CenterContentSlot-CorporateBlog               	                   ; CenterContent                         	  ;    corporateBlogPage                                                                  ; CenterContentSlot-CorporateBlog

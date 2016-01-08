@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="CustCreateOutSync" targetNamespace="urn:v2k:ia:eai:ecom:cst" xmlns:p1="urn:v2k:ia:eai:ecom:cst"
+    xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd"
+    xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+    <wsdl:documentation />
+    <wsp:UsingPolicy wsdl:required="true" />
+    <wsp:Policy wsu:Id="OP_CustCreateOutSync" />
+    <wsdl:types>
+        <xsd:schema targetNamespace="urn:v2k:ia:eai:ecom:cst" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="urn:v2k:ia:eai:ecom:cst">
+            <xsd:element name="CustCreateRes" type="CustCreateRes" />
+            <xsd:element name="CustCreateReq" type="CustCreateReq" />
+            <xsd:complexType name="CustCreateRes">
+                <xsd:sequence>
+                    <xsd:element name="RespCode" type="xsd:string" />
+                    <xsd:element name="RespMsg" type="xsd:string" />
+                    <xsd:element name="CustId" type="xsd:string" minOccurs="0" />
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="CustCreateReq">
+                <xsd:sequence>
+                    <xsd:element name="CustId" type="xsd:string" />
+                    <xsd:element name="FName" type="xsd:string" />
+                    <xsd:element name="LName" type="xsd:string" />
+                    <xsd:element name="DOB" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="Email" type="xsd:string" />
+                    <xsd:element name="Mobile" type="xsd:string" />
+                    <xsd:element name="Add1" type="xsd:string" />
+                    <xsd:element name="Add2" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="Add3" type="xsd:string" minOccurs="0" />
+                    <xsd:element name="City" type="xsd:string" />
+                    <xsd:element name="State" type="xsd:string" />
+                    <xsd:element name="Country" type="xsd:string" />
+                    <xsd:element name="Pin" type="xsd:string" />
+                </xsd:sequence>
+            </xsd:complexType>
+        </xsd:schema>
+    </wsdl:types>
+    <wsdl:message name="CustCreateReq">
+        <wsdl:documentation />
+        <wsdl:part name="CustCreateReq" element="p1:CustCreateReq" />
+    </wsdl:message>
+    <wsdl:message name="CustCreateRes">
+        <wsdl:documentation />
+        <wsdl:part name="CustCreateRes" element="p1:CustCreateRes" />
+    </wsdl:message>
+    <wsdl:portType name="CustCreateOutSync">
+        <wsdl:documentation />
+        <wsdl:operation name="CustCreateOutSync">
+            <wsdl:documentation />
+            <wsp:Policy>
+                <wsp:PolicyReference URI="#OP_CustCreateOutSync" />
+            </wsp:Policy>
+            <wsdl:input message="p1:CustCreateReq" />
+            <wsdl:output message="p1:CustCreateRes" />
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="CustCreateOutSyncBinding" type="p1:CustCreateOutSync">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+        <wsdl:operation name="CustCreateOutSync">
+            <soap:operation soapAction="http://sap.com/xi/WebService/soap1.1" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+            <wsdl:input>
+                <soap:body use="literal" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="CustCreateOutSyncService">
+        <wsdl:port name="HTTP_Port" binding="p1:CustCreateOutSyncBinding">
+            <soap:address location="" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+        </wsdl:port>
+        <wsdl:port name="HTTPS_Port" binding="p1:CustCreateOutSyncBinding">
+            <soap:address location="" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

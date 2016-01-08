@@ -1,0 +1,12 @@
+#
+# Import the v2kart BaseStore
+#
+  
+# Language
+$lang=en
+  
+$storeUid=v2kart
+  
+# Create Base Store
+UPDATE BaseStore;uid[unique=true];name[lang=$lang]
+;$storeUid;"v2kart Store"

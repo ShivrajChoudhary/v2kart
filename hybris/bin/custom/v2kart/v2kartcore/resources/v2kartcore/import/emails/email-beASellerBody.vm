@@ -1,0 +1,23 @@
+<html>
+<body>
+
+
+Hello,
+
+Below are the details of the Indivdual/Organization that wants to be seller with V2kart.com, please do the needful. 
+
+	<p>	Name      :  $ctx.sellerData.name </p>
+    <p>	Email     :  $ctx.sellerData.email </p>
+    <p>	Phone No. :  $ctx.sellerData.phone </p>
+    <p>	category  :  $ctx.sellerData.category </p>
+    #if ( $ctx.sellerData.message )
+    <p>	message   :  $ctx.sellerData.message </p>
+	#else
+		
+	#end
+	<b>Sincerely,</b>
+	
+	<b>V2Kart.com</b>
+    
+</body>
+</html>

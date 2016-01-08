@@ -1,0 +1,19 @@
+
+<html>
+<body>
+<ul>
+	<p>
+		$ctx.customerNotificationData.currentUserName with email ID : $ctx.customerNotificationData.currentUserEmailId has shown interest in $ctx.customerNotificationData.name .
+	</p>
+	<p>
+		The user shall be notified by email once it becomes available.
+	</p>
+    <p>
+        Sincerely,
+    </p>
+    <p>
+        V2Kart.com
+    </p>
+</ul>
+</body>
+</html>

@@ -1,0 +1,342 @@
+<!-- [y] hybris Platform Copyright (c) 2000-2013 hybris AG All rights reserved. 
+	This software is the confidential and proprietary information of hybris ("Confidential 
+	Information"). You shall not disclose such Confidential Information and shall 
+	use it only in accordance with the terms of the license agreement you entered 
+	into with hybris. -->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd" >
+
+	<!-- Orders -->
+	<bean id="orderCreationReq"
+		class="in.com.v2kart.sapinboundintegration.ws.order.SOCreateReq.OrderCreationReq"
+		scope="prototype" />
+	<alias name="v2OrderCreationReqConverter" alias="v2OrderCreationReqConverter" />
+	<bean id="v2OrderCreationReqConverter" parent="abstractPopulatingConverter">
+		<lookup-method name="createTarget" bean="orderCreationReq" />
+		<property name="populators">
+			<list>
+				<ref bean="v2OrderCreationReqPopulator" />
+				<ref bean="v2OrderCreationReqItemDtlsPopulator" />
+				<ref bean="v2OrderCreationReqPaymentDtlsPopulator" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="v2AbstractOrderCreationReqPopulator"
+		class="in.com.v2kart.sapinboundintegration.converters.populator.V2AbstractOrderCreationReqPopulator"
+		abstract="true">
+	</bean>
+	<alias name="v2OrderCreationReqPopulator" alias="v2OrderCreationReqPopulator" />
+	<bean id="v2OrderCreationReqPopulator"
+		class="in.com.v2kart.sapinboundintegration.converters.populator.V2OrderCreationReqPopulator"
+		parent="v2AbstractOrderCreationReqPopulator" />
+
+	<alias name="v2OrderCreationReqItemDtlsPopulator" alias="v2OrderCreationReqItemDtlsPopulator" />
+	<bean id="v2OrderCreationReqItemDtlsPopulator"
+		class="in.com.v2kart.sapinboundintegration.converters.populator.V2OrderCreationReqItemDtlsPopulator"
+		parent="v2AbstractOrderCreationReqPopulator" />
+
+	<alias name="v2OrderCreationReqPaymentDtlsPopulator" alias="v2OrderCreationReqPaymentDtlsPopulator" />
+	<bean id="v2OrderCreationReqPaymentDtlsPopulator"
+		class="in.com.v2kart.sapinboundintegration.converters.populator.V2OrderCreationReqPaymentDtlsPopulator"
+		parent="v2AbstractOrderCreationReqPopulator" />
+
+	<bean id="v2SapInboundSaleOrderIntegrationService"
+		class="in.com.v2kart.sapinboundintegration.services.impl.V2SapInboundSaleOrderIntegrationServiceImpl">
+		<property name="erpSalesWebServiceTemplate" ref="v2ErpSalesWebServiceTemplate" />
+		<property name="orderCreationReqConverter" ref="v2OrderCreationReqConverter" />
+		<property name="modelService" ref="modelService" />
+		<property name="stockService" ref="stockService" />
+		<property name="v2kartSapOrderCancelStrategy" ref="v2kartSapOrderCancelStrategy" />
+		<property name="v2kartSapReturnOrderStrategy" ref="v2kartSapReturnOrderStrategy" />
+	</bean>
+	
+	
+	 <bean id="v2ErpCancelModifyJaxbMarshaller" class="org.springframework.oxm.jaxb.Jaxb2Marshaller">
+        <property name="contextPath" value="in.com.v2kart.sapinboundintegration.ws.ordermodification" />
+    </bean>
+    
+    <bean id="v2ErpReturnModifyJaxbMarshaller" class="org.springframework.oxm.jaxb.Jaxb2Marshaller">
+        <property name="contextPath" value="in.com.v2kart.sapinboundintegration.ws.orderreturn" />
+    </bean>
+    
+     <bean id="v2ErpCancelModifySalesWsMessageSender" class="org.springframework.ws.transport.http.CommonsHttpMessageSender">
+        <property name="credentials">
+            <bean class="org.apache.commons.httpclient.UsernamePasswordCredentials">
+                <constructor-arg value="${v2kartsapinboundintegration.erp.cancelModify.sales.client.username}" />
+                <constructor-arg value="${v2kartsapinboundintegration.erp.cancelModify.sales.client.password}" />
+            </bean>
+        </property>
+        <property name="connectionTimeout" value="${v2kartsapinboundintegration.sender.connection.read.timeout}" />
+        <property name="readTimeout" value="${v2kartsapinboundintegration.sender.connection.read.timeout}" />
+    </bean>
+    
+     <bean id="v2ErpReturnModifySalesWsMessageSender" class="org.springframework.ws.transport.http.CommonsHttpMessageSender">
+        <property name="credentials">
+            <bean class="org.apache.commons.httpclient.UsernamePasswordCredentials">
+                <constructor-arg value="${v2kartsapinboundintegration.erp.cancelModify.sales.client.username}" />
+                <constructor-arg value="${v2kartsapinboundintegration.erp.cancelModify.sales.client.password}" />
+            </bean>
+        </property>
+        <property name="connectionTimeout" value="${v2kartsapinboundintegration.sender.connection.read.timeout}" />
+        <property name="readTimeout" value="${v2kartsapinboundintegration.sender.connection.read.timeout}" />
+    </bean>
+
+    <bean id="v2ErpCancelModifySalesWebServiceTemplate" class="org.springframework.ws.client.core.WebServiceTemplate">
+        <constructor-arg ref="clientMessageFactory" />
+        <property name="defaultUri" value="${v2kartsapinboundintegration.erp.cancelModify.sales.client.uri}" />
+        <property name="marshaller" ref="v2ErpCancelModifyJaxbMarshaller" />
+        <property name="unmarshaller" ref="v2ErpCancelModifyJaxbMarshaller" />
+        <property name="messageSender" ref="v2ErpCancelModifySalesWsMessageSender" />
+    </bean> 
+    
+    <bean id="v2ErpReturnModifySalesWebServiceTemplate" class="org.springframework.ws.client.core.WebServiceTemplate">
+        <constructor-arg ref="clientMessageFactory" />
+        <property name="defaultUri" value="${v2kartsapinboundintegration.erp.returnModify.sales.client.uri}" />
+        <property name="marshaller" ref="v2ErpReturnModifyJaxbMarshaller" />
+        <property name="unmarshaller" ref="v2ErpReturnModifyJaxbMarshaller" />
+        <property name="messageSender" ref="v2ErpReturnModifySalesWsMessageSender" />
+    </bean>
+ 
+	<!-- START ERP RELATED BEANS -->
+	<bean id="clientMessageFactory" class="org.springframework.ws.soap.saaj.SaajSoapMessageFactory" />
+
+	<bean id="v2ErpJaxbMarshaller" class="org.springframework.oxm.jaxb.Jaxb2Marshaller">
+		<property name="contextPath"
+			value="in.com.v2kart.sapinboundintegration.ws.order" />
+	</bean>
+
+	<bean id="v2ErpSalesWsMessageSender" class="org.springframework.ws.transport.http.CommonsHttpMessageSender">
+		<property name="credentials">
+			<bean class="org.apache.commons.httpclient.UsernamePasswordCredentials">
+				<constructor-arg
+					value="${v2kartsapinboundintegration.erp.sales.client.username}" />
+				<constructor-arg
+					value="${v2kartsapinboundintegration.erp.sales.client.password}" />
+			</bean>
+		</property>
+		<property name="connectionTimeout"
+			value="${v2kartsapinboundintegration.sender.connection.read.timeout}" />
+		<property name="readTimeout"
+			value="${v2kartsapinboundintegration.sender.connection.read.timeout}" />
+	</bean>
+
+	<bean id="v2ErpSalesWebServiceTemplate" class="org.springframework.ws.client.core.WebServiceTemplate">
+		<constructor-arg ref="clientMessageFactory" />
+		<property name="defaultUri"
+			value="${v2kartsapinboundintegration.erp.sales.client.uri}" />
+		<property name="marshaller" ref="v2ErpJaxbMarshaller" />
+		<property name="unmarshaller" ref="v2ErpJaxbMarshaller" />
+		<property name="messageSender" ref="v2ErpSalesWsMessageSender" />
+
+	</bean>
+
+	<alias alias="orderDao" name="v2OrderDao" />
+	<bean id="v2OrderDao"
+		class="in.com.v2kart.sapinboundintegration.order.daos.impl.V2OrderDaoImpl"
+		parent="defaultOrderDao" />
+
+	<alias name="v2AcceleratorConsignmentDao" alias="acceleratorConsignmentDao" />
+	<bean id="v2AcceleratorConsignmentDao"
+		class="in.com.v2kart.sapinboundintegration.order.daos.impl.V2AcceleratorConsignmentDaoImpl" />
+
+	<alias alias="stockService" name="v2StockService" />
+	<bean id="v2StockService"
+		class="in.com.v2kart.sapinboundintegration.services.impl.V2StockServiceImpl"
+		parent="defaultStockService" scope="tenant">
+		<property name="stockLevelProductStrategy" ref="stockLevelProductID" />
+		<property name="stockLevelDao" ref="v2StockLevelDao" />
+	</bean>
+
+	<alias alias="stockLevelDao" name="v2StockLevelDao" />
+	<bean id="v2StockLevelDao"
+		class="in.com.v2kart.sapinboundintegration.dao.impl.V2StockLevelDaoImpl"
+		parent="defaultStockLevelDao">
+		<property name="transactionTemplate">
+			<bean class="org.springframework.transaction.support.TransactionTemplate"
+				scope="tenant">
+				<property name="transactionManager" ref="txManager" />
+			</bean>
+		</property>
+		<property name="typeService" ref="typeService" />
+		<property name="jdbcTemplate">
+			<bean class="org.springframework.jdbc.core.JdbcTemplate" scope="tenant">
+				<property name="dataSource" ref="dataSource" />
+			</bean>
+		</property>
+	</bean>
+
+	<!-- Customer Integration Beans -->
+
+	<bean id="v2CustomerIntegrationMarshaller" class="org.springframework.oxm.jaxb.Jaxb2Marshaller">
+		<property name="contextPath"
+			value="in.com.v2kart.sapinboundintegration.ws.customer" />
+	</bean>
+
+
+    <bean id="v2CreateCustWebServiceTemplate" class="org.springframework.ws.client.core.WebServiceTemplate">
+		<constructor-arg ref="clientMessageFactory" />
+		<property name="defaultUri"
+			value="${v2kartsapinboundintegration.erp.customer.client.uri}" />
+		<property name="marshaller" ref="v2CustomerIntegrationMarshaller" />
+		<property name="unmarshaller" ref="v2CustomerIntegrationMarshaller" />
+		<property name="messageSender" ref="v2ErpSalesWsMessageSender" />
+
+	</bean>
+    
+     <bean id="v2UpdateCustWebServiceTemplate" class="org.springframework.ws.client.core.WebServiceTemplate">
+        <constructor-arg ref="clientMessageFactory" />
+        <property name="defaultUri"
+            value="${v2kartsapinboundintegration.erp.customer.update.client.uri}" />
+        <property name="marshaller" ref="v2CustomerIntegrationMarshaller" />
+        <property name="unmarshaller" ref="v2CustomerIntegrationMarshaller" />
+        <property name="messageSender" ref="v2ErpSalesWsMessageSender" />
+
+    </bean>
+
+    <alias alias="v2CustomerSapInboundIntegrationService" name="v2CustomerSapInboundIntegrationService" />
+	<bean id="v2CustomerSapInboundIntegrationService"
+		class="in.com.v2kart.sapinboundintegration.services.impl.V2CustomerSapIntegrationServiceImpl">
+		<property name="createCustWebServiceTemplate" ref="v2CreateCustWebServiceTemplate" />
+		<property name="updateCustWebServiceTemplate" ref="v2UpdateCustWebServiceTemplate" />
+        <property name="createConverter" ref="customerIntegrationCreateConverter" />
+        <property name="updateConverter" ref="customerIntegrationUpdateInConverter" />
+		<property name="modelService" ref="modelService" />
+	</bean>
+
+
+	<!-- Converters -->
+	<bean id="compositePopulator"
+		class="in.com.v2kart.sapinboundintegration.converters.populator.CompositePopulator"
+		abstract="true" />
+        
+
+	<bean id="customerIntegrationCreateConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass">
+			<value type="java.lang.Class">in.com.v2kart.sapinboundintegration.ws.customer.CustCreateReq
+			</value>
+		</property>
+		<property name="populators">
+			<list>
+				<bean
+					class="in.com.v2kart.sapinboundintegration.converters.populator.V2CustomerCreateIntegrationPopulator" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="customerIntegrationUpdateInConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass">
+			<value type="java.lang.Class">in.com.v2kart.sapinboundintegration.ws.customer.CustUpdateInReq
+			</value>
+		</property>
+		<property name="populators">
+			<list>
+				<bean
+					class="in.com.v2kart.sapinboundintegration.converters.populator.V2CustomerUpdateInIntegrationPopulator" />
+			</list>
+		</property>
+	</bean>
+    
+    <bean id="customerIntegrationErpUpdateInConverter" parent="abstractPopulatingConverter">
+        <property name="targetClass">
+            <value type="java.lang.Class">in.com.v2kart.sapinboundintegration.ws.customer.CustUpdateInReq
+            </value>
+        </property>
+        <property name="populators">
+            <list>
+                <bean class="in.com.v2kart.sapinboundintegration.converters.populator.V2CustomerUpdateInIntegrationPopulator" >
+                </bean>
+            </list>
+        </property>
+    </bean>
+
+<bean id="orderModifyCancelReq" class="in.com.v2kart.sapinboundintegration.ws.ordermodification.SOModifyCancelReq.OrderModifyCancelReq"
+        scope="prototype" />
+        
+    <alias name="v2OrderModifyCancelReqPopulator" alias="v2OrderModifyCancelReqPopulator" />
+    <bean id="v2OrderModifyCancelReqPopulator" class="in.com.v2kart.sapinboundintegration.converters.populator.V2OrderModifyCancelReqPopulator" >
+    </bean>
+
+    <alias name="v2OrderModifyCancelReqItemDtlsPopulator" alias="v2OrderModifyCancelReqItemDtlsPopulator" />
+    <bean id="v2OrderModifyCancelReqItemDtlsPopulator" class="in.com.v2kart.sapinboundintegration.converters.populator.V2OrderModifyCancelReqItemDtlsPopulator">
+        <property name="cancelReasonCodeMap">
+            <!-- CancelReasonCodeMap -->
+            <map merge="true">
+                    <entry key="OutOfStock" value="11"/>
+                    <entry key="LateDelivery" value="13"/>
+                    <entry key="Warehouse" value="14"/>
+                    <entry key="Other" value="15"/>
+                    <entry key="NA" value="16"/>
+                    <entry key="CustomerNotInterested" value="12"/>
+                    <entry key="DelayinShipping" value="35"/>
+                    <entry key="DelayinDelivery" value="31"/>
+                    <entry key="CustomerRefusedDocuments" value="30"/>
+                    <entry key="PinCodeNotServiceable" value="33"/>
+                    <entry key="ItemAvailableinDefectiveCondition" value="23"/>
+                    <entry key="ErrorinPrice" value="34"/>
+            </map>
+        </property>
+    </bean>
+    
+    <alias name="v2OrderModifyCancelReqPaymentDtlsPopulator" alias="v2OrderModifyCancelReqPaymentDtlsPopulator" />
+    <bean id="v2OrderModifyCancelReqPaymentDtlsPopulator" class="in.com.v2kart.sapinboundintegration.converters.populator.V2OrderModifyCancelReqPaymentDtlsPopulator">
+    </bean>
+    
+    
+   <alias name="v2OrderModifyCancelReqConverter" alias="v2OrderModifyCancelReqConverter"  />
+   <bean id="v2OrderModifyCancelReqConverter" parent="abstractPopulatingConverter">
+        <lookup-method name="createTarget" bean="orderModifyCancelReq" />
+        <property name="populators">
+            <list>
+                <ref bean="v2OrderModifyCancelReqPopulator" />
+                <ref bean="v2OrderModifyCancelReqItemDtlsPopulator" />
+                <ref bean="v2OrderModifyCancelReqPaymentDtlsPopulator"/>
+            </list>
+        </property>
+    </bean>
+    
+    <bean id="v2kartSapOrderCancelStrategy" class="in.com.v2kart.sapinboundintegration.strategies.impl.V2kartSapOrderCancelStrategyImpl">
+   <property name="erpCancelModifySalesWebServiceTemplate" ref="v2ErpCancelModifySalesWebServiceTemplate" /> 
+	<property name="orderModifyCancelReqConverter" ref="v2OrderModifyCancelReqConverter" />
+    </bean>
+    
+    <!-- Order Return  Starts-->
+    
+    <alias name="v2kartSapReturnOrderStrategy" alias="v2kartSapReturnOrderStrategy" />
+    <bean id="v2kartSapReturnOrderStrategy" class="in.com.v2kart.sapinboundintegration.strategies.impl.V2kartSapReturnOrderStrategyImpl">
+        <property name="erpOrderReturnWebServiceTemplate" ref="v2ErpReturnModifySalesWebServiceTemplate" />
+        <property name="orderReturnReqConverter" ref="v2OrderReturnReqConverter" />
+        <property name="modelService" ref="modelService" />
+    </bean>
+    
+    
+    
+    <bean id="orderReturnReq" class="in.com.v2kart.sapinboundintegration.ws.orderreturn.SOReturnReq.OrderReturnReq" scope="prototype" />
+    
+    <alias name="v2OrderReturnReqConverter" alias="v2OrderReturnReqConverter" />
+    <bean id="v2OrderReturnReqConverter" parent="abstractPopulatingConverter">
+        <lookup-method name="createTarget" bean="orderReturnReq" />
+        <property name="populators">
+            <list>
+                <ref bean="v2OrderReturnReqPopulator" />
+                <ref bean="v2OrderReturnReqItemDtlsPopulator" />
+            </list>
+        </property>
+    </bean>
+
+    <alias name="v2OrderReturnReqPopulator" alias="v2OrderReturnReqPopulator" />
+    <bean id="v2OrderReturnReqPopulator" class="in.com.v2kart.sapinboundintegration.converters.populator.V2OrderReturnReqPopulator"/>
+
+    <alias name="v2OrderReturnReqItemDtlsPopulator" alias="v2OrderReturnReqItemDtlsPopulator" />
+    <bean id="v2OrderReturnReqItemDtlsPopulator" class="in.com.v2kart.sapinboundintegration.converters.populator.V2OrderReturnReqItemDtlsPopulator">
+    </bean>
+
+
+	<!-- Customer Integration Beans end -->
+    
+</beans>

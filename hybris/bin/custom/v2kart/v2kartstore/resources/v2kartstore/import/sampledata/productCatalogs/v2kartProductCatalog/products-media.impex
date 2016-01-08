@@ -1,0 +1,100 @@
+# ImpEx for Importing Product Media into Merchandise store
+  
+# Macros / Replacement Parameter definitions
+$productCatalog=v2kartProductCatalog
+$storeName=v2kart
+  
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog]
+$media=@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator]
+$thumbnail=thumbnail(code, $catalogVersion)
+$picture=picture(code, $catalogVersion)
+$thumbnails=thumbnails(code, $catalogVersion)
+$detail=detail(code, $catalogVersion)
+$normal=normal(code, $catalogVersion)
+$others=others(code, $catalogVersion)
+$data_sheet=data_sheet(code, $catalogVersion)
+$medias=medias(code, $catalogVersion)
+$galleryImages=galleryImages(qualifier, $catalogVersion)
+$siteResource=jar:in.com.v2kart.initialdata.setup.InitialDataSystemSetup&/v2kartstore/import/sampledata/productCatalogs/$productCatalog/images
+$pd=Product
+$V2-WF=V2kart-WF
+  
+INSERT_UPDATE MediaFolder;qualifier[unique=true];path[unique=true]
+;images;images
+  
+# Create Media
+INSERT_UPDATE Media;mediaFormat(qualifier)[default=$V2-WF];code[unique=true];$media;mime[default='image/jpg'];$catalogVersion;folder(qualifier)
+#;;/1200Wx1200H/hybris_merch_USB-Stick.jpg;$siteResource/1200Wx1200H/hybris-merch-usb-stick.jpg;;;images
+#;;/1200Wx1200H/hybris_merch_Badge.jpg;$siteResource/1200Wx1200H/hybris-merch-badge.jpg;;;images
+#;;/1200Wx1200H/hybris_merch_Block.jpg;$siteResource/1200Wx1200H/hybris-merch-block.jpg;;;images
+#;;/1200Wx1200H/hybris_merch_Pen.jpg;$siteResource/1200Wx1200H/hybris-merch-pen.jpg;;;images
+#;;/1200Wx1200H/hybris_merch_Cup.jpg;$siteResource/1200Wx1200H/hybris-merch-cup.jpg;;;images
+#;;/1200Wx1200H/hybris_merch_Cup2.jpg;$siteResource/1200Wx1200H/hybris-merch-cup2.jpg;;;images
+#;;/1200Wx1200H/hybris_merch_Wiesnherz.jpg;$siteResource/1200Wx1200H/hybris-merch-wiesnherz.jpg;;;images
+#;;/1200Wx1200H/hybris_merch_hoodie_girls.jpg;$siteResource/1200Wx1200H/hybris-merch-hoodie-girls.jpg;;;images
+#;;/1200Wx1200H/hybris_merch_hoodie_men.jpg;$siteResource/1200Wx1200H/hybris-merch-hoodie-men.jpg;;;images
+#;;/1200Wx1200H/hybris_merch_tshirt_girls.jpg;$siteResource/1200Wx1200H/hybris-merch-tshirt-girls.jpg;;;images
+#;;/1200Wx1200H/hybris_merch_tshirt_men.jpg;$siteResource/1200Wx1200H/hybris-merch-tshirt-men.jpg;;;images
+
+;;blue_1.jpg                              ;$siteResource/1200Wx1200H/blue_1.jpg                 ;;;images
+;;blue_2.jpg                              ;$siteResource/1200Wx1200H/blue_2.jpg                 ;;;images
+;;blue_3.jpg                              ;$siteResource/1200Wx1200H/blue_3.jpg                 ;;;images  
+;;blue.jpg                                ;$siteResource/1200Wx1200H/blue.jpg                   ;;;images  
+;;2228B.jpg                               ;$siteResource/1200Wx1200H/2228B.jpg                   ;;;images
+;;2230B.jpg                               ;$siteResource/1200Wx1200H/2230B.jpg                   ;;;images
+;;2237B.jpg                               ;$siteResource/1200Wx1200H/2237B.jpg                   ;;;images  
+  
+# Create Media Containers
+INSERT_UPDATE MediaContainer;qualifier[unique=true];$medias;$catalogVersion;conversionGroup(code)[default=$pdConversionGroup]
+#;0001_1.jpg;/1200Wx1200H/hybris_merch_Cup.jpg
+#;0001_2.jpg;/1200Wx1200H/hybris_merch_Cup2.jpg
+#;0002_1.jpg;/1200Wx1200H/hybris_merch_Pen.jpg
+#;0003_1.jpg;/1200Wx1200H/hybris_merch_Block.jpg
+#;0005_1.jpg;/1200Wx1200H/hybris_merch_Badge.jpg
+#;0006_1.jpg;/1200Wx1200H/hybris_merch_USB-Stick.jpg
+#;0007_1.jpg;/1200Wx1200H/hybris_merch_Wiesnherz.jpg
+#;0100_1.jpg;/1200Wx1200H/hybris_merch_tshirt_men.jpg
+#;0110_1.jpg;/1200Wx1200H/hybris_merch_tshirt_girls.jpg
+#;0200_1.jpg;/1200Wx1200H/hybris_merch_hoodie_men.jpg
+#;0210_1.jpg;/1200Wx1200H/hybris_merch_hoodie_girls.jpg
+
+;v2kart_1.jpg;blue_1.jpg
+;v2kart_2.jpg;blue_2.jpg
+;v2kart_3.jpg;blue_3.jpg
+;v2kart.jpg;blue.jpg
+;v2kart_4.jpg;2228B.jpg
+;v2kart_5.jpg;2230B.jpg
+;v2kart_6.jpg;2237B.jpg
+
+
+  
+# Update Products with Media and Media Containers
+INSERT_UPDATE Product;code[unique=true];$catalogVersion;$galleryImages;$picture;$thumbnail
+ 
+ ;1114008707036;;v2kart_1.jpg,v2kart_2.jpg,v2kart_3.jpg,v2kart.jpg;;
+ ;1114008707_RUST;;v2kart_4.jpg;;
+ ;1114008707_TEAL;;v2kart_5.jpg;;
+ ;1114008707_BLUE;;v2kart_6.jpg;;
+ 
+ #;0001         ;;0001_1.jpg,0001_2.jpg;/1200Wx1200H/hybris_merch_Cup.jpg;
+ #;0002;;0002_1.jpg;/1200Wx1200H/hybris_merch_Pen.jpg;
+ #;0003;;0003_1.jpg;/1200Wx1200H/hybris_merch_Block.jpg;
+ #;0004;;0003_1.jpg;/1200Wx1200H/hybris_merch_Block.jpg;
+ #;0005;;0005_1.jpg;/1200Wx1200H/hybris_merch_Badge.jpg;
+ #;0006;;0006_1.jpg;/1200Wx1200H/hybris_merch_USB-Stick.jpg;
+ #;0007;;0007_1.jpg;/1200Wx1200H/hybris_merch_Wiesnherz.jpg;
+ #;0100;;0100_1.jpg;/1200Wx1200H/hybris_merch_tshirt_men.jpg;
+ #;0101;;0100_1.jpg;/1200Wx1200H/hybris_merch_tshirt_men.jpg;
+ #;0102;;0100_1.jpg;/1200Wx1200H/hybris_merch_tshirt_men.jpg;
+ #;0110;;0110_1.jpg;/1200Wx1200H/hybris_merch_tshirt_girls.jpg;
+ #;0111;;0110_1.jpg;/1200Wx1200H/hybris_merch_tshirt_girls.jpg;
+ #;0112;;0110_1.jpg;/1200Wx1200H/hybris_merch_tshirt_girls.jpg;
+ #;0200;;0200_1.jpg;/1200Wx1200H/hybris_merch_hoodie_men.jpg;
+ #;0201;;0200_1.jpg;/1200Wx1200H/hybris_merch_hoodie_men.jpg;
+ #;0202;;0200_1.jpg;/1200Wx1200H/hybris_merch_hoodie_men.jpg;
+ #;0210;;0210_1.jpg;/1200Wx1200H/hybris_merch_hoodie_girls.jpg;
+ #;0211;;0210_1.jpg;/1200Wx1200H/hybris_merch_hoodie_girls.jpg;
+ #;0212;;0210_1.jpg;/1200Wx1200H/hybris_merch_hoodie_girls.jpg;
+ 
+ 
+ 

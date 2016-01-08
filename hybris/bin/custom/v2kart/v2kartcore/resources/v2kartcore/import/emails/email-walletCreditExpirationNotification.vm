@@ -1,0 +1,18 @@
+<html>
+<body>
+
+Dear $ctx.customerData.name
+
+Greetings from V2kart !
+
+With Reference to our previous communication dated “Pull the (Sysdate- 30 Days) date here”  ,we regret 
+to inform you that your wallet points have Expired. We Apologize for Inconvenience caused, for further details, please refer to our Wallet’s 
+<a href="${ctx.baseUrl}/faq"><font color="#000000">Faq</font></a>
+If we can help you with any enquiry, please contact our customer services team directly via Phone 8010202222 or drop an Email at support@v2kart.com.
+Happy Shopping!
+
+Warm Regards,
+Team V2kart.
+ 
+</body>
+</html>
